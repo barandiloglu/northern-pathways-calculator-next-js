@@ -292,7 +292,7 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
               <div className="text-xs sm:text-sm text-yellow-800">
                 <p className="font-medium mb-2">Data Source</p>
                 <p>
-                  This information is sourced from the Government of Canada's official Express Entry rounds page. 
+                  This information is sourced from the Government of Canada&apos;s official Express Entry rounds page. 
                   For the most up-to-date and official information, please visit the 
                   <a 
                     href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds.html"

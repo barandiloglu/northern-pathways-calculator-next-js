@@ -147,10 +147,7 @@ const fswpSpouseCanadianEducationPoints = {
 };
 
 // FSWP Spouse Language Points (max 5 points) - Added missing spouse language points
-const fswpSpouseLanguagePoints = {
-  false: 0,
-  true: 5
-};
+
 
 // FSWP Adaptability Points (max 10 points)
 const fswpAdaptabilityPoints = {
@@ -214,7 +211,7 @@ export function calculateFSWPScore(data: FSWPFormData) {
 
   // Language Skills (max 24 points)
   let languagePoints = 0;
-  let languageBreakdown = { speaking: 0, listening: 0, reading: 0, writing: 0 };
+  const languageBreakdown = { speaking: 0, listening: 0, reading: 0, writing: 0 };
 
   if (data.firstLangTest) {
     // Map form values to calculation function keys

@@ -1,5 +1,5 @@
 import { CRSFormData } from "./calculateCRSScore";
-import { languageScoreToPoints, languageScoreToPointsSingle } from "../data/crsOptions";
+import { languageScoreToPoints } from "../data/crsOptions";
 
 export function calculateSpouseFactors(data: CRSFormData) {
   let educationScore = 0;

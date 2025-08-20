@@ -14,11 +14,11 @@ import {
   AlertCircle,
   ArrowRight,
   ChevronDown,
-  ChevronRight,
+
   Star,
   TrendingUp,
-  Target,
-  Zap,
+
+
   Users,
   GraduationCap,
   Languages,
@@ -37,12 +37,12 @@ import {
   ageOptions,
   educationLevelOptions,
   canadianCredentialLevelOptions,
-  firstLanguageTestOptions,
-  getSecondLangTestOptions,
+
+
   getSpouseLangTestOptions,
   getLanguageScoreOptions,
   workExperienceOptions,
-  nocTeerOptions
+
 } from "@/data/crsOptions"
 
 export default function CRSCalculatorPage() {
@@ -53,7 +53,7 @@ export default function CRSCalculatorPage() {
   const [showDrawsModal, setShowDrawsModal] = useState(false)
   const [showMissingFieldsModal, setShowMissingFieldsModal] = useState(false)
   const [crsScore, setCrsScore] = useState<number>(0)
-  const [scoreBreakdown, setScoreBreakdown] = useState<any>({})
+  const [scoreBreakdown, setScoreBreakdown] = useState<Record<string, unknown>>({})
   
   // Refs for auto-scrolling to conditional questions
   const canadianCredentialRef = useRef<HTMLDivElement | null>(null)
@@ -182,7 +182,7 @@ export default function CRSCalculatorPage() {
     if (formData.spouseLangTest && formData.spouseLangTest !== "none_or_not_applicable" && formData.spouseLangSpeaking === "") {
       setTimeout(() => scrollToElement(spouseLanguageScoresRef), 100)
     }
-  }, [formData.canadianEducationStudy, formData.firstLangTest, formData.secondLangTest, formData.spouseLangTest])
+  }, [formData.canadianEducationStudy, formData.firstLangTest, formData.secondLangTest, formData.spouseLangTest, formData.canadianCredentialLevel, formData.firstLangSpeaking, formData.secondLangSpeaking, formData.spouseLangSpeaking])
 
   const getFormProgress = () => {
     let completedFields = 0
@@ -397,7 +397,7 @@ export default function CRSCalculatorPage() {
     }
   }
 
-  const updateFormData = (field: keyof CRSFormData, value: any) => {
+  const updateFormData = (field: keyof CRSFormData, value: string) => {
     setFormData(prev => {
       const newData = { ...prev, [field]: value }
       
@@ -616,6 +616,7 @@ export default function CRSCalculatorPage() {
             transition={{ delay: 0.1, duration: 0.4 }}
             className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full mb-3 sm:mb-4 shadow-xl overflow-hidden"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/logo.png" 
               alt="Northern Pathways Logo" 
@@ -1092,7 +1093,7 @@ export default function CRSCalculatorPage() {
                             </li>
                             <li className="flex items-start">
                               <span className="text-blue-500 mr-2 sm:mr-3 text-base sm:text-lg">•</span>
-                              <span className="text-xs sm:text-sm">If you completed your studies at a private DLI (designated learning institution) in Canada and the program does not qualify for a post-graduation work permit, it is not considered 'Canadian education' for the purpose of earning additional points for Canadian education. However, your education may still be eligible for education points.</span>
+                              <span className="text-xs sm:text-sm">If you completed your studies at a private DLI (designated learning institution) in Canada and the program does not qualify for a post-graduation work permit, it is not considered &apos;Canadian education&apos; for the purpose of earning additional points for Canadian education. However, your education may still be eligible for education points.</span>
                             </li>
                           </ul>
                         </div>
@@ -1260,7 +1261,7 @@ export default function CRSCalculatorPage() {
                               <div className="mt-2 p-2 bg-blue-50 border-l-3 border-blue-400 rounded-r-md">
                                 <div className="text-xs text-gray-700 space-y-2">
                                   <p>
-                                    <span className="text-blue-500 font-medium">Official Languages:</span> English and French are Canada's official languages. Applicants are required to submit language test results that are less than two years old for all programs, regardless of whether English or French is their first language.
+                                    <span className="text-blue-500 font-medium">Official Languages:</span> English and French are Canada&apos;s official languages. Applicants are required to submit language test results that are less than two years old for all programs, regardless of whether English or French is their first language.
                                   </p>
                                   <p>
                                     <span className="text-blue-500 font-medium">Test Choice:</span> You may choose any language test and indicate the scores you have taken or anticipate taking.
@@ -1621,10 +1622,10 @@ export default function CRSCalculatorPage() {
                           <div className="mt-2 p-3 bg-blue-50 border-l-3 border-blue-400 rounded-r-md">
                             <div className="text-xs text-gray-700 space-y-2">
                               <p>
-                                <span className="text-blue-500 font-medium">Points Available:</span> Your spouse's education can earn you up to 10 additional CRS points. Higher education levels provide more points.
+                                <span className="text-blue-500 font-medium">Points Available:</span> Your spouse&apos;s education can earn you up to 10 additional CRS points. Higher education levels provide more points.
                               </p>
                               <p>
-                                <span className="text-blue-500 font-medium">ECA Requirement:</span> To get points for your spouse's foreign credential, they must obtain an Educational Credential Assessment (ECA) report. This report must verify that their foreign credential is valid and equivalent to a Canadian credential.
+                                <span className="text-blue-500 font-medium">ECA Requirement:</span> To get points for your spouse&apos;s foreign credential, they must obtain an Educational Credential Assessment (ECA) report. This report must verify that their foreign credential is valid and equivalent to a Canadian credential.
                               </p>
                             </div>
                           </div>
@@ -1767,7 +1768,7 @@ export default function CRSCalculatorPage() {
                       </div>
                       <div className="text-center py-8">
                         <p className="text-gray-600 mb-4">This section is only available for married or common-law applicants.</p>
-                        <p className="text-sm text-gray-500">Please update your marital status to "Married" or "Common-law" to access spouse-related questions.</p>
+                        <p className="text-sm text-gray-500">Please update your marital status to &quot;Married&quot; or &quot;Common-law&quot; to access spouse-related questions.</p>
                       </div>
                     </motion.div>
                   )}
@@ -1792,12 +1793,12 @@ export default function CRSCalculatorPage() {
                          {!isMarriedOrCommonLaw() ? (
                            <>
                              <p className="text-gray-600 mb-4">This section is only available for married or common-law applicants.</p>
-                             <p className="text-sm text-gray-500">Please update your marital status to "Married" or "Common-law" to access spouse-related questions.</p>
+                             <p className="text-sm text-gray-500">Please update your marital status to &quot;Married&quot; or &quot;Common-law&quot; to access spouse-related questions.</p>
                            </>
                          ) : (
                            <>
                              <p className="text-gray-600 mb-4">This section is only available when your spouse is moving to Canada.</p>
-                             <p className="text-sm text-gray-500">Please update your spouse's moving status to "Yes" in the Spouse Details section.</p>
+                             <p className="text-sm text-gray-500">Please update your spouse&apos;s moving status to &quot;Yes&quot; in the Spouse Details section.</p>
                            </>
                          )}
                        </div>
@@ -2425,7 +2426,7 @@ export default function CRSCalculatorPage() {
                           </div>
                           <div>
                             <p className="font-semibold text-gray-800">Spouse Education</p>
-                            <p className="text-sm text-gray-600">Spouse's education level</p>
+                            <p className="text-sm text-gray-600">Spouse&apos;s education level</p>
                           </div>
                         </div>
                         <div className="text-right">
@@ -2442,7 +2443,7 @@ export default function CRSCalculatorPage() {
                           </div>
                           <div>
                             <p className="font-semibold text-gray-800">Spouse Work Experience</p>
-                            <p className="text-sm text-gray-600">Spouse's Canadian work</p>
+                            <p className="text-sm text-gray-600">Spouse&apos;s Canadian work</p>
                           </div>
                         </div>
                         <div className="text-right">
@@ -2460,7 +2461,7 @@ export default function CRSCalculatorPage() {
                             </div>
                             <div>
                               <p className="font-semibold text-gray-800">Spouse Language</p>
-                              <p className="text-sm text-gray-600">Spouse's language skills</p>
+                              <p className="text-sm text-gray-600">Spouse&apos;s language skills</p>
                             </div>
                           </div>
                           <div className="text-right">
@@ -2827,7 +2828,7 @@ export default function CRSCalculatorPage() {
                           Current: {scoreBreakdown.coreBreakdown?.education || 0} points | Target: 150 points
                         </p>
                         <p className="text-xs text-amber-600">
-                          • Pursue a Master's or PhD degree
+                          • Pursue a Master&apos;s or PhD degree
                           • Get ECA for foreign credentials
                           • Consider Canadian education programs
                         </p>
@@ -3148,7 +3149,7 @@ export default function CRSCalculatorPage() {
                   }
 
                   // Filter out sections with no missing fields
-                  const sectionsWithMissingFields = Object.entries(missingSections).filter(([_, section]) => section.fields.length > 0);
+                  const sectionsWithMissingFields = Object.entries(missingSections).filter(([, section]) => section.fields.length > 0);
 
                   if (sectionsWithMissingFields.length === 0) {
                     return (

@@ -5,20 +5,20 @@ import { motion, AnimatePresence } from "framer-motion"
 import { 
   Calculator, 
   User, 
-  BookOpen, 
-  Briefcase, 
+ 
+ 
   Globe, 
   Heart, 
-  Award, 
+ 
   CheckCircle, 
   AlertCircle,
   ArrowRight,
   ChevronDown,
-  ChevronRight,
+
   Star,
   TrendingUp,
-  Target,
-  Zap,
+
+
   Users,
   GraduationCap,
   Languages,
@@ -40,7 +40,7 @@ export default function FSWPCalculatorPage() {
   const [showDrawsModal, setShowDrawsModal] = useState(false)
   const [showMissingFieldsModal, setShowMissingFieldsModal] = useState(false)
   const [fswpScore, setFswpScore] = useState<number>(0)
-  const [scoreBreakdown, setScoreBreakdown] = useState<any>({})
+  const [scoreBreakdown, setScoreBreakdown] = useState<Record<string, unknown>>({})
   
   // Refs for auto-scrolling to conditional questions
   const firstLanguageScoresRef = useRef<HTMLDivElement | null>(null)
@@ -394,7 +394,7 @@ export default function FSWPCalculatorPage() {
     }
   }
 
-  const updateFormData = (field: keyof FSWPFormData, value: any) => {
+  const updateFormData = (field: keyof FSWPFormData, value: string | string[]) => {
     setFormData(prev => {
       const newData = { ...prev, [field]: value }
       
@@ -568,6 +568,7 @@ export default function FSWPCalculatorPage() {
             transition={{ delay: 0.1, duration: 0.4 }}
             className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full mb-3 sm:mb-4 shadow-xl overflow-hidden"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/logo.png" 
               alt="Northern Pathways Logo" 
@@ -940,7 +941,7 @@ export default function FSWPCalculatorPage() {
                                 <div className="mt-2 p-2 bg-blue-50 border-l-3 border-blue-400 rounded-r-md">
                                   <div className="text-xs text-gray-700 space-y-2">
                                     <p>
-                                      <span className="text-blue-500 font-medium">Official Languages:</span> English and French are Canada's official languages. Applicants are required to submit language test results that are less than two years old for all programs, regardless of whether English or French is their first language.
+                                      <span className="text-blue-500 font-medium">Official Languages:</span> English and French are Canada&apos;s official languages. Applicants are required to submit language test results that are less than two years old for all programs, regardless of whether English or French is their first language.
                                     </p>
                                     <p>
                                       <span className="text-blue-500 font-medium">Test Choice:</span> You may choose any language test and indicate the scores you have taken or anticipate taking.
@@ -1429,9 +1430,9 @@ export default function FSWPCalculatorPage() {
                               <option value="high_school">High school</option>
                               <option value="one_year_program">One-year program at a university, college, trade or technical school, or other institute</option>
                               <option value="two_year_program">Two-year program at a university, college, trade or technical school, or other institute</option>
-                              <option value="bachelor">Bachelor's degree / Three or more year program at a university, college, trade or other institute</option>
+                              <option value="bachelor">Bachelor&apos;s degree / Three or more year program at a university, college, trade or other institute</option>
                               <option value="two_or_more_certificates">Two or more certificates, diplomas or degrees. One must be for a program of three or more years</option>
-                              <option value="masters">Master's degree, or professional degree needed to practice in a licensed profession</option>
+                              <option value="masters">Master&apos;s degree, or professional degree needed to practice in a licensed profession</option>
                               <option value="doctoral">Doctoral level university degree (PhD)</option>
                   </select>
                   
@@ -1444,7 +1445,7 @@ export default function FSWPCalculatorPage() {
                       </li>
                       <li className="flex items-start">
                         <span className="text-green-500 mr-2 sm:mr-3 text-base sm:text-lg">•</span>
-                        <span className="text-xs sm:text-sm">If you completed your studies at a private DLI (designated learning institution) in Canada and the program does not qualify for a post-graduation work permit, it is not considered 'Canadian education' for the purpose of earning additional points for Canadian education. However, your education may still be eligible for education points.</span>
+                        <span className="text-xs sm:text-sm">If you completed your studies at a private DLI (designated learning institution) in Canada and the program does not qualify for a post-graduation work permit, it is not considered &apos;Canadian education&apos; for the purpose of earning additional points for Canadian education. However, your education may still be eligible for education points.</span>
                       </li>
                     </ul>
                   </div>
@@ -1762,7 +1763,7 @@ export default function FSWPCalculatorPage() {
                             <div className="mt-2 p-2 bg-blue-50 border-l-3 border-blue-400 rounded-r-md">
                               <div className="text-xs text-gray-700 space-y-2">
                                 <p>
-                                  <span className="text-blue-500 font-medium">Official Languages:</span> English and French are Canada's official languages. Applicants are required to submit language test results that are less than two years old for all programs, regardless of whether English or French is their first language.
+                                  <span className="text-blue-500 font-medium">Official Languages:</span> English and French are Canada&apos;s official languages. Applicants are required to submit language test results that are less than two years old for all programs, regardless of whether English or French is their first language.
                                 </p>
                                 <p>
                                   <span className="text-blue-500 font-medium">Test Choice:</span> You may choose any language test and indicate the scores you have taken or anticipate taking.
@@ -2145,15 +2146,15 @@ export default function FSWPCalculatorPage() {
                                   </li>
                                   <li className="flex items-start">
                                     <span className="text-indigo-500 mr-2 text-sm">•</span>
-                                    <span>Your or your spouse's sibling (child of your or your spouse's parent)</span>
+                                    <span>Your or your spouse&apos;s sibling (child of your or your spouse&apos;s parent)</span>
                                   </li>
                                   <li className="flex items-start">
                                     <span className="text-indigo-500 mr-2 text-sm">•</span>
-                                    <span>Your or your spouse's aunt or uncle (by blood or marriage)</span>
+                                    <span>Your or your spouse&apos;s aunt or uncle (by blood or marriage)</span>
                                   </li>
                                   <li className="flex items-start">
                                     <span className="text-indigo-500 mr-2 text-sm">•</span>
-                                    <span>Your or your spouse's niece or nephew</span>
+                                    <span>Your or your spouse&apos;s niece or nephew</span>
                                   </li>
                                 </ul>
                               </div>
@@ -3348,7 +3349,7 @@ export default function FSWPCalculatorPage() {
                   if (!formData.relativesInCanada) missingSections.additional.fields.push("Relatives in Canada");
 
                   // Filter out sections with no missing fields
-                  const sectionsWithMissingFields = Object.entries(missingSections).filter(([_, section]) => section.fields.length > 0);
+                  const sectionsWithMissingFields = Object.entries(missingSections).filter(([, section]) => section.fields.length > 0);
 
                   if (sectionsWithMissingFields.length === 0) {
                     return (

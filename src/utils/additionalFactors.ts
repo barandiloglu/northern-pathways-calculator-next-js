@@ -1,5 +1,5 @@
 import { CRSFormData } from "./calculateCRSScore";
-import { languageScoreToPoints, languageScoreToPointsSingle, secondLanguageScoreToPoints } from "../data/crsOptions";
+// Import removed - unused functions
 
 export function calculateAdditionalFactors(data: CRSFormData) {
   let nomination = 0;

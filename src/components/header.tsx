@@ -96,6 +96,7 @@ export function Header() {
           <motion.div variants={itemVariants} className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2 group">
               <div className="w-44 h-44 sm:w-48 sm:h-48 md:w-48 md:h-48 lg:w-48 lg:h-48 xl:w-64 xl:h-64 rounded-lg overflow-hidden p-1 sm:p-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/logoNavBar.png" 
                   alt="Northern Pathways Logo" 

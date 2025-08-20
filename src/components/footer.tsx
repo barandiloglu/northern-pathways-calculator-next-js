@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Phone, Mail, Clock, Instagram, Linkedin } from "lucide-react"
+import { MapPin, Mail, Clock, Instagram, Linkedin } from "lucide-react"
 import Link from "next/link"
 
 export function Footer() {
@@ -43,7 +43,8 @@ export function Footer() {
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <div className="mb-6">
               <div className="w-64 h-64 rounded-lg overflow-hidden">
-                <img 
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img  
                   src="/logoFooter.png" 
                   alt="Northern Pathways Logo" 
                   className="w-full h-full object-contain"

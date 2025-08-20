@@ -397,7 +397,7 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
                 <p className="text-xs sm:text-sm text-orange-600 font-medium mb-2">Draw Frequency</p>
                 <p className="text-orange-900 text-sm sm:text-base">
                   Express Entry draws typically occur every 2 weeks, usually on Wednesdays. 
-                  The exact schedule may vary based on IRCC's operational needs.
+                  The exact schedule may vary based on IRCC&apos;s operational needs.
                 </p>
               </div>
             </div>
@@ -431,7 +431,7 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
             <div className="text-xs sm:text-sm text-yellow-800">
               <p className="font-medium mb-1">Data Source & Updates</p>
               <p>
-                This information is sourced from the Government of Canada's official Express Entry rounds page. 
+                This information is sourced from the Government of Canada&apos;s official Express Entry rounds page. 
                 For the most up-to-date and official information, please visit the 
                 <a 
                   href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds.html"

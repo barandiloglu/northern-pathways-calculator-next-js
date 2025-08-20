@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { 
   Calculator, 
-  TrendingUp, 
+ 
   Users, 
   Award, 
   ArrowRight, 
@@ -20,7 +20,7 @@ import {
 import { Footer } from "@/components/footer"
 import { LatestDraws } from "@/components/latest-draws"
 import Link from "next/link"
-import { AnimatePresence } from "framer-motion"
+
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
@@ -40,17 +40,7 @@ export default function HomePage() {
     }
   }
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut" as const
-      }
-    }
-  }
+
 
   const cardVariants = {
     hidden: { opacity: 0, scale: 0.9 },
@@ -111,6 +101,7 @@ export default function HomePage() {
               }}
               className="absolute inset-0  rounded-full opacity-50"
             />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="/logo.png" 
               alt="Northern Pathways Logo" 

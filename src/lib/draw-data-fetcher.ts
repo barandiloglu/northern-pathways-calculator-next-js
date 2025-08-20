@@ -155,8 +155,8 @@ export const fetchDrawDataFromWebsite = async (options: FetchOptions = {}): Prom
       // Fallback to mock data if proxy is not enabled
       throw new Error('Direct fetching not allowed due to CORS restrictions')
     }
-  } catch (error) {
-    console.error('Error fetching draw data:', error)
+  } catch {
+    console.error('Error fetching draw data')
     // Return fallback data
     return getLatestDrawData()
   }
@@ -171,14 +171,11 @@ const parseDrawDataFromHTML = (html: string): DrawData[] => {
     // Look for table data patterns in the HTML
     // This is a basic example - the actual parsing would depend on the HTML structure
     
-    // Extract round numbers (looking for patterns like "Round #123")
-    const roundMatches = html.match(/Round\s*#(\d+)/gi)
+
     
-    // Extract dates (looking for date patterns)
-    const dateMatches = html.match(/\d{4}-\d{2}-\d{2}/g)
+
     
-    // Extract CRS scores (looking for score patterns)
-    const scoreMatches = html.match(/\b\d{3,4}\b/g)
+
     
     // For now, return the fallback data
     // In a real implementation, you would parse the HTML and extract the actual data

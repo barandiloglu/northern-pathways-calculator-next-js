@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { motion, AnimatePresence } from "framer-motion"
-import { Calculator, ChevronDown, ChevronRight, AlertTriangle, CheckCircle, X, TrendingUp } from "lucide-react"
+import { ChevronDown, ChevronRight, AlertTriangle, X, TrendingUp } from "lucide-react"
 
 import { Footer } from "@/components/footer"
 import { DrawsModal } from "@/components/draws-modal"
@@ -13,7 +13,7 @@ import {
   maritalStatusOptions, 
   educationLevelOptions,
   workExperienceOptions,
-  nocLevelOptions,
+
   languageTestPoints,
   agePoints,
   educationPoints,
@@ -75,12 +75,12 @@ export default function CalculatorPage() {
     }
   })
 
-  const [showResults, setShowResults] = useState(false)
+
   const [showDisclaimer, setShowDisclaimer] = useState(true)
   const [showDrawsModal, setShowDrawsModal] = useState(false)
   const [expandedSection, setExpandedSection] = useState<string | null>("personal")
 
-  const updateFormData = (field: keyof AssessmentForm, value: any) => {
+  const updateFormData = (field: keyof AssessmentForm, value: string | number) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
@@ -88,7 +88,7 @@ export default function CalculatorPage() {
     setFormData(prev => ({
       ...prev,
       [`${language}LanguageScores`]: {
-        ...prev[`${language}LanguageScores` as keyof AssessmentForm] as any,
+        ...prev[`${language}LanguageScores` as keyof AssessmentForm] as Record<string, string>,
         [field]: value
       }
     }))
@@ -493,6 +493,7 @@ export default function CalculatorPage() {
               >
                 <div className="text-center mb-6">
                   <div className="w-12 h-12 mx-auto mb-4 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src="/logo.png" 
                       alt="Northern Pathways Logo" 
@@ -514,12 +515,9 @@ export default function CalculatorPage() {
                   ))}
                 </div>
 
-                <button
-                  onClick={() => setShowResults(true)}
-                  className="w-full button-primary"
-                >
+                <div className="text-sm text-muted-foreground">
                   {t("calculate")}
-                </button>
+                </div>
 
                 <div className="mt-4 text-center">
                   <p className="text-sm text-muted-foreground">
