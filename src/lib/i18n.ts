@@ -122,7 +122,6 @@ const resources = {
       date: "Date",
       invitationNumber: "Invitation Number",
       crsScore: "CRS Score",
-      category: "Category",
       subcategory: "Subcategory",
     }
   },
@@ -245,7 +244,6 @@ const resources = {
       date: "Tarih",
       invitationNumber: "Davet Sayısı",
       crsScore: "CRS Puanı",
-      category: "Kategori",
       subcategory: "Alt Kategori",
     }
   }

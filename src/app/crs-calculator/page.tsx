@@ -1993,14 +1993,14 @@ export default function CRSCalculatorPage() {
                     <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
                       <div className="flex items-center justify-between mb-2">
                         <h5 className="font-medium text-blue-800">Core Human Capital</h5>
-                        <span className="text-2xl font-bold text-blue-600">{scoreBreakdown.core || 0}</span>
+                        <span className="text-2xl font-bold text-blue-600">{(scoreBreakdown.core as number) || 0}</span>
                       </div>
                       <div className="space-y-1 text-xs text-blue-700">
-                        <div>Age: {scoreBreakdown.coreBreakdown?.age || 0}</div>
-                        <div>Education: {scoreBreakdown.coreBreakdown?.education || 0}</div>
-                        <div>Language: {scoreBreakdown.coreBreakdown?.firstLang || 0}</div>
-                        <div>2nd Language: {scoreBreakdown.coreBreakdown?.secondLang || 0}</div>
-                        <div>Work Exp: {scoreBreakdown.coreBreakdown?.canadianExp || 0}</div>
+                        <div>Age: {(scoreBreakdown.coreBreakdown as any)?.age || 0}</div>
+                        <div>Education: {(scoreBreakdown.coreBreakdown as any)?.education || 0}</div>
+                        <div>Language: {(scoreBreakdown.coreBreakdown as any)?.firstLang || 0}</div>
+                        <div>2nd Language: {(scoreBreakdown.coreBreakdown as any)?.secondLang || 0}</div>
+                        <div>Work Exp: {(scoreBreakdown.coreBreakdown as any)?.canadianExp || 0}</div>
                       </div>
                     </div>
 
@@ -2008,12 +2008,12 @@ export default function CRSCalculatorPage() {
                     <div className="bg-pink-50 rounded-lg p-4 border border-pink-200">
                       <div className="flex items-center justify-between mb-2">
                         <h5 className="font-medium text-pink-800">Spouse Factors</h5>
-                        <span className="text-2xl font-bold text-pink-600">{scoreBreakdown.spouse || 0}</span>
+                        <span className="text-2xl font-bold text-pink-600">{(scoreBreakdown.spouse as number) || 0}</span>
                       </div>
                       <div className="space-y-1 text-xs text-pink-700">
-                        <div>Education: {scoreBreakdown.spouseBreakdown?.education || 0}</div>
-                        <div>Work Exp: {scoreBreakdown.spouseBreakdown?.work || 0}</div>
-                        <div>Language: {scoreBreakdown.spouseBreakdown?.language || 0}</div>
+                        <div>Education: {(scoreBreakdown.spouseBreakdown as any)?.education || 0}</div>
+                        <div>Work Exp: {(scoreBreakdown.spouseBreakdown as any)?.work || 0}</div>
+                        <div>Language: {(scoreBreakdown.spouseBreakdown as any)?.language || 0}</div>
                       </div>
                     </div>
 
@@ -2021,16 +2021,16 @@ export default function CRSCalculatorPage() {
                     <div className="bg-green-50 rounded-lg p-4 border border-green-200">
                       <div className="flex items-center justify-between mb-2">
                         <h5 className="font-medium text-green-800">Skill Transferability</h5>
-                        <span className="text-2xl font-bold text-green-600">{scoreBreakdown.transfer || 0}</span>
+                        <span className="text-2xl font-bold text-green-600">{(scoreBreakdown.transfer as number) || 0}</span>
                       </div>
                       <div className="space-y-1 text-xs text-green-700">
-                                        <div>Edu+Lang: {scoreBreakdown.transferBreakdown?.eduLang || 0}</div>
-                <div>Edu+Work: {scoreBreakdown.transferBreakdown?.eduCanExp || 0}</div>
-                <div>Part 1 Total (capped at 50): {Math.min(50, (scoreBreakdown.transferBreakdown?.eduLang || 0) + (scoreBreakdown.transferBreakdown?.eduCanExp || 0))}</div>
-                <div>Foreign+Lang: {scoreBreakdown.transferBreakdown?.foreignLang || 0}</div>
-                <div>Foreign+Work: {scoreBreakdown.transferBreakdown?.foreignCanExp || 0}</div>
-                <div>Part 2 Total (capped at 50): {Math.min(50, (scoreBreakdown.transferBreakdown?.foreignLang || 0) + (scoreBreakdown.transferBreakdown?.foreignCanExp || 0))}</div>
-                <div>Cert+Lang: {scoreBreakdown.transferBreakdown?.certCombo || 0}</div>
+                                        <div>Edu+Lang: {(scoreBreakdown.transferBreakdown as any)?.eduLang || 0}</div>
+                <div>Edu+Work: {(scoreBreakdown.transferBreakdown as any)?.eduCanExp || 0}</div>
+                <div>Part 1 Total (capped at 50): {Math.min(50, ((scoreBreakdown.transferBreakdown as any)?.eduLang || 0) + ((scoreBreakdown.transferBreakdown as any)?.eduCanExp || 0))}</div>
+                <div>Foreign+Lang: {(scoreBreakdown.transferBreakdown as any)?.foreignLang || 0}</div>
+                <div>Foreign+Work: {(scoreBreakdown.transferBreakdown as any)?.foreignCanExp || 0}</div>
+                <div>Part 2 Total (capped at 50): {Math.min(50, ((scoreBreakdown.transferBreakdown as any)?.foreignLang || 0) + ((scoreBreakdown.transferBreakdown as any)?.foreignCanExp || 0))}</div>
+                <div>Cert+Lang: {(scoreBreakdown.transferBreakdown as any)?.certCombo || 0}</div>
                       </div>
                     </div>
 
@@ -2038,13 +2038,13 @@ export default function CRSCalculatorPage() {
                     <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
                       <div className="flex items-center justify-between mb-2">
                         <h5 className="font-medium text-purple-800">Additional Factors</h5>
-                        <span className="text-2xl font-bold text-purple-600">{scoreBreakdown.additional || 0}</span>
+                        <span className="text-2xl font-bold text-purple-600">{(scoreBreakdown.additional as number) || 0}</span>
                       </div>
                       <div className="space-y-1 text-xs text-purple-700">
-                        <div>Canadian Edu: {scoreBreakdown.additionalBreakdown?.canadianEducation || 0}</div>
-                        <div>Provincial Nom: {scoreBreakdown.additionalBreakdown?.nomination || 0}</div>
-                        <div>Sibling: {scoreBreakdown.additionalBreakdown?.sibling || 0}</div>
-                        <div>Certificate: {scoreBreakdown.additionalBreakdown?.certificateOfQualification || 0}</div>
+                        <div>Canadian Edu: {(scoreBreakdown.additionalBreakdown as any)?.canadianEducation || 0}</div>
+                        <div>Provincial Nom: {(scoreBreakdown.additionalBreakdown as any)?.nomination || 0}</div>
+                        <div>Sibling: {(scoreBreakdown.additionalBreakdown as any)?.sibling || 0}</div>
+                        <div>Certificate: {(scoreBreakdown.additionalBreakdown as any)?.certificateOfQualification || 0}</div>
                       </div>
                     </div>
                   </div>
@@ -2276,7 +2276,7 @@ export default function CRSCalculatorPage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.coreBreakdown?.age || 0}</div>
+                          <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.coreBreakdown as any)?.age || 0}</div>
                           <div className="text-xs text-gray-500">points</div>
                         </div>
                       </div>
@@ -2293,7 +2293,7 @@ export default function CRSCalculatorPage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.coreBreakdown?.education || 0}</div>
+                          <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.coreBreakdown as any)?.education || 0}</div>
                           <div className="text-xs text-gray-500">points</div>
                         </div>
                       </div>
@@ -2310,7 +2310,7 @@ export default function CRSCalculatorPage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.coreBreakdown?.canadianExp || 0}</div>
+                          <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.coreBreakdown as any)?.canadianExp || 0}</div>
                           <div className="text-xs text-gray-500">points</div>
                         </div>
                       </div>
@@ -2328,26 +2328,26 @@ export default function CRSCalculatorPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.coreBreakdown?.firstLang || 0}</div>
+                            <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.coreBreakdown as any)?.firstLang || 0}</div>
                             <div className="text-xs text-gray-500">points</div>
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3 text-sm">
                           <div className="flex justify-between">
                             <span className="text-gray-600">Speaking:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.firstLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.firstLang || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Listening:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.firstLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.firstLang || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Reading:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.firstLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.firstLang || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Writing:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.firstLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.firstLang || 0) / 4)}</span>
                           </div>
                         </div>
                       </div>
@@ -2365,26 +2365,26 @@ export default function CRSCalculatorPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.coreBreakdown?.secondLang || 0}</div>
+                            <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.coreBreakdown as any)?.secondLang || 0}</div>
                             <div className="text-xs text-gray-500">points</div>
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3 text-sm">
                           <div className="flex justify-between">
                             <span className="text-gray-600">Speaking:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.secondLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.secondLang || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Listening:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.secondLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.secondLang || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Reading:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.secondLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.secondLang || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Writing:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.coreBreakdown?.secondLang || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.coreBreakdown as any)?.secondLang || 0) / 4)}</span>
                           </div>
                         </div>
                       </div>
@@ -2393,7 +2393,7 @@ export default function CRSCalculatorPage() {
                       <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-xl">
                         <div className="flex items-center justify-between">
                           <span className="text-lg font-bold">Section A Total</span>
-                          <span className="text-3xl font-bold">{scoreBreakdown.core || 0}</span>
+                          <span className="text-3xl font-bold">{(scoreBreakdown.core as number) || 0}</span>
                         </div>
                       </div>
                     </div>
@@ -2430,7 +2430,7 @@ export default function CRSCalculatorPage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-pink-600">{scoreBreakdown.spouseBreakdown?.education || 0}</div>
+                          <div className="text-2xl font-bold text-pink-600">{(scoreBreakdown.spouseBreakdown as any)?.education || 0}</div>
                           <div className="text-xs text-gray-500">points</div>
                         </div>
                       </div>
@@ -2447,7 +2447,7 @@ export default function CRSCalculatorPage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-pink-600">{scoreBreakdown.spouseBreakdown?.work || 0}</div>
+                          <div className="text-2xl font-bold text-pink-600">{(scoreBreakdown.spouseBreakdown as any)?.work || 0}</div>
                           <div className="text-xs text-gray-500">points</div>
                         </div>
                       </div>
@@ -2465,26 +2465,26 @@ export default function CRSCalculatorPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-pink-600">{scoreBreakdown.spouseBreakdown?.language || 0}</div>
+                            <div className="text-2xl font-bold text-pink-600">{(scoreBreakdown.spouseBreakdown as any)?.language || 0}</div>
                             <div className="text-xs text-gray-500">points</div>
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-3 text-sm">
                           <div className="flex justify-between">
                             <span className="text-gray-600">Speaking:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.spouseBreakdown?.language || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.spouseBreakdown as any)?.language || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Listening:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.spouseBreakdown?.language || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.spouseBreakdown as any)?.language || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Reading:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.spouseBreakdown?.language || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.spouseBreakdown as any)?.language || 0) / 4)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-600">Writing:</span>
-                            <span className="font-medium">{Math.floor((scoreBreakdown.spouseBreakdown?.language || 0) / 4)}</span>
+                            <span className="font-medium">{Math.floor(((scoreBreakdown.spouseBreakdown as any)?.language || 0) / 4)}</span>
                           </div>
                         </div>
                       </div>
@@ -2499,7 +2499,7 @@ export default function CRSCalculatorPage() {
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-lg font-bold">Section B Total</span>
-                          <span className="text-3xl font-bold">{scoreBreakdown.spouse || 0}</span>
+                          <span className="text-3xl font-bold">{(scoreBreakdown.spouse as number) || 0}</span>
                         </div>
                       </motion.div>
                     </div>
@@ -2531,7 +2531,7 @@ export default function CRSCalculatorPage() {
                         <div className="p-4 bg-green-50 rounded-xl border border-green-200">
                           <div className="flex items-center justify-between mb-2">
                             <span className="font-medium text-gray-800">Education + Language</span>
-                            <span className="text-xl font-bold text-green-600">{scoreBreakdown.transferBreakdown?.eduLang || 0}</span>
+                            <span className="text-xl font-bold text-green-600">{(scoreBreakdown.transferBreakdown as any)?.eduLang || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">Combination of education level and language proficiency</p>
                         </div>
@@ -2539,7 +2539,7 @@ export default function CRSCalculatorPage() {
                         <div className="p-4 bg-green-50 rounded-xl border border-green-200">
                           <div className="flex items-center justify-between mb-2">
                             <span className="font-medium text-gray-800">Education + Canadian Work</span>
-                            <span className="text-xl font-bold text-green-600">{scoreBreakdown.transferBreakdown?.eduCanExp || 0}</span>
+                            <span className="text-xl font-bold text-green-600">{(scoreBreakdown.transferBreakdown as any)?.eduCanExp || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">Combination of education and Canadian work experience</p>
                         </div>
@@ -2547,7 +2547,7 @@ export default function CRSCalculatorPage() {
                         <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-4 rounded-xl">
                           <div className="flex items-center justify-between">
                             <span className="font-medium">Subtotal (Max 50)</span>
-                            <span className="text-2xl font-bold">{Math.min(50, (scoreBreakdown.transferBreakdown?.eduLang || 0) + (scoreBreakdown.transferBreakdown?.eduCanExp || 0))}</span>
+                            <span className="text-2xl font-bold">{Math.min(50, ((scoreBreakdown.transferBreakdown as any)?.eduLang || 0) + ((scoreBreakdown.transferBreakdown as any)?.eduCanExp || 0))}</span>
                           </div>
                         </div>
                       </div>
@@ -2559,7 +2559,7 @@ export default function CRSCalculatorPage() {
                         <div className="p-4 bg-green-50 rounded-xl border border-green-200">
                           <div className="flex items-center justify-between mb-2">
                             <span className="font-medium text-gray-800">Foreign Work + Language</span>
-                            <span className="text-xl font-bold text-green-600">{scoreBreakdown.transferBreakdown?.foreignLang || 0}</span>
+                            <span className="text-xl font-bold text-green-600">{(scoreBreakdown.transferBreakdown as any)?.foreignLang || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">Combination of foreign work and language skills</p>
                         </div>
@@ -2567,7 +2567,7 @@ export default function CRSCalculatorPage() {
                         <div className="p-4 bg-green-50 rounded-xl border border-green-200">
                           <div className="flex items-center justify-between mb-2">
                             <span className="font-medium text-gray-800">Foreign + Canadian Work</span>
-                            <span className="text-xl font-bold text-green-600">{scoreBreakdown.transferBreakdown?.foreignCanExp || 0}</span>
+                            <span className="text-xl font-bold text-green-600">{(scoreBreakdown.transferBreakdown as any)?.foreignCanExp || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">Combination of foreign and Canadian work experience</p>
                         </div>
@@ -2575,7 +2575,7 @@ export default function CRSCalculatorPage() {
                         <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-4 rounded-xl">
                           <div className="flex items-center justify-between">
                             <span className="font-medium">Subtotal (Max 50)</span>
-                            <span className="text-2xl font-bold">{Math.min(50, (scoreBreakdown.transferBreakdown?.foreignLang || 0) + (scoreBreakdown.transferBreakdown?.foreignCanExp || 0))}</span>
+                            <span className="text-2xl font-bold">{Math.min(50, ((scoreBreakdown.transferBreakdown as any)?.foreignLang || 0) + ((scoreBreakdown.transferBreakdown as any)?.foreignCanExp || 0))}</span>
                           </div>
                         </div>
                       </div>
@@ -2594,7 +2594,7 @@ export default function CRSCalculatorPage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-green-600">{scoreBreakdown.transferBreakdown?.certCombo || 0}</div>
+                          <div className="text-2xl font-bold text-green-600">{(scoreBreakdown.transferBreakdown as any)?.certCombo || 0}</div>
                           <div className="text-xs text-gray-500">points</div>
                         </div>
                       </div>
@@ -2610,7 +2610,7 @@ export default function CRSCalculatorPage() {
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-lg font-bold">Section C Total (Max 100)</span>
-                        <span className="text-3xl font-bold">{scoreBreakdown.transfer || 0}</span>
+                        <span className="text-3xl font-bold">{(scoreBreakdown.transfer as number) || 0}</span>
                       </div>
                     </motion.div>
                   </div>
@@ -2646,7 +2646,7 @@ export default function CRSCalculatorPage() {
                               </div>
                               <span className="font-medium text-gray-800">Sibling in Canada</span>
                             </div>
-                            <span className="text-xl font-bold text-purple-600">{scoreBreakdown.additionalBreakdown?.sibling || 0}</span>
+                            <span className="text-xl font-bold text-purple-600">{(scoreBreakdown.additionalBreakdown as any)?.sibling || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">Brother or sister living in Canada</p>
                         </div>
@@ -2659,7 +2659,7 @@ export default function CRSCalculatorPage() {
                               </div>
                               <span className="font-medium text-gray-800">French Language</span>
                             </div>
-                            <span className="text-xl font-bold text-purple-600">{scoreBreakdown.additionalBreakdown?.frenchLanguage || 0}</span>
+                            <span className="text-xl font-bold text-purple-600">{(scoreBreakdown.additionalBreakdown as any)?.frenchLanguage || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">French language proficiency bonus</p>
                         </div>
@@ -2675,7 +2675,7 @@ export default function CRSCalculatorPage() {
                               </div>
                               <span className="font-medium text-gray-800">Canadian Education</span>
                             </div>
-                            <span className="text-xl font-bold text-purple-600">{scoreBreakdown.additionalBreakdown?.canadianEducation || 0}</span>
+                            <span className="text-xl font-bold text-purple-600">{(scoreBreakdown.additionalBreakdown as any)?.canadianEducation || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">Post-secondary education in Canada</p>
                         </div>
@@ -2688,7 +2688,7 @@ export default function CRSCalculatorPage() {
                               </div>
                               <span className="font-medium text-gray-800">Provincial Nomination</span>
                             </div>
-                            <span className="text-xl font-bold text-purple-600">{scoreBreakdown.additionalBreakdown?.nomination || 0}</span>
+                            <span className="text-xl font-bold text-purple-600">{(scoreBreakdown.additionalBreakdown as any)?.nomination || 0}</span>
                           </div>
                           <p className="text-sm text-gray-600">Province/territory nomination certificate</p>
                         </div>
@@ -2705,7 +2705,7 @@ export default function CRSCalculatorPage() {
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-lg font-bold">Section D Total</span>
-                        <span className="text-3xl font-bold">{scoreBreakdown.additional || 0}</span>
+                        <span className="text-3xl font-bold">{(scoreBreakdown.additional as number) || 0}</span>
                       </div>
                     </motion.div>
                   </div>
@@ -2723,19 +2723,19 @@ export default function CRSCalculatorPage() {
                   <h3 className="text-3xl font-bold text-gray-800 mb-4">Final CRS Score Summary</h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-600 mb-1">{scoreBreakdown.core || 0}</div>
+                      <div className="text-2xl font-bold text-blue-600 mb-1">{(scoreBreakdown.core as number) || 0}</div>
                       <div className="text-sm text-gray-600">Core Human Capital</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-pink-600 mb-1">{scoreBreakdown.spouse || 0}</div>
+                      <div className="text-2xl font-bold text-pink-600 mb-1">{(scoreBreakdown.spouse as number) || 0}</div>
                       <div className="text-sm text-gray-600">Spouse Factors</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600 mb-1">{scoreBreakdown.transfer || 0}</div>
+                      <div className="text-2xl font-bold text-green-600 mb-1">{(scoreBreakdown.transfer as number) || 0}</div>
                       <div className="text-sm text-gray-600">Skill Transferability</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-purple-600 mb-1">{scoreBreakdown.additional || 0}</div>
+                      <div className="text-2xl font-bold text-purple-600 mb-1">{(scoreBreakdown.additional as number) || 0}</div>
                       <div className="text-sm text-gray-600">Additional Factors</div>
                     </div>
                   </div>
@@ -2764,7 +2764,7 @@ export default function CRSCalculatorPage() {
                     <h4 className="font-semibold text-amber-800 text-lg mb-3">High Impact Improvements</h4>
                     
                     {/* Language Improvement */}
-                    {scoreBreakdown.coreBreakdown?.firstLang < 136 && (
+                    {(scoreBreakdown.coreBreakdown as any)?.firstLang < 136 && (
                       <motion.div 
                         className="p-4 bg-amber-100 rounded-xl border border-amber-300"
                         initial={{ opacity: 0, x: -20 }}
@@ -2779,7 +2779,7 @@ export default function CRSCalculatorPage() {
                           <span className="font-medium text-amber-800">Improve First Language</span>
                         </div>
                         <p className="text-sm text-amber-700 mb-2">
-                          Current: {scoreBreakdown.coreBreakdown?.firstLang || 0} points | Target: 136 points
+                          Current: {(scoreBreakdown.coreBreakdown as any)?.firstLang || 0} points | Target: 136 points
                         </p>
                         <p className="text-xs text-amber-600">
                           • Study for IELTS/CELPIP to achieve CLB 9+ (Speaking 7+, Listening 8+, Reading 7+, Writing 7+)
@@ -2787,13 +2787,13 @@ export default function CRSCalculatorPage() {
                           • Practice with official test materials
                         </p>
                         <div className="mt-2 text-xs font-medium text-amber-700">
-                          Potential gain: +{136 - (scoreBreakdown.coreBreakdown?.firstLang || 0)} points
+                          Potential gain: +{136 - ((scoreBreakdown.coreBreakdown as any)?.firstLang || 0)} points
                         </div>
                       </motion.div>
                     )}
 
                     {/* Second Language */}
-                    {scoreBreakdown.coreBreakdown?.secondLang < 22 && (
+                    {(scoreBreakdown.coreBreakdown as any)?.secondLang < 22 && (
                       <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                         <div className="flex items-center space-x-3 mb-2">
                           <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -2802,7 +2802,7 @@ export default function CRSCalculatorPage() {
                           <span className="font-medium text-amber-800">Learn Second Language</span>
                         </div>
                         <p className="text-sm text-amber-700 mb-2">
-                          Current: {scoreBreakdown.coreBreakdown?.secondLang || 0} points | Target: 22 points
+                          Current: {(scoreBreakdown.coreBreakdown as any)?.secondLang || 0} points | Target: 22 points
                         </p>
                         <p className="text-xs text-amber-600">
                           • Study French to achieve CLB 5+ in all skills
@@ -2810,13 +2810,13 @@ export default function CRSCalculatorPage() {
                           • Focus on basic conversational skills
                         </p>
                         <div className="mt-2 text-xs font-medium text-amber-700">
-                          Potential gain: +{22 - (scoreBreakdown.coreBreakdown?.secondLang || 0)} points
+                          Potential gain: +{22 - ((scoreBreakdown.coreBreakdown as any)?.secondLang || 0)} points
                         </div>
                       </div>
                     )}
 
                     {/* Education */}
-                    {scoreBreakdown.coreBreakdown?.education < 150 && (
+                    {(scoreBreakdown.coreBreakdown as any)?.education < 150 && (
                       <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                         <div className="flex items-center space-x-3 mb-2">
                           <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -2825,7 +2825,7 @@ export default function CRSCalculatorPage() {
                           <span className="font-medium text-amber-800">Higher Education</span>
                         </div>
                         <p className="text-sm text-amber-700 mb-2">
-                          Current: {scoreBreakdown.coreBreakdown?.education || 0} points | Target: 150 points
+                          Current: {(scoreBreakdown.coreBreakdown as any)?.education || 0} points | Target: 150 points
                         </p>
                         <p className="text-xs text-amber-600">
                           • Pursue a Master&apos;s or PhD degree
@@ -2833,7 +2833,7 @@ export default function CRSCalculatorPage() {
                           • Consider Canadian education programs
                         </p>
                         <div className="mt-2 text-xs font-medium text-amber-700">
-                          Potential gain: +{150 - (scoreBreakdown.coreBreakdown?.education || 0)} points
+                          Potential gain: +{150 - ((scoreBreakdown.coreBreakdown as any)?.education || 0)} points
                         </div>
                       </div>
                     )}
@@ -2844,7 +2844,7 @@ export default function CRSCalculatorPage() {
                     <h4 className="font-semibold text-amber-800 text-lg mb-3">Medium Impact Improvements</h4>
                     
                     {/* Work Experience */}
-                    {scoreBreakdown.coreBreakdown?.canadianExp < 80 && (
+                    {(scoreBreakdown.coreBreakdown as any)?.canadianExp < 80 && (
                       <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                         <div className="flex items-center space-x-3 mb-2">
                           <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -2853,7 +2853,7 @@ export default function CRSCalculatorPage() {
                           <span className="font-medium text-amber-800">Canadian Work Experience</span>
                         </div>
                         <p className="text-sm text-amber-700 mb-2">
-                          Current: {scoreBreakdown.coreBreakdown?.canadianExp || 0} points | Target: 80 points
+                          Current: {(scoreBreakdown.coreBreakdown as any)?.canadianExp || 0} points | Target: 80 points
                         </p>
                         <p className="text-xs text-amber-600">
                           • Work in Canada for 3+ years in skilled positions
@@ -2861,13 +2861,13 @@ export default function CRSCalculatorPage() {
                           • Document all work experience properly
                         </p>
                         <div className="mt-2 text-xs font-medium text-amber-700">
-                          Potential gain: +{80 - (scoreBreakdown.coreBreakdown?.canadianExp || 0)} points
+                          Potential gain: +{80 - ((scoreBreakdown.coreBreakdown as any)?.canadianExp || 0)} points
                         </div>
                       </div>
                     )}
 
                     {/* Provincial Nomination */}
-                    {scoreBreakdown.additionalBreakdown?.nomination === 0 && (
+                    {(scoreBreakdown.additionalBreakdown as any)?.nomination === 0 && (
                       <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                         <div className="flex items-center space-x-3 mb-2">
                           <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -2890,7 +2890,7 @@ export default function CRSCalculatorPage() {
                     )}
 
                     {/* Certificate of Qualification */}
-                    {scoreBreakdown.transferBreakdown?.certCombo === 0 && (
+                    {(scoreBreakdown.transferBreakdown as any)?.certCombo === 0 && (
                       <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                         <div className="flex items-center space-x-3 mb-2">
                           <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">

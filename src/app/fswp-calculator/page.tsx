@@ -2340,13 +2340,13 @@ export default function FSWPCalculatorPage() {
                   <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
                     <div className="flex items-center justify-between mb-2">
                       <h5 className="font-medium text-blue-800">Core Factors</h5>
-                      <span className="text-2xl font-bold text-blue-600">{scoreBreakdown.core || 0}</span>
+                      <span className="text-2xl font-bold text-blue-600">{(scoreBreakdown.core as number) || 0}</span>
                     </div>
                     <div className="space-y-1 text-xs text-blue-700">
-                      <div>Language: {scoreBreakdown.language || 0}</div>
-                      <div>Education: {scoreBreakdown.education || 0}</div>
-                      <div>Work Experience: {scoreBreakdown.experience || 0}</div>
-                      <div>Age: {scoreBreakdown.age || 0}</div>
+                      <div>Language: {(scoreBreakdown.language as number) || 0}</div>
+                      <div>Education: {(scoreBreakdown.education as number) || 0}</div>
+                      <div>Work Experience: {(scoreBreakdown.experience as number) || 0}</div>
+                      <div>Age: {(scoreBreakdown.age as number) || 0}</div>
                     </div>
                   </div>
 
@@ -2354,14 +2354,14 @@ export default function FSWPCalculatorPage() {
                   <div className="bg-green-50 rounded-lg p-4 border border-green-200">
                     <div className="flex items-center justify-between mb-2">
                       <h5 className="font-medium text-green-800">Language Skills</h5>
-                      <span className="text-2xl font-bold text-green-600">{scoreBreakdown.language || 0}</span>
+                      <span className="text-2xl font-bold text-green-600">{(scoreBreakdown.language as number) || 0}</span>
                     </div>
                     <div className="space-y-1 text-xs text-green-700">
-                      <div>Speaking: {scoreBreakdown.languageBreakdown?.speaking || 0}</div>
-                      <div>Listening: {scoreBreakdown.languageBreakdown?.listening || 0}</div>
-                      <div>Reading: {scoreBreakdown.languageBreakdown?.reading || 0}</div>
-                      <div>Writing: {scoreBreakdown.languageBreakdown?.writing || 0}</div>
-                      <div>2nd Language: {scoreBreakdown.secondLanguage || 0}</div>
+                      <div>Speaking: {(scoreBreakdown.languageBreakdown as any)?.speaking || 0}</div>
+                      <div>Listening: {(scoreBreakdown.languageBreakdown as any)?.listening || 0}</div>
+                      <div>Reading: {(scoreBreakdown.languageBreakdown as any)?.reading || 0}</div>
+                      <div>Writing: {(scoreBreakdown.languageBreakdown as any)?.writing || 0}</div>
+                      <div>2nd Language: {(scoreBreakdown.secondLanguage as number) || 0}</div>
                     </div>
                   </div>
 
@@ -2369,14 +2369,14 @@ export default function FSWPCalculatorPage() {
                   <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
                     <div className="flex items-center justify-between mb-2">
                       <h5 className="font-medium text-purple-800">Additional Factors</h5>
-                      <span className="text-2xl font-bold text-purple-600">{scoreBreakdown.additional || 0}</span>
+                      <span className="text-2xl font-bold text-purple-600">{(scoreBreakdown.additional as number) || 0}</span>
                     </div>
                     <div className="space-y-1 text-xs text-purple-700">
-                      <div>Canadian Education: {scoreBreakdown.canadianEducation || 0}</div>
-                      <div>Canadian Work: {scoreBreakdown.canadianWorkExperience || 0}</div>
-                      <div>Spouse Education: {scoreBreakdown.spouseCanadianEducation || 0}</div>
-                      <div>Spouse Work: {scoreBreakdown.spouseWorkExperience || 0}</div>
-                      <div>Spouse Language: {scoreBreakdown.spouseLanguage || 0}</div>
+                      <div>Canadian Education: {(scoreBreakdown.canadianEducation as number) || 0}</div>
+                      <div>Canadian Work: {(scoreBreakdown.canadianWorkExperience as number) || 0}</div>
+                      <div>Spouse Education: {(scoreBreakdown.spouseCanadianEducation as number) || 0}</div>
+                      <div>Spouse Work: {(scoreBreakdown.spouseWorkExperience as number) || 0}</div>
+                      <div>Spouse Language: {(scoreBreakdown.spouseLanguage as number) || 0}</div>
                     </div>
                   </div>
 
@@ -2384,11 +2384,11 @@ export default function FSWPCalculatorPage() {
                   <div className="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
                     <div className="flex items-center justify-between mb-2">
                       <h5 className="font-medium text-indigo-800">Education</h5>
-                      <span className="text-2xl font-bold text-indigo-600">{scoreBreakdown.education || 0}</span>
+                      <span className="text-2xl font-bold text-indigo-600">{(scoreBreakdown.education as number) || 0}</span>
                     </div>
                     <div className="space-y-1 text-xs text-indigo-700">
-                      <div>Highest Level: {scoreBreakdown.education || 0} points</div>
-                      <div>Canadian Education: +{scoreBreakdown.canadianEducation || 0} bonus</div>
+                      <div>Highest Level: {(scoreBreakdown.education as number) || 0} points</div>
+                      <div>Canadian Education: +{(scoreBreakdown.canadianEducation as number) || 0} bonus</div>
                     </div>
                   </div>
 
@@ -2396,11 +2396,11 @@ export default function FSWPCalculatorPage() {
                   <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
                     <div className="flex items-center justify-between mb-2">
                       <h5 className="font-medium text-orange-800">Work Experience</h5>
-                      <span className="text-2xl font-bold text-orange-600">{scoreBreakdown.experience || 0}</span>
+                      <span className="text-2xl font-bold text-orange-600">{(scoreBreakdown.experience as number) || 0}</span>
                     </div>
                     <div className="space-y-1 text-xs text-orange-700">
-                      <div>Foreign Experience: {scoreBreakdown.experience || 0} points</div>
-                      <div>Canadian Experience: +{scoreBreakdown.canadianWorkExperience || 0} bonus</div>
+                      <div>Foreign Experience: {(scoreBreakdown.experience as number) || 0} points</div>
+                      <div>Canadian Experience: +{(scoreBreakdown.canadianWorkExperience as number) || 0} bonus</div>
                     </div>
                   </div>
 
@@ -2408,10 +2408,10 @@ export default function FSWPCalculatorPage() {
                   <div className="bg-pink-50 rounded-lg p-4 border border-pink-200">
                     <div className="flex items-center justify-between mb-2">
                       <h5 className="font-medium text-pink-800">Age</h5>
-                      <span className="text-2xl font-bold text-pink-600">{scoreBreakdown.age || 0}</span>
+                      <span className="text-2xl font-bold text-pink-600">{(scoreBreakdown.age as number) || 0}</span>
                     </div>
                     <div className="space-y-1 text-xs text-pink-700">
-                      <div>Age Points: {scoreBreakdown.age || 0} points</div>
+                      <div>Age Points: {(scoreBreakdown.age as number) || 0} points</div>
                       <div>Maximum: 12 points</div>
                     </div>
                   </div>
@@ -2596,7 +2596,7 @@ export default function FSWPCalculatorPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.age || 0}</div>
+                            <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.age as number) || 0}</div>
                             <div className="text-xs text-gray-500">points</div>
                           </div>
                         </div>
@@ -2613,7 +2613,7 @@ export default function FSWPCalculatorPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.education || 0}</div>
+                            <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.education as number) || 0}</div>
                             <div className="text-xs text-gray-500">points</div>
                           </div>
                         </div>
@@ -2630,7 +2630,7 @@ export default function FSWPCalculatorPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.experience || 0}</div>
+                            <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.experience as number) || 0}</div>
                             <div className="text-xs text-gray-500">points</div>
                           </div>
                         </div>
@@ -2648,26 +2648,26 @@ export default function FSWPCalculatorPage() {
                               </div>
                             </div>
                             <div className="text-right">
-                              <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.language || 0}</div>
+                              <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.language as number) || 0}</div>
                               <div className="text-xs text-gray-500">points</div>
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-3 text-sm">
                             <div className="flex justify-between">
                               <span className="text-gray-600">Speaking:</span>
-                              <span className="font-medium">{scoreBreakdown.languageBreakdown?.speaking || 0}</span>
+                              <span className="font-medium">{(scoreBreakdown.languageBreakdown as any)?.speaking || 0}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-gray-600">Listening:</span>
-                              <span className="font-medium">{scoreBreakdown.languageBreakdown?.listening || 0}</span>
+                              <span className="font-medium">{(scoreBreakdown.languageBreakdown as any)?.listening || 0}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-gray-600">Reading:</span>
-                              <span className="font-medium">{scoreBreakdown.languageBreakdown?.reading || 0}</span>
+                              <span className="font-medium">{(scoreBreakdown.languageBreakdown as any)?.reading || 0}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-gray-600">Writing:</span>
-                              <span className="font-medium">{scoreBreakdown.languageBreakdown?.writing || 0}</span>
+                              <span className="font-medium">{(scoreBreakdown.languageBreakdown as any)?.writing || 0}</span>
                             </div>
                           </div>
                         </div>
@@ -2685,26 +2685,26 @@ export default function FSWPCalculatorPage() {
                               </div>
                             </div>
                             <div className="text-right">
-                              <div className="text-2xl font-bold text-blue-600">{scoreBreakdown.secondLanguage || 0}</div>
+                              <div className="text-2xl font-bold text-blue-600">{(scoreBreakdown.secondLanguage as number) || 0}</div>
                               <div className="text-xs text-gray-500">points</div>
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-3 text-sm">
                             <div className="flex justify-between">
                               <span className="text-gray-600">Speaking:</span>
-                              <span className="font-medium">{Math.floor((scoreBreakdown.secondLanguage || 0) / 4)}</span>
+                              <span className="font-medium">{Math.floor(((scoreBreakdown.secondLanguage as number) || 0) / 4)}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-gray-600">Listening:</span>
-                              <span className="font-medium">{Math.floor((scoreBreakdown.secondLanguage || 0) / 4)}</span>
+                              <span className="font-medium">{Math.floor(((scoreBreakdown.secondLanguage as number) || 0) / 4)}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-gray-600">Reading:</span>
-                              <span className="font-medium">{Math.floor((scoreBreakdown.secondLanguage || 0) / 4)}</span>
+                              <span className="font-medium">{Math.floor(((scoreBreakdown.secondLanguage as number) || 0) / 4)}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-gray-600">Writing:</span>
-                              <span className="font-medium">{Math.floor((scoreBreakdown.secondLanguage || 0) / 4)}</span>
+                              <span className="font-medium">{Math.floor(((scoreBreakdown.secondLanguage as number) || 0) / 4)}</span>
                             </div>
                           </div>
                         </div>
@@ -2713,7 +2713,7 @@ export default function FSWPCalculatorPage() {
                         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 rounded-xl">
                           <div className="flex items-center justify-between">
                             <span className="text-lg font-bold">General Total</span>
-                            <span className="text-3xl font-bold">{scoreBreakdown.core || 0}</span>
+                            <span className="text-3xl font-bold">{(scoreBreakdown.core as number) || 0}</span>
                           </div>
                         </div>
                       </div>
@@ -2749,7 +2749,7 @@ export default function FSWPCalculatorPage() {
                                 </div>
                                 <span className="font-medium text-gray-800">Canadian Education</span>
                               </div>
-                              <span className="text-xl font-bold text-indigo-600">{scoreBreakdown.canadianEducation || 0}</span>
+                              <span className="text-xl font-bold text-indigo-600">{(scoreBreakdown.canadianEducation as number) || 0}</span>
                             </div>
                             <p className="text-sm text-gray-600">Post-secondary education in Canada</p>
                           </div>
@@ -2762,7 +2762,7 @@ export default function FSWPCalculatorPage() {
                                 </div>
                                 <span className="font-medium text-gray-800">Canadian Work Experience</span>
                               </div>
-                              <span className="text-xl font-bold text-indigo-600">{scoreBreakdown.canadianWorkExperience || 0}</span>
+                              <span className="text-xl font-bold text-indigo-600">{(scoreBreakdown.canadianWorkExperience as number) || 0}</span>
                             </div>
                             <p className="text-sm text-gray-600">Skilled work experience in Canada</p>
                           </div>
@@ -2780,7 +2780,7 @@ export default function FSWPCalculatorPage() {
                                 </div>
                                 <span className="font-medium text-gray-800">Relatives in Canada</span>
                               </div>
-                              <span className="text-xl font-bold text-indigo-600">{scoreBreakdown.adaptability || 0}</span>
+                              <span className="text-xl font-bold text-indigo-600">{(scoreBreakdown.adaptability as number) || 0}</span>
                             </div>
                             <p className="text-sm text-gray-600">Family members living in Canada</p>
                           </div>
@@ -2793,7 +2793,7 @@ export default function FSWPCalculatorPage() {
                                 </div>
                                 <span className="font-medium text-gray-800">Job Offer</span>
                               </div>
-                              <span className="text-xl font-bold text-indigo-600">{scoreBreakdown.jobOffer || 0}</span>
+                              <span className="text-xl font-bold text-indigo-600">{(scoreBreakdown.jobOffer as number) || 0}</span>
                             </div>
                             <p className="text-sm text-gray-600">Valid job offer with LMIA</p>
                           </div>
@@ -2815,7 +2815,7 @@ export default function FSWPCalculatorPage() {
                                 </div>
                                 <span className="font-medium text-gray-800">Canadian Education</span>
                               </div>
-                              <span className="text-xl font-bold text-indigo-600">{scoreBreakdown.spouseCanadianEducation || 0}</span>
+                              <span className="text-xl font-bold text-indigo-600">{(scoreBreakdown.spouseCanadianEducation as number) || 0}</span>
                             </div>
                             <p className="text-sm text-gray-600">2+ years of study in Canada</p>
                           </div>
@@ -2829,7 +2829,7 @@ export default function FSWPCalculatorPage() {
                                 </div>
                                 <span className="font-medium text-gray-800">Work Experience</span>
                               </div>
-                              <span className="text-xl font-bold text-indigo-600">{scoreBreakdown.spouseWorkExperience || 0}</span>
+                              <span className="text-xl font-bold text-indigo-600">{(scoreBreakdown.spouseWorkExperience as number) || 0}</span>
                             </div>
                             <p className="text-sm text-gray-600">Canadian work experience</p>
                           </div>
@@ -2843,7 +2843,7 @@ export default function FSWPCalculatorPage() {
                                 </div>
                                 <span className="font-medium text-gray-800">Language Skills</span>
                               </div>
-                              <span className="text-xl font-bold text-indigo-600">{scoreBreakdown.spouseLanguage || 0}</span>
+                              <span className="text-xl font-bold text-indigo-600">{(scoreBreakdown.spouseLanguage as number) || 0}</span>
                             </div>
                             <p className="text-sm text-gray-600">Language proficiency</p>
                           </div>
@@ -2861,13 +2861,13 @@ export default function FSWPCalculatorPage() {
                         <div className="flex items-center justify-between">
                           <div className="flex flex-col">
                             <span className="text-lg font-bold">Additional Factors Total</span>
-                            {scoreBreakdown.additionalRaw > 10 && (
+                            {(scoreBreakdown.additionalRaw as number) > 10 && (
                               <span className="text-xs text-gray-100 mt-1">
-                                Raw total: {scoreBreakdown.additionalRaw} (capped at 10)
+                                Raw total: {(scoreBreakdown.additionalRaw as number)} (capped at 10)
                               </span>
                             )}
                           </div>
-                          <span className="text-3xl font-bold">{scoreBreakdown.additional || 0}</span>
+                          <span className="text-3xl font-bold">{(scoreBreakdown.additional as number) || 0}</span>
                         </div>
                       </motion.div>
                     </div>
@@ -2885,11 +2885,11 @@ export default function FSWPCalculatorPage() {
                     <h3 className="text-3xl font-bold text-gray-800 mb-4">Final FSWP Score Summary</h3>
                     <div className="grid grid-cols-2 gap-6">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600 mb-1">{scoreBreakdown.core || 0}</div>
+                        <div className="text-2xl font-bold text-blue-600 mb-1">{(scoreBreakdown.core as number) || 0}</div>
                         <div className="text-sm text-gray-600">General</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-indigo-600 mb-1">{scoreBreakdown.additional || 0}</div>
+                        <div className="text-2xl font-bold text-indigo-600 mb-1">{(scoreBreakdown.additional as number) || 0}</div>
                         <div className="text-sm text-gray-600">Additional Factors</div>
                       </div>
                     </div>
@@ -2918,7 +2918,7 @@ export default function FSWPCalculatorPage() {
                       <h4 className="font-semibold text-amber-800 text-lg mb-3">High Impact Improvements</h4>
                       
                       {/* Language Improvement */}
-                      {scoreBreakdown.language < 24 && (
+                      {(scoreBreakdown.language as number) < 24 && (
                         <motion.div 
                           className="p-4 bg-amber-100 rounded-xl border border-amber-300"
                           initial={{ opacity: 0, x: -20 }}
@@ -2933,7 +2933,7 @@ export default function FSWPCalculatorPage() {
                             <span className="font-medium text-amber-800">Improve First Language</span>
                           </div>
                           <p className="text-sm text-amber-700 mb-2">
-                            Current: {scoreBreakdown.language || 0} points | Target: 24 points
+                            Current: {(scoreBreakdown.language as number) || 0} points | Target: 24 points
                           </p>
                           <p className="text-xs text-amber-600">
                             • Study for IELTS/CELPIP to achieve CLB 7+ in all skills
@@ -2941,13 +2941,13 @@ export default function FSWPCalculatorPage() {
                             • Practice with official test materials
                           </p>
                           <div className="mt-2 text-xs font-medium text-amber-700">
-                            Potential gain: +{24 - (scoreBreakdown.language || 0)} points
+                            Potential gain: +{24 - ((scoreBreakdown.language as number) || 0)} points
                           </div>
                         </motion.div>
                       )}
 
                       {/* Second Language */}
-                      {scoreBreakdown.secondLanguage < 4 && (
+                      {(scoreBreakdown.secondLanguage as number) < 4 && (
                         <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                           <div className="flex items-center space-x-3 mb-2">
                             <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -2956,7 +2956,7 @@ export default function FSWPCalculatorPage() {
                             <span className="font-medium text-amber-800">Learn Second Language</span>
                           </div>
                           <p className="text-sm text-amber-700 mb-2">
-                            Current: {scoreBreakdown.secondLanguage || 0} points | Target: 4 points
+                            Current: {(scoreBreakdown.secondLanguage as number) || 0} points | Target: 4 points
                           </p>
                           <p className="text-xs text-amber-600">
                             • Study French to achieve CLB 5+ in all skills
@@ -2964,13 +2964,13 @@ export default function FSWPCalculatorPage() {
                             • Focus on basic conversational skills
                           </p>
                           <div className="mt-2 text-xs font-medium text-amber-700">
-                            Potential gain: +{4 - (scoreBreakdown.secondLanguage || 0)} points
+                            Potential gain: +{4 - ((scoreBreakdown.secondLanguage as number) || 0)} points
                           </div>
                         </div>
                       )}
 
                       {/* Education */}
-                      {scoreBreakdown.education < 25 && (
+                      {(scoreBreakdown.education as number) < 25 && (
                         <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                           <div className="flex items-center space-x-3 mb-2">
                             <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -2979,7 +2979,7 @@ export default function FSWPCalculatorPage() {
                             <span className="font-medium text-amber-800">Higher Education</span>
                           </div>
                           <p className="text-sm text-amber-700 mb-2">
-                            Current: {scoreBreakdown.education || 0} points | Target: 25 points
+                            Current: {(scoreBreakdown.education as number) || 0} points | Target: 25 points
                           </p>
                           <p className="text-xs text-amber-600">
                             • Pursue a PhD degree
@@ -2987,7 +2987,7 @@ export default function FSWPCalculatorPage() {
                             • Consider Canadian education programs
                           </p>
                           <div className="mt-2 text-xs font-medium text-amber-700">
-                            Potential gain: +{25 - (scoreBreakdown.education || 0)} points
+                            Potential gain: +{25 - ((scoreBreakdown.education as number) || 0)} points
                           </div>
                         </div>
                       )}
@@ -2998,7 +2998,7 @@ export default function FSWPCalculatorPage() {
                       <h4 className="font-semibold text-amber-800 text-lg mb-3">Medium Impact Improvements</h4>
                       
                                              {/* Work Experience */}
-                       {scoreBreakdown.experience < 15 && (
+                       {(scoreBreakdown.experience as number) < 15 && (
                          <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                            <div className="flex items-center space-x-3 mb-2">
                              <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -3007,7 +3007,7 @@ export default function FSWPCalculatorPage() {
                              <span className="font-medium text-amber-800">Work Experience</span>
                            </div>
                            <p className="text-sm text-amber-700 mb-2">
-                             Current: {scoreBreakdown.experience || 0} points | Target: 15 points
+                             Current: {(scoreBreakdown.experience as number) || 0} points | Target: 15 points
                            </p>
                            <p className="text-xs text-amber-600">
                              • Work for 6+ years in skilled positions
@@ -3015,13 +3015,13 @@ export default function FSWPCalculatorPage() {
                              • Document all work experience properly
                            </p>
                            <div className="mt-2 text-xs font-medium text-amber-700">
-                             Potential gain: +{15 - (scoreBreakdown.experience || 0)} points
+                             Potential gain: +{15 - ((scoreBreakdown.experience as number) || 0)} points
                            </div>
                          </div>
                        )}
 
                       {/* Canadian Work Experience */}
-                      {scoreBreakdown.canadianWorkExperience === 0 && (
+                      {(scoreBreakdown.canadianWorkExperience as number) === 0 && (
                         <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                           <div className="flex items-center space-x-3 mb-2">
                             <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
@@ -3044,7 +3044,7 @@ export default function FSWPCalculatorPage() {
                       )}
 
                       {/* Canadian Education */}
-                      {scoreBreakdown.canadianEducation === 0 && (
+                      {(scoreBreakdown.canadianEducation as number) === 0 && (
                         <div className="p-4 bg-amber-100 rounded-xl border border-amber-300">
                           <div className="flex items-center space-x-3 mb-2">
                             <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
