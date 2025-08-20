@@ -205,7 +205,4 @@ For support, email support@northernpathways.ca or create an issue in this reposi
 
 ---
 
-**Built with ❤️ for aspiring Canadian immigrants**#   n o r t h e r n - p a t h w a y s - c a l c u l a t o r - n e x t - j s  
- #   n o r t h e r n - p a t h w a y s - c a l c u l a t o r - n e x t - j s  
- #   n o r t h e r n - p a t h w a y s - c a l c u l a t o r - n e x t - j s  
- 
+**Built with ❤️ for aspiring Canadian immigrants**
