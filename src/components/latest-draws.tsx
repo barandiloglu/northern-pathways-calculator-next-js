@@ -445,6 +445,10 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
                 <span className="mt-2 inline-block">
                   <strong>Current Data Source:</strong> {dataSource === 'real-time' ? 'Live data from Government of Canada website' : dataSource === 'cached' ? 'Cached data from official source' : 'Fallback data (updated periodically)'}
                 </span>
+                <br />
+                <span className="mt-2 inline-block text-xs">
+                  <strong>Licence:</strong> Contains information licensed under the Open Government Licence – Canada
+                </span>
               </p>
             </div>
           </div>

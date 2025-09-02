@@ -1,11 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TrendingUp, Calendar, Users, Award, X, ExternalLink } from "lucide-react"
 import { 
   DrawData, 
-  getLatestDrawData, 
   formatDrawDate, 
   getDrawTrend 
 } from "@/lib/draw-data-fetcher"
@@ -16,7 +15,49 @@ interface DrawsModalProps {
 }
 
 export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
-  const [drawData] = useState<DrawData[]>(getLatestDrawData())
+  const [drawData, setDrawData] = useState<DrawData[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Fetch data from the new API endpoint
+  useEffect(() => {
+    if (isOpen) {
+      fetchDrawData()
+    }
+  }, [isOpen])
+
+  const fetchDrawData = async () => {
+    try {
+      setIsLoading(true)
+      setError(null)
+      
+      const response = await fetch('/api/express-entry')
+      if (!response.ok) {
+        throw new Error('Failed to fetch draw data')
+      }
+      
+      const result = await response.json()
+      if (!result.ok) {
+        throw new Error(result.error || 'API returned error')
+      }
+      
+      // Transform the API response to match our DrawData interface
+      const transformedData = result.rounds.map((round: any) => ({
+        roundNumber: round.round,
+        date: round.date,
+        roundType: round.type,
+        invitationsIssued: round.invitations || 'N/A',
+        crsScore: round.crsCutoff || 'N/A'
+      }))
+      
+      setDrawData(transformedData)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch data')
+      console.error('Error fetching draw data:', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const getRoundTypeColor = (type: string) => {
     const lowerType = type.toLowerCase()
@@ -87,8 +128,12 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
                   <span>Last updated: {new Date().toLocaleString()}</span>
                 </span>
                 
-                <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium mx-auto sm:mx-0 w-fit">
-                  Fallback Data
+                <span className={`px-2 py-1 rounded-full text-xs font-medium mx-auto sm:mx-0 w-fit ${
+                  isLoading ? 'bg-gray-100 text-gray-800' : 
+                  error ? 'bg-red-100 text-red-800' : 
+                  'bg-green-100 text-green-800'
+                }`}>
+                  {isLoading ? 'Loading...' : error ? 'Error' : 'Live Data'}
                 </span>
               </div>
               
@@ -106,8 +151,35 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
 
           {/* Content - Scrollable Area */}
           <div className="flex-1 overflow-y-auto p-3 sm:p-6">
-            {/* Summary Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+            {/* Loading State */}
+            {isLoading && (
+              <div className="text-center py-8">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B92025] mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading latest draw data...</p>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="text-center py-8">
+                <div className="bg-red-100 text-red-800 px-4 py-3 rounded-lg mb-4">
+                  <p className="font-medium">Error loading data</p>
+                  <p className="text-sm">{error}</p>
+                </div>
+                <button
+                  onClick={fetchDrawData}
+                  className="bg-[#B92025] hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+                >
+                  Try Again
+                </button>
+              </div>
+              )}
+
+            {/* Content when data is loaded */}
+            {!isLoading && !error && drawData.length > 0 && (
+              <>
+                {/* Summary Stats */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
               <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-3 sm:p-4 border border-blue-200">
                 <div className="flex items-center space-x-2 sm:space-x-3">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500 rounded-lg flex items-center justify-center">
@@ -305,6 +377,8 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
                 </p>
               </div>
             </div>
+              </>
+            )}
           </div>
 
           {/* Footer - Fixed at Bottom */}

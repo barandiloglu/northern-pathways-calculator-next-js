@@ -120,71 +120,42 @@ export const getLatestDrawData = (): DrawData[] => {
   ]
 }
 
-// Function to fetch data from Government of Canada website using a CORS proxy
-export const fetchDrawDataFromWebsite = async (options: FetchOptions = {}): Promise<DrawData[]> => {
-  const {
-    useProxy = false,
-    proxyUrl = 'https://api.allorigins.win/raw?url=',
-    timeout = 10000
-  } = options
-
-  const targetUrl = 'https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds.html'
-  
+// Function to fetch data from our internal API endpoint
+export const fetchDrawDataFromAPI = async (): Promise<DrawData[]> => {
   try {
-    if (useProxy) {
-      // Using a CORS proxy service
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), timeout)
-      
-      const response = await fetch(`${proxyUrl}${encodeURIComponent(targetUrl)}`, {
-        signal: controller.signal,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-      })
-      
-      clearTimeout(timeoutId)
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      
-      const html = await response.text()
-      return parseDrawDataFromHTML(html)
-    } else {
-      // Fallback to mock data if proxy is not enabled
-      throw new Error('Direct fetching not allowed due to CORS restrictions')
+    const response = await fetch('/api/express-entry', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    
+    if (!response.ok) {
+      throw new Error(`API error! status: ${response.status}`)
     }
-  } catch {
-    console.error('Error fetching draw data')
+    
+    const result = await response.json()
+    
+    if (!result.ok) {
+      throw new Error(result.error || 'API returned error')
+    }
+    
+    // Transform the API response to match our DrawData interface
+    return result.rounds.map((round: any) => ({
+      roundNumber: round.round,
+      date: round.date,
+      roundType: round.type,
+      invitationsIssued: round.invitations || 'N/A',
+      crsScore: round.crsCutoff || 'N/A'
+    }))
+  } catch (error) {
+    console.error('Error fetching draw data from API:', error)
     // Return fallback data
     return getLatestDrawData()
   }
 }
 
-// Parse HTML content to extract draw data
-const parseDrawDataFromHTML = (html: string): DrawData[] => {
-  try {
-    // This is a simplified parser - in production, you'd want more robust parsing
-    const drawData: DrawData[] = []
-    
-    // Look for table data patterns in the HTML
-    // This is a basic example - the actual parsing would depend on the HTML structure
-    
-
-    
-
-    
-
-    
-    // For now, return the fallback data
-    // In a real implementation, you would parse the HTML and extract the actual data
-    return getLatestDrawData()
-  } catch (error) {
-    console.error('Error parsing HTML:', error)
-    return getLatestDrawData()
-  }
-}
+// Note: HTML parsing is now handled by the server-side API route
+// This function is kept for backward compatibility but is no longer used
 
 // Function to simulate real-time data updates
 export const simulateRealTimeUpdates = (): Promise<DrawData[]> => {
@@ -206,10 +177,10 @@ export const getDrawDataWithFallback = async (): Promise<{
   lastUpdated: string
 }> => {
   try {
-    // Try to fetch from website with proxy first
-    const websiteData = await fetchDrawDataFromWebsite({ useProxy: true })
+    // Try to fetch from our internal API first
+    const apiData = await fetchDrawDataFromAPI()
     return {
-      data: websiteData,
+      data: apiData,
       source: 'cached',
       lastUpdated: new Date().toISOString()
     }
