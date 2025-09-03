@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { TrendingUp, Calendar, Users, Award, RefreshCw, AlertCircle, ExternalLink, Info, Globe } from "lucide-react"
 import { 
   DrawData, 
+  DrawDataResponse,
   getDrawDataWithFallback, 
   formatDrawDate, 
   getDrawTrend 
@@ -16,23 +17,27 @@ interface LatestDrawsProps {
 
 export function LatestDraws({ className = "" }: LatestDrawsProps) {
   const [drawData, setDrawData] = useState<DrawData[]>([])
+  const [pagination, setPagination] = useState<DrawDataResponse['pagination'] | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [lastUpdated, setLastUpdated] = useState<string | "Never">("Never")
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [dataSource, setDataSource] = useState<'real-time' | 'cached' | 'fallback'>('fallback')
 
-  const fetchDrawData = async () => {
+  const fetchDrawData = async (page: number = 1) => {
     try {
       setIsRefreshing(true)
       setError(null)
       
-      // Use the utility function to get data with fallback strategies
-      const result = await getDrawDataWithFallback()
+      // Use the paginated function to get specific page with 25 items
+      const result = await getDrawDataWithFallback({ page, limit: 25 })
       
       setDrawData(result.data)
+      setPagination(result.pagination)
       setLastUpdated(result.lastUpdated)
       setDataSource(result.source)
+      setCurrentPage(page)
     } catch (err) {
       setError("Failed to fetch latest draw data. Please try again later.")
       console.error("Error fetching draw data:", err)
@@ -44,7 +49,25 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
 
   const refreshData = async () => {
     if (!isRefreshing) {
-      await fetchDrawData()
+      await fetchDrawData(currentPage)
+    }
+  }
+
+  const goToPage = async (page: number) => {
+    if (!isRefreshing && pagination && page >= 1 && page <= pagination.totalPages) {
+      await fetchDrawData(page)
+    }
+  }
+
+  const goToNextPage = async () => {
+    if (pagination && pagination.hasNextPage) {
+      await goToPage(currentPage + 1)
+    }
+  }
+
+  const goToPreviousPage = async () => {
+    if (pagination && pagination.hasPreviousPage) {
+      await goToPage(currentPage - 1)
     }
   }
 
@@ -177,6 +200,37 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
       <div className="p-4 sm:p-8">
         {/* Mobile Cards View */}
         <div className="block sm:hidden space-y-4">
+          {/* Mobile Pagination Controls */}
+          {pagination && pagination.totalPages > 1 && (
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <button
+                onClick={goToPreviousPage}
+                disabled={!pagination.hasPreviousPage || isRefreshing}
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>Previous</span>
+              </button>
+              
+              <span className="text-sm font-medium text-gray-700">
+                {pagination.currentPage} / {pagination.totalPages}
+              </span>
+              
+              <button
+                onClick={goToNextPage}
+                disabled={!pagination.hasNextPage || isRefreshing}
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+              >
+                <span>Next</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          )}
+          
           <AnimatePresence>
             {drawData.map((draw, index) => {
               const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore
@@ -241,11 +295,83 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
                 </motion.div>
               )
             })}
-          </AnimatePresence>
-        </div>
+                      </AnimatePresence>
+            
+            {/* Mobile Pagination Info */}
+            {pagination && (
+              <div className="mt-4 text-center text-sm text-gray-600">
+                <div className="mb-2">
+                  Showing {drawData.length} of {pagination.totalItems} draws
+                  {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
+                </div>
+                <div className="text-xs text-gray-500">
+                  Limited to 25 most recent draws
+                </div>
+              </div>
+            )}
+          </div>
 
         {/* Desktop Table View */}
         <div className="hidden sm:block overflow-x-auto">
+          {/* Pagination Controls */}
+          {pagination && pagination.totalPages > 1 && (
+            <div className="mb-4 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={goToPreviousPage}
+                  disabled={!pagination.hasPreviousPage || isRefreshing}
+                  className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <span>Previous</span>
+                </button>
+                
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-gray-600">Page</span>
+                  <input
+                    type="number"
+                    min={1}
+                    max={pagination.totalPages}
+                    value={currentPage}
+                    onChange={(e) => {
+                      const page = parseInt(e.target.value)
+                      if (page >= 1 && page <= pagination.totalPages) {
+                        goToPage(page)
+                      }
+                    }}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        const page = parseInt((e.target as HTMLInputElement).value)
+                        if (page >= 1 && page <= pagination.totalPages) {
+                          goToPage(page)
+                        }
+                      }
+                    }}
+                    className="w-16 px-2 py-1 text-sm text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent"
+                  />
+                  <span className="text-sm text-gray-600">of {pagination.totalPages}</span>
+                </div>
+                
+                <button
+                  onClick={goToNextPage}
+                  disabled={!pagination.hasNextPage || isRefreshing}
+                  className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                >
+                  <span>Next</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+              
+              <div className="text-sm text-gray-600">
+                Showing {drawData.length} of {pagination.totalItems} draws
+              </div>
+            </div>
+          )}
+          
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-200">
@@ -321,6 +447,19 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
               </AnimatePresence>
             </tbody>
           </table>
+          
+          {/* Pagination Info */}
+          {pagination && (
+            <div className="mt-4 flex items-center justify-between text-sm text-gray-600">
+              <div>
+                Showing {drawData.length} of {pagination.totalItems} draws
+                {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
+              </div>
+              <div className="text-xs text-gray-500">
+                Limited to 25 most recent draws
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Summary Stats */}
