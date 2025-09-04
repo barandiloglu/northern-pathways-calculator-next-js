@@ -6,7 +6,6 @@ export function calculateAdditionalFactors(data: CRSFormData) {
   let job = 0;
   let sibling = 0;
   let canadianEducation = 0;
-  let certificateOfQualification = 0;
   let frenchLanguage = 0;
 
   // ✅ Provincial Nomination
@@ -31,27 +30,21 @@ export function calculateAdditionalFactors(data: CRSFormData) {
   }
 
   // ✅ Canadian post-secondary education
-  const validCanadianCredentials = [
-    "one_two_year_diploma_certificate",
-    "degree_diploma_certificate_three_years_or_longer_masters_professional_doctoral"
-  ];
-
-  if (
-    data.canadianEducationStudy === "yes" &&
-    validCanadianCredentials.includes(data.canadianCredentialLevel)
-  ) {
-    canadianEducation = 15;
-    console.log("✅ Additional Factor: Canadian post-secondary education → +15");
+  if (data.canadianEducationStudy === "yes") {
+    if (data.canadianCredentialLevel === "one_two_year_diploma_certificate") {
+      canadianEducation = 15; // 1-2 year programs
+    } else if (data.canadianCredentialLevel === "degree_diploma_certificate_three_years_or_longer_masters_professional_doctoral") {
+      canadianEducation = 30; // 3+ year programs
+    }
+    console.log("✅ Additional Factor: Canadian post-secondary education → +" + canadianEducation);
     console.log("🔍 DEBUG - Study in Canada:", data.canadianEducationStudy);
     console.log("🔍 DEBUG - Credential Level:", data.canadianCredentialLevel);
   }
 
   // ✅ Certificate of Qualification (Section C points)
-  if (data.certificateOfQualification === "yes") {
-    // This is handled in skill transferability for language combo
-    // But we also need to add the base certificate points
-    certificateOfQualification = 25; // Base points for certificate
-  }
+  // Note: Certificate of qualification points are only awarded in combination with language skills
+  // in the skill transferability section, not as standalone additional factors
+  // Therefore, no base points are awarded here
 
   // ✅ French Language Proficiency (NCLC points)
   
@@ -287,7 +280,7 @@ export function calculateAdditionalFactors(data: CRSFormData) {
   });
   console.log("  • French Language Points:", frenchLanguage);
 
-  const total = nomination + job + sibling + canadianEducation + certificateOfQualification + frenchLanguage;
+  const total = nomination + job + sibling + canadianEducation + frenchLanguage;
 
   return {
     total,
@@ -296,7 +289,6 @@ export function calculateAdditionalFactors(data: CRSFormData) {
       job,
       sibling,
       canadianEducation,
-      certificateOfQualification,
       frenchLanguage
     }
   };

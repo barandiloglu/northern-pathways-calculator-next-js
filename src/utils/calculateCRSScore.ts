@@ -73,6 +73,7 @@ export function calculateCRSScore(data: CRSFormData) {
   console.log("    • Provincial Nomination:", additionalBreakdown.nomination || 0);
   console.log("    • Job Offer:", additionalBreakdown.job || 0);
   console.log("    • Sibling in Canada:", additionalBreakdown.sibling || 0);
+  console.log("    • French Language Proficiency:", additionalBreakdown.frenchLanguage || 0);
 
   console.log("🎯 TOTAL CRS Score:", total);
 

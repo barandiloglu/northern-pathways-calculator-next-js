@@ -64,9 +64,11 @@ export function calculateSkillTransferability(data: CRSFormData) {
     ["bachelor", "two_or_more_post_secondary"].includes(data.educationLevel)
   ) {
     if (clbLevel >= 9) eduLang = 50;
+    else if (clbLevel >= 8) eduLang = 13;  // CLB 8 = 13 points
     else if (clbLevel >= 7) eduLang = 25;
   } else if (["masters", "doctoral"].includes(data.educationLevel)) {
     if (clbLevel >= 9) eduLang = 50;
+    else if (clbLevel >= 8) eduLang = 13;  // CLB 8 = 13 points
     else if (clbLevel >= 7) eduLang = 25;
   }
   
@@ -82,9 +84,9 @@ export function calculateSkillTransferability(data: CRSFormData) {
     if (
       ["2_years", "3_years", "4_years", "5_years_or_more"].includes(canExp)
     ) {
-      eduCanExp = 50;
+      eduCanExp = 25;  // 2+ years Canadian work + post-secondary education = 25 points
     } else if (canExp === "1_year") {
-      eduCanExp = 25;
+      eduCanExp = 25;  // 1 year Canadian work + post-secondary education = 25 points
     }
   }
 
@@ -115,7 +117,7 @@ export function calculateSkillTransferability(data: CRSFormData) {
       ["1_year", "2_years"].includes(foreignExp) &&
       ["1_year", "2_years", "3_years", "4_years", "5_years_or_more"].includes(canExp)
     ) {
-      foreignCanExp = 13; // Corrected: 1-2 years foreign + 1+ years Canadian = 13 points
+      foreignCanExp = 25; // 1-2 years foreign + 1+ years Canadian = 25 points
     }
   }
   
