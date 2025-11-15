@@ -1,0 +1,297 @@
+{
+  "common": {
+    "home": "Ana Sayfa",
+    "select": "Seçiniz...",
+    "calculate": "Puanınızı Hesaplayın",
+    "totalScore": "Toplam Puan",
+    "detailShow": "Detayları Göster",
+    "detailHide": "Detayları Gizle",
+    "category": "Kategori",
+    "points": "Puanlar",
+    "close": "Kapat",
+    "save": "Kaydet",
+    "cancel": "İptal"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "fswpCalculator": "FSWP Hesaplayıcı",
+    "crsCalculator": "CRS Hesaplayıcı",
+    "preAssessment": "Ön Değerlendirme"
+  },
+  "home": {
+    "newHero": {
+      "title": "Kanada Yolculuğunuz",
+      "tagline": "Kanada göçmenlik yolculuğunuzun başladığı yer...",
+      "description": "Göçmenlik ihtiyaçlarınız için uzman rehberlik. Yeni hayatınıza Kanada'da başlamanız için yolu sizinle birlikte kat ediyoruz.",
+      "bookConsultation": "DANIŞMANLIK RANDEVUSU AL",
+      "exploreServices": "HİZMETLERİ KEŞFET",
+      "cardTitle": "Kanada hayalinizi görselleştirin.",
+      "cardPlaceholder": "Yolculuğunuzu hayal edin...",
+      "consultant": {
+        "name": "Burcu Akyol",
+        "title": "Düzenlenmiş Kanada Göçmenlik Danışmanı (RCIC-IRB)",
+        "credential1": "Queen's Üniversitesi'nde Yardımcı Doçent",
+        "credential2": "Kanada Profesyonel Göçmenlik Danışmanları Derneği (CAPIC) Yönetim Kurulu Üyesi",
+        "credential3": "Politika Komitesi Başkanı",
+        "credential4": "Ontario'da Yeminli Belge Alma Komiseri",
+        "credential5": "RCIC-IRB Sertifikalı",
+        "teamDescription": "Northern Pathways, yolculuğunuzu anlayan göçmenler, profesyoneller ve eğitimcilerden oluşan bir ekiptir."
+      }
+    },
+    "heroTitle": "Kanada'ya Giden Yolunuz",
+    "heroTitleHighlight": "Buradan Başlıyor",
+    "heroDescription": "Express Entry ve Federal Nitelikli İşçi Programı için profesyonel göçmenlik değerlendirme araçları. Kanada göçmenlik yolculuğunuz için doğru puanlar ve uzman rehberlik alın.",
+    "crsCalculator": "CRS Hesaplayıcı",
+    "fswpCalculator": "FSWP Hesaplayıcı",
+    "solutions": {
+      "label": "ÇÖZÜMLERİMİZ",
+      "title": "Kapsamlı Göçmenlik Çözümleri",
+      "description": "Kanada yolculuğunuzu mümkün olduğunca sorunsuz ve başarılı hale getirmek için tasarlanmış geniş bir hizmet yelpazesi sunuyoruz.",
+      "learnMore": "DAHA FAZLA BİLGİ",
+      "services": {
+        "expressEntry": {
+          "title": "Express Entry",
+          "description": "Federal Nitelikli İşçi (FSW), Kanada Deneyim Sınıfı (CEC) ve Federal Nitelikli Ticaretler (FST) programlarında yardımcı oluyoruz. Ekibimiz güçlü bir profil oluşturmanıza ve Kapsamlı Sıralama Sistemi'ni (CRS) kullanmanıza yardımcı olur."
+        },
+        "pnp": {
+          "title": "Eyalet Adaylık Programları (PNP)",
+          "description": "Eyalet Adaylık Programları, Kanada'ya göç etmek isteyen ve belirli bir eyalet veya bölgede yerleşmekle ilgilenen kişileri aday göstermelerine olanak tanır."
+        },
+        "familySponsorship": {
+          "title": "Aile Sponsorluğu",
+          "description": "Aile üyelerinizle Kanada'da bir araya gelin. Eşinizi, çocuklarınızı, ebeveynlerinizi veya büyükanne ve büyükbabanızı sponsor etme sürecinde size rehberlik ediyoruz."
+        },
+        "studyPermits": {
+          "title": "Çalışma İzinleri",
+          "description": "Kanada'da eğitiminizi sürdürün. Çalışma izinleri almanıza ve Kanada eğitim kurumlarında eğitim görme sürecinde size yardımcı oluyoruz."
+        },
+        "workPermits": {
+          "title": "Çalışma İzinleri",
+          "description": "Doğru izinlerle Kanada'da çalışın. LMIA tabanlı ve açık çalışma izinleri dahil olmak üzere çeşitli programlar için çalışma izni başvurularında yardımcı oluyoruz."
+        },
+        "citizenship": {
+          "title": "Vatandaşlık",
+          "description": "Kanada vatandaşı olun. Vatandaşlık başvuru sürecinde size rehberlik ediyor ve tüm gereksinimleri karşılamanıza yardımcı oluyoruz."
+        }
+      }
+    },
+    "commitment": {
+      "title": "Başarınıza Olan Bağlılığımız",
+      "subtitle": "Müşteri odaklı bir yaklaşıma inanıyoruz. Sürecimiz uzmanlık, kişiselleştirilmiş strateji ve tam şeffaflık temeli üzerine kuruludur.",
+      "regulated": {
+        "title": "Düzenlenmiş ve Yetkili",
+        "description": "[Yer Tutucu] CICC'nin iyi durumda üyeleriyiz. Bu, sizi temsil etmeye yetkili olduğumuz ve profesyonel ve etik hizmet sağlayan katı bir etik koduna bağlı olduğumuz anlamına gelir."
+      },
+      "personalized": {
+        "title": "Kişiselleştirilmiş Strateji",
+        "description": "[Yer Tutucu] Sadece bir dosya numarası değilsiniz. Benzersiz durumunuzu, hedeflerinizi ve zorluklarınızı anlamak için zaman ayırıyoruz, böylece sizin ve aileniz için özel olarak çalışan özelleştirilmiş bir göçmenlik planı oluşturabiliriz."
+      },
+      "transparent": {
+        "title": "Şeffaf ve Dürüst",
+        "description": "[Yer Tutucu] Sıfır gizli ücretle şeffaflığa inanıyoruz. Net, sabit ücretli fiyatlandırma sağlıyoruz ve size her zaman şanslarınızın ve en iyi yolun dürüst bir değerlendirmesini veriyoruz."
+      }
+    },
+    "about": {
+      "title": "Northern Pathways Hakkında",
+      "mission": "Misyonumuz net, güvenilir ve etkili göçmenlik çözümleri sunmaktır. Bunun sadece evrak işinden daha fazlası olduğunu anlıyoruz—geleceğinizle ilgili.",
+      "consultant": {
+        "name": "[Danışman Adı Buraya]",
+        "title": "Düzenlenmiş Kanada Göçmenlik Danışmanı (RCIC)",
+        "bio1": "[Yer Tutucu] Lorem ipsum dolor sit amet, consectetur adipiscing elit. [Kurucu biyografisi yer tutucu - niteliklerini, göçmenlik tutkusunu ve müşterilere bağlılığını açıklayın.]",
+        "bio2": "[Yer Tutucu] Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+      }
+    },
+    "testimonials": {
+      "title": "Müşterilerimiz Ne Diyor",
+      "subtitle": "Başarı hikayeleriniz bizim en büyük ödülümüz. Gerçek müşterilerin bizimle olan yolculukları hakkında ne söylediklerini görün.",
+      "testimonial1": {
+        "text": "[Yer Tutucu] Northern Pathways ekibine çok minnettarız. Kanada'ya taşınma hayalimizi gerçeğe dönüştürdüler. Süreç çok netti ve sorularımızı cevaplamak için her zaman oradaydılar.",
+        "client": "- A. & S. Sharma, Hindistan (Daimi İkametgahlar)"
+      },
+      "testimonial2": {
+        "text": "[Yer Tutucu] Çalışma iznimi hiçbir sorun olmadan aldım, bu onların titiz çalışması sayesinde. Süreç konusunda çok karışıktım ama her şeyi basitleştirdiler. Kesinlikle tavsiye ederim!",
+        "client": "- J. Adebayo, Nijerya (Çalışma İzni Sahibi)"
+      },
+      "testimonial3": {
+        "text": "[Yer Tutucu] Profesyonel, dürüst ve her kuruşa değer. Diğer danışmanlar imkansız dediğinde, Express Entry profilim için net bir yol ileri verdiler.",
+        "client": "- R. Silva, Brezilya (Express Entry Müşterisi)"
+      }
+    },
+    "tools": {
+      "label": "ÜCRETSİZ KAYNAKLAR",
+      "title": "Göçmenlik Araçları ve Hesaplayıcılar",
+      "description": "Ücretsiz tahmin araçlarımızla seçenekleriniz hakkında daha iyi bir anlayış elde edin. Tam bir değerlendirme için lütfen bir danışmanlık randevusu alın.",
+      "tabs": {
+        "crs": "CRS Hesaplayıcı",
+        "fswp": "Altı Seçim Faktörü"
+      },
+      "crsCard": {
+        "title": "Express Entry CRS Hesaplayıcı",
+        "description": "[Yer Tutucu] Kapsamlı Sıralama Sistemi (CRS), Express Entry adaylarını puanlamak için kullanılır. Bu araç, yaş, eğitim, iş deneyimi ve dil becerilerinize dayalı olarak puanınızı tahmin etmenize yardımcı olur."
+      },
+      "fswpCard": {
+        "title": "Federal Nitelikli İşçi Programı Hesaplayıcı",
+        "description": "[Yer Tutucu] Federal Nitelikli İşçi Programı (FSWP), uygunluğu değerlendirmek için altı seçim faktörü kullanır. Bu araç, eğitim, dil, iş deneyimi, yaş, düzenlenmiş istihdam ve uyum yeteneğine dayalı olarak puanlarınızı hesaplamanıza yardımcı olur."
+      },
+      "useTool": "CRS ARACINI KULLAN"
+    },
+    "faq": {
+      "title": "Sık Sorulan Sorular",
+      "subtitle": "İşte bazı yaygın soruların cevapları. Başka sorularınız varsa, ekibimiz size yardımcı olmaya hazırdır.",
+      "attribution": "Northern Pathways Ekibi",
+      "questions": {
+        "q1": "Express Entry nedir?",
+        "q2": "Kanada göçmenliği için uygun muyum?",
+        "q3": "Göçmenlik süreci ne kadar sürer?",
+        "q4": "Eyalet Adaylık Programı (PNP) nedir?",
+        "q5": "Neden Düzenlenmiş bir Danışman (RCIC) ihtiyacım var?"
+      },
+      "answers": {
+        "a1": "[Yer Tutucu] Express Entry, nitelikli işçilerden daimi ikamet başvurularını yönetmek için kullanılan çevrimiçi bir sistemdir. Federal Nitelikli İşçi Programı, Federal Nitelikli Ticaretler Programı ve Kanada Deneyim Sınıfı'nı içerir.",
+        "a2": "[Yer Tutucu] Uygunluk, yaş, eğitim, iş deneyimi, dil yeterliliği ve uyum yeteneği dahil olmak üzere çeşitli faktörlere bağlıdır. Uygunluğunuzu değerlendirmek için ücretsiz hesaplayıcılarımızı kullanın.",
+        "a3": "[Yer Tutucu] İşlem süreleri programa ve bireysel koşullara bağlı olarak değişir. Express Entry başvuruları genellikle 6-8 ay sürerken, diğer programlar daha uzun sürebilir.",
+        "a4": "[Yer Tutucu] Eyalet Adaylık Programları, Kanada eyaletleri ve bölgelerinin Kanada'ya göç etmek ve belirli bir eyalet veya bölgede yerleşmek isteyen kişileri aday göstermelerine olanak tanır.",
+        "a5": "[Yer Tutucu] Düzenlenmiş bir Kanada Göçmenlik Danışmanı (RCIC), göçmenlik konularında sizi temsil etmeye yetkilidir ve profesyonel ve etik hizmet sağlayan katı bir etik koduna bağlıdır."
+      }
+    },
+    "process": {
+      "title": "BAŞVURU SÜRECİ",
+      "step1": {
+        "title": "Ön Değerlendirme",
+        "description": "Potansiyel başvuru kategorilerinizi vurgulamak ve uygunluğunuzu anlamak için ön değerlendirme formumuzu doldurun.",
+        "button": "Ön Değerlendirme Formu"
+      },
+      "step2": {
+        "title": "Danışmanlık Toplantısı",
+        "description": "Özel profilinize ve gereksinimlerinize göre kişiselleştirilmiş danışmanlıklar. Kanada genelinde (Quebec hariç) göçmenlik danışmanlığı ve temsil hizmetleri sunmaya yetkilidir.",
+        "button": "Danışmanlık Randevusu Al"
+      },
+      "step3": {
+        "title": "Başvuru",
+        "description": "Başvuru sürecinizin her aşamasını planlamak için birlikte çalışın, en iyi sonuçları ve Kanada'da yeni hayatınıza sorunsuz bir yol hedefleyin.",
+        "button": "Hizmetler"
+      }
+    },
+    "educationPartner": {
+      "title": "EĞİTİM VE KARİYER DANIŞMANLIĞI ÇÖZÜM ORTAĞI",
+      "partnerName": "EDUPATHWAYS EĞİTİM VE KARİYER DANIŞMANLIĞI",
+      "subtitle": "Eğitim ve kariyer rehberliği için güvenilir ortağınız"
+    },
+    "stats": {
+      "multiLanguage": "Çok Dilli",
+      "multiLanguageValue": "EN/TR",
+      "secure": "Güvenli",
+      "secureValue": "%100 Güvenli",
+      "realtime": "Gerçek Zamanlı",
+      "realtimeValue": "Canlı Veri",
+      "accurate": "Doğru",
+      "accurateValue": "Resmi"
+    },
+    "features": {
+      "crsTitle": "Doğru CRS Hesaplamaları",
+      "crsDescription": "Güncel IRCC yönergeleri ve göçmenlik kriterlerine dayalı olarak kesin Kapsamlı Sıralama Sistemi puanları alın",
+      "fswpTitle": "FSWP Değerlendirmesi",
+      "fswpDescription": "Detaylı puanlama dökümü ile kapsamlı Federal Nitelikli İşçi Programı değerlendirmesi",
+      "bilingualTitle": "İki Dilli Destek",
+      "bilingualDescription": "Maksimum erişilebilirlik ve kullanıcı kolaylığı için İngilizce ve Türkçe olarak mevcuttur"
+    },
+    "howItWorks": {
+      "title": "Nasıl Çalışır",
+      "subtitle": "Göçmenlik puanınızı hesaplamak ve uygunluğunuzu değerlendirmek için basit adımlar",
+      "step1Title": "Detaylarınızı Doldurun",
+      "step1Description": "Kişisel bilgileriniz, eğitim, iş deneyimi ve dil puanlarınızı girin",
+      "step2Title": "Puanınızı Alın",
+      "step2Description": "Sistemimiz resmi kriterlere dayalı olarak CRS veya FSWP puanınızı hesaplar",
+      "step3Title": "Yolunuzu Planlayın",
+      "step3Description": "Uygunluğunuzu anlayın ve göçmenlik yolculuğunuz için rehberlik alın",
+      "readyToStart": "Başlamaya hazır mısınız? Aşağıdan hesaplayıcınızı seçin!",
+      "ctaTitle": "Yolculuğunuza Başlamaya Hazır mısınız?",
+      "ctaDescription": "Kanada göçmenliği için uygunluğunuzu değerlendirmek üzere kapsamlı hesaplayıcılarımızı kullanın ve hayalinize doğru ilk adımı atın",
+      "startCrsCalculator": "CRS Hesaplayıcıyı Başlat",
+      "tryFswpCalculator": "FSWP Hesaplayıcıyı Dene"
+    }
+  },
+  "personalInfo": {
+    "maritalStatusQuestion": "Medeni durumunuz nedir?",
+    "spouseQuestion": "Eşiniz veya ortak yaşam partneriniz Kanada vatandaşı veya daimi ikametgahı mı?",
+    "spouseMovingQuestion": "Eşiniz veya ortak yaşam partneriniz sizinle Kanada'ya gelecek mi?",
+    "ageQuestion": "Kaç yaşındasınız?"
+  },
+  "education": {
+    "educationStatusQuestion": "Eğitim seviyeniz nedir?",
+    "caEducationStatusQuestion": "Kanada'da diploma, sertifika veya derece kazandınız mı?",
+    "caEducationLevelStatusQuestion": "Kanada eğitiminizi en iyi şekilde tanımlayan cevabı seçin."
+  },
+  "language": {
+    "languageQuestionFirst": "Hangi dil sınavını aldınız veya almayı planlıyorsunuz?",
+    "languageQuestionSecond": "İkinci yabancı diliniz için hangi dil sınavını aldınız veya düşünüyorsunuz?",
+    "languageQuestionSpouse": "Hangi dil sınavını aldınız veya almayı planlıyorsunuz?",
+    "speaking": "Konuşma",
+    "listening": "Dinleme",
+    "reading": "Okuma",
+    "writing": "Yazma"
+  },
+  "workExperience": {
+    "caWorkExperience": "Kanada İş Deneyimi (TEER 0, 1, 2, 3)",
+    "caWorkExperienceQuestion": "Son on yılda Kanada'da kaç yıl ücretli nitelikli iş deneyimi kazandınız?",
+    "foreignWorkExperience": "Yabancı iş deneyimi (Kanada dışı iş deneyimi) (TEER 0, 1, 2, 3)",
+    "foreignWorkExperienceQuestion": "Son 10 yılda toplam kaç yıl yabancı nitelikli iş deneyiminiz var?"
+  },
+  "additionalPoints": {
+    "additionalPoint": "Ek Puanlar",
+    "additionalPointDescription": "İş Piyasası Etki Değerlendirmesi (LMIA) ile desteklenen geçerli bir iş teklifiniz var mı?",
+    "nominationQuestion": "Bir eyalet veya bölgeden adaylık sertifikanız var mı?",
+    "lawPartnerStatusQuestion": "Siz veya eşiniz/ortak yaşam partnerinizin Kanada'da yaşayan, en az 18 yaşında ve vatandaş veya daimi ikametgahı olan en az bir erkek veya kız kardeşi var mı?"
+  },
+  "spouse": {
+    "spouseEducationQuestion": "Eşinizin veya ortak yaşam partnerinizin en yüksek eğitim seviyesi nedir?",
+    "spouseWorkStatus": "Son on yılda eşinizin/ortak yaşam partnerinizin Kanada'da kaç yıl nitelikli iş deneyimi var?",
+    "spouseLanguageTestQuestion": "Eşiniz veya ortak yaşam partneriniz dil sınavı aldı mı? Eğer aldıysa, hangisi?"
+  },
+  "options": {
+    "single": "Bekar",
+    "married": "Evli",
+    "commonLaw": "Ortak yaşam partneri",
+    "divorced": "Boşanmış",
+    "widowed": "Dul",
+    "yes": "Evet",
+    "no": "Hayır",
+    "willAccompany": "Eşlik edecek",
+    "willNotAccompany": "Eşlik etmeyecek"
+  },
+  "draws": {
+    "title": "Son Express Entry Çekilişleri",
+    "subtitle": "En son davet turları",
+    "viewOfficial": "Resmi verileri görüntüle",
+    "lastUpdated": "Son güncelleme",
+    "liveData": "Canlı Veri",
+    "cached": "Önbelleğe Alınmış",
+    "fallback": "Yedek",
+    "refresh": "Yenile",
+    "refreshing": "Yenileniyor...",
+    "roundNumber": "Tur #",
+    "date": "Tarih",
+    "type": "Tür",
+    "invitations": "Davetler",
+    "crsScore": "CRS Puanı",
+    "trend": "Eğilim",
+    "noChange": "Değişiklik yok",
+    "latestCrsScore": "Son CRS Puanı",
+    "totalInvitations": "Toplam Davetler",
+    "latestDraw": "Son Çekiliş",
+    "drawFrequency": "Çekiliş Sıklığı",
+    "drawFrequencyText": "Express Entry çekilişleri genellikle 2 haftada bir, genellikle Çarşamba günleri yapılır. Kesin program IRCC'nin operasyonel ihtiyaçlarına göre değişebilir.",
+    "crsScoreRange": "CRS Puan Aralığı",
+    "crsScoreRangeText": "CRS puanları genellikle 400-600+ puan arasındadır. Daha yüksek puanlar, Başvuru Daveti (ITA) alma şansınızı artırır.",
+    "dataSource": "Veri Kaynağı ve Güncellemeler",
+    "dataSourceText": "Bu bilgiler Kanada Hükümeti'nin resmi Express Entry turları sayfasından alınmıştır. En güncel ve resmi bilgiler için lütfen",
+    "officialWebsite": "resmi web sitesini",
+    "currentDataSource": "Mevcut Veri Kaynağı:",
+    "liveDataFromGov": "Kanada Hükümeti web sitesinden canlı veri",
+    "cachedData": "Resmi kaynaktan önbelleğe alınmış veri",
+    "fallbackData": "Yedek veri (periyodik olarak güncellenir)",
+    "license": "Lisans: Kanada Açık Hükümet Lisansı altında lisanslanmış bilgiler içerir",
+    "useInfo": "Mevcut CRS puan gereksinimlerini anlamak için bu bilgileri kullanın"
+  }
+}
+

@@ -310,13 +310,10 @@ export const caWorkExperiencePoints: Record<string, number> = {
 
 // Foreign work experience points
 export const foreignWorkExperiencePoints: Record<string, number> = {
-  noExperience: 0,
-  lessThanOneYear: 0,
+  none: 0,
   oneYear: 25,
   twoYears: 25,
-  threeYears: 25,
-  fourYears: 25,
-  fiveYears: 25
+  threeYearsOrMore: 25
 };
 
 // Spouse education points

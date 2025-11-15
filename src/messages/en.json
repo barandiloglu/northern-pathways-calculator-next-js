@@ -1,0 +1,297 @@
+{
+  "common": {
+    "home": "Home",
+    "select": "Select...",
+    "calculate": "Calculate Your Score",
+    "totalScore": "Total Score",
+    "detailShow": "Show Details",
+    "detailHide": "Hide Details",
+    "category": "Category",
+    "points": "Points",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "nav": {
+    "home": "Home",
+    "fswpCalculator": "FSWP Calculator",
+    "crsCalculator": "CRS Calculator",
+    "preAssessment": "Pre-Assessment"
+  },
+  "home": {
+    "newHero": {
+      "title": "Your Journey to Canada Starts",
+      "tagline": "Where your journey to Canadian immigration begins...",
+      "description": "Expert guidance for your immigration needs. We help you navigate the path to your new life in Canada.",
+      "bookConsultation": "BOOK A CONSULTATION",
+      "exploreServices": "EXPLORE SERVICES",
+      "cardTitle": "Visualize your Canadian dream.",
+      "cardPlaceholder": "Imagine your journey...",
+      "consultant": {
+        "name": "Burcu Akyol",
+        "title": "Regulated Canadian Immigration Consultant (RCIC-IRB)",
+        "credential1": "Adjunct Professor at Queen's University",
+        "credential2": "Board Member of the Canadian Association of Professional Immigration Consultants (CAPIC)",
+        "credential3": "Chair of the Policy Committee",
+        "credential4": "Commissioner for Taking Affidavits in Ontario",
+        "credential5": "RCIC-IRB Certified",
+        "teamDescription": "Northern Pathways is a team of immigrants, professionals, and educators who understand your journey."
+      }
+    },
+    "heroTitle": "Your Path to",
+    "heroTitleHighlight": "Canada Starts Here",
+    "heroDescription": "Professional immigration assessment tools for Express Entry and Federal Skilled Worker Program. Get accurate scores and expert guidance for your Canadian immigration journey.",
+    "crsCalculator": "CRS Calculator",
+    "fswpCalculator": "FSWP Calculator",
+    "solutions": {
+      "label": "OUR SOLUTIONS",
+      "title": "Comprehensive Immigration Solutions",
+      "description": "We offer a wide array of services designed to make your journey to Canada as smooth and successful as possible.",
+      "learnMore": "LEARN MORE",
+      "services": {
+        "expressEntry": {
+          "title": "Express Entry",
+          "description": "We assist with Federal Skilled Worker (FSW), Canadian Experience Class (CEC), and Federal Skilled Trades (FST) programs. Our team helps you create a strong profile and navigate the Comprehensive Ranking System (CRS)."
+        },
+        "pnp": {
+          "title": "Provincial Nominee Programs (PNP)",
+          "description": "Provincial Nominee Programs allow provinces and territories to nominate individuals who want to immigrate to Canada and who are interested in settling in a particular province or territory."
+        },
+        "familySponsorship": {
+          "title": "Family Sponsorship",
+          "description": "Reunite with your family members in Canada. We guide you through the process of sponsoring your spouse, children, parents, or grandparents."
+        },
+        "studyPermits": {
+          "title": "Study Permits",
+          "description": "Pursue your education in Canada. We help you obtain study permits and navigate the process of studying at Canadian educational institutions."
+        },
+        "workPermits": {
+          "title": "Work Permits",
+          "description": "Work in Canada with the right permits. We assist with work permit applications for various programs including LMIA-based and open work permits."
+        },
+        "citizenship": {
+          "title": "Citizenship",
+          "description": "Become a Canadian citizen. We guide you through the citizenship application process and help you meet all requirements."
+        }
+      }
+    },
+    "commitment": {
+      "title": "Our Commitment to Your Success",
+      "subtitle": "We believe in a client-centric approach. Our process is built on a foundation of expertise, personalized strategy, and complete transparency.",
+      "regulated": {
+        "title": "Regulated & Authorized",
+        "description": "[Placeholder] We are members in good standing of the CICC. This means we are authorized to represent you and are bound by a strict code of ethics, ensuring professional and ethical service."
+      },
+      "personalized": {
+        "title": "Personalized Strategy",
+        "description": "[Placeholder] You are not just a file number. We take the time to understand your unique situation, goals, and challenges to build a customized immigration plan that works specifically for you and your family."
+      },
+      "transparent": {
+        "title": "Transparent & Honest",
+        "description": "[Placeholder] We believe in transparency with zero hidden fees. We provide clear, flat-fee pricing and always give you an honest assessment of your chances and the best path forward."
+      }
+    },
+    "about": {
+      "title": "About Northern Pathways",
+      "mission": "Our mission is to provide clear, trustworthy, and effective immigration solutions. We understand this is more than paperwork—it's about your future.",
+      "consultant": {
+        "name": "[Consultant Name Here]",
+        "title": "Regulated Canadian Immigration Consultant (RCIC)",
+        "bio1": "[Placeholder] Lorem ipsum dolor sit amet, consectetur adipiscing elit. [Founder's bio placeholder - describe their qualifications, passion for immigration, and commitment to clients.]",
+        "bio2": "[Placeholder] Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+      }
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "subtitle": "Your success stories are our greatest reward. See what real clients have to say about their journey with us.",
+      "testimonial1": {
+        "text": "[Placeholder] We are so grateful to the Northern Pathways team. They made our dream of moving to Canada a reality. The process was so clear and they were always there to answer our questions.",
+        "client": "- A. & S. Sharma, India (Permanent Residents)"
+      },
+      "testimonial2": {
+        "text": "[Placeholder] I received my study permit with no issues thanks to their diligent work. I was very confused about the process, but they simplified everything. Highly recommend!",
+        "client": "- J. Adebayo, Nigeria (Study Permit Holder)"
+      },
+      "testimonial3": {
+        "text": "[Placeholder] Professional, honest, and worth every penny. They gave me a clear path forward for my Express Entry profile when other consultants said it was impossible.",
+        "client": "- R. Silva, Brazil (Express Entry Client)"
+      }
+    },
+    "tools": {
+      "label": "FREE RESOURCES",
+      "title": "Immigration Tools & Calculators",
+      "description": "Get a better understanding of your options with our free estimation tools. For a full assessment, please book a consultation.",
+      "tabs": {
+        "crs": "CRS Calculator",
+        "fswp": "Six Selection Factors"
+      },
+      "crsCard": {
+        "title": "Express Entry CRS Calculator",
+        "description": "[Placeholder] The Comprehensive Ranking System (CRS) is used to score Express Entry candidates. This tool helps you estimate your score based on age, education, work experience, and language skills."
+      },
+      "fswpCard": {
+        "title": "Federal Skilled Worker Program Calculator",
+        "description": "[Placeholder] The Federal Skilled Worker Program (FSWP) uses six selection factors to assess eligibility. This tool helps you calculate your points based on education, language, work experience, age, arranged employment, and adaptability."
+      },
+      "useTool": "USE CRS TOOL"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Here are answers to some common questions. If you have other inquiries, our team is ready to assist you.",
+      "attribution": "Northern Pathways Team",
+      "questions": {
+        "q1": "What is Express Entry?",
+        "q2": "Am I eligible for Canadian immigration?",
+        "q3": "How long does the immigration process take?",
+        "q4": "What is a Provincial Nominee Program (PNP)?",
+        "q5": "Why do I need a Regulated Consultant (RCIC)?"
+      },
+      "answers": {
+        "a1": "[Placeholder] Express Entry is an online system used to manage applications for permanent residence from skilled workers. It includes the Federal Skilled Worker Program, the Federal Skilled Trades Program, and the Canadian Experience Class.",
+        "a2": "[Placeholder] Eligibility depends on various factors including age, education, work experience, language proficiency, and adaptability. Use our free calculators to assess your eligibility.",
+        "a3": "[Placeholder] Processing times vary depending on the program and individual circumstances. Express Entry applications typically take 6-8 months, while other programs may take longer.",
+        "a4": "[Placeholder] Provincial Nominee Programs allow Canadian provinces and territories to nominate individuals who want to immigrate to Canada and settle in a specific province or territory.",
+        "a5": "[Placeholder] A Regulated Canadian Immigration Consultant (RCIC) is authorized to represent you in immigration matters and is bound by a strict code of ethics, ensuring professional and ethical service."
+      }
+    },
+    "process": {
+      "title": "APPLICATION PROCESS",
+      "step1": {
+        "title": "Pre-Assessment",
+        "description": "Complete our pre-assessment form to highlight potential application categories and understand your eligibility.",
+        "button": "Pre-Assessment Form"
+      },
+      "step2": {
+        "title": "Consultation Meeting",
+        "description": "Personalized consultations tailored to your specific profile and requirements. We are authorized to provide immigration consultation and representation services across Canada (excluding Quebec).",
+        "button": "Book a Consultation"
+      },
+      "step3": {
+        "title": "Application",
+        "description": "Work together to plan each phase of your application process, aiming for the best outcomes and a seamless path to your new life in Canada.",
+        "button": "Services"
+      }
+    },
+    "educationPartner": {
+      "title": "EDUCATION & CAREER CONSULTING SOLUTION PARTNER",
+      "partnerName": "EDUPATHWAYS EDUCATION & CAREER CONSULTING",
+      "subtitle": "Your trusted partner for educational and career guidance"
+    },
+    "stats": {
+      "multiLanguage": "Multi-Language",
+      "multiLanguageValue": "EN/TR",
+      "secure": "Secure",
+      "secureValue": "100% Safe",
+      "realtime": "Real-time",
+      "realtimeValue": "Live Data",
+      "accurate": "Accurate",
+      "accurateValue": "Official"
+    },
+    "features": {
+      "crsTitle": "Accurate CRS Calculations",
+      "crsDescription": "Get precise Comprehensive Ranking System scores based on current IRCC guidelines and immigration criteria",
+      "fswpTitle": "FSWP Assessment",
+      "fswpDescription": "Comprehensive Federal Skilled Worker Program evaluation with detailed scoring breakdown",
+      "bilingualTitle": "Bilingual Support",
+      "bilingualDescription": "Available in English and Turkish for maximum accessibility and user convenience"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Simple steps to calculate your immigration score and assess your eligibility",
+      "step1Title": "Fill Your Details",
+      "step1Description": "Enter your personal information, education, work experience, and language scores",
+      "step2Title": "Get Your Score",
+      "step2Description": "Our system calculates your CRS or FSWP score based on official criteria",
+      "step3Title": "Plan Your Path",
+      "step3Description": "Understand your eligibility and get guidance for your immigration journey",
+      "readyToStart": "Ready to get started? Choose your calculator below!",
+      "ctaTitle": "Ready to Start Your Journey?",
+      "ctaDescription": "Use our comprehensive calculators to assess your eligibility for Canadian immigration and take the first step towards your dream",
+      "startCrsCalculator": "Start CRS Calculator",
+      "tryFswpCalculator": "Try FSWP Calculator"
+    }
+  },
+  "personalInfo": {
+    "maritalStatusQuestion": "What is your marital status?",
+    "spouseQuestion": "Is your spouse or common-law partner a citizen or permanent resident of Canada?",
+    "spouseMovingQuestion": "Will your spouse or common-law partner come with you to Canada?",
+    "ageQuestion": "How old are you?"
+  },
+  "education": {
+    "educationStatusQuestion": "What is your level of education?",
+    "caEducationStatusQuestion": "Have you earned a Canadian degree, diploma or certificate?",
+    "caEducationLevelStatusQuestion": "Choose the best answer to describe your Canadian education."
+  },
+  "language": {
+    "languageQuestionFirst": "Which language test have you taken, or do you plan to take?",
+    "languageQuestionSecond": "Which language test have you taken, or are you considering, for your second foreign language?",
+    "languageQuestionSpouse": "Which language test have you taken, or do you plan to take?",
+    "speaking": "Speaking",
+    "listening": "Listening",
+    "reading": "Reading",
+    "writing": "Writing"
+  },
+  "workExperience": {
+    "caWorkExperience": "Canadian Work Experience (TEER 0, 1, 2, 3)",
+    "caWorkExperienceQuestion": "In the last ten years, how many years of paid skilled work experience have you gained in Canada?",
+    "foreignWorkExperience": "Foreign work experience (outside Canada work experience) (TEER 0, 1, 2, 3)",
+    "foreignWorkExperienceQuestion": "In the last 10 years, how many total years of foreign skilled work experience do you have?"
+  },
+  "additionalPoints": {
+    "additionalPoint": "Additional Points",
+    "additionalPointDescription": "Do you have a valid job offer supported by a Labour Market Impact Assessment (LMIA)?",
+    "nominationQuestion": "Do you have a nomination certificate from a province or territory?",
+    "lawPartnerStatusQuestion": "Do you or your spouse or common-law partner have at least one brother or sister living in Canada who is a citizen or permanent resident and who is at least 18 years old?"
+  },
+  "spouse": {
+    "spouseEducationQuestion": "What is the highest level of education for which your spouse or common-law partner's has?",
+    "spouseWorkStatus": "In the last ten years, how many years of skilled work experience in Canada does your spouse/common-law partner have?",
+    "spouseLanguageTestQuestion": "Did your spouse or common-law partner take a language test? If so, which one?"
+  },
+  "options": {
+    "single": "Single",
+    "married": "Married",
+    "commonLaw": "Common-law partner",
+    "divorced": "Divorced",
+    "widowed": "Widowed",
+    "yes": "Yes",
+    "no": "No",
+    "willAccompany": "Will accompany",
+    "willNotAccompany": "Will not accompany"
+  },
+  "draws": {
+    "title": "Latest Express Entry Draws",
+    "subtitle": "Most recent invitation rounds",
+    "viewOfficial": "View official data",
+    "lastUpdated": "Last updated",
+    "liveData": "Live Data",
+    "cached": "Cached",
+    "fallback": "Fallback",
+    "refresh": "Refresh",
+    "refreshing": "Refreshing...",
+    "roundNumber": "Round #",
+    "date": "Date",
+    "type": "Type",
+    "invitations": "Invitations",
+    "crsScore": "CRS Score",
+    "trend": "Trend",
+    "noChange": "No change",
+    "latestCrsScore": "Latest CRS Score",
+    "totalInvitations": "Total Invitations",
+    "latestDraw": "Latest Draw",
+    "drawFrequency": "Draw Frequency",
+    "drawFrequencyText": "Express Entry draws typically occur every 2 weeks, usually on Wednesdays. The exact schedule may vary based on IRCC's operational needs.",
+    "crsScoreRange": "CRS Score Range",
+    "crsScoreRangeText": "CRS scores typically range from 400-600+ points. Higher scores increase your chances of receiving an Invitation to Apply (ITA).",
+    "dataSource": "Data Source & Updates",
+    "dataSourceText": "This information is sourced from the Government of Canada's official Express Entry rounds page. For the most up-to-date and official information, please visit the",
+    "officialWebsite": "official website",
+    "currentDataSource": "Current Data Source:",
+    "liveDataFromGov": "Live data from Government of Canada website",
+    "cachedData": "Cached data from official source",
+    "fallbackData": "Fallback data (updated periodically)",
+    "license": "Licence: Contains information licensed under the Open Government Licence – Canada",
+    "useInfo": "Use this information to understand current CRS score requirements"
+  }
+}
+

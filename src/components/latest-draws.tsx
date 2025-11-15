@@ -13,9 +13,10 @@ import {
 
 interface LatestDrawsProps {
   className?: string
+  hideHeader?: boolean
 }
 
-export function LatestDraws({ className = "" }: LatestDrawsProps) {
+export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsProps) {
   const [drawData, setDrawData] = useState<DrawData[]>([])
   const [pagination, setPagination] = useState<DrawDataResponse['pagination'] | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
@@ -141,7 +142,8 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
   return (
     <div className={`bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#B92025] to-red-700 p-4 sm:p-8 text-white">
+      {!hideHeader && (
+        <div className="bg-gradient-to-r from-[#B92025] to-red-700 p-4 sm:p-8 text-white">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 space-y-4 sm:space-y-0">
           <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto sm:mx-0">
@@ -195,6 +197,7 @@ export function LatestDraws({ className = "" }: LatestDrawsProps) {
           </a>
         </div>
       </div>
+      )}
 
       {/* Draw Data - Mobile Cards / Desktop Table */}
       <div className="p-4 sm:p-8">

@@ -42,6 +42,16 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        brand: {
+          red: "#b92025",
+          maroon: "#7d1416",
+          lightGray: "#f9f9f9",
+          black: "#000000",
+          white: "#ffffff",
+        },
+      },
+      fontFamily: {
+        sans: ["var(--font-montserrat)", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

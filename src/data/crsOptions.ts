@@ -532,9 +532,7 @@ export const workExperienceOptions = [
   { value: "none", label: "None or less than a year" },
   { value: "1_year", label: "1 year" },
   { value: "2_years", label: "2 years" },
-  { value: "3_years", label: "3 years" },
-  { value: "4_years", label: "4 years" },
-  { value: "5_years_or_more", label: "5 years or more" },
+  { value: "3_years_or_more", label: "3 years or more" },
 ];
 
 export const nocTeerOptions = [

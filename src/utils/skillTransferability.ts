@@ -92,9 +92,7 @@ export function calculateSkillTransferability(data: CRSFormData) {
 
   // 3. Foreign Work + Language
   let foreignLang = 0;
-  if (
-    ["3_years", "4_years", "5_years_or_more"].includes(foreignExp)
-  ) {
+  if (foreignExp === "3_years_or_more") {
     foreignLang = clbLevel >= 9 ? 50 : clbLevel >= 7 ? 25 : 0;
   } else if (["1_year", "2_years"].includes(foreignExp)) {
     foreignLang = clbLevel >= 9 ? 25 : clbLevel >= 7 ? 13 : 0;
@@ -109,7 +107,7 @@ export function calculateSkillTransferability(data: CRSFormData) {
   const hasCanExp = canExp && canExp !== "none";
   if (hasForeignExp && hasCanExp) {
     if (
-      ["3_years", "4_years", "5_years_or_more"].includes(foreignExp) &&
+      foreignExp === "3_years_or_more" &&
       ["2_years", "3_years", "4_years", "5_years_or_more"].includes(canExp)
     ) {
       foreignCanExp = 50;
