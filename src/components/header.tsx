@@ -26,6 +26,7 @@ interface HeaderProps {
 }
 
 export function Header({ lang }: HeaderProps) {
+  const [mounted, setMounted] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [toolsHover, setToolsHover] = useState(false)
@@ -33,6 +34,8 @@ export function Header({ lang }: HeaderProps) {
   const t = getTranslations(lang)
 
   useEffect(() => {
+    setMounted(true)
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
@@ -55,12 +58,12 @@ export function Header({ lang }: HeaderProps) {
   ]
 
   const containerVariants = {
-    hidden: { opacity: 1, y: 0 }, // Start visible for immediate display
+    hidden: { opacity: 1, y: 0 }, // Start visible on mobile
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        staggerChildren: 0.05,
+        staggerChildren: 0.03,
         delayChildren: 0,
         duration: 0.2
       }
@@ -68,7 +71,7 @@ export function Header({ lang }: HeaderProps) {
   }
 
   const itemVariants = {
-    hidden: { opacity: 1, y: 0 }, // Start visible for immediate display
+    hidden: { opacity: 1, y: 0 }, // Start visible on mobile
     visible: { 
       opacity: 1, 
       y: 0,
@@ -77,6 +80,30 @@ export function Header({ lang }: HeaderProps) {
         ease: "easeOut" as const
       }
     }
+  }
+
+  if (!mounted) {
+    return (
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon"
+        style={{ opacity: 1 }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-20 md:h-24">
+            <div className="h-16 md:h-20 w-40 bg-white/20 rounded animate-pulse" />
+            <div className="hidden md:flex gap-4">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="h-4 w-20 bg-white/20 rounded animate-pulse" />
+              ))}
+            </div>
+            <div className="md:hidden flex items-center gap-2">
+              <div className="h-8 w-16 bg-white/20 rounded animate-pulse" />
+              <div className="h-8 w-8 bg-white/20 rounded animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </header>
+    )
   }
 
   return (
@@ -97,35 +124,29 @@ export function Header({ lang }: HeaderProps) {
       }}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 md:h-24 gap-4">
-          {/* Div - Logo/Icon */}
+        <div className="flex items-center justify-between h-20 md:h-24 gap-2 md:gap-4">
+          {/* Div 1 - Logo/Icon */}
           <motion.div 
             variants={itemVariants} 
             className="flex items-center flex-shrink-0"
-            style={{ opacity: 1, visibility: 'visible' }}
+            style={{ opacity: 1 }}
           >
             <Link href={`/${lang}`} className="flex items-center group">
-              <div className="h-16 md:h-20 w-auto min-w-[100px]">
+              <div className="h-14 md:h-20 w-auto max-w-[140px] md:max-w-none min-w-[80px] md:min-w-[100px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/logoFooter.png" 
                   alt="Northern Pathways Logo" 
                   className="h-full w-full object-contain"
                   loading="eager"
-                  style={{ opacity: 1, visibility: 'visible' }}
+                  style={{ opacity: 1 }}
                 />
               </div>
             </Link>
           </motion.div>
 
-          {/* Div - Nav Items */}
-          <motion.div 
-            variants={itemVariants} 
-            initial="visible"
-            animate="visible"
-            className="hidden md:flex items-center gap-1 flex-1 justify-center"
-            style={{ opacity: 1, visibility: 'visible' }}
-          >
+          {/* Div 2 - Nav Items (Desktop only) */}
+          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-1 flex-1 justify-center">
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.href === `/${lang}` && pathname === `/${lang}`)
               
@@ -239,14 +260,11 @@ export function Header({ lang }: HeaderProps) {
             </div>
           </motion.div>
 
-          {/* Div - Contact Us and Language Selection */}
-          <motion.div 
-            variants={itemVariants} 
-            initial="visible"
-            animate="visible"
-            className="hidden md:flex items-center gap-3 flex-shrink-0"
-            style={{ opacity: 1, visibility: 'visible' }}
-          >
+          {/* Div 2 - Empty space on mobile (prevents logo from blocking) */}
+          <div className="flex-1 md:hidden" />
+
+          {/* Div 3 - Contact Us and Language Selection (Desktop) */}
+          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 flex-shrink-0">
             {/* Contact Us Button */}
             <a
               href="https://www.northernpathways.ca/pre-assessment-form"
@@ -260,18 +278,20 @@ export function Header({ lang }: HeaderProps) {
             <LanguageSwitcher currentLang={lang} />
           </motion.div>
 
-          {/* Mobile Menu Button and Language Switcher */}
+          {/* Div 3 - Language Switcher and Menu Button (Mobile) */}
           <motion.div 
             variants={itemVariants} 
-            className="flex items-center gap-2 md:hidden"
-            style={{ opacity: 1, visibility: 'visible' }}
+            className="flex items-center gap-2 md:hidden flex-shrink-0"
+            style={{ opacity: 1 }}
           >
-            <LanguageSwitcher currentLang={lang} />
+            <div className="flex-shrink-0">
+              <LanguageSwitcher currentLang={lang} />
+            </div>
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="relative p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200 w-10 h-10 flex items-center justify-center z-50"
+              className="relative p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200 w-10 h-10 flex items-center justify-center flex-shrink-0"
               aria-label="Toggle menu"
-              style={{ opacity: 1, visibility: 'visible' }}
+              style={{ opacity: 1 }}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -287,13 +307,13 @@ export function Header({ lang }: HeaderProps) {
                 ) : (
                   <motion.div
                     key="menu"
-                    initial={{ rotate: 0, opacity: 1, scale: 1 }}
+                    initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
                     animate={{ rotate: 0, opacity: 1, scale: 1 }}
                     exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
-                    style={{ opacity: 1, visibility: 'visible' }}
+                    style={{ opacity: 1 }}
                   >
-                    <Menu className="h-6 w-6" style={{ opacity: 1, visibility: 'visible' }} />
+                    <Menu className="h-6 w-6" style={{ opacity: 1 }} />
                   </motion.div>
                 )}
               </AnimatePresence>

@@ -66,6 +66,12 @@
     header {
       opacity: 1 !important;
       visibility: visible !important;
+      display: block !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 50 !important;
     }
 
     /* Ensure header logo and buttons are visible */
@@ -76,20 +82,18 @@
       visibility: visible !important;
     }
 
-    /* Ensure all motion elements inside header are visible */
-    header [data-framer-name],
-    header > *,
-    header > * > * {
-      opacity: 1 !important;
-      visibility: visible !important;
+    /* Prevent logo overflow on mobile */
+    header img {
+      max-width: 140px !important;
+      height: auto !important;
     }
 
-    /* Override Framer Motion opacity on mobile */
-    header > div,
-    header > div > div,
-    header > div > div > div {
-      opacity: 1 !important;
-      visibility: visible !important;
+    /* Ensure proper flex layout on mobile */
+    header > div > div {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
     }
   }
 }
