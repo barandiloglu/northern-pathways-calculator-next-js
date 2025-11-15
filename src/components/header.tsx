@@ -26,7 +26,6 @@ interface HeaderProps {
 }
 
 export function Header({ lang }: HeaderProps) {
-  const [mounted, setMounted] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [toolsHover, setToolsHover] = useState(false)
@@ -34,8 +33,6 @@ export function Header({ lang }: HeaderProps) {
   const t = getTranslations(lang)
 
   useEffect(() => {
-    setMounted(true)
-    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
@@ -82,52 +79,6 @@ export function Header({ lang }: HeaderProps) {
     }
   }
 
-  if (!mounted) {
-    return (
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon"
-        style={{ 
-          opacity: 1,
-          visibility: 'visible'
-        }}
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-20 md:h-24">
-            {/* Logo - Always visible */}
-            <Link href={`/${lang}`} className="flex items-center">
-              <div className="h-16 md:h-20 w-auto min-w-[100px]">
-                <img 
-                  src="/logoFooter.png" 
-                  alt="Northern Pathways Logo" 
-                  className="h-full w-full object-contain"
-                  style={{ opacity: 1 }}
-                />
-              </div>
-            </Link>
-            {/* Mobile Menu - Always visible */}
-            <div className="md:hidden flex items-center gap-2">
-              <LanguageSwitcher currentLang={lang} />
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="relative p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200 w-10 h-10 flex items-center justify-center z-50"
-                aria-label="Toggle menu"
-                style={{ opacity: 1 }}
-              >
-                <Menu className="h-6 w-6" style={{ opacity: 1 }} />
-              </button>
-            </div>
-            {/* Desktop Nav - Hidden on mobile */}
-            <div className="hidden md:flex gap-4">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="h-4 w-20 bg-white/20 rounded animate-pulse" />
-              ))}
-            </div>
-          </div>
-        </div>
-      </header>
-    )
-  }
-
   return (
     <motion.header
       variants={containerVariants}
@@ -141,7 +92,8 @@ export function Header({ lang }: HeaderProps) {
       style={{ 
         opacity: 1,
         visibility: 'visible',
-        pointerEvents: 'auto'
+        pointerEvents: 'auto',
+        display: 'block'
       }}
     >
       <div className="container mx-auto px-4">
@@ -167,7 +119,13 @@ export function Header({ lang }: HeaderProps) {
           </motion.div>
 
           {/* Div - Nav Items */}
-          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-1 flex-1 justify-center">
+          <motion.div 
+            variants={itemVariants} 
+            initial="visible"
+            animate="visible"
+            className="hidden md:flex items-center gap-1 flex-1 justify-center"
+            style={{ opacity: 1, visibility: 'visible' }}
+          >
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.href === `/${lang}` && pathname === `/${lang}`)
               
@@ -282,7 +240,13 @@ export function Header({ lang }: HeaderProps) {
           </motion.div>
 
           {/* Div - Contact Us and Language Selection */}
-          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 flex-shrink-0">
+          <motion.div 
+            variants={itemVariants} 
+            initial="visible"
+            animate="visible"
+            className="hidden md:flex items-center gap-3 flex-shrink-0"
+            style={{ opacity: 1, visibility: 'visible' }}
+          >
             {/* Contact Us Button */}
             <a
               href="https://www.northernpathways.ca/pre-assessment-form"

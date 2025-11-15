@@ -75,6 +75,22 @@
       opacity: 1 !important;
       visibility: visible !important;
     }
+
+    /* Ensure all motion elements inside header are visible */
+    header [data-framer-name],
+    header > *,
+    header > * > * {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Override Framer Motion opacity on mobile */
+    header > div,
+    header > div > div,
+    header > div > div > div {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
   }
 }
 
