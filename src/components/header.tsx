@@ -63,8 +63,9 @@ export function Header({ lang }: HeaderProps) {
       opacity: 1,
       y: 0,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
+        staggerChildren: 0.05,
+        delayChildren: 0.05,
+        duration: 0.3
       }
     }
   }
@@ -75,7 +76,7 @@ export function Header({ lang }: HeaderProps) {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.3,
         ease: "easeOut" as const
       }
     }
@@ -83,7 +84,10 @@ export function Header({ lang }: HeaderProps) {
 
   if (!mounted) {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon">
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon"
+        style={{ opacity: 1 }}
+      >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20 md:h-24">
             <div className="h-16 md:h-20 w-40 bg-white/20 rounded animate-pulse" />
@@ -92,7 +96,10 @@ export function Header({ lang }: HeaderProps) {
                 <div key={i} className="h-4 w-20 bg-white/20 rounded animate-pulse" />
               ))}
             </div>
-            <div className="h-8 w-8 bg-white/20 rounded animate-pulse" />
+            <div className="md:hidden flex items-center gap-2">
+              <div className="h-8 w-16 bg-white/20 rounded animate-pulse" />
+              <div className="h-8 w-8 bg-white/20 rounded animate-pulse" />
+            </div>
           </div>
         </div>
       </header>
@@ -109,18 +116,28 @@ export function Header({ lang }: HeaderProps) {
           ? "bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon shadow-lg" 
           : "bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon"
       }`}
+      style={{ 
+        opacity: 1,
+        pointerEvents: 'auto'
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20 md:h-24 gap-4">
           {/* Div - Logo/Icon */}
-          <motion.div variants={itemVariants} className="flex items-center flex-shrink-0">
+          <motion.div 
+            variants={itemVariants} 
+            className="flex items-center flex-shrink-0"
+            style={{ opacity: 1 }}
+          >
             <Link href={`/${lang}`} className="flex items-center group">
-              <div className="h-16 md:h-20 w-auto">
+              <div className="h-16 md:h-20 w-auto min-w-[100px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/logoFooter.png" 
                   alt="Northern Pathways Logo" 
                   className="h-full w-full object-contain"
+                  loading="eager"
+                  style={{ opacity: 1 }}
                 />
               </div>
             </Link>
@@ -257,12 +274,17 @@ export function Header({ lang }: HeaderProps) {
           </motion.div>
 
           {/* Mobile Menu Button and Language Switcher */}
-          <motion.div variants={itemVariants} className="flex items-center gap-2 md:hidden">
+          <motion.div 
+            variants={itemVariants} 
+            className="flex items-center gap-2 md:hidden"
+            style={{ opacity: 1 }}
+          >
             <LanguageSwitcher currentLang={lang} />
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="relative p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200 w-10 h-10 flex items-center justify-center"
+              className="relative p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200 w-10 h-10 flex items-center justify-center z-50"
               aria-label="Toggle menu"
+              style={{ opacity: 1 }}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -282,8 +304,9 @@ export function Header({ lang }: HeaderProps) {
                     animate={{ rotate: 0, opacity: 1, scale: 1 }}
                     exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
+                    style={{ opacity: 1 }}
                   >
-                    <Menu className="h-6 w-6" />
+                    <Menu className="h-6 w-6" style={{ opacity: 1 }} />
                   </motion.div>
                 )}
               </AnimatePresence>

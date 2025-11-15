@@ -61,6 +61,20 @@
     * {
       -webkit-overflow-scrolling: touch;
     }
+
+    /* Ensure header is always visible on mobile */
+    header {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Ensure header logo and buttons are visible */
+    header img,
+    header button,
+    header a {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
   }
 }
 
