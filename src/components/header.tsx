@@ -185,29 +185,56 @@ export function Header({ lang }: HeaderProps) {
               <AnimatePresence>
                 {toolsHover && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-2 min-w-[200px] z-50"
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute top-full left-0 mt-3 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 min-w-[240px]"
                   >
-                    {toolsItems.map((tool) => {
-                      const isActive = pathname === tool.href
-                      return (
-                        <Link
-                          key={tool.href}
-                          href={tool.href}
-                          className={`flex items-center gap-3 px-4 py-2 font-medium transition-colors duration-200 ${
-                            isActive
-                              ? "bg-brand-red text-white"
-                              : "text-[#2c2b2b] hover:bg-red-50 hover:text-brand-red"
-                          }`}
-                        >
-                          <tool.icon className="h-4 w-4" />
-                          <span>{tool.label}</span>
-                        </Link>
-                      )
-                    })}
+                    <div className="py-2">
+                      {toolsItems.map((tool, index) => {
+                        const isActive = pathname === tool.href
+                        return (
+                          <motion.div
+                            key={tool.href}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05, duration: 0.2 }}
+                          >
+                            <Link
+                              href={tool.href}
+                              className={`group relative flex items-center gap-3 px-5 py-3 font-semibold transition-all duration-200 ${
+                                isActive
+                                  ? "bg-gradient-to-r from-brand-red to-brand-maroon text-white"
+                                  : "text-[#2c2b2b] hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-brand-red"
+                              }`}
+                            >
+                              <motion.div
+                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                                className={`flex-shrink-0 ${
+                                  isActive ? "text-white" : "text-brand-red group-hover:text-brand-red"
+                                }`}
+                              >
+                                <tool.icon className="h-5 w-5" />
+                              </motion.div>
+                              <span className="text-sm">{tool.label}</span>
+                              {isActive && (
+                                <motion.div
+                                  layoutId="activeToolIndicator"
+                                  className="absolute right-3 w-2 h-2 bg-white rounded-full"
+                                  initial={false}
+                                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                              )}
+                            </Link>
+                          </motion.div>
+                        )
+                      })}
+                    </div>
+                    
+                    {/* Decorative bottom accent */}
+                    <div className="h-1 bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon" />
                   </motion.div>
                 )}
               </AnimatePresence>
