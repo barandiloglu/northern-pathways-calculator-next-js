@@ -140,7 +140,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
   }
 
   return (
-    <div className={`bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden ${className}`}>
+    <div className={`${hideHeader ? '' : 'bg-white rounded-2xl shadow-lg border border-gray-100'} overflow-hidden ${className}`}>
       {/* Header */}
       {!hideHeader && (
         <div className="bg-gradient-to-r from-[#B92025] to-red-700 p-4 sm:p-8 text-white">
@@ -200,7 +200,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
       )}
 
       {/* Draw Data - Mobile Cards / Desktop Table */}
-      <div className="p-4 sm:p-8">
+      <div className={`${hideHeader ? 'p-0' : 'p-4 sm:p-8'}`}>
         {/* Mobile Cards View */}
         <div className="block sm:hidden space-y-4">
           {/* Mobile Pagination Controls */}
@@ -209,7 +209,11 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
               <button
                 onClick={goToPreviousPage}
                 disabled={!pagination.hasPreviousPage || isRefreshing}
-                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
+                  hideHeader 
+                    ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                    : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                }`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -217,14 +221,18 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
                 <span>Previous</span>
               </button>
               
-              <span className="text-sm font-medium text-gray-700">
+              <span className={`text-sm font-medium ${hideHeader ? 'text-white' : 'text-gray-700'}`}>
                 {pagination.currentPage} / {pagination.totalPages}
               </span>
               
               <button
                 onClick={goToNextPage}
                 disabled={!pagination.hasNextPage || isRefreshing}
-                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
+                  hideHeader 
+                    ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                    : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                }`}
               >
                 <span>Next</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -245,7 +253,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                  className={`${hideHeader ? 'bg-white' : 'bg-gray-50'} rounded-xl p-4 ${hideHeader ? 'shadow-lg' : 'border border-gray-200'}`}
                 >
                   {/* Header */}
                   <div className="flex items-center justify-between mb-3">
@@ -302,12 +310,12 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
             
             {/* Mobile Pagination Info */}
             {pagination && (
-              <div className="mt-4 text-center text-sm text-gray-600">
+              <div className={`mt-4 text-center text-sm ${hideHeader ? 'text-white/80' : 'text-gray-600'}`}>
                 <div className="mb-2">
                   Showing {drawData.length} of {pagination.totalItems} draws
                   {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className={`text-xs ${hideHeader ? 'text-white/70' : 'text-gray-500'}`}>
                   Limited to 25 most recent draws
                 </div>
               </div>
