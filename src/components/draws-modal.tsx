@@ -52,7 +52,7 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
             </div>
 
             {/* Content - LatestDraws Component */}
-            <div className="flex-1 overflow-y-auto min-h-0" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex-1 overflow-y-auto min-h-0 pb-6" style={{ WebkitOverflowScrolling: 'touch' }}>
               <LatestDraws className="border-0 shadow-none rounded-none" hideHeader={true} />
             </div>
 

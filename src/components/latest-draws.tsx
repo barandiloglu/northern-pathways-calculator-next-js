@@ -200,7 +200,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
       )}
 
       {/* Draw Data - Mobile Cards / Desktop Table */}
-      <div className={`${hideHeader ? 'p-4 pt-6' : 'p-4 sm:p-8'}`}>
+      <div className={`${hideHeader ? 'p-4 pt-6 pb-8' : 'p-4 sm:p-8'}`}>
         {/* Mobile Cards View */}
         <div className="block sm:hidden space-y-4">
           {/* Mobile Pagination Controls */}
