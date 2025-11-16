@@ -202,170 +202,329 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
       </div>
       )}
 
-      {/* Draw Data - Responsive Table View */}
+      {/* Draw Data - Mobile Cards / Desktop Table */}
+      {/* IMPORTANT: Both mobile and desktop views use the EXACT same data source:
+          - Same drawData state (line 20)
+          - Same pagination state (line 21)  
+          - Same currentPage state (line 22)
+          - Same fetchDrawData function (line 29)
+          This ensures mobile and desktop always show identical data */}
       <div className={`${hideHeader ? 'p-4 pt-6 pb-8' : 'p-4 sm:p-8'}`}>
-        {/* Responsive Table View - Works on all screen sizes */}
-        <div className="overflow-x-auto -mx-4 sm:mx-0">
-          {/* Pagination Controls - Responsive */}
+        {/* Mobile Cards View - Uses same drawData state as desktop */}
+        <div className="block sm:hidden">
+          {/* Div 1 - Mobile Pagination Header (separated from data to prevent blocking) */}
           {pagination && (
-            <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
+            <div className="mb-4 flex flex-col space-y-3 flex-shrink-0">
+              {/* Pagination Controls - Only show when more than 1 page */}
               {pagination.totalPages > 1 && (
-                <div className="flex items-center space-x-2 flex-wrap gap-2">
-                  <button
-                    onClick={goToPreviousPage}
-                    disabled={!pagination.hasPreviousPage || isRefreshing}
-                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
-                      hideHeader 
-                        ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
-                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    <span className="hidden sm:inline">Previous</span>
-                    <span className="sm:hidden">Prev</span>
-                  </button>
-                  
-                  <div className="flex items-center space-x-2">
-                    <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>Page</span>
-                    <input
-                      type="number"
-                      min={1}
-                      max={pagination.totalPages}
-                      value={currentPage}
-                      onChange={(e) => {
-                        const page = parseInt(e.target.value)
-                        if (page >= 1 && page <= pagination.totalPages) {
-                          goToPage(page)
-                        }
-                      }}
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          const page = parseInt((e.target as HTMLInputElement).value)
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center space-x-2 flex-shrink-0">
+                    <button
+                      onClick={goToPreviousPage}
+                      disabled={!pagination.hasPreviousPage || isRefreshing}
+                      className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
+                        hideHeader 
+                          ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                          : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      <span>Previous</span>
+                    </button>
+                    
+                    <div className="flex items-center space-x-2">
+                      <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>Page</span>
+                      <input
+                        type="number"
+                        min={1}
+                        max={pagination.totalPages}
+                        value={currentPage}
+                        onChange={(e) => {
+                          const page = parseInt(e.target.value)
                           if (page >= 1 && page <= pagination.totalPages) {
                             goToPage(page)
                           }
-                        }
-                      }}
-                      className={`w-16 px-2 py-1 text-sm text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent ${
+                        }}
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            const page = parseInt((e.target as HTMLInputElement).value)
+                            if (page >= 1 && page <= pagination.totalPages) {
+                              goToPage(page)
+                            }
+                          }
+                        }}
+                        className={`w-16 px-2 py-1 text-sm text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent ${
+                          hideHeader 
+                            ? 'text-white bg-white/20 border-white/30' 
+                            : 'text-gray-700 bg-white border-gray-300'
+                        }`}
+                      />
+                      <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>of {pagination.totalPages}</span>
+                    </div>
+                    
+                    <button
+                      onClick={goToNextPage}
+                      disabled={!pagination.hasNextPage || isRefreshing}
+                      className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
                         hideHeader 
-                          ? 'text-white bg-white/20 border-white/30' 
-                          : 'text-gray-700 bg-white border-gray-300'
+                          ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                          : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
                       }`}
-                    />
-                    <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>of {pagination.totalPages}</span>
+                    >
+                      <span>Next</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                   
-                  <button
-                    onClick={goToNextPage}
-                    disabled={!pagination.hasNextPage || isRefreshing}
-                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
-                      hideHeader 
-                        ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
-                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span>Next</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
+                  <div className={`text-sm ${hideHeader ? 'text-white/90' : 'text-gray-600'} flex-shrink-0`}>
+                    Showing {drawData.length} of {pagination.totalItems} draws
+                  </div>
                 </div>
               )}
               
-              <div className={`text-sm ${hideHeader ? 'text-white/90' : 'text-gray-600'}`}>
+              {/* Always show pagination info, even if only 1 page */}
+              {pagination.totalPages <= 1 && (
+                <div className={`text-sm ${hideHeader ? 'text-white/90' : 'text-gray-600'}`}>
+                  Showing {drawData.length} of {pagination.totalItems} draws
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Div 2 - Mobile Draw Data (separated from header to prevent blocking) */}
+          <div className="flex-1 min-h-0 space-y-4">
+            {/* Mobile view uses the exact same drawData array as desktop - no separate data fetching */}
+            <AnimatePresence>
+              {drawData.map((draw, index) => {
+                const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore
+                const trend = getDrawTrend(draw.crsScore, previousScore)
+                
+                return (
+                  <motion.div
+                    key={draw.roundNumber}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className={`${hideHeader ? 'bg-white' : 'bg-gray-50'} rounded-xl p-4 ${hideHeader ? 'shadow-lg' : 'border border-gray-200'}`}
+                  >
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-mono text-lg font-bold text-[#B92025]">
+                        #{draw.roundNumber}
+                      </span>
+                      <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium border ${getRoundTypeColor(draw.roundType)}`}>
+                        {draw.roundType}
+                      </span>
+                    </div>
+                    
+                    {/* CRS Score - Prominent */}
+                    <div className="text-center mb-3">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Award className="h-5 w-5 text-[#B92025]" />
+                        <span className="text-2xl font-bold text-[#B92025]">
+                          {draw.crsScore}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">CRS Score</p>
+                    </div>
+                    
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-3 text-sm">
+                      <div className="flex items-center space-x-2">
+                        <Calendar className="h-4 w-4 text-gray-400" />
+                        <span className="font-medium text-gray-900">
+                          {formatDrawDate(draw.date)}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Users className="h-4 w-4 text-gray-400" />
+                        <span className="font-medium text-gray-900">
+                          {draw.invitationsIssued}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Trend */}
+                    <div className="mt-3 pt-3 border-t border-gray-200">
+                      <div className="flex items-center justify-center space-x-2">
+                        <span className={`text-lg font-semibold ${trend.color}`}>
+                          {trend.icon}
+                        </span>
+                        <span className={`text-sm font-medium ${trend.color}`}>
+                          {trend.trend === 'stable' ? 'No change' : trend.trend}
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </AnimatePresence>
+            
+            {/* Mobile Pagination Info - Matching desktop exactly */}
+            {pagination && (
+              <div className={`mt-4 flex items-center justify-between text-sm ${hideHeader ? 'text-white/80' : 'text-gray-600'}`}>
+                <div>
+                  Showing {drawData.length} of {pagination.totalItems} draws
+                  {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
+                </div>
+                <div className={`text-xs ${hideHeader ? 'text-white/70' : 'text-gray-500'}`}>
+                  Limited to 25 most recent draws
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Desktop Table View - Uses same drawData state as mobile (line 20) */}
+        <div className="hidden sm:block overflow-x-auto">
+          {/* Pagination Controls */}
+          {pagination && pagination.totalPages > 1 && (
+            <div className="mb-4 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={goToPreviousPage}
+                  disabled={!pagination.hasPreviousPage || isRefreshing}
+                  className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <span>Previous</span>
+                </button>
+                
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-gray-600">Page</span>
+                  <input
+                    type="number"
+                    min={1}
+                    max={pagination.totalPages}
+                    value={currentPage}
+                    onChange={(e) => {
+                      const page = parseInt(e.target.value)
+                      if (page >= 1 && page <= pagination.totalPages) {
+                        goToPage(page)
+                      }
+                    }}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        const page = parseInt((e.target as HTMLInputElement).value)
+                        if (page >= 1 && page <= pagination.totalPages) {
+                          goToPage(page)
+                        }
+                      }
+                    }}
+                    className="w-16 px-2 py-1 text-sm text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent"
+                  />
+                  <span className="text-sm text-gray-600">of {pagination.totalPages}</span>
+                </div>
+                
+                <button
+                  onClick={goToNextPage}
+                  disabled={!pagination.hasNextPage || isRefreshing}
+                  className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                >
+                  <span>Next</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+              
+              <div className="text-sm text-gray-600">
                 Showing {drawData.length} of {pagination.totalItems} draws
               </div>
             </div>
           )}
           
-          <div className="min-w-full inline-block align-middle">
-            <table className="w-full min-w-[640px]">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  <th className={`text-left py-3 px-2 sm:py-4 sm:px-4 font-semibold ${hideHeader ? 'text-white' : 'text-gray-700'} text-xs sm:text-sm`}>Round #</th>
-                  <th className={`text-left py-3 px-2 sm:py-4 sm:px-4 font-semibold ${hideHeader ? 'text-white' : 'text-gray-700'} text-xs sm:text-sm`}>Date</th>
-                  <th className={`text-left py-3 px-2 sm:py-4 sm:px-4 font-semibold ${hideHeader ? 'text-white' : 'text-gray-700'} text-xs sm:text-sm`}>Type</th>
-                  <th className={`text-left py-3 px-2 sm:py-4 sm:px-4 font-semibold ${hideHeader ? 'text-white' : 'text-gray-700'} text-xs sm:text-sm`}>Invitations</th>
-                  <th className={`text-left py-3 px-2 sm:py-4 sm:px-4 font-semibold ${hideHeader ? 'text-white' : 'text-gray-700'} text-xs sm:text-sm`}>CRS Score</th>
-                  <th className={`text-left py-3 px-2 sm:py-4 sm:px-4 font-semibold ${hideHeader ? 'text-white' : 'text-gray-700'} text-xs sm:text-sm`}>Trend</th>
-                </tr>
-              </thead>
-              <tbody>
-                <AnimatePresence>
-                  {drawData.map((draw, index) => {
-                    const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore
-                    const trend = getDrawTrend(draw.crsScore, previousScore)
-                    
-                    return (
-                      <motion.tr
-                        key={draw.roundNumber}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1, duration: 0.5 }}
-                        className={`border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200 ${hideHeader ? 'hover:bg-white/10' : ''}`}
-                      >
-                        <td className="py-3 px-2 sm:py-4 sm:px-4">
-                          <span className={`font-mono text-base sm:text-lg font-bold ${hideHeader ? 'text-white' : 'text-[#B92025]'}`}>
-                            #{draw.roundNumber}
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-200">
+                <th className="text-left py-4 px-4 font-semibold text-gray-700">Round #</th>
+                <th className="text-left py-4 px-4 font-semibold text-gray-700">Date</th>
+                <th className="text-left py-4 px-4 font-semibold text-gray-700">Type</th>
+                <th className="text-left py-4 px-4 font-semibold text-gray-700">Invitations</th>
+                <th className="text-left py-4 px-4 font-semibold text-gray-700">CRS Score</th>
+                <th className="text-left py-4 px-4 font-semibold text-gray-700">Trend</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Desktop view uses the exact same drawData array as mobile - no separate data fetching */}
+              <AnimatePresence>
+                {drawData.map((draw, index) => {
+                  const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore
+                  const trend = getDrawTrend(draw.crsScore, previousScore)
+                  
+                  return (
+                    <motion.tr
+                      key={draw.roundNumber}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                      className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200"
+                    >
+                      <td className="py-4 px-4">
+                        <span className="font-mono text-lg font-bold text-[#B92025]">
+                          #{draw.roundNumber}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4">
+                        <div className="flex items-center space-x-2">
+                          <Calendar className="h-4 w-4 text-gray-400" />
+                          <span className="font-medium text-gray-900">
+                            {formatDrawDate(draw.date)}
                           </span>
-                        </td>
-                        <td className="py-3 px-2 sm:py-4 sm:px-4">
-                          <div className="flex items-center space-x-1 sm:space-x-2">
-                            <Calendar className={`h-3 w-3 sm:h-4 sm:w-4 ${hideHeader ? 'text-white/70' : 'text-gray-400'}`} />
-                            <span className={`font-medium text-xs sm:text-base ${hideHeader ? 'text-white' : 'text-gray-900'}`}>
-                              {formatDrawDate(draw.date)}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-2 sm:py-4 sm:px-4">
-                          <span className={`inline-flex px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-medium border ${getRoundTypeColor(draw.roundType)}`}>
-                            <span className="line-clamp-1">{draw.roundType}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4">
+                        <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium border ${getRoundTypeColor(draw.roundType)}`}>
+                          {draw.roundType}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4">
+                        <div className="flex items-center space-x-2">
+                          <Users className="h-4 w-4 text-gray-400" />
+                          <span className="font-medium text-gray-900">
+                            {draw.invitationsIssued}
                           </span>
-                        </td>
-                        <td className="py-3 px-2 sm:py-4 sm:px-4">
-                          <div className="flex items-center space-x-1 sm:space-x-2">
-                            <Users className={`h-3 w-3 sm:h-4 sm:w-4 ${hideHeader ? 'text-white/70' : 'text-gray-400'}`} />
-                            <span className={`font-medium text-xs sm:text-base ${hideHeader ? 'text-white' : 'text-gray-900'}`}>
-                              {draw.invitationsIssued}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-2 sm:py-4 sm:px-4">
-                          <div className="flex items-center space-x-1 sm:space-x-2">
-                            <Award className={`h-3 w-3 sm:h-4 sm:w-4 ${hideHeader ? 'text-white' : 'text-[#B92025]'}`} />
-                            <span className={`text-xl sm:text-2xl font-bold ${hideHeader ? 'text-white' : 'text-[#B92025]'}`}>
-                              {draw.crsScore}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-2 sm:py-4 sm:px-4">
-                          <div className="flex items-center space-x-1 sm:space-x-2">
-                            <span className={`text-base sm:text-lg font-semibold ${trend.color}`}>
-                              {trend.icon}
-                            </span>
-                            <span className={`text-xs sm:text-sm font-medium ${trend.color}`}>
-                              {trend.trend === 'stable' ? 'No change' : trend.trend}
-                            </span>
-                          </div>
-                        </td>
-                      </motion.tr>
-                    )
-                  })}
-                </AnimatePresence>
-              </tbody>
-            </table>
-          </div>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4">
+                        <div className="flex items-center space-x-2">
+                          <Award className="h-4 w-4 text-[#B92025]" />
+                          <span className="text-2xl font-bold text-[#B92025]">
+                            {draw.crsScore}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4">
+                        <div className="flex items-center space-x-2">
+                          <span className={`text-lg font-semibold ${trend.color}`}>
+                            {trend.icon}
+                          </span>
+                          <span className={`text-sm font-medium ${trend.color}`}>
+                            {trend.trend === 'stable' ? 'No change' : trend.trend}
+                          </span>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  )
+                })}
+              </AnimatePresence>
+            </tbody>
+          </table>
           
-          {/* Pagination Info - Responsive */}
+          {/* Pagination Info */}
           {pagination && (
-            <div className={`mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm ${hideHeader ? 'text-white/80' : 'text-gray-600'}`}>
+            <div className="mt-4 flex items-center justify-between text-sm text-gray-600">
               <div>
                 Showing {drawData.length} of {pagination.totalItems} draws
                 {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
               </div>
-              <div className={`text-xs ${hideHeader ? 'text-white/70' : 'text-gray-500'}`}>
+              <div className="text-xs text-gray-500">
                 Limited to 25 most recent draws
               </div>
             </div>

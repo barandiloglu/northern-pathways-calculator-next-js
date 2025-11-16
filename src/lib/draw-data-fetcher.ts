@@ -179,18 +179,21 @@ export const parseDrawDataFromHTML = async (html: string): Promise<DrawData[]> =
 // Function to fetch HTML from Canada.ca website
 export const fetchHTMLFromCanadaCa = async (): Promise<string> => {
   try {
+    // Use AbortController for better mobile browser compatibility
+    // AbortSignal.timeout() is not supported in all mobile browsers
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 10000)
+    
     const response = await fetch('https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/policies-operational-instructions-agreements/ministerial-instructions/express-entry-rounds.html', {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        // Note: User-Agent header is ignored by browsers in fetch requests
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
       },
-      // Add timeout
-      signal: AbortSignal.timeout(10000)
+      signal: controller.signal
     })
+    
+    clearTimeout(timeoutId)
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
@@ -206,15 +209,21 @@ export const fetchHTMLFromCanadaCa = async (): Promise<string> => {
 // Function to fetch JSON data directly from Canada.ca (if available)
 export const fetchDrawDataFromCanadaCaJSON = async (): Promise<DrawData[]> => {
   try {
+    // Use AbortController for better mobile browser compatibility
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 10000)
+    
     // Try to fetch the JSON data directly from the endpoint
     const response = await fetch('https://www.canada.ca/content/dam/ircc/documents/json/ee_rounds_123_en.json', {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        // Note: User-Agent header is ignored by browsers in fetch requests
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'en-US,en;q=0.5',
       },
-      signal: AbortSignal.timeout(10000)
+      signal: controller.signal
     })
+    
+    clearTimeout(timeoutId)
     
     if (!response.ok) {
       throw new Error(`JSON fetch failed with status: ${response.status}`)
@@ -292,46 +301,87 @@ export const getDrawDataWithFallback = async (options?: PaginationOptions): Prom
   const page = options?.page || 1
   const limit = options?.limit || 25
   
-  try {
-    // Try to fetch from Canada.ca website first (most up-to-date)
-    // Fetch FULL dataset first (without pagination options) to ensure accurate pagination calculation
-    // This single call approach prevents issues on mobile devices where a second call might fail/timeout
-    const fullData = await fetchDrawDataFromCanadaCa()
-    if (fullData.length > 0) {
-      // Apply pagination to the full dataset
-      const { paginatedData, pagination } = paginateData(fullData, page, limit)
-      
-      return {
-        data: paginatedData,
-        pagination,
-        source: 'real-time',
-        lastUpdated: new Date().toISOString()
+  // On client-side (browser), prioritize API route to avoid CORS issues
+  // Direct fetch to Canada.ca will fail on mobile due to CORS restrictions
+  const isClientSide = typeof window !== 'undefined'
+  
+  if (isClientSide) {
+    // Client-side: Use API route first (works on both mobile and desktop)
+    try {
+      const apiData = await fetchDrawDataFromAPI()
+      if (apiData.length > 0) {
+        const { paginatedData, pagination } = paginateData(apiData, page, limit)
+        
+        return {
+          data: paginatedData,
+          pagination,
+          source: 'cached',
+          lastUpdated: new Date().toISOString()
+        }
       }
+    } catch (error) {
+      console.log('API fetch failed on client-side:', error)
     }
-  } catch (error) {
-    console.log('Canada.ca fetch failed, trying API fallback:', error)
-  }
-
-  try {
-    // Try to fetch from our internal API as fallback
-    const apiData = await fetchDrawDataFromAPI()
-    const { paginatedData, pagination } = paginateData(apiData, page, limit)
     
-    return {
-      data: paginatedData,
-      pagination,
-      source: 'cached',
-      lastUpdated: new Date().toISOString()
+    // If API fails, try direct fetch (may fail due to CORS on mobile)
+    try {
+      const fullData = await fetchDrawDataFromCanadaCa()
+      if (fullData.length > 0) {
+        const { paginatedData, pagination } = paginateData(fullData, page, limit)
+        
+        return {
+          data: paginatedData,
+          pagination,
+          source: 'real-time',
+          lastUpdated: new Date().toISOString()
+        }
+      }
+    } catch (error) {
+      console.log('Canada.ca direct fetch failed on client-side (likely CORS):', error)
     }
-  } catch (error) {
-    // Return empty data for testing
-    const { pagination } = paginateData([], page, limit)
-    return {
-      data: [],
-      pagination,
-      source: 'fallback',
-      lastUpdated: new Date().toISOString()
+  } else {
+    // Server-side: Try direct fetch first (no CORS issues)
+    try {
+      const fullData = await fetchDrawDataFromCanadaCa()
+      if (fullData.length > 0) {
+        const { paginatedData, pagination } = paginateData(fullData, page, limit)
+        
+        return {
+          data: paginatedData,
+          pagination,
+          source: 'real-time',
+          lastUpdated: new Date().toISOString()
+        }
+      }
+    } catch (error) {
+      console.log('Canada.ca fetch failed on server-side, trying API fallback:', error)
     }
+    
+    // Server-side fallback to API
+    try {
+      const apiData = await fetchDrawDataFromAPI()
+      if (apiData.length > 0) {
+        const { paginatedData, pagination } = paginateData(apiData, page, limit)
+        
+        return {
+          data: paginatedData,
+          pagination,
+          source: 'cached',
+          lastUpdated: new Date().toISOString()
+        }
+      }
+    } catch (error) {
+      console.log('API fetch failed on server-side:', error)
+    }
+  }
+  
+  // Return empty data if all strategies fail
+  const { pagination } = paginateData([], page, limit)
+  return {
+    data: [],
+    pagination,
+    source: 'fallback',
+    lastUpdated: new Date().toISOString()
   }
 }
 
