@@ -53,13 +53,13 @@ export default async function AboutPage({ params }: PageProps) {
           {/* Vision */}
           <Reveal>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-              <Reveal delay={0.1}>
-                <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-64 md:h-72 w-full flex items-center justify-center text-gray-400 order-1 md:order-none">
+              <Reveal delay={0.1} className="order-2 md:order-none">
+                <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-64 md:h-72 w-full flex items-center justify-center text-gray-400">
                   [Company Vision Image]
                 </div>
               </Reveal>
-              <Reveal delay={0.05}>
-                <div>
+              <Reveal delay={0.05} className="order-1 md:order-none">
+                <div className="w-full">
                   <h2 className="text-2xl md:text-3xl font-extrabold text-brand-red">Our Vision</h2>
                   <p className="mt-4 text-[#2c2b2b]/80 leading-relaxed">
                     To be a leading Canadian immigration consulting firm, known for integrity,
