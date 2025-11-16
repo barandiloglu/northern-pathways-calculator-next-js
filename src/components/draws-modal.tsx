@@ -17,7 +17,7 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start sm:items-center justify-center p-0 sm:p-2 md:p-4 overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
@@ -25,7 +25,7 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[98vh] sm:max-h-[90vh] overflow-hidden flex flex-col"
+            className="bg-white rounded-none sm:rounded-2xl shadow-2xl w-full max-w-6xl max-h-screen sm:max-h-[90vh] overflow-hidden flex flex-col mt-0 sm:mt-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -52,7 +52,7 @@ export function DrawsModal({ isOpen, onClose }: DrawsModalProps) {
             </div>
 
             {/* Content - LatestDraws Component */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto min-h-0" style={{ WebkitOverflowScrolling: 'touch' }}>
               <LatestDraws className="border-0 shadow-none rounded-none" hideHeader={true} />
             </div>
 

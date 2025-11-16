@@ -57,7 +57,7 @@ export function FloatingDrawsButton() {
               className="fixed inset-0 bg-black/60 z-40 backdrop-blur-sm"
             />
 
-            {/* Panel - Slides up from bottom */}
+            {/* Panel - Slides up from bottom on desktop, full screen on mobile */}
             <motion.div
               initial={{ 
                 y: "100%",
@@ -76,11 +76,11 @@ export function FloatingDrawsButton() {
                 stiffness: 300,
                 damping: 30
               }}
-              className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-brand-red to-brand-maroon md:bg-white rounded-t-3xl md:rounded-t-3xl shadow-2xl overflow-hidden flex flex-col h-screen md:max-h-[85vh]"
+              className="fixed top-0 left-0 right-0 bottom-0 md:top-auto md:bottom-0 z-50 bg-gradient-to-r from-brand-red to-brand-maroon md:bg-white rounded-b-3xl md:rounded-t-3xl shadow-2xl overflow-hidden flex flex-col max-h-screen md:max-h-[85vh]"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Header with gradient */}
-              <div className="bg-gradient-to-r from-brand-red to-brand-maroon text-white p-4 md:p-6 flex items-center justify-between relative flex-shrink-0">
+              {/* Header with gradient - Sticky on mobile */}
+              <div className="bg-gradient-to-r from-brand-red to-brand-maroon text-white p-4 md:p-6 flex items-center justify-between relative flex-shrink-0 sticky top-0 z-10">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center">
                     <Calendar className="h-5 w-5 md:h-6 md:w-6" />
@@ -106,7 +106,7 @@ export function FloatingDrawsButton() {
               </div>
 
               {/* Content - Scrollable */}
-              <div className="flex-1 overflow-y-auto min-h-0 md:p-6 md:bg-white">
+              <div className="flex-1 overflow-y-auto min-h-0 md:p-6 md:bg-white" style={{ WebkitOverflowScrolling: 'touch' }}>
                 <LatestDraws hideHeader />
               </div>
 
