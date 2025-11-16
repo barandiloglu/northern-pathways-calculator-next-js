@@ -723,7 +723,7 @@ export async function GET() {
 
     // Check if parsed data is incomplete (missing dates, CRS scores, etc.)
     const hasIncompleteData = data.rounds.length > 0 && data.rounds.some(r => !r.date || !r.crsCutoff);
-    const isFallbackData = data.rounds.length > 0 && data.rounds[0].round === "364";
+    let isFallbackData = data.rounds.length > 0 && data.rounds[0].round === "364";
     
     // If we have incomplete data, use fallback data instead
     if (hasIncompleteData && !isFallbackData) {
@@ -930,7 +930,16 @@ export async function GET() {
           link: undefined,
         }
       ];
+      // CRITICAL FIX: Recompute isFallbackData after overwriting data.rounds
+      isFallbackData = true;
     }
+    
+    // Add better logging for debugging
+    console.log("Final rounds count:", data.rounds.length);
+    console.log("First round:", data.rounds[0]?.round);
+    console.log("hasIncompleteData:", hasIncompleteData);
+    console.log("isFallbackData:", isFallbackData);
+    console.log("dataSource:", isFallbackData ? "fallback" : "parsed");
     
     return NextResponse.json(
       {
