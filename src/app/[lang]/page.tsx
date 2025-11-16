@@ -79,7 +79,6 @@ export default function HomePage() {
         {/* Education Partner Section */}
         <EducationPartnerSection lang={lang} />
       </main>
-      <Footer />
     </div>
   )
 }

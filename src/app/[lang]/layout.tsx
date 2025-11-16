@@ -2,8 +2,10 @@ import type { Metadata } from "next"
 import { Montserrat } from "next/font/google"
 import "../globals.css"
 import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import { isValidLocale, defaultLocale } from "@/lib/i18n-config"
 import { notFound } from "next/navigation"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
@@ -41,10 +43,10 @@ export default async function LangLayout({ children, params }: LangLayoutProps) 
   return (
     <html lang={lang} suppressHydrationWarning>
       <body className={montserrat.variable} suppressHydrationWarning>
+        <ScrollToTop />
         <Header lang={lang} />
-        <main className="pt-28">
-          {children}
-        </main>
+        <main className="pt-28">{children}</main>
+        <Footer />
       </body>
     </html>
   )

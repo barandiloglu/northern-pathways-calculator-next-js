@@ -48,7 +48,7 @@ export function Header({ lang }: HeaderProps) {
     { href: `/${lang}`, label: "Home", icon: Home },
     { href: `/${lang}#services`, label: "Services", icon: Briefcase },
     { href: `/${lang}#why-us`, label: "Why Us", icon: Award },
-    { href: `/${lang}#about`, label: "About Us", icon: Users },
+    { href: `/${lang}/about`, label: "About Us", icon: Users },
     { href: `/${lang}#testimonials`, label: "Testimonials", icon: MessageSquare },
   ]
 
@@ -160,14 +160,13 @@ export function Header({ lang }: HeaderProps) {
                       : "text-white/90 hover:text-white hover:bg-white/10"
                   }`}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
+                   <motion.span
+                     className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                     initial={false}
+                     style={{ transformOrigin: "50% 50%" }}
+                     animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                     transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                   />
                   <span className="relative z-10">{item.label}</span>
                 </Link>
               )
@@ -187,14 +186,13 @@ export function Header({ lang }: HeaderProps) {
                     : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
-                {pathname.includes('calculator') && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
+                 <motion.span
+                   className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                   initial={false}
+                   style={{ transformOrigin: "50% 50%" }}
+                   animate={pathname.includes('calculator') ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                   transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                 />
                 <Wrench className="h-4 w-4" />
                 <span className="relative z-10">Tools</span>
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${toolsHover ? 'rotate-180' : ''}`} />
@@ -238,14 +236,13 @@ export function Header({ lang }: HeaderProps) {
                                 <tool.icon className="h-5 w-5" />
                               </motion.div>
                               <span className="text-sm">{tool.label}</span>
-                              {isActive && (
-                                <motion.div
-                                  layoutId="activeToolIndicator"
-                                  className="absolute right-3 w-2 h-2 bg-white rounded-full"
-                                  initial={false}
-                                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                />
-                              )}
+                              <motion.span
+                                className="absolute left-4 right-4 bottom-0 h-px bg-white/70"
+                                initial={false}
+                                style={{ transformOrigin: "50% 50%" }}
+                                animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                                transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                              />
                             </Link>
                           </motion.div>
                         )

@@ -3483,7 +3483,6 @@ export default function FSWPCalculatorPage() {
         )}
       </AnimatePresence>
 
-      <Footer />
     </div>
   )
 }

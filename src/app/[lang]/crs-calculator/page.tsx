@@ -3283,7 +3283,6 @@ export default function CRSCalculatorPage() {
         )}
       </AnimatePresence>
 
-      <Footer />
     </div>
   )
 }
