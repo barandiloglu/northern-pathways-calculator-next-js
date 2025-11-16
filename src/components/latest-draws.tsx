@@ -32,6 +32,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
       setError(null)
       
       // Use the paginated function to get specific page with 25 items
+      // The API now fetches full data first to ensure consistent pagination for both mobile and desktop
       const result = await getDrawDataWithFallback({ page, limit: 25 })
       
       setDrawData(result.data)
