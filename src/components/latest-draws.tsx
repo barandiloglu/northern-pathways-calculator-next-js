@@ -211,144 +211,163 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
           This ensures mobile and desktop always show identical data */}
       <div className={`${hideHeader ? 'p-4 pt-6 pb-8' : 'p-4 sm:p-8'}`}>
         {/* Mobile Cards View - Uses same drawData state as desktop */}
-        <div className="block sm:hidden space-y-4">
-          {/* Mobile Pagination Controls - EXACT same structure and styling as desktop */}
+        <div className="block sm:hidden">
+          {/* Div 1 - Mobile Pagination Header (separated from data to prevent blocking) */}
           {pagination && pagination.totalPages > 1 && (
-            <div className="mb-4 flex items-center justify-between flex-wrap gap-2">
-              <div className="flex items-center space-x-2 flex-wrap gap-2">
-                <button
-                  onClick={goToPreviousPage}
-                  disabled={!pagination.hasPreviousPage || isRefreshing}
-                  className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  <span>Previous</span>
-                </button>
-                
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-600">Page</span>
-                  <input
-                    type="number"
-                    min={1}
-                    max={pagination.totalPages}
-                    value={currentPage}
-                    onChange={(e) => {
-                      const page = parseInt(e.target.value)
-                      if (page >= 1 && page <= pagination.totalPages) {
-                        goToPage(page)
-                      }
-                    }}
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter') {
-                        const page = parseInt((e.target as HTMLInputElement).value)
+            <div className="mb-4 flex flex-col space-y-3 flex-shrink-0">
+              {/* Pagination Controls - Matching desktop layout exactly */}
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="flex items-center space-x-2 flex-shrink-0">
+                  <button
+                    onClick={goToPreviousPage}
+                    disabled={!pagination.hasPreviousPage || isRefreshing}
+                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
+                      hideHeader 
+                        ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span>Previous</span>
+                  </button>
+                  
+                  <div className="flex items-center space-x-2">
+                    <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>Page</span>
+                    <input
+                      type="number"
+                      min={1}
+                      max={pagination.totalPages}
+                      value={currentPage}
+                      onChange={(e) => {
+                        const page = parseInt(e.target.value)
                         if (page >= 1 && page <= pagination.totalPages) {
                           goToPage(page)
                         }
-                      }
-                    }}
-                    className="w-16 px-2 py-1 text-sm text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent"
-                  />
-                  <span className="text-sm text-gray-600">of {pagination.totalPages}</span>
+                      }}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          const page = parseInt((e.target as HTMLInputElement).value)
+                          if (page >= 1 && page <= pagination.totalPages) {
+                            goToPage(page)
+                          }
+                        }
+                      }}
+                      className={`w-16 px-2 py-1 text-sm text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent ${
+                        hideHeader 
+                          ? 'text-white bg-white/20 border-white/30' 
+                          : 'text-gray-700 bg-white border-gray-300'
+                      }`}
+                    />
+                    <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>of {pagination.totalPages}</span>
+                  </div>
+                  
+                  <button
+                    onClick={goToNextPage}
+                    disabled={!pagination.hasNextPage || isRefreshing}
+                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
+                      hideHeader 
+                        ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span>Next</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
                 
-                <button
-                  onClick={goToNextPage}
-                  disabled={!pagination.hasNextPage || isRefreshing}
-                  className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-                >
-                  <span>Next</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-              
-              <div className="text-sm text-gray-600">
-                Showing {drawData.length} of {pagination.totalItems} draws
+                <div className={`text-sm ${hideHeader ? 'text-white/90' : 'text-gray-600'} flex-shrink-0`}>
+                  Showing {drawData.length} of {pagination.totalItems} draws
+                </div>
               </div>
             </div>
           )}
-          
-          {/* Mobile Cards - EXACT same data fields in same order as desktop table */}
-          <AnimatePresence>
-            {drawData.map((draw, index) => {
-              const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore
-              const trend = getDrawTrend(draw.crsScore, previousScore)
-              
-              return (
-                <motion.div
-                  key={draw.roundNumber}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-white rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors duration-200 p-4"
-                >
-                  {/* Round # - Same as desktop table first column */}
-                  <div className="mb-3 pb-3 border-b border-gray-200">
-                    <span className="font-mono text-lg font-bold text-[#B92025]">
-                      #{draw.roundNumber}
-                    </span>
-                  </div>
-                  
-                  {/* Date - Same as desktop table second column */}
-                  <div className="mb-3 flex items-center space-x-2">
-                    <Calendar className="h-4 w-4 text-gray-400" />
-                    <span className="font-medium text-gray-900">
-                      {formatDrawDate(draw.date)}
-                    </span>
-                  </div>
-                  
-                  {/* Type - Same as desktop table third column */}
-                  <div className="mb-3">
-                    <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium border ${getRoundTypeColor(draw.roundType)}`}>
-                      {draw.roundType}
-                    </span>
-                  </div>
-                  
-                  {/* Invitations - Same as desktop table fourth column */}
-                  <div className="mb-3 flex items-center space-x-2">
-                    <Users className="h-4 w-4 text-gray-400" />
-                    <span className="font-medium text-gray-900">
-                      {draw.invitationsIssued}
-                    </span>
-                  </div>
-                  
-                  {/* CRS Score - Same as desktop table fifth column */}
-                  <div className="mb-3 flex items-center space-x-2">
-                    <Award className="h-4 w-4 text-[#B92025]" />
-                    <span className="text-2xl font-bold text-[#B92025]">
-                      {draw.crsScore}
-                    </span>
-                  </div>
-                  
-                  {/* Trend - Same as desktop table sixth column */}
-                  <div className="flex items-center space-x-2">
-                    <span className={`text-lg font-semibold ${trend.color}`}>
-                      {trend.icon}
-                    </span>
-                    <span className={`text-sm font-medium ${trend.color}`}>
-                      {trend.trend === 'stable' ? 'No change' : trend.trend}
-                    </span>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </AnimatePresence>
+
+          {/* Div 2 - Mobile Draw Data (separated from header to prevent blocking) */}
+          <div className="flex-1 min-h-0 space-y-4">
+            {/* Mobile view uses the exact same drawData array as desktop - no separate data fetching */}
+            <AnimatePresence>
+              {drawData.map((draw, index) => {
+                const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore
+                const trend = getDrawTrend(draw.crsScore, previousScore)
+                
+                return (
+                  <motion.div
+                    key={draw.roundNumber}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className={`${hideHeader ? 'bg-white' : 'bg-gray-50'} rounded-xl p-4 ${hideHeader ? 'shadow-lg' : 'border border-gray-200'}`}
+                  >
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-mono text-lg font-bold text-[#B92025]">
+                        #{draw.roundNumber}
+                      </span>
+                      <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium border ${getRoundTypeColor(draw.roundType)}`}>
+                        {draw.roundType}
+                      </span>
+                    </div>
+                    
+                    {/* CRS Score - Prominent */}
+                    <div className="text-center mb-3">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Award className="h-5 w-5 text-[#B92025]" />
+                        <span className="text-2xl font-bold text-[#B92025]">
+                          {draw.crsScore}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">CRS Score</p>
+                    </div>
+                    
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-3 text-sm">
+                      <div className="flex items-center space-x-2">
+                        <Calendar className="h-4 w-4 text-gray-400" />
+                        <span className="font-medium text-gray-900">
+                          {formatDrawDate(draw.date)}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Users className="h-4 w-4 text-gray-400" />
+                        <span className="font-medium text-gray-900">
+                          {draw.invitationsIssued}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Trend */}
+                    <div className="mt-3 pt-3 border-t border-gray-200">
+                      <div className="flex items-center justify-center space-x-2">
+                        <span className={`text-lg font-semibold ${trend.color}`}>
+                          {trend.icon}
+                        </span>
+                        <span className={`text-sm font-medium ${trend.color}`}>
+                          {trend.trend === 'stable' ? 'No change' : trend.trend}
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </AnimatePresence>
             
-          {/* Mobile Pagination Info - EXACT same as desktop */}
-          {pagination && (
-            <div className="mt-4 flex items-center justify-between text-sm text-gray-600">
-              <div>
-                Showing {drawData.length} of {pagination.totalItems} draws
-                {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
+            {/* Mobile Pagination Info - Matching desktop exactly */}
+            {pagination && (
+              <div className={`mt-4 flex items-center justify-between text-sm ${hideHeader ? 'text-white/80' : 'text-gray-600'}`}>
+                <div>
+                  Showing {drawData.length} of {pagination.totalItems} draws
+                  {pagination.totalPages > 1 && ` (Page ${pagination.currentPage} of ${pagination.totalPages})`}
+                </div>
+                <div className={`text-xs ${hideHeader ? 'text-white/70' : 'text-gray-500'}`}>
+                  Limited to 25 most recent draws
+                </div>
               </div>
-              <div className="text-xs text-gray-500">
-                Limited to 25 most recent draws
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* Desktop Table View - Uses same drawData state as mobile (line 20) */}
