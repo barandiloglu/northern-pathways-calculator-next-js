@@ -140,7 +140,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
   }
 
   return (
-    <div className={`${hideHeader ? '' : 'bg-white rounded-2xl shadow-lg border border-gray-100'} overflow-hidden ${className}`}>
+    <div className={`${hideHeader ? '' : 'bg-white rounded-2xl shadow-lg border border-gray-100'} ${hideHeader ? '' : 'overflow-hidden'} ${className}`}>
       {/* Header */}
       {!hideHeader && (
         <div className="bg-gradient-to-r from-[#B92025] to-red-700 p-4 sm:p-8 text-white">

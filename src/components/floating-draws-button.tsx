@@ -106,7 +106,7 @@ export function FloatingDrawsButton() {
               </div>
 
               {/* Content - Scrollable */}
-              <div className="flex-1 overflow-y-auto md:p-6 md:bg-white">
+              <div className="flex-1 overflow-y-auto min-h-0 md:p-6 md:bg-white">
                 <LatestDraws hideHeader />
               </div>
 
