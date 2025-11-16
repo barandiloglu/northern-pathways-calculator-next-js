@@ -213,76 +213,85 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
         {/* Mobile Cards View - Uses same drawData state as desktop */}
         <div className="block sm:hidden">
           {/* Div 1 - Mobile Pagination Header (separated from data to prevent blocking) */}
-          {pagination && pagination.totalPages > 1 && (
+          {pagination && (
             <div className="mb-4 flex flex-col space-y-3 flex-shrink-0">
-              {/* Pagination Controls - Matching desktop layout exactly */}
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <div className="flex items-center space-x-2 flex-shrink-0">
-                  <button
-                    onClick={goToPreviousPage}
-                    disabled={!pagination.hasPreviousPage || isRefreshing}
-                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
-                      hideHeader 
-                        ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
-                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    <span>Previous</span>
-                  </button>
-                  
-                  <div className="flex items-center space-x-2">
-                    <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>Page</span>
-                    <input
-                      type="number"
-                      min={1}
-                      max={pagination.totalPages}
-                      value={currentPage}
-                      onChange={(e) => {
-                        const page = parseInt(e.target.value)
-                        if (page >= 1 && page <= pagination.totalPages) {
-                          goToPage(page)
-                        }
-                      }}
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          const page = parseInt((e.target as HTMLInputElement).value)
+              {/* Pagination Controls - Only show when more than 1 page */}
+              {pagination.totalPages > 1 && (
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center space-x-2 flex-shrink-0">
+                    <button
+                      onClick={goToPreviousPage}
+                      disabled={!pagination.hasPreviousPage || isRefreshing}
+                      className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
+                        hideHeader 
+                          ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                          : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                      <span>Previous</span>
+                    </button>
+                    
+                    <div className="flex items-center space-x-2">
+                      <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>Page</span>
+                      <input
+                        type="number"
+                        min={1}
+                        max={pagination.totalPages}
+                        value={currentPage}
+                        onChange={(e) => {
+                          const page = parseInt(e.target.value)
                           if (page >= 1 && page <= pagination.totalPages) {
                             goToPage(page)
                           }
-                        }
-                      }}
-                      className={`w-16 px-2 py-1 text-sm text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent ${
+                        }}
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            const page = parseInt((e.target as HTMLInputElement).value)
+                            if (page >= 1 && page <= pagination.totalPages) {
+                              goToPage(page)
+                            }
+                          }
+                        }}
+                        className={`w-16 px-2 py-1 text-sm text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent ${
+                          hideHeader 
+                            ? 'text-white bg-white/20 border-white/30' 
+                            : 'text-gray-700 bg-white border-gray-300'
+                        }`}
+                      />
+                      <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>of {pagination.totalPages}</span>
+                    </div>
+                    
+                    <button
+                      onClick={goToNextPage}
+                      disabled={!pagination.hasNextPage || isRefreshing}
+                      className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
                         hideHeader 
-                          ? 'text-white bg-white/20 border-white/30' 
-                          : 'text-gray-700 bg-white border-gray-300'
+                          ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
+                          : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
                       }`}
-                    />
-                    <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>of {pagination.totalPages}</span>
+                    >
+                      <span>Next</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                   
-                  <button
-                    onClick={goToNextPage}
-                    disabled={!pagination.hasNextPage || isRefreshing}
-                    className={`flex items-center space-x-2 px-3 py-2 text-sm font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ${
-                      hideHeader 
-                        ? 'text-white bg-white/20 border border-white/30 hover:bg-white/30' 
-                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span>Next</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
+                  <div className={`text-sm ${hideHeader ? 'text-white/90' : 'text-gray-600'} flex-shrink-0`}>
+                    Showing {drawData.length} of {pagination.totalItems} draws
+                  </div>
                 </div>
-                
-                <div className={`text-sm ${hideHeader ? 'text-white/90' : 'text-gray-600'} flex-shrink-0`}>
+              )}
+              
+              {/* Always show pagination info, even if only 1 page */}
+              {pagination.totalPages <= 1 && (
+                <div className={`text-sm ${hideHeader ? 'text-white/90' : 'text-gray-600'}`}>
                   Showing {drawData.length} of {pagination.totalItems} draws
                 </div>
-              </div>
+              )}
             </div>
           )}
 
