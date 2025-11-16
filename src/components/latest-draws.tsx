@@ -26,13 +26,15 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [dataSource, setDataSource] = useState<'real-time' | 'cached' | 'fallback'>('fallback')
 
+  // Single data fetching function used by both mobile and desktop views
+  // Both views share the same state (drawData, pagination, currentPage) to ensure identical data
   const fetchDrawData = async (page: number = 1) => {
     try {
       setIsRefreshing(true)
       setError(null)
       
       // Use the paginated function to get specific page with 25 items
-      // The API now fetches full data first to ensure consistent pagination for both mobile and desktop
+      // This is the EXACT same data fetching used for both mobile and desktop
       const result = await getDrawDataWithFallback({ page, limit: 25 })
       
       setDrawData(result.data)
@@ -201,8 +203,14 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
       )}
 
       {/* Draw Data - Mobile Cards / Desktop Table */}
+      {/* IMPORTANT: Both mobile and desktop views use the EXACT same data source:
+          - Same drawData state (line 20)
+          - Same pagination state (line 21)  
+          - Same currentPage state (line 22)
+          - Same fetchDrawData function (line 29)
+          This ensures mobile and desktop always show identical data */}
       <div className={`${hideHeader ? 'p-4 pt-6 pb-8' : 'p-4 sm:p-8'}`}>
-        {/* Mobile Cards View */}
+        {/* Mobile Cards View - Uses same drawData state as desktop */}
         <div className="block sm:hidden space-y-4">
           {/* Mobile Pagination Controls - Always show when pagination exists */}
           {pagination && (
@@ -276,6 +284,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
             </div>
           )}
           
+          {/* Mobile view uses the exact same drawData array as desktop - no separate data fetching */}
           <AnimatePresence>
             {drawData.map((draw, index) => {
               const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore
@@ -356,7 +365,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
             )}
           </div>
 
-        {/* Desktop Table View */}
+        {/* Desktop Table View - Uses same drawData state as mobile (line 20) */}
         <div className="hidden sm:block overflow-x-auto">
           {/* Pagination Controls */}
           {pagination && pagination.totalPages > 1 && (
@@ -429,6 +438,7 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
               </tr>
             </thead>
             <tbody>
+              {/* Desktop view uses the exact same drawData array as mobile - no separate data fetching */}
               <AnimatePresence>
                 {drawData.map((draw, index) => {
                   const previousScore = index < drawData.length - 1 ? drawData[index + 1].crsScore : draw.crsScore

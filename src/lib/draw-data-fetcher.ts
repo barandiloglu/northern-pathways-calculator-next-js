@@ -294,14 +294,14 @@ export const getDrawDataWithFallback = async (options?: PaginationOptions): Prom
   
   try {
     // Try to fetch from Canada.ca website first (most up-to-date)
-    // Always fetch full data first to ensure consistent pagination calculation
-    const fullData = await fetchDrawDataFromCanadaCa()
-    if (fullData.length > 0) {
-      // Calculate pagination from full data
-      const { paginatedData, pagination } = paginateData(fullData, page, limit)
+    const canadaCaData = await fetchDrawDataFromCanadaCa(options)
+    if (canadaCaData.length > 0) {
+      // Get full data for pagination info
+      const fullData = await fetchDrawDataFromCanadaCa()
+      const { pagination } = paginateData(fullData, page, limit)
       
       return {
-        data: paginatedData,
+        data: canadaCaData,
         pagination,
         source: 'real-time',
         lastUpdated: new Date().toISOString()
