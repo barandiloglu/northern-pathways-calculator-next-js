@@ -30,6 +30,9 @@ export function Header({ lang }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [toolsHover, setToolsHover] = useState(false)
+  const [servicesHover, setServicesHover] = useState(false)
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
+  const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false)
   const pathname = usePathname()
   const t = getTranslations(lang)
 
@@ -44,9 +47,17 @@ export function Header({ lang }: HeaderProps) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Reset expandable sections when mobile menu closes
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      setIsMobileServicesOpen(false)
+      setIsMobileToolsOpen(false)
+    }
+  }, [isMobileMenuOpen])
+
   const navItems = [
     { href: `/${lang}`, label: "Home", icon: Home },
-    { href: `/${lang}#services`, label: "Services", icon: Briefcase },
+    { href: `/${lang}#services`, label: "Services", icon: Briefcase, isDropdown: true },
     { href: `/${lang}#why-us`, label: "Why Us", icon: Award },
     { href: `/${lang}/about`, label: "About Us", icon: Users },
     { href: `/${lang}#testimonials`, label: "Testimonials", icon: MessageSquare },
@@ -55,6 +66,15 @@ export function Header({ lang }: HeaderProps) {
   const toolsItems = [
     { href: `/${lang}/crs-calculator`, label: "CRS Calculator", icon: Calculator },
     { href: `/${lang}/fswp-calculator`, label: "FSWP Calculator", icon: FileText },
+  ]
+
+  const servicesItems = [
+    { href: `/${lang}#economic-immigration`, label: "Economic Immigration", icon: Briefcase },
+    { href: `/${lang}#family-class`, label: "Family Class", icon: Users },
+    { href: `/${lang}/services/temporary-residence`, label: "Temporary Residence", icon: Home },
+    { href: `/${lang}#employers`, label: "Employers", icon: Briefcase },
+    { href: `/${lang}#citizenship`, label: "Citizenship", icon: Award },
+    { href: `/${lang}#investors`, label: "Investors", icon: FileText },
   ]
 
   const containerVariants = {
@@ -148,6 +168,73 @@ export function Header({ lang }: HeaderProps) {
           {/* Div 2 - Nav Items (Desktop only) */}
           <motion.div variants={itemVariants} className="hidden md:flex items-center gap-1 flex-1 justify-center">
             {navItems.map((item) => {
+              // Handle Services with dropdown
+              if (item.label === "Services") {
+                return (
+                  <div 
+                    key={item.label}
+                    className="relative"
+                    onMouseEnter={() => setServicesHover(true)}
+                    onMouseLeave={() => setServicesHover(false)}
+                  >
+                    <Link
+                      href={`/${lang}#services`}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-white/90 hover:text-white hover:bg-white/10"
+                    >
+                      <motion.span
+                        className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                        initial={false}
+                        style={{ transformOrigin: "50% 50%" }}
+                        animate={{ opacity: 0, scaleX: 0 }}
+                        transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                      />
+                      <Briefcase className="h-4 w-4" />
+                      <span className="relative z-10">Services</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesHover ? 'rotate-180' : ''}`} />
+                    </Link>
+
+              <AnimatePresence>
+                {servicesHover && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute top-full left-0 mt-3 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 min-w-[260px]"
+                  >
+                    <div className="py-2">
+                      {servicesItems.map((service, index) => (
+                        <motion.div
+                          key={service.href}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05, duration: 0.2 }}
+                        >
+                          <Link
+                            href={service.href}
+                            className="group relative flex items-center gap-3 px-5 py-3 font-semibold transition-all duration-200 text-[#2c2b2b] hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-brand-red"
+                          >
+                            <motion.div
+                              whileHover={{ scale: 1.1, rotate: 5 }}
+                              transition={{ duration: 0.2 }}
+                              className="flex-shrink-0 text-brand-red group-hover:text-brand-red"
+                            >
+                              <service.icon className="h-5 w-5" />
+                            </motion.div>
+                            <span className="text-sm">{service.label}</span>
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                    <div className="h-1 bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+                  </div>
+                )
+              }
+              
+              // Regular nav items
               const isActive = pathname === item.href || (item.href === `/${lang}` && pathname === `/${lang}`)
               
               return (
@@ -332,6 +419,60 @@ export function Header({ lang }: HeaderProps) {
             <div className="container mx-auto px-4 py-4">
               <div className="space-y-2">
                 {navItems.map((item) => {
+                  // Handle Services with dropdown
+                  if (item.label === "Services") {
+                    return (
+                      <div key={item.label}>
+                        <button
+                          type="button"
+                          onClick={() => setIsMobileServicesOpen((open) => !open)}
+                          className="flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative text-white/90 hover:text-white hover:bg-white/10"
+                        >
+                          <motion.span
+                            className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                            initial={false}
+                            style={{ transformOrigin: "50% 50%" }}
+                            animate={{ opacity: 0, scaleX: 0 }}
+                            transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                          />
+                          <div className="flex items-center gap-3 relative z-10">
+                            <Briefcase className="h-5 w-5" />
+                            <span>Services</span>
+                          </div>
+                          <ChevronDown
+                            className={`h-4 w-4 transition-transform duration-200 relative z-10 ${
+                              isMobileServicesOpen ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {isMobileServicesOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="space-y-1 pl-8"
+                            >
+                              {servicesItems.map((service) => (
+                                <Link
+                                  key={service.href}
+                                  href={service.href}
+                                  className="flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 text-white/90 hover:bg-white/10 hover:text-white"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  <service.icon className="h-5 w-5" />
+                                  <span>{service.label}</span>
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )
+                  }
+                  
+                  // Regular nav items
                   const isActive = pathname === item.href || (item.href === `/${lang}` && pathname === `/${lang}`)
                   
                   return (
@@ -340,46 +481,79 @@ export function Header({ lang }: HeaderProps) {
                       href={item.href}
                       className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
                         isActive
-                          ? "bg-white/20 text-white"
-                          : "text-white/90 hover:bg-white/10 hover:text-white"
+                          ? "text-white"
+                          : "text-white/90 hover:text-white hover:bg-white/10"
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <item.icon className="h-5 w-5" />
-                      <span>{item.label}</span>
+                      <item.icon className="h-5 w-5 flex-shrink-0" />
+                      <span className="relative inline-block">
+                        {item.label}
+                        <motion.span
+                          className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                          initial={false}
+                          style={{ transformOrigin: "50% 50%" }}
+                          animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                          transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                        />
+                      </span>
                     </Link>
                   )
                 })}
 
-                {/* Tools Mobile */}
-                <div className="space-y-1 pl-3 border-l-2 border-white/20 ml-3">
-                  <div className="text-white/70 text-sm font-semibold px-3 py-2">Tools</div>
-                  {toolsItems.map((tool) => {
-                    const isActive = pathname === tool.href
-                    return (
-                      <Link
-                        key={tool.href}
-                        href={tool.href}
-                        className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
-                          isActive
-                            ? "bg-white/20 text-white"
-                            : "text-white/90 hover:bg-white/10 hover:text-white"
-                        }`}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        <tool.icon className="h-5 w-5" />
-                        <span>{tool.label}</span>
-                      </Link>
-                    )
-                  })}
-                </div>
+                {/* Tools Mobile (expandable) */}
+                <button
+                  type="button"
+                  onClick={() => setIsMobileToolsOpen((open) => !open)}
+                  className="flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 text-white/90 hover:bg-white/10 hover:text-white"
+                >
+                  <div className="flex items-center gap-3">
+                    <Wrench className="h-5 w-5" />
+                    <span>Tools</span>
+                  </div>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${
+                      isMobileToolsOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isMobileToolsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-1 pl-8"
+                    >
+                      {toolsItems.map((tool) => {
+                        const isActive = pathname === tool.href
+                        return (
+                          <Link
+                            key={tool.href}
+                            href={tool.href}
+                            className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
+                              isActive
+                                ? "bg-white/20 text-white"
+                                : "text-white/90 hover:bg-white/10 hover:text-white"
+                            }`}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <tool.icon className="h-5 w-5" />
+                            <span>{tool.label}</span>
+                          </Link>
+                        )
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Contact Us Mobile */}
                 <a
                   href="https://www.northernpathways.ca/pre-assessment-form"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-brand-red hover:bg-brand-red/90 text-white rounded-lg font-semibold transition-all duration-200"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span>Contact Us</span>

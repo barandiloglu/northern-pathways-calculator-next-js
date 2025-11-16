@@ -292,6 +292,59 @@
     "fallbackData": "Fallback data (updated periodically)",
     "license": "Licence: Contains information licensed under the Open Government Licence – Canada",
     "useInfo": "Use this information to understand current CRS score requirements"
+  },
+  "temporaryResidence": {
+    "hero": {
+      "title": "Temporary Residence",
+      "subtitle": "Study, Work, or Visit Canada"
+    },
+    "intro": {
+      "title": "Our Temporary Residence Services",
+      "description": "We provide expert guidance for your temporary stay in Canada, ensuring your application is strong and complete."
+    },
+    "serviceOverview": "SERVICE OVERVIEW",
+    "usefulInfo": {
+      "title": "Useful Information"
+    },
+    "studyPermits": {
+      "title": "Study Permits",
+      "description1": "Canada boasts a world-class education system. We can help you navigate the process of applying for a study permit, from choosing the right Designated Learning Institution (DLI) to preparing your letter of explanation and proving you have sufficient funds for your stay.",
+      "description2": "We also guide you on your rights as a student, including your ability to work on or off-campus and your eligibility for a Post-Graduation Work Permit (PGWP) after you complete your studies.",
+      "whoFor": {
+        "title": "Who is this for?",
+        "description": "International students who have been accepted into a Canadian DLI (Designated Learning Institution)."
+      },
+      "processingTimes": {
+        "title": "Processing Times:",
+        "description": "Varies by country. Can range from a few weeks to several months. We recommend applying as soon as you receive your letter of acceptance."
+      }
+    },
+    "workPermits": {
+      "title": "Work Permits",
+      "description1": "Gaining Canadian work experience is a valuable step towards permanent residency. We assist with a variety of work permit applications, including those supported by a Labour Market Impact Assessment (LMIA), Post-Graduation Work Permits (PGWP) for eligible graduates, and spousal open work permits.",
+      "description2": "We'll help you and your employer navigate the complex requirements to ensure your application is submitted correctly.",
+      "whoFor": {
+        "title": "Who is this for?",
+        "description": "Foreign nationals who have a job offer from a Canadian employer, are recent graduates from a Canadian DLI, or are spouses of skilled workers or students."
+      },
+      "keyTip": {
+        "title": "Key Tip:",
+        "description": "Most work permits require a valid job offer or LMIA *before* you can apply. A PGWP is a notable exception."
+      }
+    },
+    "visitorVisas": {
+      "title": "Visitor & Super Visas",
+      "description1": "Whether you're looking to visit Canada for tourism, visit family, or attend a business meeting, you'll need a Visitor Visa (or eTA). We help you prepare a strong application that demonstrates your ties to your home country.",
+      "description2": "We also specialize in the **Super Visa**, which allows parents and grandparents of Canadian citizens and Permanent Residents to stay in Canada for up to five years at a time.",
+      "whoFor": {
+        "title": "Who is this for?",
+        "description": "Tourists, business visitors, and family members of Canadian residents. The Super Visa is specifically for parents and grandparents."
+      },
+      "superVisaRequirement": {
+        "title": "Super Visa Requirement:",
+        "description": "Applicants must provide proof of Canadian medical insurance for at least one year and a letter of financial support from their child or grandchild."
+      }
+    }
   }
 }
 

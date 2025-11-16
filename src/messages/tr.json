@@ -292,6 +292,59 @@
     "fallbackData": "Yedek veri (periyodik olarak güncellenir)",
     "license": "Lisans: Kanada Açık Hükümet Lisansı altında lisanslanmış bilgiler içerir",
     "useInfo": "Mevcut CRS puan gereksinimlerini anlamak için bu bilgileri kullanın"
+  },
+  "temporaryResidence": {
+    "hero": {
+      "title": "Geçici İkamet",
+      "subtitle": "Kanada'da Eğitim, Çalışma veya Ziyaret"
+    },
+    "intro": {
+      "title": "Geçici İkamet Hizmetlerimiz",
+      "description": "Kanada'da geçici kalışınız için uzman rehberlik sağlıyoruz, başvurunuzun güçlü ve eksiksiz olmasını sağlıyoruz."
+    },
+    "serviceOverview": "HİZMET ÖZETİ",
+    "usefulInfo": {
+      "title": "Faydalı Bilgiler"
+    },
+    "studyPermits": {
+      "title": "Öğrenci İzinleri",
+      "description1": "Kanada dünya standartlarında bir eğitim sistemine sahiptir. Doğru Belirlenmiş Öğrenim Kurumunu (DLI) seçmekten, açıklama mektubunuzu hazırlamaya ve kalışınız için yeterli fonlara sahip olduğunuzu kanıtlamaya kadar öğrenci izni başvuru sürecinde size yardımcı olabiliriz.",
+      "description2": "Ayrıca öğrenci olarak haklarınız konusunda size rehberlik ediyoruz, kampüs içinde veya dışında çalışma yeteneğiniz ve eğitiminizi tamamladıktan sonra Mezuniyet Sonrası Çalışma İzni (PGWP) için uygunluğunuz dahil.",
+      "whoFor": {
+        "title": "Bu kimler için?",
+        "description": "Kanadalı bir DLI'ye (Belirlenmiş Öğrenim Kurumu) kabul edilmiş uluslararası öğrenciler."
+      },
+      "processingTimes": {
+        "title": "İşlem Süreleri:",
+        "description": "Ülkeye göre değişir. Birkaç haftadan birkaç aya kadar sürebilir. Kabul mektubunuzu aldığınızda hemen başvurmanızı öneririz."
+      }
+    },
+    "workPermits": {
+      "title": "Çalışma İzinleri",
+      "description1": "Kanadalı iş deneyimi kazanmak, kalıcı ikamet için değerli bir adımdır. İşgücü Piyasası Etki Değerlendirmesi (LMIA) ile desteklenenler, uygun mezunlar için Mezuniyet Sonrası Çalışma İzinleri (PGWP) ve eş açık çalışma izinleri dahil olmak üzere çeşitli çalışma izni başvurularında yardımcı oluyoruz.",
+      "description2": "Başvurunuzun doğru şekilde sunulmasını sağlamak için sizin ve işvereninizin karmaşık gereksinimlerde gezinmenize yardımcı olacağız.",
+      "whoFor": {
+        "title": "Bu kimler için?",
+        "description": "Kanadalı bir işverenden iş teklifi olan, Kanadalı bir DLI'den yeni mezun olan veya vasıflı işçilerin veya öğrencilerin eşleri olan yabancı uyruklular."
+      },
+      "keyTip": {
+        "title": "Önemli İpucu:",
+        "description": "Çoğu çalışma izni, başvurabilmeniz için *önce* geçerli bir iş teklifi veya LMIA gerektirir. PGWP dikkate değer bir istisnadır."
+      }
+    },
+    "visitorVisas": {
+      "title": "Ziyaretçi ve Süper Vizeler",
+      "description1": "Kanada'yı turizm için ziyaret etmek, aile ziyareti yapmak veya bir iş toplantısına katılmak istiyorsanız, bir Ziyaretçi Vizesi (veya eTA) gerekecektir. Ülkenize olan bağlarınızı gösteren güçlü bir başvuru hazırlamanıza yardımcı oluyoruz.",
+      "description2": "Ayrıca **Süper Vize** konusunda uzmanız, bu vize Kanadalı vatandaşların ve Kalıcı İkamet Sahiplerinin ebeveynlerinin ve büyükanne/büyükbabalarının Kanada'da bir seferde beş yıla kadar kalmasına izin verir.",
+      "whoFor": {
+        "title": "Bu kimler için?",
+        "description": "Turistler, iş ziyaretçileri ve Kanadalı sakinlerin aile üyeleri. Süper Vize özellikle ebeveynler ve büyükanne/büyükbabalar içindir."
+      },
+      "superVisaRequirement": {
+        "title": "Süper Vize Gereksinimi:",
+        "description": "Başvuranlar en az bir yıl için Kanadalı sağlık sigortası kanıtı ve çocuklarından veya torunlarından mali destek mektubu sağlamalıdır."
+      }
+    }
   }
 }
 

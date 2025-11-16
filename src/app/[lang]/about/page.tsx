@@ -17,7 +17,7 @@ export default async function AboutPage({ params }: PageProps) {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#f9f9f9]">
-        <div className="container mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-24">
+        <div className="container mx-auto px-4 pt-16 pb-16 md:pt-24 md:pb-24">
           <AnimatedHero
             title="About Northern Pathways"
             subtitle="Your trusted partners on the journey to Canada."
@@ -111,12 +111,12 @@ export default async function AboutPage({ params }: PageProps) {
           {/* Lead profile */}
           <Reveal>
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-              <Reveal delay={0.05}>
+              <Reveal delay={0.05} className="order-2 md:order-none">
                 <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-72 md:h-80 w-full flex items-center justify-center text-gray-400">
                   [Burcu&apos;s Photo]
                 </div>
               </Reveal>
-              <Reveal delay={0.1}>
+              <Reveal delay={0.1} className="order-1 md:order-none">
                 <div>
                   <h3 className="text-2xl md:text-3xl font-extrabold text-[#2c2b2b]">Burcu Akyol</h3>
                   <div className="mt-1 font-semibold text-brand-red">
@@ -141,7 +141,7 @@ export default async function AboutPage({ params }: PageProps) {
           <Reveal>
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
               <Reveal delay={0.05}>
-                <div className="order-2 md:order-none">
+                <div className="order-1 md:order-none">
                   <h3 className="text-2xl md:text-3xl font-extrabold text-[#2c2b2b]">Tugsel Akyol</h3>
                   <div className="mt-1 font-semibold text-brand-red">
                     Education and Career Consultant
@@ -154,7 +154,7 @@ export default async function AboutPage({ params }: PageProps) {
                 </div>
               </Reveal>
               <Reveal delay={0.1}>
-                <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-72 md:h-80 w-full flex items-center justify-center text-gray-400 order-1 md:order-none">
+                <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-72 md:h-80 w-full flex items-center justify-center text-gray-400 order-2 md:order-none">
                   [Tugsel&apos;s Photo]
                 </div>
               </Reveal>

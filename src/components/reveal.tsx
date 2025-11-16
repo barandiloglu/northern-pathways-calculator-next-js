@@ -9,11 +9,11 @@ interface RevealProps extends PropsWithChildren {
 }
 
 const variants: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: "easeOut" }
+    transition: { duration: 0.6, ease: "easeOut" }
   }
 }
 
