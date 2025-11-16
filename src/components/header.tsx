@@ -170,6 +170,7 @@ export function Header({ lang }: HeaderProps) {
             {navItems.map((item) => {
               // Handle Services with dropdown
               if (item.label === "Services") {
+                const isServicesActive = pathname.includes('/services/')
                 return (
                   <div 
                     key={item.label}
@@ -179,13 +180,17 @@ export function Header({ lang }: HeaderProps) {
                   >
                     <Link
                       href={`/${lang}#services`}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 relative text-white/90 hover:text-white hover:bg-white/10"
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 relative ${
+                        isServicesActive
+                          ? "text-white"
+                          : "text-white/90 hover:text-white hover:bg-white/10"
+                      }`}
                     >
                       <motion.span
                         className="absolute left-0 right-0 bottom-0 h-px bg-white"
                         initial={false}
                         style={{ transformOrigin: "50% 50%" }}
-                        animate={{ opacity: 0, scaleX: 0 }}
+                        animate={isServicesActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                         transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                       />
                       <Briefcase className="h-4 w-4" />
@@ -203,28 +208,46 @@ export function Header({ lang }: HeaderProps) {
                     className="absolute top-full left-0 mt-3 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 min-w-[260px]"
                   >
                     <div className="py-2">
-                      {servicesItems.map((service, index) => (
-                        <motion.div
-                          key={service.href}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.05, duration: 0.2 }}
-                        >
-                          <Link
-                            href={service.href}
-                            className="group relative flex items-center gap-3 px-5 py-3 font-semibold transition-all duration-200 text-[#2c2b2b] hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-brand-red"
+                      {servicesItems.map((service, index) => {
+                        const isActive = pathname === service.href
+                        return (
+                          <motion.div
+                            key={service.href}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05, duration: 0.2 }}
                           >
-                            <motion.div
-                              whileHover={{ scale: 1.1, rotate: 5 }}
-                              transition={{ duration: 0.2 }}
-                              className="flex-shrink-0 text-brand-red group-hover:text-brand-red"
+                            <Link
+                              href={service.href}
+                              className={`group relative flex items-center gap-3 px-5 py-3 font-semibold transition-all duration-200 ${
+                                isActive
+                                  ? "bg-gradient-to-r from-brand-red to-brand-maroon text-white"
+                                  : "text-[#2c2b2b] hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-brand-red"
+                              }`}
                             >
-                              <service.icon className="h-5 w-5" />
-                            </motion.div>
-                            <span className="text-sm">{service.label}</span>
-                          </Link>
-                        </motion.div>
-                      ))}
+                              <motion.div
+                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                                className={`flex-shrink-0 ${
+                                  isActive ? "text-white" : "text-brand-red group-hover:text-brand-red"
+                                }`}
+                              >
+                                <service.icon className="h-5 w-5" />
+                              </motion.div>
+                              <span className="text-sm">{service.label}</span>
+                              {isActive && (
+                                <motion.span
+                                  className="absolute left-4 right-4 bottom-0 h-px bg-white/70"
+                                  initial={false}
+                                  style={{ transformOrigin: "50% 50%" }}
+                                  animate={{ opacity: 1, scaleX: 1 }}
+                                  transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                                />
+                              )}
+                            </Link>
+                          </motion.div>
+                        )
+                      })}
                     </div>
                     <div className="h-1 bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon" />
                   </motion.div>
@@ -421,18 +444,23 @@ export function Header({ lang }: HeaderProps) {
                 {navItems.map((item) => {
                   // Handle Services with dropdown
                   if (item.label === "Services") {
+                    const isServicesActive = pathname.includes('/services/')
                     return (
                       <div key={item.label}>
                         <button
                           type="button"
                           onClick={() => setIsMobileServicesOpen((open) => !open)}
-                          className="flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative text-white/90 hover:text-white hover:bg-white/10"
+                          className={`flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative ${
+                            isServicesActive
+                              ? "text-white"
+                              : "text-white/90 hover:text-white hover:bg-white/10"
+                          }`}
                         >
                           <motion.span
                             className="absolute left-0 right-0 bottom-0 h-px bg-white"
                             initial={false}
                             style={{ transformOrigin: "50% 50%" }}
-                            animate={{ opacity: 0, scaleX: 0 }}
+                            animate={isServicesActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                             transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                           />
                           <div className="flex items-center gap-3 relative z-10">
@@ -454,17 +482,31 @@ export function Header({ lang }: HeaderProps) {
                               transition={{ duration: 0.2 }}
                               className="space-y-1 pl-8"
                             >
-                              {servicesItems.map((service) => (
-                                <Link
-                                  key={service.href}
-                                  href={service.href}
-                                  className="flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 text-white/90 hover:bg-white/10 hover:text-white"
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                  <service.icon className="h-5 w-5" />
-                                  <span>{service.label}</span>
-                                </Link>
-                              ))}
+                              {servicesItems.map((service) => {
+                                const isActive = pathname === service.href
+                                return (
+                                  <Link
+                                    key={service.href}
+                                    href={service.href}
+                                    className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative ${
+                                      isActive
+                                        ? "text-white"
+                                        : "text-white/90 hover:text-white hover:bg-white/10"
+                                    }`}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                  >
+                                    <motion.span
+                                      className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                                      initial={false}
+                                      style={{ transformOrigin: "50% 50%" }}
+                                      animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                                      transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                                    />
+                                    <service.icon className="h-5 w-5 relative z-10" />
+                                    <span className="relative z-10">{service.label}</span>
+                                  </Link>
+                                )
+                              })}
                             </motion.div>
                           )}
                         </AnimatePresence>
