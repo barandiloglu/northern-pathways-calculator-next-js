@@ -203,8 +203,8 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
       <div className={`${hideHeader ? 'p-4 pt-6 pb-8' : 'p-4 sm:p-8'}`}>
         {/* Mobile Cards View */}
         <div className="block sm:hidden space-y-4">
-          {/* Mobile Pagination Controls */}
-          {pagination && pagination.totalPages > 1 && (
+          {/* Mobile Pagination Controls - Always show when pagination exists */}
+          {pagination && (
             <div className="flex items-center justify-center space-x-3 mb-4">
               <button
                 onClick={goToPreviousPage}
@@ -239,6 +239,39 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
+            </div>
+          )}
+          
+          {/* Mobile Pagination - Page Input (matching desktop) */}
+          {pagination && pagination.totalPages > 1 && (
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>Page</span>
+              <input
+                type="number"
+                min={1}
+                max={pagination.totalPages}
+                value={currentPage}
+                onChange={(e) => {
+                  const page = parseInt(e.target.value)
+                  if (page >= 1 && page <= pagination.totalPages) {
+                    goToPage(page)
+                  }
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    const page = parseInt((e.target as HTMLInputElement).value)
+                    if (page >= 1 && page <= pagination.totalPages) {
+                      goToPage(page)
+                    }
+                  }
+                }}
+                className={`w-16 px-2 py-1 text-sm text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B92025] focus:border-transparent ${
+                  hideHeader 
+                    ? 'text-white bg-white/20 border-white/30' 
+                    : 'text-gray-700 bg-white border-gray-300'
+                }`}
+              />
+              <span className={`text-sm ${hideHeader ? 'text-white' : 'text-gray-600'}`}>of {pagination.totalPages}</span>
             </div>
           )}
           
