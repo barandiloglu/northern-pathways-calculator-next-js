@@ -13,7 +13,10 @@ import {
   Wrench,
   Calculator,
   FileText,
-  ChevronDown
+  ChevronDown,
+  DollarSign,
+  Calendar,
+  BookOpen
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -58,9 +61,10 @@ export function Header({ lang }: HeaderProps) {
   const navItems = [
     { href: `/${lang}`, label: "Home", icon: Home },
     { href: `/${lang}#services`, label: "Services", icon: Briefcase, isDropdown: true },
-    { href: `/${lang}#why-us`, label: "Why Us", icon: Award },
     { href: `/${lang}/about`, label: "About Us", icon: Users },
-    { href: `/${lang}#testimonials`, label: "Testimonials", icon: MessageSquare },
+    { href: `/${lang}/fees`, label: "Fees", icon: DollarSign },
+    { href: `/${lang}/events`, label: "Events", icon: Calendar },
+    { href: `/${lang}/blogs`, label: "Blogs", icon: BookOpen },
   ]
 
   const toolsItems = [
@@ -73,8 +77,8 @@ export function Header({ lang }: HeaderProps) {
     { href: `/${lang}/services/family-class`, label: "Family Class", icon: Users },
     { href: `/${lang}/services/temporary-residence`, label: "Temporary Residence", icon: Home },
     { href: `/${lang}/services/employers`, label: "Employers", icon: Briefcase },
-    { href: `/${lang}#citizenship`, label: "Citizenship", icon: Award },
-    { href: `/${lang}#investors`, label: "Investors", icon: FileText },
+    { href: `/${lang}/services/citizenship`, label: "Citizenship", icon: Award },
+    { href: `/${lang}/services/investors`, label: "Investors", icon: FileText },
   ]
 
   const containerVariants = {
@@ -268,6 +272,7 @@ export function Header({ lang }: HeaderProps) {
                      animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                      transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                    />
+                  <item.icon className="h-4 w-4" />
                   <span className="relative z-10">{item.label}</span>
                 </Link>
               )
@@ -354,16 +359,16 @@ export function Header({ lang }: HeaderProps) {
           {/* Div 2 - Empty space on mobile (prevents logo from blocking) */}
           <div className="flex-1 md:hidden" />
 
-          {/* Div 3 - Contact Us and Language Selection (Desktop) */}
+          {/* Div 3 - Pre-Assessment and Language Selection (Desktop) */}
           <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 flex-shrink-0">
-            {/* Contact Us Button */}
+            {/* Pre-Assessment Button */}
             <a
               href="https://www.northernpathways.ca/pre-assessment-form"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
             >
-              <span>Contact Us</span>
+              <span>Pre-Assessment</span>
             </a>
 
             <LanguageSwitcher currentLang={lang} />
@@ -582,7 +587,7 @@ export function Header({ lang }: HeaderProps) {
                   </AnimatePresence>
                 </div>
 
-                {/* Contact Us Mobile */}
+                {/* Pre-Assessment Mobile */}
                 <a
                   href="https://www.northernpathways.ca/pre-assessment-form"
                   target="_blank"
@@ -590,7 +595,7 @@ export function Header({ lang }: HeaderProps) {
                   className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <span>Contact Us</span>
+                  <span>Pre-Assessment</span>
                 </a>
               </div>
             </div>
