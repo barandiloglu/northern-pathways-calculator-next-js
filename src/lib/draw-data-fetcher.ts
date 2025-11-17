@@ -393,12 +393,49 @@ export const getFirstPageDrawData = async (): Promise<DrawDataResponse> => {
 // Utility function to format dates consistently
 export const formatDrawDate = (dateString: string): string => {
   try {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-CA', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
+    // Handle different date formats
+    let date: Date
+    
+    // If date is in YYYY-MM-DD format, parse it directly to avoid timezone shifts
+    // JavaScript's Date constructor treats "YYYY-MM-DD" as UTC midnight, which can
+    // cause dates to shift to the previous day in timezones behind UTC
+    const isoDateMatch = dateString.match(/^(\d{4})-(\d{2})-(\d{2})/)
+    if (isoDateMatch) {
+      // Parse date components and create in local timezone to preserve the date
+      const year = parseInt(isoDateMatch[1], 10)
+      const month = parseInt(isoDateMatch[2], 10) - 1 // Month is 0-indexed
+      const day = parseInt(isoDateMatch[3], 10)
+      // Create date at noon local time to avoid timezone edge cases
+      // then format it without timezone conversion to preserve the date
+      date = new Date(year, month, day, 12, 0, 0)
+    } else {
+      // Try parsing as-is (might already be formatted like "September 3, 2025")
+      date = new Date(dateString)
+      // If parsing fails or results in invalid date, try manual parsing
+      if (isNaN(date.getTime())) {
+        // Try parsing common date formats
+        const parsed = Date.parse(dateString)
+        if (!isNaN(parsed)) {
+          date = new Date(parsed)
+        } else {
+          return dateString // Return original if we can't parse
+        }
+      }
+    }
+    
+    // Format the date without timezone conversion to preserve the original date
+    // If we parsed YYYY-MM-DD as local time, format it as local time
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const day = date.getDate()
+    
+    // Format manually or use Intl.DateTimeFormat with same timezone
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+    
+    return `${monthNames[month]} ${day}, ${year}`
   } catch (error) {
     return dateString
   }
