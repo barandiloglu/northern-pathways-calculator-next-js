@@ -344,6 +344,284 @@
         "title": "Süper Vize Gereksinimi:",
         "description": "Başvuranlar en az bir yıl için Kanadalı sağlık sigortası kanıtı ve çocuklarından veya torunlarından mali destek mektubu sağlamalıdır."
       }
+    },
+    "process": {
+      "title": "Sürecimiz",
+      "subtitle": "Baştan sona size nasıl rehberlik ettiğimiz.",
+      "assessment": {
+        "title": "Değerlendirme",
+        "description": "Aradığınız belirli geçici vize için uygunluğunuzu değerlendirmek ve hedeflerinizi tartışmak için detaylı bir danışmanlıkla başlıyoruz."
+      },
+      "applicationPrep": {
+        "title": "Başvuru Hazırlığı",
+        "description": "Davanızı oluşturuyoruz, gerekli tüm belgeleri toplamanıza yardımcı oluyoruz ve davayı güçlü bir şekilde temsil eden eksiksiz, profesyonel bir başvuru hazırlıyoruz."
+      },
+      "submissionSupport": {
+        "title": "Gönderim ve Destek",
+        "description": "Başvurunuzu sizin adınıza gönderiyoruz ve IRCC ile temsilciniz olarak hareket ediyoruz, nihai bir karar verilene kadar tüm takip taleplerini ele alıyoruz."
+      }
+    },
+    "cta": {
+      "title": "Yolculuğunuza Başlamaya Hazır mısınız?",
+      "button": "DANIŞMANLIK RANDEVUSU AL"
+    }
+  },
+  "economicImmigration": {
+    "hero": {
+      "title": "Ekonomik Göçmenlik",
+      "subtitle": "Kanada'da bir hayat kurmak isteyen nitelikli işçiler için yollar."
+    },
+    "expressEntryLabel": "EXPRESS ENTRY",
+    "expressEntry": {
+      "title": "Express Entry",
+      "description": "Express Entry, nitelikli işçilerden daimi ikamet başvurularını yönetmek için Kanada'nın ana sistemidir. Puanınızı ve Başvuru Daveti (ITA) alma şansınızı maksimize etmek için üç ana programında size yardımcı oluyoruz."
+    },
+    "usefulInfo": {
+      "title": "Faydalı Bilgiler"
+    },
+    "fsw": {
+      "title": "Federal Nitelikli İşçi (FSW)",
+      "description1": "Bu program, Kanada'ya kalıcı olarak göç etmek isteyen yabancı iş deneyimi olan nitelikli işçiler içindir. Eğitim, dil yeterliliği kriterlerini karşılamalı ve en az bir yıl sürekli, tam zamanlı nitelikli iş deneyimine sahip olmalısınız.",
+      "description2": "Uygunluğunuzu değerlendirmenize, başlangıç 67 puanlık grid dahil, ve Express Entry havuzu için profilinizi hazırlamanıza yardımcı oluyoruz.",
+      "whoFor": {
+        "title": "Bu kimler için?",
+        "description": "En az bir yıl yabancı iş deneyimi ve yüksek dil puanları (CLB 7+) olan nitelikli profesyoneller (TEER 0, 1, 2 veya 3)."
+      },
+      "keyPoint": {
+        "title": "Önemli Nokta:",
+        "description": "Bu program altında Express Entry havuzuna girebilmeniz için *önce* Altı Seçim Faktörü gridinde en az 67/100 puan almalısınız."
+      }
+    },
+    "fst": {
+      "title": "Federal Nitelikli Ticaretler (FST)",
+      "description1": "Bu program, belirli bir nitelikli ticarette nitelikli olan nitelikli işçiler içindir. İnşaat, imalat ve ulaştırma gibi ticaretlerde Kanada işgücü piyasasının taleplerini karşılayabilecek bireyler için daimi ikamete bir yol sağlar.",
+      "description2": "Gereksinimler, nitelikli bir ticarette en az iki yıl tam zamanlı iş deneyimi ve geçerli bir iş teklifi VEYA bir Kanadalı eyaletten nitelik sertifikası içerir.",
+      "whoFor": {
+        "title": "Bu kimler için?",
+        "description": "2+ yıl deneyimi ve iş teklifi veya Kanadalı nitelik belgesi olan nitelikli zanaatkarlar (örn. kaynakçılar, elektrikçiler, şefler, fırıncılar)."
+      },
+      "language": {
+        "title": "Dil:",
+        "description": "FSW'den daha düşük bir dil puanı gerektirir (konuşma/dinleme için CLB 5, okuma/yazma için CLB 4)."
+      }
+    },
+    "cec": {
+      "title": "Kanada Deneyim Sınıfı (CEC)",
+      "description1": "Bu, zaten Kanada'da eğitim görmüş veya çalışmış bireyler için ideal bir yoldur. CEC programı, Kanada içi deneyiminize değer verir ve bu, geçici yabancı işçiler ve uluslararası öğrenci mezunları için daimi ikamete en popüler yollardan biri haline getirir.",
+      "description2": "Son 3 yıl içinde Kanada'da en az 12 ay tam zamanlı (veya eşdeğer yarı zamanlı) nitelikli iş deneyimine sahip olmalısınız.",
+      "whoFor": {
+        "title": "Bu kimler için?",
+        "description": "En az bir yıl yakın zamanda, nitelikli iş deneyimi *Kanada içinde* olan bireyler."
+      },
+      "keyBenefit": {
+        "title": "Önemli Avantaj:",
+        "description": "CEC programı için yerleşim fonları kanıtı göstermenize gerek yoktur (FSW ve FST'nin aksine)."
+      }
+    },
+    "otherPathways": {
+      "title": "Diğer Göçmenlik Yolları",
+      "description": "Express Entry'nin ötesinde, Kanada nitelikli bireyler ve girişimciler için çeşitli başka programlar sunar.",
+      "learnMore": "Daha Fazla Bilgi",
+      "pnp": {
+        "title": "Eyalet Adaylık Programı (PNP)",
+        "description": "Çoğu eyalet ve bölgenin, belirli yerel işgücü piyasası ihtiyaçlarını karşılayan bireyleri aday göstermek için kendi \"PNP\" akışları vardır. Bir adaylık, Express Entry profilinize 600 puan ekler ve neredeyse bir ITA'yı garanti eder."
+      },
+      "selfEmployed": {
+        "title": "Kendi İşini Yapan Kişiler",
+        "description": "Kültürel faaliyetlerde (örn. sanatçılar, tasarımcılar, müzisyenler) veya atletizmde (örn. antrenörler, sporcular) ilgili deneyime sahip ve Kanada'ya önemli bir katkı yapabilecek bireyler için."
+      },
+      "startupVisa": {
+        "title": "Başlangıç Vizesi",
+        "description": "Kanada'da iş yaratabilecek ve küresel ölçekte rekabet edebilecek yenilikçi bir iş kurma becerilerine ve potansiyeline sahip göçmen girişimciler için. Belirlenmiş bir Kanadalı kuruluştan destek gerektirir."
+      },
+      "newPathways": {
+        "title": "Yeni Yollar (2025)",
+        "description": "Göçmenlik manzarası sürekli gelişiyor. Kategori bazlı seçim çekilişleri gibi tüm politika değişikliklerini ve yeni pilot programları takip ediyoruz, böylece en son fırsatlara erişiminiz olur."
+      },
+      "agrifood": {
+        "title": "Tarım-Gıda Göçmenlik Pilotu",
+        "description": "Belirli tarım ve gıda işleme endüstrilerinde (et işleme ve mantar üretimi gibi) deneyimli, mevsimlik olmayan işçiler için daimi ikamet kazanma yolu."
+      },
+      "atlantic": {
+        "title": "Atlantik Göçmenlik Programı",
+        "description": "Kanada'nın dört Atlantik eyaletinden birinde (New Brunswick, Nova Scotia, PEI veya Newfoundland ve Labrador) yaşamak ve çalışmak isteyen nitelikli işçiler ve uluslararası mezunlar için özel bir program."
+      }
+    },
+    "process": {
+      "title": "Sürecimiz",
+      "subtitle": "Baştan sona size nasıl rehberlik ettiğimiz.",
+      "assessment": {
+        "title": "Değerlendirme",
+        "description": "Tüm ekonomik yollar için uygunluğunuzu değerlendirmek ve en iyi stratejinizi belirlemek için detaylı bir danışmanlıkla başlıyoruz."
+      },
+      "profileCreation": {
+        "title": "Profil Oluşturma",
+        "description": "Gerekli tüm belgeleri (dil testleri, ECA, vb.) toplamanıza ve mükemmel bir Express Entry profili veya PNP başvurusu oluşturmanıza yardımcı oluyoruz."
+      },
+      "postITA": {
+        "title": "ITA Sonrası Destek",
+        "description": "Bir Başvuru Daveti (ITA) aldığınızda, Daimi İkamet için tam başvurunuzu sunmak için hızlı bir şekilde çalışıyoruz."
+      }
+    },
+    "cta": {
+      "title": "Yolculuğunuza Başlamaya Hazır mısınız?",
+      "button": "DANIŞMANLIK RANDEVUSU AL"
+    }
+  },
+  "familyClass": {
+    "hero": {
+      "title": "Aile Sınıfı",
+      "subtitle": "Aileleri bir araya getirmek misyonumuzun kalbidir."
+    },
+    "serviceOverview": "HİZMET ÖZETİ",
+    "usefulInfo": {
+      "title": "Faydalı Bilgiler"
+    },
+    "spousalSponsorship": {
+      "title": "Eş ve Ortak Yaşam Partneri Sponsorluğu",
+      "description": "Partnerinizle bir araya gelmek hayat değiştiren bir olaydır. Hem iç hem de dış sponsorluk başvuruları için eksiksiz başvuru desteği sağlıyoruz, dosyanızın yaygın tuzaklardan ve gecikmelerden kaçınmak için titizlikle hazırlanmasını sağlıyoruz.",
+      "inland": {
+        "title": "Kanada'daki Eş veya Ortak Yaşam Partneri Sınıfı (İç)",
+        "description": "Bu yol, zaten Kanada'da geçerli geçici statüye sahip eşler veya partnerler içindir. İç sürecin önemli bir avantajı, Açık Çalışma İzni başvurusu yapabilme yeteneğidir."
+      },
+      "outland": {
+        "title": "Aile Sınıfı (Dış)",
+        "description": "Bu yol, Kanada dışında yaşayan sponsorlu partnerler içindir. \"Dış\" başvuruların bazen partner Kanada'yı ziyaret ediyor olsa bile sunulabileceğini ve daha hızlı işlem süreleri sunabileceğini unutmayın."
+      },
+      "whoFor": {
+        "title": "Bu kimler için?",
+        "description": "Eşlerini, ortak yaşam partnerlerini veya evlilik dışı partnerlerini Kanada'ya sponsor etmek isteyen Kanadalı vatandaşlar veya Daimi İkamet Sahipleri."
+      },
+      "keyPoint": {
+        "title": "Önemli Nokta:",
+        "description": "İlişkinizin gerçekliğini kanıtlamak başvurunun en kritik kısmıdır. Doğru kanıtları toplamanıza yardımcı oluyoruz."
+      }
+    },
+    "otherFamilySponsorships": {
+      "title": "Diğer Aile Sponsorlukları",
+      "description": "Diğer aile birleşimi akışları için de tam destek sağlıyoruz.",
+      "learnMore": "Daha Fazla Bilgi",
+      "parentGrandparent": {
+        "title": "Ebeveyn ve Büyükanne/Büyükbaba Sponsorluğu",
+        "description": "PGP programı popüler, sınırlı alım kura sistemidir. Başvurunuzu hazırlamanıza yardımcı oluyoruz, böylece alım havuzu açıldığı anda göndermeye hazır olursunuz."
+      },
+      "dependentChild": {
+        "title": "Bağımlı Çocuk Sponsorluğu",
+        "description": "Biyolojik veya evlat edindiğiniz çocuğunuzu Kanada'ya daimi ikametgah olarak sponsor edin. Bağımlı çocuklar için uygunluk gereksinimlerinde size yardımcı olabiliriz."
+      },
+      "otherEligibleRelatives": {
+        "title": "Diğer Uygun Akrabalar",
+        "description": "Belirli olağanüstü durumlarda, \"yalnız Kanadalı\" gereksinimlerini karşılıyorsanız, diğer akrabaları (kardeş, yeğen veya torun gibi) sponsor edebilirsiniz."
+      }
+    },
+    "process": {
+      "title": "Sürecimiz",
+      "subtitle": "Baştan sona size nasıl rehberlik ettiğimiz.",
+      "eligibilityCheck": {
+        "title": "Uygunluk Kontrolü",
+        "description": "Hem sponsorun hem de sponsor edilen kişinin uygunluğunu doğruluyoruz, tüm mali ve ilişki gereksinimlerinin karşılandığından emin oluyoruz."
+      },
+      "filePreparation": {
+        "title": "Dosya Hazırlığı",
+        "description": "Güçlü bir dava oluşturmanıza yardımcı oluyoruz, ilişkinizin gerçekliğini kapsamlı belgeler ve destekleyici kanıtlarla kanıtlamaya odaklanıyoruz."
+      },
+      "submissionSupport": {
+        "title": "Gönderim ve Destek",
+        "description": "Eksiksiz başvuruyu gönderiyoruz ve IRCC ile tüm iletişimi yönetiyoruz, bir karar verilene kadar güncellemeler sağlıyor ve tüm taleplere yanıt veriyoruz."
+      }
+    },
+    "cta": {
+      "title": "Yolculuğunuza Başlamaya Hazır mısınız?",
+      "button": "DANIŞMANLIK RANDEVUSU AL"
+    }
+  },
+  "employers": {
+    "hero": {
+      "title": "Kanadalı İşverenler için Destek",
+      "subtitle": "Yabancı yetenek işe alma sürecinde gezinme."
+    },
+    "overview": "GENEL BAKIŞ",
+    "labourShortages": {
+      "title": "İşgücü Kıtlığını Yönetme",
+      "description1": "Sıkı bir işgücü piyasasında, Kanadalı işverenler genellikle kritik beceri boşluklarını doldurmak için yurtdışına bakarlar. Geçici yabancı bir işçi işe almak etkili bir çözüm olabilir, ancak karmaşık yasal yükümlülükler içerir.",
+      "description2": "İşverenlerin tüm süreçte gezinmesine yardımcı oluyoruz, İşgücü Piyasası Etki Değerlendirmesi (LMIA) başvurusundan tüm hükümet düzenlemelerine uyumlu kaldığınızdan emin olmaya kadar. Amacımız, işinize odaklanabilmeniz için süreci mümkün olduğunca sorunsuz hale getirmektir."
+    },
+    "services": {
+      "title": "İşveren Hizmetlerimiz",
+      "fillSkillGaps": {
+        "title": "Beceri Boşluklarını Doldurun",
+        "description": "İhtiyacınız olan nitelikli işçileri bulmak için küresel bir yetenek havuzuna erişin."
+      },
+      "ensureCompliance": {
+        "title": "Uyumluluğu Sağlayın",
+        "description": "Uzman rehberlikle karmaşık düzenlemelerde gezinin ve cezalardan kaçının."
+      },
+      "retainTalent": {
+        "title": "Yetenekleri Koruyun",
+        "description": "Yabancı işçilerinizin daimi ikamet yolunda desteklenmesi için uzun vadeli stratejiler oluşturun."
+      }
+    },
+    "solutionsHub": {
+      "title": "İşveren Çözüm Merkezimiz",
+      "description": "İhtiyacınız olan çözümü bulun. LMIA'lar, LMIA muafiyetli izinler ve devam eden uyumluluk için uçtan uca destek sağlıyoruz.",
+      "lmia": {
+        "title": "İşgücü Piyasası Etki Değerlendirmesi (LMIA)",
+        "description": "LMIA, bir işverene geçici yabancı bir işçi işe alma izni veren Service Canada'dan bir belgedir. İşçiye ihtiyaç olduğunu ve işi yapacak Kanadalı veya daimi ikametgah bulunmadığını kanıtlamalısınız.",
+        "servicesTitle": "LMIA hizmetlerimiz şunları içerir",
+        "service1": "Reklam gereksinimleri konusunda tavsiye verme.",
+        "service2": "Eksiksiz LMIA başvurusunu hazırlama ve gönderme.",
+        "service3": "Ücret oranı hesaplamaları ve işe alım çabalarında yardımcı olma.",
+        "service4": "İşçinin çalışma izni başvurusuna geçişte size rehberlik etme."
+      },
+      "lmiaExempt": {
+        "title": "LMIA Muafiyetli Çalışma İzinleri",
+        "description": "Bazı çalışma izinleri, uluslararası anlaşmalara veya Kanada'ya sağladığı faydalara dayalı olarak LMIA gerektirmez. Potansiyel işe alımınızın bu akışlardan birine uygun olup olmadığını değerlendirmenize yardımcı olabiliriz.",
+        "ict": {
+          "title": "Şirket İçi Transfer (ICT)",
+          "description": "Yabancı bir şubeden Kanadalı bir konuma kilit çalışanları transfer edin."
+        },
+        "francophone": {
+          "title": "Frankofon Hareketlilik Çalışma İzni",
+          "description": "Quebec dışında, belirli TEER seviyeleri için LMIA olmadan Fransızca konuşan nitelikli işçileri işe alın."
+        },
+        "postDoc": {
+          "title": "Doktora Sonrası Araştırmacılar (Doktora Sahipleri)",
+          "description": "Akademik kurumlar, LMIA muafiyeti kullanarak doktora sahiplerini işe alabilir."
+        },
+        "obligations": {
+          "title": "LMIA Muafiyetli İzinler için İşveren Yükümlülükleri",
+          "description": "İşverenler bir \"İstihdam Teklifi\" sunmalı ve bir uyumluluk ücreti ödemelidir."
+        }
+      },
+      "compliance": {
+        "title": "İşveren Uyumluluğu",
+        "description": "Geçici yabancı bir işçi işe aldığınızda, ücretler, çalışma koşulları ve kayıt tutma konusunda belirli yükümlülükleri yerine getirmeniz yasal olarak gereklidir. Uyumsuzluk, ciddi cezalara, para cezalarına ve programdan yasaklanmaya yol açabilir.",
+        "helpTitle": "Nasıl yardımcı oluyoruz",
+        "help1": "Dosyalarınızın denetime hazır olduğundan emin olmak için sahte denetimler yapma.",
+        "help2": "Kayıt tutma en iyi uygulamaları konusunda tavsiye verme.",
+        "help3": "Resmi bir hükümet uyumluluk denetimi sırasında temsil sağlama.",
+        "help4": "Kayıtlı İşveren Pilot programına başvurularda yardımcı olma."
+      }
+    },
+    "process": {
+      "title": "İşverenler için Sürecimiz",
+      "subtitle": "İşe alım ihtiyaçlarınızı karşılamak için net, yapılandırılmış bir yaklaşım.",
+      "strategySession": {
+        "title": "Strateji Oturumu",
+        "description": "İşletmenizi, işgücü ihtiyaçlarınızı anlamak ve en iyi yolu (LMIA vs. LMIA muafiyetli) belirlemek için bir danışmanlıkla başlıyoruz."
+      },
+      "filePreparation": {
+        "title": "Dosya Hazırlığı",
+        "description": "İşe alım ve reklam konusunda tavsiyelerden LMIA veya İşveren Portalı teklifini göndermeye kadar tüm başvuruyu yönetiyoruz."
+      },
+      "complianceSupport": {
+        "title": "Uyumluluk Desteği",
+        "description": "Onaydan sonra, bir işveren olarak yükümlülükleriniz konusunda size rehberlik ediyoruz ve herhangi bir uyumluluk sorusu veya denetimi için hazır bulunuyoruz."
+      }
+    },
+    "cta": {
+      "title": "Yolculuğunuza Başlamaya Hazır mısınız?",
+      "button": "DANIŞMANLIK RANDEVUSU AL"
     }
   }
 }

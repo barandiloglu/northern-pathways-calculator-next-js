@@ -344,6 +344,284 @@
         "title": "Super Visa Requirement:",
         "description": "Applicants must provide proof of Canadian medical insurance for at least one year and a letter of financial support from their child or grandchild."
       }
+    },
+    "process": {
+      "title": "Our Process",
+      "subtitle": "How we guide you from start to finish.",
+      "assessment": {
+        "title": "Assessment",
+        "description": "We start with a detailed consultation to assess your eligibility for the specific temporary visa you're seeking and discuss your goals."
+      },
+      "applicationPrep": {
+        "title": "Application Prep",
+        "description": "We build your case, help you gather all required documents, and prepare a complete, professional application that strongly represents your case."
+      },
+      "submissionSupport": {
+        "title": "Submission & Support",
+        "description": "We submit your application on your behalf and act as your representative with IRCC, handling any follow-up requests until a final decision is made."
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey?",
+      "button": "BOOK A CONSULTATION"
+    }
+  },
+  "economicImmigration": {
+    "hero": {
+      "title": "Economic Immigration",
+      "subtitle": "Pathways for skilled workers to build a life in Canada."
+    },
+    "expressEntryLabel": "EXPRESS ENTRY",
+    "expressEntry": {
+      "title": "Express Entry",
+      "description": "Express Entry is Canada's main system for managing skilled worker applications for permanent residence. We help you navigate its three main programs to maximize your score and chances of receiving an Invitation to Apply (ITA)."
+    },
+    "usefulInfo": {
+      "title": "Useful Information"
+    },
+    "fsw": {
+      "title": "Federal Skilled Worker (FSW)",
+      "description1": "This program is for skilled workers with foreign work experience who want to immigrate to Canada permanently. You must meet criteria for education, language proficiency, and have at least one year of continuous, full-time skilled work experience.",
+      "description2": "We help you assess your eligibility, including the initial 67-point grid, and prepare your profile for the Express Entry pool.",
+      "whoFor": {
+        "title": "Who is this for?",
+        "description": "Skilled professionals (TEER 0, 1, 2, or 3) with at least one year of foreign work experience and high language scores (CLB 7+)."
+      },
+      "keyPoint": {
+        "title": "Key Point:",
+        "description": "You must score at least 67/100 points on the Six Selection Factors grid *before* you can enter the Express Entry pool under this program."
+      }
+    },
+    "fst": {
+      "title": "Federal Skilled Trades (FST)",
+      "description1": "This program is for skilled workers who are qualified in a specific skilled trade. It provides a pathway to permanent residence for individuals who can meet the demands of the Canadian labour market in trades like construction, manufacturing, and transportation.",
+      "description2": "Requirements include at least two years of full-time work experience in a skilled trade and a valid job offer OR a certificate of qualification from a Canadian province.",
+      "whoFor": {
+        "title": "Who is this for?",
+        "description": "Qualified tradespersons (e.g., welders, electricians, chefs, bakers) with 2+ years of experience and a job offer or Canadian qualification."
+      },
+      "language": {
+        "title": "Language:",
+        "description": "Requires a lower language score than FSW (CLB 5 for speaking/listening, CLB 4 for reading/writing)."
+      }
+    },
+    "cec": {
+      "title": "Canadian Experience Class (CEC)",
+      "description1": "This is an ideal pathway for individuals who have already studied or worked in Canada. The CEC program values your in-Canada experience, making it one of the most popular routes to permanent residence for temporary foreign workers and international student graduates.",
+      "description2": "You must have at least 12 months of full-time (or equivalent part-time) skilled work experience in Canada within the last 3 years.",
+      "whoFor": {
+        "title": "Who is this for?",
+        "description": "Individuals with at least one year of recent, skilled work experience *inside Canada*."
+      },
+      "keyBenefit": {
+        "title": "Key Benefit:",
+        "description": "You do not need to show proof of settlement funds for the CEC program (unlike FSW and FST)."
+      }
+    },
+    "otherPathways": {
+      "title": "Other Immigration Pathways",
+      "description": "Beyond Express Entry, Canada offers a variety of other programs for skilled individuals and entrepreneurs.",
+      "learnMore": "Learn More",
+      "pnp": {
+        "title": "Provincial Nominee Program (PNP)",
+        "description": "Most provinces and territories have their own \"PNP\" streams to nominate individuals who meet specific local labour market needs. A nomination adds 600 points to your Express Entry profile, virtually guaranteeing an ITA."
+      },
+      "selfEmployed": {
+        "title": "Self-Employed Persons",
+        "description": "For individuals with relevant experience in cultural activities (e.g., artists, designers, musicians) or athletics (e.g., coaches, athletes) who can make a significant contribution to Canada."
+      },
+      "startupVisa": {
+        "title": "Start-Up Visa",
+        "description": "For immigrant entrepreneurs with the skills and potential to build an innovative business in Canada that can create jobs and compete on a global scale. Requires support from a designated Canadian entity."
+      },
+      "newPathways": {
+        "title": "New Pathways (2025)",
+        "description": "The immigration landscape is always evolving. We stay on top of all policy changes and new pilot programs, such as category-based selection draws, to ensure you have access to the latest opportunities."
+      },
+      "agrifood": {
+        "title": "Agri-food Immigration Pilot",
+        "description": "A pathway for experienced, non-seasonal workers in specific agriculture and food processing industries (like meat processing and mushroom production) to gain permanent residence."
+      },
+      "atlantic": {
+        "title": "Atlantic Immigration Program",
+        "description": "A dedicated program for skilled workers and international graduates who want to live and work in one of Canada's four Atlantic provinces: New Brunswick, Nova Scotia, PEI, or Newfoundland and Labrador."
+      }
+    },
+    "process": {
+      "title": "Our Process",
+      "subtitle": "How we guide you from start to finish.",
+      "assessment": {
+        "title": "Assessment",
+        "description": "We start with a detailed consultation to assess your eligibility for all economic pathways and determine your best strategy."
+      },
+      "profileCreation": {
+        "title": "Profile Creation",
+        "description": "We help you gather all required documents (language tests, ECA, etc.) and build a perfect Express Entry profile or PNP application."
+      },
+      "postITA": {
+        "title": "Post-ITA Support",
+        "description": "Once you receive an Invitation to Apply (ITA), we work quickly to submit your full application for Permanent Residence."
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey?",
+      "button": "BOOK A CONSULTATION"
+    }
+  },
+  "familyClass": {
+    "hero": {
+      "title": "Family Class",
+      "subtitle": "Reuniting families is at the heart of our mission."
+    },
+    "serviceOverview": "SERVICE OVERVIEW",
+    "usefulInfo": {
+      "title": "Useful Information"
+    },
+    "spousalSponsorship": {
+      "title": "Spousal and Common-Law Partner Sponsorship",
+      "description": "Reuniting with your partner is a life-changing event. We provide complete application support for both inland and outland sponsorship applications, ensuring your file is prepared meticulously to avoid common pitfalls and delays.",
+      "inland": {
+        "title": "Spouse or Common-Law Partner in Canada Class (Inland)",
+        "description": "This pathway is for spouses or partners already in Canada with valid temporary status. One key benefit of the inland process is the ability to apply for an Open Work Permit."
+      },
+      "outland": {
+        "title": "Family Class (Outland)",
+        "description": "This pathway is for sponsored partners living outside Canada. Note that \"outland\" applications can sometimes be submitted even if the partner is visiting Canada, and may offer faster processing times."
+      },
+      "whoFor": {
+        "title": "Who is this for?",
+        "description": "Canadian citizens or Permanent Residents who wish to sponsor their spouse, common-law partner, or conjugal partner to Canada."
+      },
+      "keyPoint": {
+        "title": "Key Point:",
+        "description": "Proving the genuineness of your relationship is the most critical part of the application. We help you gather the right evidence."
+      }
+    },
+    "otherFamilySponsorships": {
+      "title": "Other Family Sponsorships",
+      "description": "We also provide full support for other family reunification streams.",
+      "learnMore": "Learn More",
+      "parentGrandparent": {
+        "title": "Parent & Grandparent Sponsorship",
+        "description": "The PGP program is a popular, limited-intake lottery system. We help you prepare your application so you are ready to submit the moment the intake pool opens."
+      },
+      "dependentChild": {
+        "title": "Dependent Child Sponsorship",
+        "description": "Sponsor your biological or adopted child to come to Canada as a permanent resident. We can help you navigate the eligibility requirements for dependent children."
+      },
+      "otherEligibleRelatives": {
+        "title": "Other Eligible Relatives",
+        "description": "In certain exceptional circumstances, you may be able to sponsor other relatives (like a sibling, niece, nephew, or grandchild) if you meet the \"lonely Canadian\" requirements."
+      }
+    },
+    "process": {
+      "title": "Our Process",
+      "subtitle": "How we guide you from start to finish.",
+      "eligibilityCheck": {
+        "title": "Eligibility Check",
+        "description": "We confirm the eligibility of both the sponsor and the person being sponsored, ensuring all financial and relationship requirements are met."
+      },
+      "filePreparation": {
+        "title": "File Preparation",
+        "description": "We help you build a strong case, focusing on proving the genuineness of your relationship with extensive documentation and supporting evidence."
+      },
+      "submissionSupport": {
+        "title": "Submission & Support",
+        "description": "We submit the complete application and manage all communication with IRCC, providing updates and responding to any requests until a decision is made."
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey?",
+      "button": "BOOK A CONSULTATION"
+    }
+  },
+  "employers": {
+    "hero": {
+      "title": "Support for Canadian Employers",
+      "subtitle": "Navigating the process of hiring foreign talent."
+    },
+    "overview": "OVERVIEW",
+    "labourShortages": {
+      "title": "Navigating Labour Shortages",
+      "description1": "In a tight labour market, Canadian employers often look abroad to fill critical skill gaps. Hiring a temporary foreign worker can be an effective solution, but it involves complex legal obligations.",
+      "description2": "We help employers navigate the entire process, from applying for a Labour Market Impact Assessment (LMIA) to ensuring you remain compliant with all government regulations. Our goal is to make the process as smooth as possible so you can focus on your business."
+    },
+    "services": {
+      "title": "Our Employer Services",
+      "fillSkillGaps": {
+        "title": "Fill Skill Gaps",
+        "description": "Access a global talent pool to find the skilled workers you need."
+      },
+      "ensureCompliance": {
+        "title": "Ensure Compliance",
+        "description": "Navigate complex regulations and avoid penalties with expert guidance."
+      },
+      "retainTalent": {
+        "title": "Retain Talent",
+        "description": "Create long-term strategies to support your foreign workers on their path to permanent residence."
+      }
+    },
+    "solutionsHub": {
+      "title": "Our Employer Solutions Hub",
+      "description": "Find the solution you need. We provide end-to-end support for LMIAs, LMIA-exempt permits, and ongoing compliance.",
+      "lmia": {
+        "title": "Labour Market Impact Assessment (LMIA)",
+        "description": "An LMIA is a document from Service Canada that gives an employer permission to hire a temporary foreign worker. You must prove that there is a need for the worker and that no Canadian or permanent resident is available to do the job.",
+        "servicesTitle": "Our LMIA services include",
+        "service1": "Advising on advertising requirements.",
+        "service2": "Preparing and submitting the full LMIA application.",
+        "service3": "Assisting with wage rate calculations and recruitment efforts.",
+        "service4": "Guiding you through the transition to the worker's work permit application."
+      },
+      "lmiaExempt": {
+        "title": "LMIA-Exempt Work Permits",
+        "description": "Some work permits do not require an LMIA, based on international agreements or benefits to Canada. We can help you assess if your potential hire qualifies for one of these streams.",
+        "ict": {
+          "title": "Intra-Company Transferee (ICT)",
+          "description": "Transfer key employees from a foreign branch to a Canadian location."
+        },
+        "francophone": {
+          "title": "Francophone Mobility Work Permit",
+          "description": "Hire French-speaking skilled workers outside Quebec without an LMIA for specific TEER levels."
+        },
+        "postDoc": {
+          "title": "Post-Doctoral Fellows (PhD Holders)",
+          "description": "Academic institutions can hire PhD holders using an LMIA exemption."
+        },
+        "obligations": {
+          "title": "Employer Obligations for LMIA-Exempt Permits",
+          "description": "Employers must submit an \"Offer of Employment\" and pay a compliance fee."
+        }
+      },
+      "compliance": {
+        "title": "Employer Compliance",
+        "description": "When you hire a temporary foreign worker, you are legally required to meet specific obligations regarding wages, working conditions, and keeping records. Non-compliance can lead to severe penalties, fines, and bans from the program.",
+        "helpTitle": "How we help",
+        "help1": "Conducting mock audits to ensure your files are inspection-ready.",
+        "help2": "Advising on record-keeping best practices.",
+        "help3": "Providing representation during an official government compliance inspection.",
+        "help4": "Assisting with applications to the Registered Employer Pilot program."
+      }
+    },
+    "process": {
+      "title": "Our Process for Employers",
+      "subtitle": "A clear, structured approach to meet your hiring needs.",
+      "strategySession": {
+        "title": "Strategy Session",
+        "description": "We start with a consultation to understand your business, your labour needs, and determine the best pathway (LMIA vs. LMIA-exempt)."
+      },
+      "filePreparation": {
+        "title": "File Preparation",
+        "description": "We manage the entire application, from advising on recruitment and advertising to submitting the LMIA or Employer Portal offer."
+      },
+      "complianceSupport": {
+        "title": "Compliance Support",
+        "description": "After approval, we guide you on your obligations as an employer and remain available for any compliance questions or audits."
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey?",
+      "button": "BOOK A CONSULTATION"
     }
   }
 }

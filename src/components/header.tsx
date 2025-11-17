@@ -69,10 +69,10 @@ export function Header({ lang }: HeaderProps) {
   ]
 
   const servicesItems = [
-    { href: `/${lang}#economic-immigration`, label: "Economic Immigration", icon: Briefcase },
-    { href: `/${lang}#family-class`, label: "Family Class", icon: Users },
+    { href: `/${lang}/services/economic-immigration`, label: "Economic Immigration", icon: Briefcase },
+    { href: `/${lang}/services/family-class`, label: "Family Class", icon: Users },
     { href: `/${lang}/services/temporary-residence`, label: "Temporary Residence", icon: Home },
-    { href: `/${lang}#employers`, label: "Employers", icon: Briefcase },
+    { href: `/${lang}/services/employers`, label: "Employers", icon: Briefcase },
     { href: `/${lang}#citizenship`, label: "Citizenship", icon: Award },
     { href: `/${lang}#investors`, label: "Investors", icon: FileText },
   ]
@@ -460,7 +460,7 @@ export function Header({ lang }: HeaderProps) {
                             className="absolute left-0 right-0 bottom-0 h-px bg-white"
                             initial={false}
                             style={{ transformOrigin: "50% 50%" }}
-                            animate={isServicesActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                            animate={isServicesActive && !isMobileServicesOpen ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                             transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                           />
                           <div className="flex items-center gap-3 relative z-10">
@@ -473,6 +473,9 @@ export function Header({ lang }: HeaderProps) {
                             }`}
                           />
                         </button>
+                        {isMobileServicesOpen && (
+                          <div className="border-b border-white/30 my-2" />
+                        )}
                         <AnimatePresence initial={false}>
                           {isMobileServicesOpen && (
                             <motion.div
@@ -544,51 +547,70 @@ export function Header({ lang }: HeaderProps) {
                 })}
 
                 {/* Tools Mobile (expandable) */}
-                <button
-                  type="button"
-                  onClick={() => setIsMobileToolsOpen((open) => !open)}
-                  className="flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 text-white/90 hover:bg-white/10 hover:text-white"
-                >
-                  <div className="flex items-center gap-3">
-                    <Wrench className="h-5 w-5" />
-                    <span>Tools</span>
-                  </div>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${
-                      isMobileToolsOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                <AnimatePresence initial={false}>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setIsMobileToolsOpen((open) => !open)}
+                    className="flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative text-white/90 hover:bg-white/10 hover:text-white"
+                  >
+                    <motion.span
+                      className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                      initial={false}
+                      style={{ transformOrigin: "50% 50%" }}
+                      animate={pathname.includes('calculator') && !isMobileToolsOpen ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                      transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                    />
+                    <div className="flex items-center gap-3 relative z-10">
+                      <Wrench className="h-5 w-5" />
+                      <span>Tools</span>
+                    </div>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 relative z-10 ${
+                        isMobileToolsOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
                   {isMobileToolsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="space-y-1 pl-8"
-                    >
-                      {toolsItems.map((tool) => {
-                        const isActive = pathname === tool.href
-                        return (
-                          <Link
-                            key={tool.href}
-                            href={tool.href}
-                            className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
-                              isActive
-                                ? "bg-white/20 text-white"
-                                : "text-white/90 hover:bg-white/10 hover:text-white"
-                            }`}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            <tool.icon className="h-5 w-5" />
-                            <span>{tool.label}</span>
-                          </Link>
-                        )
-                      })}
-                    </motion.div>
+                    <div className="border-b border-white/30 my-2" />
                   )}
-                </AnimatePresence>
+                  <AnimatePresence initial={false}>
+                    {isMobileToolsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-1 pl-8"
+                      >
+                        {toolsItems.map((tool) => {
+                          const isActive = pathname === tool.href
+                          return (
+                            <Link
+                              key={tool.href}
+                              href={tool.href}
+                              className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative ${
+                                isActive
+                                  ? "text-white"
+                                  : "text-white/90 hover:text-white hover:bg-white/10"
+                              }`}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              <motion.span
+                                className="absolute left-0 right-0 bottom-0 h-px bg-white"
+                                initial={false}
+                                style={{ transformOrigin: "50% 50%" }}
+                                animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                                transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
+                              />
+                              <tool.icon className="h-5 w-5 relative z-10" />
+                              <span className="relative z-10">{tool.label}</span>
+                            </Link>
+                          )
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 {/* Contact Us Mobile */}
                 <a
