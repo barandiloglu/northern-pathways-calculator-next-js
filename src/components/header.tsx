@@ -235,15 +235,6 @@ export function Header({ lang }: HeaderProps) {
                                 <service.icon className="h-5 w-5" />
                               </motion.div>
                               <span className="text-sm">{service.label}</span>
-                              {isActive && (
-                                <motion.span
-                                  className="absolute left-4 right-4 bottom-0 h-px bg-white/70"
-                                  initial={false}
-                                  style={{ transformOrigin: "50% 50%" }}
-                                  animate={{ opacity: 1, scaleX: 1 }}
-                                  transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
-                                />
-                              )}
                             </Link>
                           </motion.div>
                         )
@@ -346,13 +337,6 @@ export function Header({ lang }: HeaderProps) {
                                 <tool.icon className="h-5 w-5" />
                               </motion.div>
                               <span className="text-sm">{tool.label}</span>
-                              <motion.span
-                                className="absolute left-4 right-4 bottom-0 h-px bg-white/70"
-                                initial={false}
-                                style={{ transformOrigin: "50% 50%" }}
-                                animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                                transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
-                              />
                             </Link>
                           </motion.div>
                         )
@@ -491,22 +475,15 @@ export function Header({ lang }: HeaderProps) {
                                   <Link
                                     key={service.href}
                                     href={service.href}
-                                    className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative ${
+                                    className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
                                       isActive
-                                        ? "text-white"
+                                        ? "bg-white/20 text-white"
                                         : "text-white/90 hover:text-white hover:bg-white/10"
                                     }`}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                   >
-                                    <motion.span
-                                      className="absolute left-0 right-0 bottom-0 h-px bg-white"
-                                      initial={false}
-                                      style={{ transformOrigin: "50% 50%" }}
-                                      animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                                      transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
-                                    />
-                                    <service.icon className="h-5 w-5 relative z-10" />
-                                    <span className="relative z-10">{service.label}</span>
+                                    <service.icon className="h-5 w-5" />
+                                    <span>{service.label}</span>
                                   </Link>
                                 )
                               })}
@@ -588,22 +565,15 @@ export function Header({ lang }: HeaderProps) {
                             <Link
                               key={tool.href}
                               href={tool.href}
-                              className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative ${
+                              className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
                                 isActive
-                                  ? "text-white"
+                                  ? "bg-white/20 text-white"
                                   : "text-white/90 hover:text-white hover:bg-white/10"
                               }`}
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
-                              <motion.span
-                                className="absolute left-0 right-0 bottom-0 h-px bg-white"
-                                initial={false}
-                                style={{ transformOrigin: "50% 50%" }}
-                                animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                                transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
-                              />
-                              <tool.icon className="h-5 w-5 relative z-10" />
-                              <span className="relative z-10">{tool.label}</span>
+                              <tool.icon className="h-5 w-5" />
+                              <span>{tool.label}</span>
                             </Link>
                           )
                         })}
