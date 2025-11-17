@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Plus, ArrowRight } from "lucide-react"
+import { Plus, ArrowRight } from "lucide-react"
 import { type Locale } from "@/lib/i18n-config"
 import { getTranslations } from "@/lib/i18n"
 
@@ -12,7 +12,7 @@ interface SolutionsSectionProps {
 
 export function SolutionsSection({ lang }: SolutionsSectionProps) {
   const t = getTranslations(lang)
-  const [expandedService, setExpandedService] = useState<number>(0)
+  const [expandedService, setExpandedService] = useState<number>(-1)
 
   const services = [
     {
@@ -152,13 +152,10 @@ export function SolutionsSection({ lang }: SolutionsSectionProps) {
                     </div>
                     <motion.div
                       animate={{ rotate: isExpanded ? 45 : 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="flex-shrink-0"
                     >
-                      {isExpanded ? (
-                        <X className="h-6 w-6 text-brand-red" />
-                      ) : (
-                        <Plus className="h-6 w-6 text-brand-red" />
-                      )}
+                      <Plus className="h-6 w-6 text-brand-red" />
                     </motion.div>
                   </button>
 
