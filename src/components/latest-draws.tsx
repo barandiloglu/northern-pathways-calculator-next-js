@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TrendingUp, Calendar, Users, Award, RefreshCw, AlertCircle, ExternalLink, Info, Globe } from "lucide-react"
 import { 
@@ -51,11 +51,27 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
     }
   }
 
-  const refreshData = async () => {
+  const refreshData = useCallback(async () => {
     if (!isRefreshing) {
-      await fetchDrawData(currentPage)
+      // Use cache-busting when refreshing to get fresh data
+      try {
+        setIsRefreshing(true)
+        setError(null)
+        
+        const result = await getDrawDataWithFallback({ page: currentPage, limit: 25, bypassCache: true })
+        
+        setDrawData(result.data)
+        setPagination(result.pagination)
+        setLastUpdated(result.lastUpdated)
+        setDataSource(result.source)
+      } catch (err) {
+        setError("Failed to refresh draw data. Please try again later.")
+        console.error("Error refreshing draw data:", err)
+      } finally {
+        setIsRefreshing(false)
+      }
     }
-  }
+  }, [currentPage, isRefreshing])
 
   const goToPage = async (page: number) => {
     if (!isRefreshing && pagination && page >= 1 && page <= pagination.totalPages) {
@@ -78,6 +94,19 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
   useEffect(() => {
     fetchDrawData()
   }, [])
+
+  // Listen for refresh event from floating button
+  useEffect(() => {
+    const handleRefresh = () => {
+      refreshData()
+    }
+
+    window.addEventListener('refresh-draws', handleRefresh)
+    
+    return () => {
+      window.removeEventListener('refresh-draws', handleRefresh)
+    }
+  }, [refreshData]) // Include refreshData to ensure it uses the latest values
 
   const getRoundTypeColor = (type: string) => {
     const lowerType = type.toLowerCase()

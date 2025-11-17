@@ -68,9 +68,10 @@ export const getLatestDrawData = (): DrawData[] => {
 }
 
 // Function to fetch data from our internal API endpoint
-export const fetchDrawDataFromAPI = async (): Promise<DrawData[]> => {
+export const fetchDrawDataFromAPI = async (bypassCache: boolean = false): Promise<DrawData[]> => {
   try {
-    const response = await fetch('/api/express-entry', {
+    const url = bypassCache ? '/api/express-entry?bypassCache=1' : '/api/express-entry';
+    const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -288,9 +289,10 @@ export const simulateRealTimeUpdates = (): Promise<DrawData[]> => {
 }
 
 // Function to get data with different strategies
-export const getDrawDataWithFallback = async (options?: PaginationOptions): Promise<DrawDataResponse> => {
+export const getDrawDataWithFallback = async (options?: PaginationOptions & { bypassCache?: boolean }): Promise<DrawDataResponse> => {
   const page = options?.page || 1
   const limit = options?.limit || 25
+  const bypassCache = options?.bypassCache || false
   
   try {
     // Try to fetch from Canada.ca website first (most up-to-date)
@@ -314,7 +316,8 @@ export const getDrawDataWithFallback = async (options?: PaginationOptions): Prom
 
   try {
     // Try to fetch from our internal API as fallback
-    const apiData = await fetchDrawDataFromAPI()
+    // Use bypassCache parameter to force fresh data when refreshing
+    const apiData = await fetchDrawDataFromAPI(bypassCache)
     const { paginatedData, pagination } = paginateData(apiData, page, limit)
     
     return {
