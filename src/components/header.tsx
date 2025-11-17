@@ -21,6 +21,7 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { LanguageSwitcher } from "./language-switcher"
+import { PreAssessmentModal } from "./pre-assessment-modal"
 import { type Locale } from "@/lib/i18n-config"
 import { getTranslations } from "@/lib/i18n"
 
@@ -36,6 +37,7 @@ export function Header({ lang }: HeaderProps) {
   const [servicesHover, setServicesHover] = useState(false)
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
   const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false)
+  const [isPreAssessmentModalOpen, setIsPreAssessmentModalOpen] = useState(false)
   const pathname = usePathname()
   const t = getTranslations(lang)
 
@@ -362,14 +364,12 @@ export function Header({ lang }: HeaderProps) {
           {/* Div 3 - Pre-Assessment and Language Selection (Desktop) */}
           <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 flex-shrink-0">
             {/* Pre-Assessment Button */}
-            <a
-              href="https://www.northernpathways.ca/pre-assessment-form"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setIsPreAssessmentModalOpen(true)}
               className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
             >
               <span>Pre-Assessment</span>
-            </a>
+            </button>
 
             <LanguageSwitcher currentLang={lang} />
           </motion.div>
@@ -588,20 +588,26 @@ export function Header({ lang }: HeaderProps) {
                 </div>
 
                 {/* Pre-Assessment Mobile */}
-                <a
-                  href="https://www.northernpathways.ca/pre-assessment-form"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => {
+                    setIsPreAssessmentModalOpen(true)
+                    setIsMobileMenuOpen(false)
+                  }}
                   className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
-                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span>Pre-Assessment</span>
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Pre-Assessment Modal */}
+      <PreAssessmentModal
+        isOpen={isPreAssessmentModalOpen}
+        onClose={() => setIsPreAssessmentModalOpen(false)}
+      />
     </motion.header>
   )
 }

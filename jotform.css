@@ -1,0 +1,622 @@
+/* Import Montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+/* Force font on all text elements in form */
+.form-all *,
+.form-all label,
+.form-all span,
+.form-all div,
+.form-all p {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Base styles - match website design */
+body, 
+.jotform-form,
+.form-all {
+  font-family: 'Montserrat', sans-serif !important;
+  background-color: #f9f9f9 !important;
+  color: #2c2b2b !important;
+}
+
+/* Form container - 752px width - No border */
+.form-all {
+  background-color: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 32px !important;
+  max-width: 752px !important;
+  width: 752px !important;
+  margin: 0 auto !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Headings */
+.form-label,
+.form-header-group,
+.form-label-top,
+.form-label-left,
+.form-label-right,
+.form-sub-label,
+.form-sub-label-container {
+  font-family: 'Montserrat', sans-serif !important;
+  color: #2c2b2b !important;
+  font-weight: 600 !important;
+}
+
+.form-header-group {
+  color: #b92025 !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  margin-bottom: 24px !important;
+}
+
+/* Label Alignment: Top - Ensure labels are on top */
+.form-label-top,
+.form-label {
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 8px !important;
+  font-size: 14px !important;
+}
+
+/* Label Width: 230px - Applied when labels are left/right aligned */
+.form-label-left,
+.form-label-right {
+  width: 230px !important;
+  min-width: 230px !important;
+  max-width: 230px !important;
+}
+
+/* Question Spacing: 6 - Adjust spacing between form fields */
+.form-line,
+.form-line.form-line-column {
+  margin-bottom: 6px !important;
+}
+
+.form-line.form-line-column:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Form field containers with proper spacing */
+.form-input,
+.form-textarea,
+.form-dropdown,
+.form-radio,
+.form-checkbox {
+  margin-bottom: 6px !important;
+}
+
+/* Input fields - Same height as dropdowns */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="url"] {
+  font-family: 'Montserrat', sans-serif !important;
+  background-color: #ffffff !important;
+  border: 2px solid #e5e5e5 !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  color: #2c2b2b !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+  line-height: 1.5 !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="url"]:focus {
+  outline: none !important;
+  border-color: #b92025 !important;
+  box-shadow: 0 0 0 3px rgba(185, 32, 37, 0.1) !important;
+}
+
+/* Textarea - Different height for multi-line */
+textarea {
+  font-family: 'Montserrat', sans-serif !important;
+  background-color: #ffffff !important;
+  border: 2px solid #e5e5e5 !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  color: #2c2b2b !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+  line-height: 1.5 !important;
+  min-height: 80px !important;
+  resize: vertical !important;
+}
+
+textarea:focus {
+  outline: none !important;
+  border-color: #b92025 !important;
+  box-shadow: 0 0 0 3px rgba(185, 32, 37, 0.1) !important;
+}
+
+/* Dropdowns - Same height as text inputs */
+select {
+  font-family: 'Montserrat', sans-serif !important;
+  background-color: #ffffff !important;
+  border: 2px solid #e5e5e5 !important;
+  border-radius: 8px !important;
+  padding: 10px 36px 10px 14px !important;
+  color: #2c2b2b !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  width: 100% !important;
+  line-height: 1.5 !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b92025' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+select:focus {
+  outline: none !important;
+  border-color: #b92025 !important;
+  box-shadow: 0 0 0 3px rgba(185, 32, 37, 0.1) !important;
+}
+
+/* Ensure placeholder text is fully visible */
+select option:first-child {
+  color: #9ca3af !important;
+}
+
+select:invalid,
+select option[value=""] {
+  color: #9ca3af !important;
+}
+
+select:focus,
+select:not([value=""]) {
+  color: #2c2b2b !important;
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  font-size: 14px !important;
+}
+
+/* Buttons */
+button[type="submit"],
+input[type="submit"],
+.form-submit-button {
+  font-family: 'Montserrat', sans-serif !important;
+  background: linear-gradient(to right, #b92025, #7d1416) !important;
+  background-color: #b92025 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 28px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 6px rgba(185, 32, 37, 0.2) !important;
+  margin-top: 6px !important;
+  min-height: 44px !important;
+  min-width: 44px !important;
+}
+
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+.form-submit-button:hover {
+  background: linear-gradient(to right, #7d1416, #b92025) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(185, 32, 37, 0.3) !important;
+}
+
+button[type="submit"]:active,
+input[type="submit"]:active,
+.form-submit-button:active {
+  transform: translateY(0) !important;
+}
+
+/* Radio buttons and checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: #b92025 !important;
+  width: 18px !important;
+  height: 18px !important;
+  cursor: pointer !important;
+  margin-right: 8px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+}
+
+/* Checkbox and Radio button labels - Ensure font applies */
+.form-checkbox-group label,
+.form-radio-group label,
+.form-checkbox label,
+.form-radio label,
+label[for*="checkbox"],
+label[for*="radio"],
+.form-checkbox-item label,
+.form-radio-item label,
+.form-checkbox-item,
+.form-radio-item {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px !important;
+  color: #2c2b2b !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 8px 0 !important;
+}
+
+/* Checkbox container text */
+.form-checkbox-item .form-checkbox-label,
+.form-radio-item .form-radio-label,
+.form-checkbox-item span,
+.form-radio-item span,
+.form-checkbox-item div,
+.form-radio-item div {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px !important;
+  color: #2c2b2b !important;
+  line-height: 1.5 !important;
+}
+
+/* All label elements */
+label {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px !important;
+  color: #2c2b2b !important;
+}
+
+/* Privacy/consent text containers */
+.form-checkbox-item-container,
+.form-radio-item-container,
+.form-checkbox-wrapper,
+.form-radio-wrapper,
+.form-checkbox-group,
+.form-radio-group {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Text within checkbox/radio containers */
+.form-checkbox-item *,
+.form-radio-item *,
+.form-checkbox-group *,
+.form-radio-group * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Labels - Font Size: 14px */
+.form-label,
+.form-label-top,
+.form-label-left,
+.form-label-right {
+  font-weight: 600 !important;
+  color: #2c2b2b !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+/* Required field indicators */
+.form-label-required {
+  color: #b92025 !important;
+  font-size: 14px !important;
+}
+
+/* Sub-labels */
+.form-sub-label,
+.form-sub-label-container {
+  font-size: 13px !important;
+  color: #6b7280 !important;
+  margin-top: 4px !important;
+}
+
+/* Section dividers */
+.form-line {
+  border-color: #e5e5e5 !important;
+  margin: 24px 0 !important;
+}
+
+/* Error messages */
+.form-error-message,
+.form-error-header {
+  color: #b92025 !important;
+  font-weight: 600 !important;
+  background-color: #fee2e2 !important;
+  border: 1px solid #b92025 !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  font-size: 14px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Success messages */
+.form-success-message {
+  color: #059669 !important;
+  background-color: #d1fae5 !important;
+  border: 1px solid #059669 !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  font-size: 14px !important;
+  margin-bottom: 6px !important;
+}
+
+/* File upload areas */
+.form-file-upload {
+  border: 2px dashed #e5e5e5 !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  background-color: #f9f9f9 !important;
+  transition: all 0.2s ease !important;
+  margin-bottom: 6px !important;
+}
+
+.form-file-upload:hover {
+  border-color: #b92025 !important;
+  background-color: #fff5f5 !important;
+}
+
+/* Progress bar */
+.form-progress-bar {
+  background-color: #b92025 !important;
+}
+
+/* Links */
+a {
+  color: #b92025 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+  font-size: 14px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+a:hover {
+  color: #7d1416 !important;
+  text-decoration: underline !important;
+}
+
+/* Form sections */
+.form-section {
+  margin-bottom: 32px !important;
+  padding: 24px !important;
+  background-color: #ffffff !important;
+  border-radius: 8px !important;
+  border: 1px solid #e5e5e5 !important;
+}
+
+/* Spacing improvements - Question Spacing: 6 */
+.form-line-column {
+  margin-bottom: 6px !important;
+}
+
+.form-line.form-line-column:not(:last-child) {
+  margin-bottom: 6px !important;
+}
+
+/* Ensure proper spacing between question groups */
+.form-group {
+  margin-bottom: 6px !important;
+}
+
+/* Mobile responsiveness - Enhanced for better mobile experience */
+@media (max-width: 768px) {
+  /* Form container */
+  .form-all {
+    padding: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Header */
+  .form-header-group {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+    padding: 0 4px !important;
+  }
+  
+  /* Labels - Full width on mobile */
+  .form-label-left,
+  .form-label-right {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Force single column layout on mobile */
+  .form-line-column {
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* Multi-column layouts stack on mobile */
+  .form-line[class*="column"] > div {
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* Input fields - Touch-friendly */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="url"],
+  select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 14px 16px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    -webkit-appearance: none !important;
+    border-radius: 8px !important;
+  }
+  
+  select {
+    padding: 14px 40px 14px 16px !important;
+    background-position: right 14px center !important;
+  }
+  
+  /* Textarea */
+  textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 14px 16px !important;
+    min-height: 120px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Labels on mobile */
+  .form-label,
+  .form-label-top,
+  .form-label-left,
+  .form-label-right {
+    font-size: 15px !important;
+    margin-bottom: 10px !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Buttons - Full width and touch-friendly */
+  button[type="submit"],
+  input[type="submit"],
+  .form-submit-button {
+    width: 100% !important;
+    padding: 16px !important;
+    font-size: 16px !important;
+    min-height: 48px !important;
+    margin-top: 12px !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Checkbox and radio - Touch-friendly */
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    margin-right: 12px !important;
+  }
+  
+  .form-checkbox-item,
+  .form-radio-item {
+    min-height: 48px !important;
+    padding: 12px 0 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .form-checkbox-item label,
+  .form-radio-item label {
+    font-size: 15px !important;
+    min-height: 48px !important;
+    padding: 0 !important;
+  }
+  
+  /* Spacing adjustments */
+  .form-line,
+  .form-line-column {
+    margin-bottom: 20px !important;
+  }
+  
+  .form-line:last-child {
+    margin-bottom: 12px !important;
+  }
+  
+  /* Error and success messages */
+  .form-error-message,
+  .form-error-header,
+  .form-success-message {
+    font-size: 15px !important;
+    padding: 12px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* File upload */
+  .form-file-upload {
+    padding: 24px 16px !important;
+    min-height: 120px !important;
+  }
+  
+  /* Links */
+  a {
+    font-size: 15px !important;
+    min-height: 44px !important;
+    padding: 8px 0 !important;
+  }
+  
+  /* Sub-labels */
+  .form-sub-label,
+  .form-sub-label-container {
+    font-size: 14px !important;
+    margin-top: 6px !important;
+  }
+  
+  /* Section dividers */
+  .form-line {
+    margin: 20px 0 !important;
+  }
+  
+  /* Form sections */
+  .form-section {
+    padding: 16px !important;
+    margin-bottom: 24px !important;
+  }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 480px) {
+  .form-all {
+    padding: 12px !important;
+  }
+  
+  .form-header-group {
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="url"],
+  select,
+  textarea {
+    padding: 12px 14px !important;
+  }
+  
+  .form-label,
+  .form-label-top {
+    font-size: 14px !important;
+  }
+}
