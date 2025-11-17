@@ -67,6 +67,44 @@ export const getLatestDrawData = (): DrawData[] => {
   return []
 }
 
+// Function to fetch data from our new proxy API endpoint (uses same parsing as client-side)
+export const fetchDrawDataFromProxyAPI = async (): Promise<DrawData[]> => {
+  try {
+    console.log("=== PROXY FETCHER: Starting proxy API call ===");
+    console.log("URL: /api/express-entry/proxy");
+    const response = await fetch('/api/express-entry/proxy', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    
+    console.log("=== PROXY FETCHER: Response received ===");
+    console.log("Status:", response.status);
+    
+    if (!response.ok) {
+      throw new Error(`Proxy API error! status: ${response.status}`)
+    }
+    
+    const result = await response.json()
+    console.log("=== PROXY FETCHER: JSON parsed ===");
+    console.log("Result OK:", result.ok);
+    console.log("Data count:", result.data?.length);
+    console.log("First item:", result.data?.[0]);
+    
+    if (!result.ok || !result.data) {
+      throw new Error(result.error || 'Proxy API returned error')
+    }
+    
+    // The proxy API already returns data in the correct format
+    return result.data as DrawData[]
+  } catch (error) {
+    console.error('=== PROXY FETCHER: ERROR ===');
+    console.error('Error fetching draw data from proxy API:', error);
+    console.error('Error details:', error instanceof Error ? error.message : String(error));
+    return []
+  }
+}
+
 // Function to fetch data from our internal API endpoint
 export const fetchDrawDataFromAPI = async (): Promise<DrawData[]> => {
   try {
@@ -316,13 +354,12 @@ export const getDrawDataWithFallback = async (options?: PaginationOptions): Prom
   console.log("=== DATA FETCHER: getDrawDataWithFallback STARTED ===");
   console.log("Page:", page, "Limit:", limit);
   
+  // Use the proxy API route instead of direct client-side fetch
+  // This uses the same parsing logic but runs server-side (no CORS issues on mobile)
   try {
-    // Try to fetch from Canada.ca website first (most up-to-date)
-    // Fetch FULL dataset first (without pagination options) to ensure accurate pagination calculation
-    // This single call approach prevents issues on mobile devices where a second call might fail/timeout
-    console.log("=== DATA FETCHER: Attempting Canada.ca fetch ===");
-    const fullData = await fetchDrawDataFromCanadaCa()
-    console.log("=== DATA FETCHER: Canada.ca fetch result ===");
+    console.log("=== DATA FETCHER: Attempting proxy API fetch ===");
+    const fullData = await fetchDrawDataFromProxyAPI()
+    console.log("=== DATA FETCHER: Proxy API fetch result ===");
     console.log("Data length:", fullData.length);
     console.log("First item:", fullData[0]);
     
@@ -341,47 +378,80 @@ export const getDrawDataWithFallback = async (options?: PaginationOptions): Prom
         lastUpdated: new Date().toISOString()
       }
     } else {
-      console.log("=== DATA FETCHER: Canada.ca returned empty, trying API ===");
+      console.log("=== DATA FETCHER: Proxy API returned empty, trying direct fetch ===");
     }
   } catch (error) {
-    console.error('=== DATA FETCHER: Canada.ca fetch failed ===');
+    console.error('=== DATA FETCHER: Proxy API fetch failed ===');
     console.error('Error:', error);
-    console.log('Trying API fallback...');
+    console.log('Trying direct fetch fallback...');
   }
 
+  // Fallback: Try direct client-side fetch (works on desktop, may fail on mobile due to CORS)
   try {
-    // Try to fetch from our internal API as fallback
-    console.log("=== DATA FETCHER: Attempting API fetch ===");
-    const apiData = await fetchDrawDataFromAPI()
-    console.log("=== DATA FETCHER: API fetch result ===");
-    console.log("API data length:", apiData.length);
-    console.log("First item:", apiData[0]);
-    console.log("API response:", JSON.stringify(apiData.slice(0, 2), null, 2));
+    console.log("=== DATA FETCHER: Attempting direct Canada.ca fetch ===");
+    const fullData = await fetchDrawDataFromCanadaCa()
+    console.log("=== DATA FETCHER: Direct fetch result ===");
+    console.log("Data length:", fullData.length);
+    console.log("First item:", fullData[0]);
     
-    const { paginatedData, pagination } = paginateData(apiData, page, limit)
-    
-    console.log("=== DATA FETCHER: Returning cached data ===");
-    console.log("Paginated data length:", paginatedData.length);
-    console.log("Pagination:", pagination);
-    
-    return {
-      data: paginatedData,
-      pagination,
-      source: 'cached',
-      lastUpdated: new Date().toISOString()
+    if (fullData.length > 0) {
+      // Apply pagination to the full dataset
+      const { paginatedData, pagination } = paginateData(fullData, page, limit)
+      
+      console.log("=== DATA FETCHER: Returning real-time data from direct fetch ===");
+      console.log("Paginated data length:", paginatedData.length);
+      console.log("Pagination:", pagination);
+      
+      return {
+        data: paginatedData,
+        pagination,
+        source: 'real-time',
+        lastUpdated: new Date().toISOString()
+      }
+    } else {
+      console.log("=== DATA FETCHER: Direct fetch returned empty, trying old API ===");
     }
   } catch (error) {
-    console.error('=== DATA FETCHER: API fetch failed ===');
+    console.error('=== DATA FETCHER: Direct fetch failed ===');
     console.error('Error:', error);
-    console.log('=== DATA FETCHER: Returning fallback (empty) data ===');
-    // Return empty data for testing
-    const { pagination } = paginateData([], page, limit)
-    return {
-      data: [],
-      pagination,
-      source: 'fallback',
-      lastUpdated: new Date().toISOString()
+    console.log('Trying old API fallback...');
+  }
+
+  // Fallback to old API route if proxy and direct fetch fail
+  try {
+    console.log("=== DATA FETCHER: Attempting old API fetch ===");
+    const apiData = await fetchDrawDataFromAPI()
+    console.log("=== DATA FETCHER: Old API fetch result ===");
+    console.log("API data length:", apiData.length);
+    console.log("First item:", apiData[0]);
+    
+    if (apiData.length > 0) {
+      const { paginatedData, pagination } = paginateData(apiData, page, limit)
+      
+      console.log("=== DATA FETCHER: Returning cached data ===");
+      console.log("Paginated data length:", paginatedData.length);
+      console.log("Pagination:", pagination);
+      
+      return {
+        data: paginatedData,
+        pagination,
+        source: 'cached',
+        lastUpdated: new Date().toISOString()
+      }
     }
+  } catch (error) {
+    console.error('=== DATA FETCHER: Old API fetch failed ===');
+    console.error('Error:', error);
+  }
+  
+  // Final fallback
+  console.log('=== DATA FETCHER: Returning fallback (empty) data ===');
+  const { pagination } = paginateData([], page, limit)
+  return {
+    data: [],
+    pagination,
+    source: 'fallback',
+    lastUpdated: new Date().toISOString()
   }
 }
 
