@@ -30,46 +30,48 @@ export function LatestDraws({ className = "", hideHeader = false }: LatestDrawsP
   // Both views share the same state (drawData, pagination, currentPage) to ensure identical data
   const fetchDrawData = async (page: number = 1) => {
     try {
+      console.log("=== CLIENT: FETCHING DRAW DATA ===");
+      console.log("Page:", page);
+      console.log("Timestamp:", new Date().toISOString());
       setIsRefreshing(true)
       setError(null)
       
       // Use the paginated function to get specific page with 25 items
       // This is the EXACT same data fetching used for both mobile and desktop
+      console.log("=== CLIENT: CALLING getDrawDataWithFallback ===");
       const result = await getDrawDataWithFallback({ page, limit: 25 })
+      
+      console.log("=== CLIENT: DATA RECEIVED ===");
+      console.log("Data source:", result.source);
+      console.log("Data count:", result.data.length);
+      console.log("First draw:", result.data[0]);
+      console.log("Pagination:", result.pagination);
+      console.log("Last updated:", result.lastUpdated);
+      console.log("Full result:", JSON.stringify(result, null, 2));
       
       setDrawData(result.data)
       setPagination(result.pagination)
       setLastUpdated(result.lastUpdated)
       setDataSource(result.source)
       setCurrentPage(page)
+      
+      console.log("=== CLIENT: STATE UPDATED ===");
+      console.log("drawData length:", result.data.length);
+      console.log("dataSource set to:", result.source);
     } catch (err) {
+      console.error("=== CLIENT: ERROR FETCHING DATA ===");
+      console.error("Error:", err);
       setError("Failed to fetch latest draw data. Please try again later.")
-      console.error("Error fetching draw data:", err)
     } finally {
       setIsRefreshing(false)
       setIsLoading(false)
+      console.log("=== CLIENT: FETCH COMPLETE ===");
     }
   }
 
   const refreshData = useCallback(async () => {
     if (!isRefreshing) {
-      // Use cache-busting when refreshing to get fresh data
-      try {
-        setIsRefreshing(true)
-        setError(null)
-        
-        const result = await getDrawDataWithFallback({ page: currentPage, limit: 25, bypassCache: true })
-        
-        setDrawData(result.data)
-        setPagination(result.pagination)
-        setLastUpdated(result.lastUpdated)
-        setDataSource(result.source)
-      } catch (err) {
-        setError("Failed to refresh draw data. Please try again later.")
-        console.error("Error refreshing draw data:", err)
-      } finally {
-        setIsRefreshing(false)
-      }
+      await fetchDrawData(currentPage)
     }
   }, [currentPage, isRefreshing])
 

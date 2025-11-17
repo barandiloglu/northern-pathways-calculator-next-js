@@ -20,6 +20,7 @@ function normalize(text: string) {
 }
 
 function parse(html: string) {
+  console.log("=== PARSE FUNCTION STARTED ===");
   const $ = cheerio.load(html);
 
   // Try multiple strategies to find the Express Entry rounds table
@@ -449,15 +450,19 @@ function parse(html: string) {
   }
 
   // Clean up and filter
+  console.log(`=== FILTERING ROUNDS ===`);
+  console.log(`Rounds before filtering:`, rounds.length);
   rounds = rounds
     .filter(r => r.round || r.date || r.crsCutoff)
     .filter(r => r.round !== "Round" && r.date !== "Date" && r.round !== "Number")
     .slice(0, 20); // Limit to first 20 rounds
 
-  console.log(`Final parsed rounds:`, rounds);
+  console.log(`Final parsed rounds after filtering:`, rounds.length);
+  console.log(`Final parsed rounds data:`, JSON.stringify(rounds, null, 2));
   
   // If no rounds found, return comprehensive fallback data with 25 rounds matching the actual Express Entry table
   if (rounds.length === 0) {
+    console.log("=== NO ROUNDS PARSED - USING FALLBACK ===");
     console.log("No rounds parsed, returning comprehensive fallback data with 25 rounds matching the actual Express Entry table");
     rounds = [
       {
@@ -674,14 +679,11 @@ function parse(html: string) {
   return { rounds };
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-    const bypassCache = searchParams.get('bypassCache') === '1';
-    const debug = searchParams.get('debug') === '1';
-    
+    console.log("=== API ROUTE CALLED ===");
+    console.log("Timestamp:", new Date().toISOString());
     console.log("Fetching Express Entry data from:", SOURCE);
-    console.log("Cache bypass:", bypassCache);
     
     const res = await fetch(SOURCE, {
       headers: { 
@@ -694,7 +696,7 @@ export async function GET(request: Request) {
         "upgrade-insecure-requests": "1",
         "cache-control": "no-cache"
       },
-      next: bypassCache ? { revalidate: 0 } : { revalidate: 60 * 30 }, // Bypass cache if requested
+      next: { revalidate: 60 * 30 }, // 30 minutes cache for more frequent updates
     });
 
     if (!res.ok) {
@@ -706,57 +708,56 @@ export async function GET(request: Request) {
     }
 
     const html = await res.text();
+    console.log("=== FETCHED HTML DATA ===");
     console.log("HTML length:", html.length);
-    console.log("HTML preview:", html.substring(0, 1000));
+    console.log("Response status:", res.status);
+    console.log("Response OK:", res.ok);
+    console.log("HTML preview (first 2000 chars):", html.substring(0, 2000));
     
     // Look for specific content patterns
+    console.log("=== HTML CONTENT CHECK ===");
     if (html.includes("Express Entry")) {
       console.log("✓ Found 'Express Entry' in HTML");
+    } else {
+      console.log("✗ 'Express Entry' NOT found in HTML");
     }
     if (html.includes("round")) {
       console.log("✓ Found 'round' in HTML");
+    } else {
+      console.log("✗ 'round' NOT found in HTML");
     }
     if (html.includes("CRS")) {
       console.log("✓ Found 'CRS' in HTML");
+    } else {
+      console.log("✗ 'CRS' NOT found in HTML");
     }
     if (html.includes("table")) {
       console.log("✓ Found 'table' in HTML");
+    } else {
+      console.log("✗ 'table' NOT found in HTML");
     }
     
+    console.log("=== PARSING HTML ===");
     const data = parse(html);
-    console.log("Parsed data:", data);
+    console.log("=== PARSED DATA RESULT ===");
+    console.log("Total rounds parsed:", data.rounds.length);
+    console.log("First 3 rounds:", JSON.stringify(data.rounds.slice(0, 3), null, 2));
+    console.log("All rounds:", JSON.stringify(data.rounds, null, 2));
 
     // Check if parsed data is incomplete (missing dates, CRS scores, etc.)
+    console.log("=== DATA VALIDATION ===");
     const hasIncompleteData = data.rounds.length > 0 && data.rounds.some(r => !r.date || !r.crsCutoff);
     let isFallbackData = data.rounds.length > 0 && data.rounds[0].round === "364";
     
-    // Debug mode - return HTML info
-    if (debug) {
-      return NextResponse.json({
-        htmlLength: html.length,
-        htmlPreview: html.substring(0, 5000),
-        hasExpressEntry: html.includes("Express Entry"),
-        hasTable: html.includes("table"),
-        hasRound: html.includes("round"),
-        hasCRS: html.includes("CRS"),
-        parsedRoundsCount: data.rounds.length,
-        firstRound: data.rounds[0]?.round,
-        hasIncompleteData,
-        isFallbackData,
-        sampleRounds: data.rounds.slice(0, 3)
-      }, { headers: { "Cache-Control": "no-cache" } });
-    }
+    console.log("hasIncompleteData:", hasIncompleteData);
+    console.log("isFallbackData (before check):", isFallbackData);
+    console.log("Rounds with missing data:", data.rounds.filter(r => !r.date || !r.crsCutoff).map(r => ({ round: r.round, hasDate: !!r.date, hasCrs: !!r.crsCutoff })));
     
-    // If we have incomplete data, check if we should use fallback
+    // If we have incomplete data, use fallback data instead
     if (hasIncompleteData && !isFallbackData) {
-      console.log("Parsed data is incomplete, checking if we should use fallback");
-      
-      // Only use fallback if we have NO valid complete data
-      const hasValidData = data.rounds.some(r => r.date && r.crsCutoff && r.round);
-      
-      if (!hasValidData || data.rounds.length === 0) {
-        console.log("No valid data found, using fallback data instead");
-        data.rounds = [
+      console.log("=== USING FALLBACK DATA ===");
+      console.log("Reason: Parsed data is incomplete, using fallback data instead");
+      data.rounds = [
         {
           round: "364",
           date: "September 3, 2025",
@@ -957,21 +958,21 @@ export async function GET(request: Request) {
           invitations: "536",
           link: undefined,
         }
-        ];
-        // CRITICAL FIX: Recompute isFallbackData after overwriting data.rounds
-        isFallbackData = true;
-      } else {
-        console.log("Keeping partial data - some rows are valid");
-        // Keep the partial data, just log a warning
-      }
+      ];
+      // CRITICAL FIX: Recompute isFallbackData after overwriting data.rounds
+      isFallbackData = true;
     }
     
     // Add better logging for debugging
+    console.log("=== FINAL DATA SUMMARY ===");
     console.log("Final rounds count:", data.rounds.length);
     console.log("First round:", data.rounds[0]?.round);
+    console.log("Last round:", data.rounds[data.rounds.length - 1]?.round);
     console.log("hasIncompleteData:", hasIncompleteData);
     console.log("isFallbackData:", isFallbackData);
     console.log("dataSource:", isFallbackData ? "fallback" : "parsed");
+    console.log("Sample of final data (first 2 rounds):", JSON.stringify(data.rounds.slice(0, 2), null, 2));
+    console.log("=== RETURNING RESPONSE ===");
     
     return NextResponse.json(
       {
@@ -983,13 +984,7 @@ export async function GET(request: Request) {
         note: isFallbackData ? "Using fallback data - HTML parsing from source website was unsuccessful" : "Data successfully parsed from source website",
         ...data,
       },
-      { 
-        headers: { 
-          "Cache-Control": bypassCache 
-            ? "no-cache, no-store, must-revalidate" 
-            : "s-maxage=21600, stale-while-revalidate=86400" 
-        } 
-      }
+      { headers: { "Cache-Control": "s-maxage=21600, stale-while-revalidate=86400" } }
     );
   } catch (error) {
     console.error("Error fetching Express Entry data:", error);

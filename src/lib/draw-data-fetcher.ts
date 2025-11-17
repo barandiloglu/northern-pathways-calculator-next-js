@@ -68,35 +68,55 @@ export const getLatestDrawData = (): DrawData[] => {
 }
 
 // Function to fetch data from our internal API endpoint
-export const fetchDrawDataFromAPI = async (bypassCache: boolean = false): Promise<DrawData[]> => {
+export const fetchDrawDataFromAPI = async (): Promise<DrawData[]> => {
   try {
-    const url = bypassCache ? '/api/express-entry?bypassCache=1' : '/api/express-entry';
-    const response = await fetch(url, {
+    console.log("=== API FETCHER: Starting API call ===");
+    console.log("URL: /api/express-entry");
+    const response = await fetch('/api/express-entry', {
       headers: {
         'Content-Type': 'application/json',
       },
     })
+    
+    console.log("=== API FETCHER: Response received ===");
+    console.log("Status:", response.status);
+    console.log("OK:", response.ok);
+    console.log("Headers:", Object.fromEntries(response.headers.entries()));
     
     if (!response.ok) {
       throw new Error(`API error! status: ${response.status}`)
     }
     
     const result = await response.json()
+    console.log("=== API FETCHER: JSON parsed ===");
+    console.log("Result OK:", result.ok);
+    console.log("Result dataSource:", result.dataSource);
+    console.log("Rounds count:", result.rounds?.length);
+    console.log("First round:", result.rounds?.[0]);
+    console.log("Full result:", JSON.stringify(result, null, 2));
     
     if (!result.ok) {
       throw new Error(result.error || 'API returned error')
     }
     
     // Transform the API response to match our DrawData interface
-    return result.rounds.map((round: any) => ({
+    const transformed = result.rounds.map((round: any) => ({
       roundNumber: round.round,
       date: round.date,
       roundType: round.type,
       invitationsIssued: round.invitations || 'N/A',
       crsScore: round.crsCutoff || 'N/A'
     }))
+    
+    console.log("=== API FETCHER: Data transformed ===");
+    console.log("Transformed count:", transformed.length);
+    console.log("First transformed:", transformed[0]);
+    
+    return transformed
   } catch (error) {
-    console.error('Error fetching draw data from API:', error)
+    console.error('=== API FETCHER: ERROR ===');
+    console.error('Error fetching draw data from API:', error);
+    console.error('Error details:', error instanceof Error ? error.message : String(error));
     // Return empty array for testing
     return []
   }
@@ -289,19 +309,30 @@ export const simulateRealTimeUpdates = (): Promise<DrawData[]> => {
 }
 
 // Function to get data with different strategies
-export const getDrawDataWithFallback = async (options?: PaginationOptions & { bypassCache?: boolean }): Promise<DrawDataResponse> => {
+export const getDrawDataWithFallback = async (options?: PaginationOptions): Promise<DrawDataResponse> => {
   const page = options?.page || 1
   const limit = options?.limit || 25
-  const bypassCache = options?.bypassCache || false
+  
+  console.log("=== DATA FETCHER: getDrawDataWithFallback STARTED ===");
+  console.log("Page:", page, "Limit:", limit);
   
   try {
     // Try to fetch from Canada.ca website first (most up-to-date)
     // Fetch FULL dataset first (without pagination options) to ensure accurate pagination calculation
     // This single call approach prevents issues on mobile devices where a second call might fail/timeout
+    console.log("=== DATA FETCHER: Attempting Canada.ca fetch ===");
     const fullData = await fetchDrawDataFromCanadaCa()
+    console.log("=== DATA FETCHER: Canada.ca fetch result ===");
+    console.log("Data length:", fullData.length);
+    console.log("First item:", fullData[0]);
+    
     if (fullData.length > 0) {
       // Apply pagination to the full dataset
       const { paginatedData, pagination } = paginateData(fullData, page, limit)
+      
+      console.log("=== DATA FETCHER: Returning real-time data ===");
+      console.log("Paginated data length:", paginatedData.length);
+      console.log("Pagination:", pagination);
       
       return {
         data: paginatedData,
@@ -309,16 +340,29 @@ export const getDrawDataWithFallback = async (options?: PaginationOptions & { by
         source: 'real-time',
         lastUpdated: new Date().toISOString()
       }
+    } else {
+      console.log("=== DATA FETCHER: Canada.ca returned empty, trying API ===");
     }
   } catch (error) {
-    console.log('Canada.ca fetch failed, trying API fallback:', error)
+    console.error('=== DATA FETCHER: Canada.ca fetch failed ===');
+    console.error('Error:', error);
+    console.log('Trying API fallback...');
   }
 
   try {
     // Try to fetch from our internal API as fallback
-    // Use bypassCache parameter to force fresh data when refreshing
-    const apiData = await fetchDrawDataFromAPI(bypassCache)
+    console.log("=== DATA FETCHER: Attempting API fetch ===");
+    const apiData = await fetchDrawDataFromAPI()
+    console.log("=== DATA FETCHER: API fetch result ===");
+    console.log("API data length:", apiData.length);
+    console.log("First item:", apiData[0]);
+    console.log("API response:", JSON.stringify(apiData.slice(0, 2), null, 2));
+    
     const { paginatedData, pagination } = paginateData(apiData, page, limit)
+    
+    console.log("=== DATA FETCHER: Returning cached data ===");
+    console.log("Paginated data length:", paginatedData.length);
+    console.log("Pagination:", pagination);
     
     return {
       data: paginatedData,
@@ -327,6 +371,9 @@ export const getDrawDataWithFallback = async (options?: PaginationOptions & { by
       lastUpdated: new Date().toISOString()
     }
   } catch (error) {
+    console.error('=== DATA FETCHER: API fetch failed ===');
+    console.error('Error:', error);
+    console.log('=== DATA FETCHER: Returning fallback (empty) data ===');
     // Return empty data for testing
     const { pagination } = paginateData([], page, limit)
     return {
