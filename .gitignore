@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/New Design/
+CRS breakdown.docx
+CRS_Score_Breakdown_2025-09-25 (5).pdf
+EXPRESS_ENTRY_DRAWS_README.md
