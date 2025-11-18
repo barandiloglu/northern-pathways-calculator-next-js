@@ -155,9 +155,11 @@
     @apply w-full;
   }
 
+  /* Ensure sticky works on all browsers */
   @media (min-width: 1024px) {
     .sticky-nav {
-      @apply w-[260px];
+      position: -webkit-sticky !important; /* Safari support */
+      position: sticky !important;
     }
   }
 

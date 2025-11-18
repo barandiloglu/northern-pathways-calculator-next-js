@@ -108,12 +108,12 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
   }
 
   return (
-    <div className="bg-[#f8f8f8]">
+    <div className="bg-[#f8f8f8] min-h-screen">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-16 lg:items-start">
           {/* Left-hand Sticky Navigation */}
-          <aside className="sticky-nav">
-            <div className="lg:sticky lg:top-28 lg:self-start">
+          <aside className="sticky-nav w-full lg:w-[260px] lg:sticky lg:top-28 lg:self-start lg:h-fit lg:z-10">
+            <div>
               <h4 className="text-base font-bold uppercase tracking-wider text-[#2c3e50] mb-4 pb-2 border-b-2 border-gray-200">
                 On This Page
               </h4>
