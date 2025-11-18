@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { type Locale } from "@/lib/i18n-config"
 import { CheckCircle2 } from "lucide-react"
 import Link from "next/link"
@@ -16,6 +16,7 @@ interface NavigationItem {
 
 export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
   const [activeSection, setActiveSection] = useState<string>("intro")
+  const stickyNavRef = useRef<HTMLElement>(null)
 
   const navigationItems: NavigationItem[] = [
     { id: "intro", label: "Business Immigration" },
@@ -88,40 +89,76 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array - navigationItems is constant and handleScroll is recreated on mount
 
-  // Inject critical sticky styles directly into the page to ensure they load
-  // even if CSS chunks fail (fixes Vercel deployment issue)
+  // Apply sticky styles directly to the element and ensure parent containers are correct
   useEffect(() => {
     if (typeof window === 'undefined') return
     
+    const applyStickyStyles = () => {
+      const navElement = stickyNavRef.current
+      if (!navElement) return
+      
+      // Check if we're on desktop
+      if (window.innerWidth >= 1024) {
+        // Apply styles directly to the element with inline styles (highest priority)
+        navElement.style.setProperty('position', '-webkit-sticky', 'important')
+        navElement.style.setProperty('position', 'sticky', 'important')
+        navElement.style.setProperty('top', '7rem', 'important')
+        navElement.style.setProperty('align-self', 'start', 'important')
+        navElement.style.setProperty('height', 'fit-content', 'important')
+        navElement.style.setProperty('z-index', '10', 'important')
+        navElement.style.setProperty('width', '260px', 'important')
+      } else {
+        // Mobile: ensure static positioning
+        navElement.style.setProperty('position', 'static', 'important')
+      }
+    }
+    
+    // Wait for DOM to be ready, then apply styles
+    const initSticky = () => {
+      requestAnimationFrame(() => {
+        if (stickyNavRef.current) {
+          applyStickyStyles()
+        } else {
+          // Retry if element not ready
+          setTimeout(initSticky, 50)
+        }
+      })
+    }
+    
+    // Start initialization
+    initSticky()
+    
+    // Re-apply on resize
+    window.addEventListener('resize', applyStickyStyles)
+    
+    // Also inject global styles as backup
     const styleId = 'investors-sticky-styles'
-    
-    // Check if style already exists to avoid duplicates
-    if (document.getElementById(styleId)) return
-    
-    const style = document.createElement('style')
-    style.id = styleId
-    style.textContent = `
-      @media (min-width: 1024px) {
-        .sticky-nav {
-          position: -webkit-sticky !important;
-          position: sticky !important;
-          top: 7rem !important;
-          align-self: start !important;
-          height: fit-content !important;
-          z-index: 10 !important;
-          width: 260px !important;
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style')
+      style.id = styleId
+      style.textContent = `
+        @media (min-width: 1024px) {
+          .sticky-nav {
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: 7rem !important;
+            align-self: start !important;
+            height: fit-content !important;
+            z-index: 10 !important;
+            width: 260px !important;
+          }
         }
-      }
-      @media (max-width: 1023px) {
-        .sticky-nav {
-          position: static !important;
+        @media (max-width: 1023px) {
+          .sticky-nav {
+            position: static !important;
+          }
         }
-      }
-    `
-    document.head.appendChild(style)
+      `
+      document.head.appendChild(style)
+    }
     
-    // Cleanup on unmount
     return () => {
+      window.removeEventListener('resize', applyStickyStyles)
       const existingStyle = document.getElementById(styleId)
       if (existingStyle) {
         existingStyle.remove()
@@ -153,7 +190,7 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-16 lg:items-start">
           {/* Left-hand Sticky Navigation */}
-          <aside className="sticky-nav w-full lg:w-[260px] lg:sticky lg:top-28 lg:self-start lg:h-fit lg:z-10">
+          <aside ref={stickyNavRef} className="sticky-nav w-full lg:w-[260px] lg:sticky lg:top-28 lg:self-start lg:h-fit lg:z-10">
             <div>
               <h4 className="text-base font-bold uppercase tracking-wider text-[#2c3e50] mb-4 pb-2 border-b-2 border-gray-200">
                 On This Page
