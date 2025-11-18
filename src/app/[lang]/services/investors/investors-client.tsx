@@ -28,12 +28,12 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
   // Scroll spy functionality
   useEffect(() => {
     const handleScroll = () => {
-      const sections = document.querySelectorAll<HTMLElement>(".content-card section")
-      const navLinks = document.querySelectorAll<HTMLAnchorElement>(".sticky-nav ul li a")
-
+      const sections = document.querySelectorAll<HTMLElement>('.content-card section')
+      const navLinks = document.querySelectorAll<HTMLAnchorElement>('.sticky-nav ul li a')
+      
       if (!sections.length || !navLinks.length) return
 
-      let currentId = ""
+      let currentId = ''
 
       sections.forEach((section) => {
         const sectionTop = section.offsetTop
@@ -43,19 +43,19 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
       })
 
       navLinks.forEach((link) => {
-        link.classList.remove("active")
-        if (link.getAttribute("href") === `#${currentId}`) {
-          link.classList.add("active")
+        link.classList.remove('active')
+        if (link.getAttribute('href') === `#${currentId}`) {
+          link.classList.add('active')
         }
       })
 
-      setActiveSection(currentId || "intro")
+      setActiveSection(currentId || 'intro')
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll() // Run on page load
 
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const scrollToSection = (sectionId: string) => {
@@ -68,9 +68,9 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
 
     window.scrollTo({
       top: offsetPosition,
-      behavior: "smooth",
+      behavior: 'smooth',
     })
-
+    
     setActiveSection(sectionId)
   }
 
