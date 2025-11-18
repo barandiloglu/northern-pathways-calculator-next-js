@@ -88,6 +88,47 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array - navigationItems is constant and handleScroll is recreated on mount
 
+  // Inject critical sticky styles directly into the page to ensure they load
+  // even if CSS chunks fail (fixes Vercel deployment issue)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    
+    const styleId = 'investors-sticky-styles'
+    
+    // Check if style already exists to avoid duplicates
+    if (document.getElementById(styleId)) return
+    
+    const style = document.createElement('style')
+    style.id = styleId
+    style.textContent = `
+      @media (min-width: 1024px) {
+        .sticky-nav {
+          position: -webkit-sticky !important;
+          position: sticky !important;
+          top: 7rem !important;
+          align-self: start !important;
+          height: fit-content !important;
+          z-index: 10 !important;
+          width: 260px !important;
+        }
+      }
+      @media (max-width: 1023px) {
+        .sticky-nav {
+          position: static !important;
+        }
+      }
+    `
+    document.head.appendChild(style)
+    
+    // Cleanup on unmount
+    return () => {
+      const existingStyle = document.getElementById(styleId)
+      if (existingStyle) {
+        existingStyle.remove()
+      }
+    }
+  }, [])
+
   const scrollToSection = (sectionId: string) => {
     if (typeof window === 'undefined') return
     
