@@ -21,7 +21,6 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { LanguageSwitcher } from "./language-switcher"
-import { PreAssessmentModal } from "./pre-assessment-modal"
 import { type Locale } from "@/lib/i18n-config"
 import { getTranslations } from "@/lib/i18n"
 
@@ -37,7 +36,6 @@ export function Header({ lang }: HeaderProps) {
   const [servicesHover, setServicesHover] = useState(false)
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
   const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false)
-  const [isPreAssessmentModalOpen, setIsPreAssessmentModalOpen] = useState(false)
   const pathname = usePathname()
   const t = getTranslations(lang)
 
@@ -149,8 +147,8 @@ export function Header({ lang }: HeaderProps) {
         display: 'block'
       }}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 md:h-24 gap-2 md:gap-4">
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="flex items-center justify-between h-16 sm:h-20 md:h-24 gap-2 sm:gap-3 md:gap-4">
           {/* Div 1 - Logo/Icon */}
           <motion.div 
             variants={itemVariants} 
@@ -158,7 +156,7 @@ export function Header({ lang }: HeaderProps) {
             style={{ opacity: 1 }}
           >
             <Link href={`/${lang}`} className="flex items-center group">
-              <div className="h-14 md:h-20 w-auto max-w-[140px] md:max-w-none min-w-[80px] md:min-w-[100px]">
+              <div className="h-12 sm:h-14 md:h-20 w-auto max-w-[120px] sm:max-w-[140px] md:max-w-none min-w-[70px] sm:min-w-[80px] md:min-w-[100px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/logoFooter.png" 
@@ -363,13 +361,13 @@ export function Header({ lang }: HeaderProps) {
 
           {/* Div 3 - Pre-Assessment and Language Selection (Desktop) */}
           <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 flex-shrink-0">
-            {/* Pre-Assessment Button */}
-            <button
-              onClick={() => setIsPreAssessmentModalOpen(true)}
+            {/* Pre-Assessment Link */}
+            <Link
+              href={`/${lang}/pre-assessment`}
               className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
             >
               <span>Pre-Assessment</span>
-            </button>
+            </Link>
 
             <LanguageSwitcher currentLang={lang} />
           </motion.div>
@@ -377,7 +375,7 @@ export function Header({ lang }: HeaderProps) {
           {/* Div 3 - Language Switcher and Menu Button (Mobile) */}
           <motion.div 
             variants={itemVariants} 
-            className="flex items-center gap-2 md:hidden flex-shrink-0"
+            className="flex items-center gap-2 sm:gap-3 md:hidden flex-shrink-0"
             style={{ opacity: 1 }}
           >
             <div className="flex-shrink-0">
@@ -385,7 +383,7 @@ export function Header({ lang }: HeaderProps) {
             </div>
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="relative p-2 rounded-lg text-white hover:bg-white/10 transition-all duration-200 w-10 h-10 flex items-center justify-center flex-shrink-0"
+              className="relative p-2.5 rounded-lg text-white hover:bg-white/10 active:bg-white/20 transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0 touch-friendly"
               aria-label="Toggle menu"
               style={{ opacity: 1 }}
             >
@@ -428,8 +426,8 @@ export function Header({ lang }: HeaderProps) {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-brand-maroon border-t border-brand-red/30 overflow-hidden"
           >
-            <div className="container mx-auto px-4 py-4">
-              <div className="space-y-2">
+            <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+              <div className="space-y-1 sm:space-y-2">
                 {navItems.map((item) => {
                   // Handle Services with dropdown
                   if (item.label === "Services") {
@@ -439,10 +437,10 @@ export function Header({ lang }: HeaderProps) {
                         <button
                           type="button"
                           onClick={() => setIsMobileServicesOpen((open) => !open)}
-                          className={`flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative ${
+                          className={`flex w-full items-center justify-between gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 relative min-h-[44px] touch-friendly ${
                             isServicesActive
                               ? "text-white"
-                              : "text-white/90 hover:text-white hover:bg-white/10"
+                              : "text-white/90 hover:text-white active:bg-white/10"
                           }`}
                         >
                           <motion.span
@@ -480,10 +478,10 @@ export function Header({ lang }: HeaderProps) {
                                   <Link
                                     key={service.href}
                                     href={service.href}
-                                    className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
+                                    className={`flex items-center gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 min-h-[44px] touch-friendly ${
                                       isActive
                                         ? "bg-white/20 text-white"
-                                        : "text-white/90 hover:text-white hover:bg-white/10"
+                                        : "text-white/90 hover:text-white active:bg-white/10"
                                     }`}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                   >
@@ -506,10 +504,10 @@ export function Header({ lang }: HeaderProps) {
                     <Link
                       key={item.label}
                       href={item.href}
-                      className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
+                      className={`flex items-center gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 min-h-[44px] touch-friendly ${
                         isActive
                           ? "text-white"
-                          : "text-white/90 hover:text-white hover:bg-white/10"
+                          : "text-white/90 hover:text-white active:bg-white/10"
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -533,7 +531,7 @@ export function Header({ lang }: HeaderProps) {
                   <button
                     type="button"
                     onClick={() => setIsMobileToolsOpen((open) => !open)}
-                    className="flex w-full items-center justify-between gap-3 p-3 rounded-lg font-medium transition-all duration-200 relative text-white/90 hover:bg-white/10 hover:text-white"
+                    className="flex w-full items-center justify-between gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 relative min-h-[44px] touch-friendly text-white/90 active:bg-white/10 hover:text-white"
                   >
                     <motion.span
                       className="absolute left-0 right-0 bottom-0 h-px bg-white"
@@ -570,10 +568,10 @@ export function Header({ lang }: HeaderProps) {
                             <Link
                               key={tool.href}
                               href={tool.href}
-                              className={`flex items-center gap-3 p-3 rounded-lg font-medium transition-all duration-200 ${
+                              className={`flex items-center gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 min-h-[44px] touch-friendly ${
                                 isActive
                                   ? "bg-white/20 text-white"
-                                  : "text-white/90 hover:text-white hover:bg-white/10"
+                                  : "text-white/90 hover:text-white active:bg-white/10"
                               }`}
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
@@ -588,26 +586,18 @@ export function Header({ lang }: HeaderProps) {
                 </div>
 
                 {/* Pre-Assessment Mobile */}
-                <button
-                  onClick={() => {
-                    setIsPreAssessmentModalOpen(true)
-                    setIsMobileMenuOpen(false)
-                  }}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
+                <Link
+                  href={`/${lang}/pre-assessment`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 bg-white/10 active:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg active:shadow-xl whitespace-nowrap min-h-[44px] w-full touch-friendly"
                 >
                   <span>Pre-Assessment</span>
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Pre-Assessment Modal */}
-      <PreAssessmentModal
-        isOpen={isPreAssessmentModalOpen}
-        onClose={() => setIsPreAssessmentModalOpen(false)}
-      />
     </motion.header>
   )
 }
