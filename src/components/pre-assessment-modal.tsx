@@ -43,7 +43,7 @@ export function PreAssessmentModal({ isOpen, onClose }: PreAssessmentModalProps)
   useEffect(() => {
     if (isOpen) {
       // Check if script already exists
-      let script1 = document.querySelector('script[src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"]')
+      let script1: HTMLScriptElement | null = document.querySelector('script[src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"]') as HTMLScriptElement
       
       if (!script1) {
         script1 = document.createElement("script")
@@ -62,9 +62,11 @@ export function PreAssessmentModal({ isOpen, onClose }: PreAssessmentModalProps)
       }
 
       if (script1) {
-        script1.addEventListener("load", initJotForm)
-        if ((script1 as HTMLScriptElement).readyState === "complete") {
+        // Check if script is already loaded
+        if (window.jotformEmbedHandler) {
           initJotForm()
+        } else {
+          script1.addEventListener("load", initJotForm)
         }
       } else {
         initJotForm()
