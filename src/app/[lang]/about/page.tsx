@@ -1,9 +1,8 @@
-import { getTranslations } from "@/lib/i18n"
 import { type Locale } from "@/lib/i18n-config"
 import Link from "next/link"
-import { Suspense } from "react"
 import { AnimatedHero } from "@/components/animated-hero"
 import { Reveal } from "@/components/reveal"
+import { AnimatedSeparator } from "@/components/animated-separator"
 
 interface PageProps {
   params: Promise<{ lang: Locale }>
@@ -11,7 +10,6 @@ interface PageProps {
 
 export default async function AboutPage({ params }: PageProps) {
   const { lang } = await params
-  const t = getTranslations(lang)
 
   return (
     <div className="min-h-screen">
@@ -73,28 +71,8 @@ export default async function AboutPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Stats banner */}
-      <section className="bg-[#213142] text-white">
-        <div className="container mx-auto px-4 py-10 md:py-14">
-          <Reveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { k: "10+", l: "Years of Experience" },
-                { k: "500+", l: "Happy Clients" },
-                { k: "98%", l: "Success Rate" },
-                { k: "15+", l: "Countries Served" },
-              ].map((s, i) => (
-                <Reveal key={s.l} delay={i * 0.05}>
-                  <div>
-                    <div className="text-3xl md:text-4xl font-extrabold">{s.k}</div>
-                    <div className="mt-1 text-white/80 text-sm md:text-base">{s.l}</div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* Visual Separator */}
+      <AnimatedSeparator />
 
       {/* Team */}
       <section className="bg-white">
@@ -175,7 +153,7 @@ export default async function AboutPage({ params }: PageProps) {
                 <Reveal key={member.name}>
                   <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100">
                     <div className="h-44 bg-gradient-to-b from-gray-100 to-gray-50 w-full flex items-center justify-center text-gray-400">
-                      [{member.name.split(" ")[0]}'s Photo]
+                      [{member.name.split(" ")[0]}&apos;s Photo]
                     </div>
                     <div className="p-6">
                       <div className="text-lg font-extrabold text-[#2c2b2b]">{member.name}</div>

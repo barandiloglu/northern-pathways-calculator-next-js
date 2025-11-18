@@ -45,7 +45,7 @@ export default async function LangLayout({ children, params }: LangLayoutProps) 
       <body className={montserrat.variable} suppressHydrationWarning>
         <ScrollToTop />
         <Header lang={lang} />
-        <main className="pt-16 sm:pt-20 md:pt-28">{children}</main>
+        <main className="pt-16 sm:pt-20 md:pt-24">{children}</main>
         <Footer lang={lang} />
       </body>
     </html>

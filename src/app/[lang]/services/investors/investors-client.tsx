@@ -263,4 +263,3 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
     </div>
   )
 }
-
