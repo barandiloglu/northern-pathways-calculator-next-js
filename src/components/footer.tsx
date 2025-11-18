@@ -3,8 +3,13 @@
 import { motion } from "framer-motion"
 import { Linkedin, Instagram } from "lucide-react"
 import Link from "next/link"
+import { type Locale } from "@/lib/i18n-config"
 
-export function Footer() {
+interface FooterProps {
+  lang: Locale
+}
+
+export function Footer({ lang }: FooterProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -72,25 +77,59 @@ export function Footer() {
           {/* Quick Links */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
             <h3 className="text-2xl font-bold text-white mb-6">Quick Links</h3>
-            <div className="space-y-4">
-              <Link href="/en" className="block text-white/90 hover:text-white transition-colors duration-200">
-                Services
-              </Link>
-              <Link href="/en" className="block text-white/90 hover:text-white transition-colors duration-200">
-                Why Us
-              </Link>
-              <Link href="/en" className="block text-white/90 hover:text-white transition-colors duration-200">
-                About Us
-              </Link>
-              <Link href="/en" className="block text-white/90 hover:text-white transition-colors duration-200">
-                Testimonials
-              </Link>
-              <Link href="/en/crs-calculator" className="block text-white/90 hover:text-white transition-colors duration-200">
-                Tools
-              </Link>
-              <Link href="/en" className="block text-white/90 hover:text-white transition-colors duration-200">
-                FAQ
-              </Link>
+            <div className="grid grid-cols-3 gap-6">
+              {/* Main Navigation - Left Column */}
+              <div className="space-y-3">
+                <Link href={`/${lang}`} className="block text-white/90 hover:text-white transition-colors duration-200">
+                  Home
+                </Link>
+                <Link href={`/${lang}/about`} className="block text-white/90 hover:text-white transition-colors duration-200">
+                  About Us
+                </Link>
+                <Link href={`/${lang}/fees`} className="block text-white/90 hover:text-white transition-colors duration-200">
+                  Fees
+                </Link>
+                <Link href={`/${lang}/events`} className="block text-white/90 hover:text-white transition-colors duration-200">
+                  Events
+                </Link>
+                <Link href={`/${lang}/blogs`} className="block text-white/90 hover:text-white transition-colors duration-200">
+                  Blogs
+                </Link>
+              </div>
+
+              {/* Services Section - Middle Column */}
+              <div className="space-y-3">
+                <h4 className="text-lg font-semibold text-white mb-2">Services</h4>
+                <Link href={`/${lang}/services/economic-immigration`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  Economic Immigration
+                </Link>
+                <Link href={`/${lang}/services/family-class`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  Family Class
+                </Link>
+                <Link href={`/${lang}/services/temporary-residence`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  Temporary Residence
+                </Link>
+                <Link href={`/${lang}/services/employers`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  Employers
+                </Link>
+                <Link href={`/${lang}/services/citizenship`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  Citizenship
+                </Link>
+                <Link href={`/${lang}/services/investors`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  Investors
+                </Link>
+              </div>
+
+              {/* Tools Section - Right Column */}
+              <div className="space-y-3">
+                <h4 className="text-lg font-semibold text-white mb-2">Tools</h4>
+                <Link href={`/${lang}/crs-calculator`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  CRS Calculator
+                </Link>
+                <Link href={`/${lang}/fswp-calculator`} className="block text-white/90 hover:text-white transition-colors duration-200 text-sm">
+                  FSWP Calculator
+                </Link>
+              </div>
             </div>
           </motion.div>
 
@@ -136,3 +175,4 @@ export function Footer() {
     </footer>
   )
 }
+

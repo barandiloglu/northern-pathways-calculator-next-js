@@ -46,7 +46,7 @@ export default async function LangLayout({ children, params }: LangLayoutProps) 
         <ScrollToTop />
         <Header lang={lang} />
         <main className="pt-16 sm:pt-20 md:pt-28">{children}</main>
-        <Footer />
+        <Footer lang={lang} />
       </body>
     </html>
   )

@@ -28,7 +28,6 @@ import {
   X
 } from "lucide-react"
 
-import { Footer } from "@/components/footer"
 import { calculateCRSScore, CRSFormData } from "@/utils/calculateCRSScore"
 import { DrawsModal } from "@/components/draws-modal"
 import {
@@ -598,10 +597,6 @@ export default function CRSCalculatorPage() {
             </div>
           </div>
         </main>
-
-
-
-      <Footer />
     </div>
   )
 }

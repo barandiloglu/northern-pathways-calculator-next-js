@@ -28,7 +28,6 @@ import {
   X
 } from "lucide-react"
 
-import { Footer } from "@/components/footer"
 import { calculateFSWPScore, FSWPFormData } from "@/utils/calculateFSWPScore"
 import { DrawsModal } from "@/components/draws-modal"
 
@@ -553,7 +552,6 @@ export default function FSWPCalculatorPage() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     )
   }

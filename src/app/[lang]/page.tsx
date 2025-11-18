@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Footer } from "@/components/footer"
 import { LatestDraws } from "@/components/latest-draws"
 import { FloatingDrawsButton } from "@/components/floating-draws-button"
 import { HeroSection } from "@/components/homepage/hero-section"
@@ -41,7 +40,6 @@ export default function HomePage() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     )
   }
