@@ -27,6 +27,9 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
 
   // Scroll spy functionality
   useEffect(() => {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return
+
     const handleScroll = () => {
       const sections = document.querySelectorAll('.content-card section')
       const navLinks = document.querySelectorAll('.sticky-nav ul li a')
@@ -37,7 +40,8 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
 
       sections.forEach((section) => {
         const sectionTop = (section as HTMLElement).offsetTop
-        if (window.pageYOffset >= sectionTop - 150) {
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop
+        if (scrollPosition >= sectionTop - 150) {
           current = section.getAttribute('id') || ''
         }
       })
@@ -53,18 +57,46 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
       setActiveSection(current || navigationItems[0].id)
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Run on page load
+    // Wait for DOM to be fully ready before attaching listeners
+    // Use requestAnimationFrame to ensure layout is complete
+    let retryCount = 0
+    const maxRetries = 20 // Maximum 1 second of retries (20 * 50ms)
+    
+    const initScrollSpy = () => {
+      requestAnimationFrame(() => {
+        // Double-check elements exist
+        const sections = document.querySelectorAll('.content-card section')
+        const navLinks = document.querySelectorAll('.sticky-nav ul li a')
+        
+        if (sections.length > 0 && navLinks.length > 0) {
+          window.addEventListener('scroll', handleScroll, { passive: true })
+          handleScroll() // Run on page load
+        } else if (retryCount < maxRetries) {
+          // Retry after a short delay if elements aren't ready
+          retryCount++
+          setTimeout(initScrollSpy, 50)
+        }
+      })
+    }
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [navigationItems])
+    // Start initialization
+    initScrollSpy()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Empty dependency array - navigationItems is constant and handleScroll is recreated on mount
 
   const scrollToSection = (sectionId: string) => {
+    if (typeof window === 'undefined') return
+    
     const section = document.getElementById(sectionId)
     if (section) {
       const headerOffset = 120
       const elementPosition = section.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop
+      const offsetPosition = elementPosition + scrollPosition - headerOffset
 
       window.scrollTo({
         top: offsetPosition,
