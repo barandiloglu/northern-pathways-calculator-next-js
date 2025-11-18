@@ -147,12 +147,12 @@ export function Header({ lang }: HeaderProps) {
         display: 'block'
       }}
     >
-      <div className="container mx-auto px-3 sm:px-4">
-        <div className="flex items-center justify-between h-16 sm:h-20 md:h-24 gap-2 sm:gap-3 md:gap-4">
-          {/* Div 1 - Logo/Icon */}
+      <div className="container mx-auto px-3 sm:px-4 max-w-[1920px]">
+        <div className="flex md:grid md:grid-cols-[1fr_auto_1fr] items-center h-16 sm:h-20 md:h-24 gap-4">
+          {/* Div 1 - Logo/Icon - Left Aligned */}
           <motion.div 
             variants={itemVariants} 
-            className="flex items-center flex-shrink-0"
+            className="flex items-center justify-start z-10"
             style={{ opacity: 1 }}
           >
             <Link href={`/${lang}`} className="flex items-center group">
@@ -169,8 +169,8 @@ export function Header({ lang }: HeaderProps) {
             </Link>
           </motion.div>
 
-          {/* Div 2 - Nav Items (Desktop only) */}
-          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-1 flex-1 justify-center">
+          {/* Div 2 - Nav Items (Desktop only) - Center Aligned */}
+          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-2 justify-center z-20">
             {navItems.map((item) => {
               // Handle Services with dropdown
               if (item.label === "Services") {
@@ -359,14 +359,23 @@ export function Header({ lang }: HeaderProps) {
           {/* Div 2 - Empty space on mobile (prevents logo from blocking) */}
           <div className="flex-1 md:hidden" />
 
-          {/* Div 3 - Pre-Assessment and Language Selection (Desktop) */}
-          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 flex-shrink-0">
+          {/* Div 3 - Pre-Assessment, Book Consultation and Language Selection (Desktop) - Right Aligned */}
+          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 justify-end z-10">
             {/* Pre-Assessment Link */}
             <Link
               href={`/${lang}/pre-assessment`}
               className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
             >
               <span>Pre-Assessment</span>
+            </Link>
+
+            {/* Book a Consultation Link */}
+            <Link
+              href={`/${lang}/book-consultation`}
+              className="flex items-center gap-2 px-6 py-2.5 bg-white hover:bg-white/90 text-brand-red rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
+            >
+              <Calendar className="h-4 w-4" />
+              <span>Book Consultation</span>
             </Link>
 
             <LanguageSwitcher currentLang={lang} />
@@ -426,7 +435,7 @@ export function Header({ lang }: HeaderProps) {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-brand-maroon border-t border-brand-red/30 overflow-hidden"
           >
-            <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+            <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 max-w-[1920px]">
               <div className="space-y-1 sm:space-y-2">
                 {navItems.map((item) => {
                   // Handle Services with dropdown
@@ -592,6 +601,16 @@ export function Header({ lang }: HeaderProps) {
                   className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 bg-white/10 active:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg active:shadow-xl whitespace-nowrap min-h-[44px] w-full touch-friendly"
                 >
                   <span>Pre-Assessment</span>
+                </Link>
+
+                {/* Book a Consultation Mobile */}
+                <Link
+                  href={`/${lang}/book-consultation`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 bg-white text-brand-red active:bg-white/90 rounded-lg font-semibold transition-all duration-200 shadow-lg active:shadow-xl whitespace-nowrap min-h-[44px] w-full touch-friendly mt-4 sm:mt-6"
+                >
+                  <Calendar className="h-5 w-5" />
+                  <span>Book Consultation</span>
                 </Link>
               </div>
             </div>
