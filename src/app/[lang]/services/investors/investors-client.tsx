@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { type Locale } from "@/lib/i18n-config"
 import { CheckCircle2 } from "lucide-react"
 import Link from "next/link"
@@ -16,7 +16,6 @@ interface NavigationItem {
 
 export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
   const [activeSection, setActiveSection] = useState<string>("intro")
-  const stickyNavRef = useRef<HTMLElement>(null)
 
   const navigationItems: NavigationItem[] = [
     { id: "intro", label: "Business Immigration" },
@@ -28,170 +27,60 @@ export function InvestorsPageClient({ lang }: InvestorsPageClientProps) {
 
   // Scroll spy functionality
   useEffect(() => {
-    // Ensure we're on the client side
-    if (typeof window === 'undefined') return
-
     const handleScroll = () => {
-      const sections = document.querySelectorAll('.content-card section')
-      const navLinks = document.querySelectorAll('.sticky-nav ul li a')
-      
-      if (sections.length === 0 || navLinks.length === 0) return
+      const sections = document.querySelectorAll<HTMLElement>(".content-card section")
+      const navLinks = document.querySelectorAll<HTMLAnchorElement>(".sticky-nav ul li a")
 
-      let current = ''
+      if (!sections.length || !navLinks.length) return
+
+      let currentId = ""
 
       sections.forEach((section) => {
-        const sectionTop = (section as HTMLElement).offsetTop
-        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop
-        if (scrollPosition >= sectionTop - 150) {
-          current = section.getAttribute('id') || ''
+        const sectionTop = section.offsetTop
+        if (window.pageYOffset >= sectionTop - 150) {
+          currentId = section.id
         }
       })
 
       navLinks.forEach((link) => {
-        const anchor = link as HTMLAnchorElement
-        anchor.classList.remove('active')
-        if (anchor.getAttribute('href') === `#${current}`) {
-          anchor.classList.add('active')
+        link.classList.remove("active")
+        if (link.getAttribute("href") === `#${currentId}`) {
+          link.classList.add("active")
         }
       })
 
-      setActiveSection(current || navigationItems[0].id)
+      setActiveSection(currentId || "intro")
     }
 
-    // Wait for DOM to be fully ready before attaching listeners
-    // Use requestAnimationFrame to ensure layout is complete
-    let retryCount = 0
-    const maxRetries = 20 // Maximum 1 second of retries (20 * 50ms)
-    
-    const initScrollSpy = () => {
-      requestAnimationFrame(() => {
-        // Double-check elements exist
-        const sections = document.querySelectorAll('.content-card section')
-        const navLinks = document.querySelectorAll('.sticky-nav ul li a')
-        
-        if (sections.length > 0 && navLinks.length > 0) {
-          window.addEventListener('scroll', handleScroll, { passive: true })
-          handleScroll() // Run on page load
-        } else if (retryCount < maxRetries) {
-          // Retry after a short delay if elements aren't ready
-          retryCount++
-          setTimeout(initScrollSpy, 50)
-        }
-      })
-    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll() // Run on page load
 
-    // Start initialization
-    initScrollSpy()
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) // Empty dependency array - navigationItems is constant and handleScroll is recreated on mount
-
-  // Apply sticky styles directly to the element and ensure parent containers are correct
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    
-    const applyStickyStyles = () => {
-      const navElement = stickyNavRef.current
-      if (!navElement) return
-      
-      // Check if we're on desktop
-      if (window.innerWidth >= 1024) {
-        // Apply styles directly to the element with inline styles (highest priority)
-        navElement.style.setProperty('position', '-webkit-sticky', 'important')
-        navElement.style.setProperty('position', 'sticky', 'important')
-        navElement.style.setProperty('top', '7rem', 'important')
-        navElement.style.setProperty('align-self', 'start', 'important')
-        navElement.style.setProperty('height', 'fit-content', 'important')
-        navElement.style.setProperty('z-index', '10', 'important')
-        navElement.style.setProperty('width', '260px', 'important')
-      } else {
-        // Mobile: ensure static positioning
-        navElement.style.setProperty('position', 'static', 'important')
-      }
-    }
-    
-    // Wait for DOM to be ready, then apply styles
-    const initSticky = () => {
-      requestAnimationFrame(() => {
-        if (stickyNavRef.current) {
-          applyStickyStyles()
-        } else {
-          // Retry if element not ready
-          setTimeout(initSticky, 50)
-        }
-      })
-    }
-    
-    // Start initialization
-    initSticky()
-    
-    // Re-apply on resize
-    window.addEventListener('resize', applyStickyStyles)
-    
-    // Also inject global styles as backup
-    const styleId = 'investors-sticky-styles'
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement('style')
-      style.id = styleId
-      style.textContent = `
-        @media (min-width: 1024px) {
-          .sticky-nav {
-            position: -webkit-sticky !important;
-            position: sticky !important;
-            top: 7rem !important;
-            align-self: start !important;
-            height: fit-content !important;
-            z-index: 10 !important;
-            width: 260px !important;
-          }
-        }
-        @media (max-width: 1023px) {
-          .sticky-nav {
-            position: static !important;
-          }
-        }
-      `
-      document.head.appendChild(style)
-    }
-    
-    return () => {
-      window.removeEventListener('resize', applyStickyStyles)
-      const existingStyle = document.getElementById(styleId)
-      if (existingStyle) {
-        existingStyle.remove()
-      }
-    }
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const scrollToSection = (sectionId: string) => {
-    if (typeof window === 'undefined') return
-    
     const section = document.getElementById(sectionId)
-    if (section) {
-      const headerOffset = 120
-      const elementPosition = section.getBoundingClientRect().top
-      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop
-      const offsetPosition = elementPosition + scrollPosition - headerOffset
+    if (!section) return
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      })
-      
-      setActiveSection(sectionId)
-    }
+    const headerOffset = 120
+    const elementPosition = section.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    })
+
+    setActiveSection(sectionId)
   }
 
   return (
-    <div className="bg-[#f8f8f8] min-h-screen">
+    <div className="bg-[#f8f8f8]">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-16 lg:items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-16">
           {/* Left-hand Sticky Navigation */}
-          <aside ref={stickyNavRef} className="sticky-nav w-full lg:w-[260px] lg:sticky lg:top-28 lg:self-start lg:h-fit lg:z-10">
-            <div>
+          <aside className="sticky-nav">
+            <div className="lg:sticky lg:top-28 lg:self-start">
               <h4 className="text-base font-bold uppercase tracking-wider text-[#2c3e50] mb-4 pb-2 border-b-2 border-gray-200">
                 On This Page
               </h4>
