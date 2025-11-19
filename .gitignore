@@ -44,3 +44,4 @@ next-env.d.ts
 CRS breakdown.docx
 CRS_Score_Breakdown_2025-09-25 (5).pdf
 EXPRESS_ENTRY_DRAWS_README.md
+/src/generated/prisma

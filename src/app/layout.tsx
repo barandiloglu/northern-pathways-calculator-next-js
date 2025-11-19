@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { Toaster } from "@/components/ui/toaster";
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={montserrat.variable} suppressHydrationWarning>
         <ScrollToTop />
         {children}
+        <Toaster />
       </body>
     </html>
   );
