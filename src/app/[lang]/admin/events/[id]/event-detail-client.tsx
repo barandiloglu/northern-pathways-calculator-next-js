@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { motion } from "framer-motion"
 import {
   ArrowLeft,
   Edit,
@@ -18,7 +17,6 @@ import {
 } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { useToast } from "@/hooks/use-toast"
-import { formatDateTime } from "@/lib/utils"
 
 // Helper function to format date
 function formatDateString(date: Date | string): string {

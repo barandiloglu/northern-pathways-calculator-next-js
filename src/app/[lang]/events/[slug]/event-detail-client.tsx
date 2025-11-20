@@ -53,8 +53,6 @@ interface EventDetailClientProps {
     photos: any
     videos: any
     calendarUrl: string | null
-    capacity: number | null
-    registeredCount: number
     author: {
       id: string
       name: string | null
