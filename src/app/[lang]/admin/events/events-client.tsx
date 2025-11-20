@@ -420,11 +420,11 @@ export function EventsClient({ lang, events }: EventsClientProps) {
                     {/* Actions */}
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <motion.button
-                        onClick={() => router.push(`/${lang}/events/${event.slug}`)}
+                        onClick={() => router.push(`/${lang}/admin/events/${event.id}`)}
                         className="p-2 text-[#2c2b2b]/60 hover:text-[#2c2b2b] hover:bg-gray-100 rounded-lg transition-colors"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        title="View"
+                        title="View Details"
                       >
                         <Eye className="w-5 h-5" />
                       </motion.button>

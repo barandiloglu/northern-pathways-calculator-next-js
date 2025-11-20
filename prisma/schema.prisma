@@ -217,6 +217,7 @@ model Event {
   // Relations
   authorId String
   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  registrations EventRegistration[]
 
   @@index([slug])
   @@index([status, publishedAt])
@@ -224,6 +225,47 @@ model Event {
   @@index([startDate])
   @@index([language])
   @@map("events")
+}
+
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  WAITLISTED
+}
+
+model EventRegistration {
+  id        String   @id @default(cuid())
+  
+  // Event relation
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  // Registrant Information (collected from user)
+  firstName    String
+  lastName     String
+  email        String
+
+  // Registration Status
+  status            RegistrationStatus @default(PENDING)
+
+  // Tracking timestamps
+  registeredAt DateTime @default(now())
+  confirmedAt  DateTime?
+  cancelledAt  DateTime?
+  
+  // Admin Notes (for internal use, not collected from user)
+  adminNotes String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([eventId, email])
+  @@index([eventId])
+  @@index([email])
+  @@index([status])
+  @@index([registeredAt])
+  @@map("event_registrations")
 }
 
 model EventTranslation {

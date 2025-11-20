@@ -7,6 +7,7 @@ import { Reveal } from "@/components/reveal"
 import Link from "next/link"
 import Image from "next/image"
 import { QRCodeSVG } from "qrcode.react"
+import { EventRegistrationModal } from "@/components/events/event-registration-modal"
 
 interface TipTapJSON {
   type: string
@@ -52,6 +53,8 @@ interface EventDetailClientProps {
     photos: any
     videos: any
     calendarUrl: string | null
+    capacity: number | null
+    registeredCount: number
     author: {
       id: string
       name: string | null
@@ -223,6 +226,7 @@ function renderTipTapContent(content: string): React.ReactNode {
 
 export function EventDetailClient({ lang, event }: EventDetailClientProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false)
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : ""
   const shareText = `Check out this event: ${event.title}`
@@ -539,15 +543,23 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                   )}
 
                   {/* Register Button */}
-                  {event.registrationRequired && event.registrationUrl && (
-                    <a
-                      href={event.registrationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  {event.registrationRequired && (
+                    <motion.button
+                      onClick={() => setIsRegistrationModalOpen(true)}
                       className="block w-full text-center px-6 py-3 bg-white border-2 border-brand-red text-brand-red hover:bg-gray-50 rounded-lg font-semibold transition-colors mb-4"
+                      whileHover={{ 
+                        scale: 1.02,
+                        boxShadow: "0 4px 12px rgba(185, 32, 37, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 400, 
+                        damping: 17 
+                      }}
                     >
                       Register Now
-                    </a>
+                    </motion.button>
                   )}
 
                   {/* QR Code Section */}
@@ -643,6 +655,22 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Registration Modal */}
+      {event.registrationRequired && (
+        <EventRegistrationModal
+          isOpen={isRegistrationModalOpen}
+          onClose={() => setIsRegistrationModalOpen(false)}
+          eventId={event.id}
+          eventTitle={event.title}
+          capacity={event.capacity}
+          registeredCount={event.registeredCount}
+          onRegistrationSuccess={() => {
+            // Refresh page to update registered count
+            window.location.reload()
+          }}
+        />
       )}
     </div>
   )
