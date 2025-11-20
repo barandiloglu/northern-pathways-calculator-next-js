@@ -387,10 +387,14 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
                 <article className="prose prose-lg max-w-none">
                   {(() => {
                     // Check if content is TipTap JSON format (has type: "doc" or is an object with type property)
+                    const contentObj = content as any
                     const isTipTapFormat = content && 
                       typeof content === "object" && 
                       !Array.isArray(content) && 
-                      (content.type === "doc" || content.type)
+                      contentObj &&
+                      typeof contentObj === "object" &&
+                      "type" in contentObj &&
+                      (contentObj.type === "doc" || contentObj.type)
 
                     if (isTipTapFormat) {
                       // Render TipTap JSON content
