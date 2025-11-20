@@ -21,7 +21,7 @@ interface EventDetailClientProps {
   lang: string
   event: {
     id: string
-    slug: string
+  slug: string
     title: string
     subtitle: string | null
     description: string | null
@@ -244,7 +244,7 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
 
   const handleAddToCalendar = () => {
     if (event.calendarUrl) {
-      window.open(event.calendarUrl, "_blank")
+    window.open(event.calendarUrl, "_blank")
     }
   }
 
@@ -282,7 +282,7 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="text-white text-lg md:text-2xl">Event Hero Image</span>
+          <span className="text-white text-lg md:text-2xl">Event Hero Image</span>
             </div>
           )}
         </div>
@@ -317,10 +317,10 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                       </div>
                     </div>
                     {(event.startTime || event.endTime) && (
-                      <div className="flex items-center gap-3">
-                        <Clock className="h-5 w-5 text-brand-red flex-shrink-0" />
-                        <div>
-                          <p className="text-sm text-[#2c2b2b]/60">Time</p>
+                    <div className="flex items-center gap-3">
+                      <Clock className="h-5 w-5 text-brand-red flex-shrink-0" />
+                      <div>
+                        <p className="text-sm text-[#2c2b2b]/60">Time</p>
                           <p className="text-[#2c2b2b] font-medium">
                             {formatTime(event.startTime, event.endTime, event.timezone)}
                           </p>
@@ -331,10 +331,10 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
 
                   {/* Address or Meeting Link */}
                   {event.locationType === "IN_PERSON" && fullAddress && (
-                    <div className="flex items-center gap-3">
-                      <MapPin className="h-5 w-5 text-brand-red flex-shrink-0" />
-                      <div>
-                        <p className="text-sm text-[#2c2b2b]/60">Address</p>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-5 w-5 text-brand-red flex-shrink-0" />
+                    <div>
+                      <p className="text-sm text-[#2c2b2b]/60">Address</p>
                         <p className="text-[#2c2b2b] font-medium">{fullAddress}</p>
                       </div>
                     </div>
@@ -353,8 +353,8 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                         >
                           Join Online Event
                         </a>
-                      </div>
                     </div>
+                  </div>
                   )}
                 </div>
               </Reveal>
@@ -395,49 +395,49 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
 
               {/* Event Details */}
               {event.description && (
-                <Reveal delay={0.3}>
-                  <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mb-4">
-                      Event Details
-                    </h2>
-                    <div className="prose prose-lg max-w-none">
+              <Reveal delay={0.3}>
+                <div className="mb-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mb-4">
+                    Event Details
+                  </h2>
+                  <div className="prose prose-lg max-w-none">
                       {renderTipTapContent(event.description)}
-                    </div>
                   </div>
-                </Reveal>
+                </div>
+              </Reveal>
               )}
 
               {/* What to Expect */}
               {whatToExpectItems.length > 0 && (
-                <Reveal delay={0.4}>
-                  <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mb-4">
-                      What to Expect:
-                    </h2>
-                    <ul className="space-y-3">
+              <Reveal delay={0.4}>
+                <div className="mb-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mb-4">
+                    What to Expect:
+                  </h2>
+                  <ul className="space-y-3">
                       {whatToExpectItems.map((item: string, index: number) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <span className="text-brand-red mt-1">•</span>
-                          <span className="text-[#2c2b2b]/80 text-base md:text-lg">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Reveal>
+                      <li key={index} className="flex items-start gap-3">
+                        <span className="text-brand-red mt-1">•</span>
+                        <span className="text-[#2c2b2b]/80 text-base md:text-lg">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
               )}
 
               {/* Dress Code */}
               {event.dressCode && (
-                <Reveal delay={0.5}>
-                  <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mb-4">
-                      Dress Code:
-                    </h2>
-                    <p className="text-[#2c2b2b]/80 leading-relaxed text-base md:text-lg">
-                      {event.dressCode}
-                    </p>
-                  </div>
-                </Reveal>
+              <Reveal delay={0.5}>
+                <div className="mb-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mb-4">
+                    Dress Code:
+                  </h2>
+                  <p className="text-[#2c2b2b]/80 leading-relaxed text-base md:text-lg">
+                    {event.dressCode}
+                  </p>
+                </div>
+              </Reveal>
               )}
 
               {/* Special Notes */}
@@ -456,18 +456,18 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
 
               {/* Photo Gallery */}
               {photos.length > 0 && (
-                <Reveal delay={0.7}>
-                  <div className="mb-8">
+              <Reveal delay={0.7}>
+                <div className="mb-8">
                     <h2 className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mb-4">
                       Photos
-                    </h2>
+                  </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {photos.map((photo: string, index: number) => (
-                        <motion.div
-                          key={index}
-                          whileHover={{ scale: 1.02 }}
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.02 }}
                           className="relative h-48 rounded-lg overflow-hidden cursor-pointer"
-                          onClick={() => setSelectedImage(photo)}
+                        onClick={() => setSelectedImage(photo)}
                         >
                           <Image
                             src={photo}
@@ -476,8 +476,8 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                             className="object-cover"
                             sizes="(max-width: 768px) 100vw, 50vw"
                           />
-                        </motion.div>
-                      ))}
+                      </motion.div>
+                    ))}
                     </div>
                   </div>
                 </Reveal>
@@ -492,9 +492,9 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {videos.map((video: { thumbnail?: string; url?: string }, index: number) => (
-                        <motion.div
-                          key={`video-${index}`}
-                          whileHover={{ scale: 1.02 }}
+                      <motion.div
+                        key={`video-${index}`}
+                        whileHover={{ scale: 1.02 }}
                           className="relative h-48 rounded-lg overflow-hidden cursor-pointer"
                           onClick={() => {
                             if (video.url) {
@@ -515,11 +515,11 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                               <Play className="h-12 w-12 text-white" />
                             </div>
                           )}
-                        </motion.div>
-                      ))}
-                    </div>
+                      </motion.div>
+                    ))}
                   </div>
-                </Reveal>
+                </div>
+              </Reveal>
               )}
             </div>
 
@@ -565,35 +565,35 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                     <>
                       {/* OR Separator */}
                       <div className="relative mb-4">
-                        <div className="absolute inset-0 flex items-center">
-                          <div className="w-full border-t border-gray-300"></div>
-                        </div>
-                        <div className="relative flex justify-center text-sm">
-                          <span className="bg-white px-2 text-[#2c2b2b]/60">OR</span>
-                        </div>
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-300"></div>
                       </div>
+                      <div className="relative flex justify-center text-sm">
+                          <span className="bg-white px-2 text-[#2c2b2b]/60">OR</span>
+                      </div>
+                    </div>
 
                       {/* QR Code */}
                       <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg p-4">
                         <QRCodeSVG value={event.calendarUrl} size={150} className="mb-3" />
                         <p className="text-sm text-[#2c2b2b]/70 text-center">
-                          Scan QR with your phone and you will be subscribed automatically
-                        </p>
+                        Scan QR with your phone and you will be subscribed automatically
+                      </p>
                       </div>
                     </>
                   )}
-                </div>
-              </Reveal>
+                  </div>
+                </Reveal>
 
               {/* Northern Pathways Contact Card */}
               <Reveal delay={0.4}>
                 <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                   <div className="flex items-start gap-4 mb-4">
                     {/* Logo */}
-                    <div className="w-12 h-12 bg-[#2c2b2b] rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-[#2c2b2b] rounded-full flex items-center justify-center flex-shrink-0">
                       <span className="text-white text-lg font-bold">NP</span>
-                    </div>
-                    <div>
+                      </div>
+                      <div>
                       <h3 className="text-base font-bold text-[#2c2b2b] mb-1">
                         Northern Pathways
                       </h3>
@@ -604,29 +604,29 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
                   </div>
 
                   {/* Contact Information */}
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
                       <Phone className="h-5 w-5 text-brand-red flex-shrink-0" />
                       <a href="tel:+1234567890" className="text-[#2c2b2b] hover:text-brand-red transition-colors text-sm">
                         Phone: (123) 456-7890
                       </a>
-                    </div>
-                    <div className="flex items-center gap-3">
+                      </div>
+                      <div className="flex items-center gap-3">
                       <Mail className="h-5 w-5 text-brand-red flex-shrink-0" />
                       <a href="mailto:info@northernpathways.ca" className="text-[#2c2b2b] hover:text-brand-red transition-colors text-sm">
                         Email: info@northernpathways.ca
                       </a>
-                    </div>
-                    <div className="flex items-center gap-3">
+                      </div>
+                      <div className="flex items-center gap-3">
                       <Globe className="h-5 w-5 text-brand-red flex-shrink-0" />
                       <a href="https://www.northernpathways.ca" target="_blank" rel="noopener noreferrer" className="text-[#2c2b2b] hover:text-brand-red transition-colors text-sm">
                         Website: northernpathways.ca
                       </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Reveal>
-            </div>
+                </Reveal>
+              </div>
           </div>
         </div>
       </section>
@@ -639,8 +639,8 @@ export function EventDetailClient({ lang, event }: EventDetailClientProps) {
         >
           <div className="relative max-w-5xl max-h-full">
             <Image
-              src={selectedImage}
-              alt="Event photo"
+            src={selectedImage}
+            alt="Event photo"
               width={1200}
               height={800}
               className="max-w-full max-h-[90vh] object-contain"

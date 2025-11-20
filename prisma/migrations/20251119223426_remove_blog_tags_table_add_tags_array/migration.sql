@@ -9,10 +9,10 @@
 DO $$ 
 BEGIN
   IF EXISTS (SELECT 1 FROM information_schema.table_constraints WHERE constraint_name = '_BlogPostToBlogTag_A_fkey') THEN
-    ALTER TABLE "_BlogPostToBlogTag" DROP CONSTRAINT "_BlogPostToBlogTag_A_fkey";
+ALTER TABLE "_BlogPostToBlogTag" DROP CONSTRAINT "_BlogPostToBlogTag_A_fkey";
   END IF;
   IF EXISTS (SELECT 1 FROM information_schema.table_constraints WHERE constraint_name = '_BlogPostToBlogTag_B_fkey') THEN
-    ALTER TABLE "_BlogPostToBlogTag" DROP CONSTRAINT "_BlogPostToBlogTag_B_fkey";
+ALTER TABLE "_BlogPostToBlogTag" DROP CONSTRAINT "_BlogPostToBlogTag_B_fkey";
   END IF;
 END $$;
 

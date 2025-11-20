@@ -147,21 +147,21 @@ export default async function AboutPage({ params }: PageProps) {
               </div>
             </Reveal>
 
-            {[
+              {[
               { name: "Dilsat Harika Eke", title: "Client Relations Manager", imageOrder: "right" },
               { name: "Seda Karaca", title: "Case Processing Lead", imageOrder: "left" },
               { name: "Seyda Can Goklerinoglu", title: "Finance Officer", imageOrder: "right" },
               { name: "Baran Diloglu", title: "[Placeholder Title, e.g., Case Analyst]", imageOrder: "left" },
               { name: "Yiğit Pala", title: "[Placeholder Title, e.g., Marketing Specialist]", imageOrder: "right" },
-            ].map((member) => (
-              <Reveal key={member.name}>
+              ].map((member) => (
+                <Reveal key={member.name}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
                   {member.imageOrder === "left" ? (
                     <>
                       <Reveal delay={0.05}>
                         <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-72 md:h-80 w-full flex items-center justify-center text-gray-400 order-1 md:order-none">
-                          [{member.name.split(" ")[0]}&apos;s Photo]
-                        </div>
+                      [{member.name.split(" ")[0]}&apos;s Photo]
+                    </div>
                       </Reveal>
                       <Reveal delay={0.1} className="order-2 md:order-none">
                         <div>
@@ -180,9 +180,9 @@ export default async function AboutPage({ params }: PageProps) {
                           <h3 className="text-2xl md:text-3xl font-extrabold text-[#2c2b2b]">{member.name}</h3>
                           <div className="mt-1 font-semibold text-brand-red">{member.title}</div>
                           <p className="mt-4 text-[#2c2b2b]/80 leading-relaxed">
-                            Placeholder bio. Please add professional details and contributions for this team member.
-                          </p>
-                        </div>
+                        Placeholder bio. Please add professional details and contributions for this team member.
+                      </p>
+                    </div>
                       </Reveal>
                       <Reveal delay={0.1}>
                         <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-72 md:h-80 w-full flex items-center justify-center text-gray-400 order-1 md:order-none">
@@ -191,9 +191,9 @@ export default async function AboutPage({ params }: PageProps) {
                       </Reveal>
                     </>
                   )}
-                </div>
-              </Reveal>
-            ))}
+                  </div>
+                </Reveal>
+              ))}
           </div>
         </div>
       </section>

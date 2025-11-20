@@ -68,7 +68,7 @@ export function NewBlogClient({ lang, categories, authorName, authorEmail }: New
       setTipTapContent({
         type: "doc",
         content: [],
-      })
+  })
     }
   }, [formData.content, tipTapContent])
 
@@ -153,8 +153,8 @@ export function NewBlogClient({ lang, categories, authorName, authorEmail }: New
       const newMetaTitle = metaTitleManuallyEdited ? prev.metaTitle : title
       
       return {
-        ...prev,
-        title,
+      ...prev,
+      title,
         slug: newSlug,
         metaTitle: newMetaTitle,
       }
@@ -238,7 +238,7 @@ export function NewBlogClient({ lang, categories, authorName, authorEmail }: New
           {/* Form Column */}
           <div className="lg:col-span-1">
             <form onSubmit={handleSubmit}>
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 space-y-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 space-y-6">
             {/* Basic Information */}
             <div>
               <h2 className="text-xl font-bold text-[#2c2b2b] mb-4">Basic Information</h2>
@@ -426,14 +426,14 @@ export function NewBlogClient({ lang, categories, authorName, authorEmail }: New
                   <label className="block text-sm font-semibold text-[#2c2b2b] mb-2">
                     Tags
                   </label>
-                  <input
+                            <input
                     type="text"
                     name="tags"
                     value={formData.tags}
                     onChange={handleInputChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b92025] focus:border-transparent text-[#2c2b2b]"
                     placeholder="tag1, tag2, tag3 (comma-separated)"
-                  />
+                            />
                   <p className="text-xs text-[#2c2b2b]/60 mt-1">
                     Enter tags separated by commas
                   </p>
@@ -587,8 +587,8 @@ export function NewBlogClient({ lang, categories, authorName, authorEmail }: New
                 )}
               </motion.button>
             </div>
-              </div>
-            </form>
+          </div>
+        </form>
           </div>
 
           {/* Preview Column */}

@@ -13,8 +13,8 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: "Northern Pathways - Immigration Assessment Tools",
-  description: "Professional immigration assessment tools for Express Entry and Federal Skilled Worker Program",
+  title: "Northern Pathways | Kanada Göçmenlik Danışmanlığı",
+  description: "Northern Pathways | Canada Immigration Consultancy",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
   icons: {
     icon: '/logo.ico',

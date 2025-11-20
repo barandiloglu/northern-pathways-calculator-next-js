@@ -127,9 +127,9 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
                 {post.title}
               </h1>
               {post.subtitle && (
-                <p className="text-lg md:text-xl text-[#2c2b2b]/70 mb-8">
-                  {post.subtitle}
-                </p>
+              <p className="text-lg md:text-xl text-[#2c2b2b]/70 mb-8">
+                {post.subtitle}
+              </p>
               )}
             </div>
           </Reveal>
@@ -138,15 +138,15 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
 
       {/* Hero Image */}
       {post.heroImage && (
-        <section className="w-full">
+      <section className="w-full">
           <div className="w-full h-64 md:h-96 bg-[#2c2b2b] overflow-hidden">
             <img
               src={post.heroImage}
               alt={post.title}
               className="w-full h-full object-cover"
             />
-          </div>
-        </section>
+        </div>
+      </section>
       )}
 
       {/* Author and Metadata Section */}
@@ -174,18 +174,18 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
             <div className="flex items-center gap-2 flex-wrap">
               {categories.length > 0 &&
                 categories.map((category: string, index: number) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1.5 bg-brand-red text-white text-xs font-semibold rounded-full"
-                  >
-                    {category}
-                  </span>
-                ))}
-              {post.readTime && (
-                <span className="px-3 py-1.5 bg-gray-200 text-[#2c2b2b] text-xs font-semibold rounded-full flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5" />
-                  {post.readTime}
+                <span
+                  key={index}
+                  className="px-3 py-1.5 bg-brand-red text-white text-xs font-semibold rounded-full"
+                >
+                  {category}
                 </span>
+              ))}
+              {post.readTime && (
+              <span className="px-3 py-1.5 bg-gray-200 text-[#2c2b2b] text-xs font-semibold rounded-full flex items-center gap-1.5">
+                <Clock className="h-3.5 w-3.5" />
+                {post.readTime}
+              </span>
               )}
             </div>
           </div>
@@ -198,28 +198,28 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Table of Contents - Left Sidebar */}
             {tableOfContents.length > 0 && (
-              <aside className="lg:col-span-1 order-2 lg:order-1">
-                <div className="lg:sticky lg:top-24">
-                  <Reveal delay={0.1}>
-                    <div>
-                      <h3 className="text-sm font-bold text-[#2c2b2b] uppercase tracking-wider mb-6">
-                        TABLE OF CONTENTS
-                      </h3>
-                      <nav className="space-y-1">
+            <aside className="lg:col-span-1 order-2 lg:order-1">
+              <div className="lg:sticky lg:top-4 lg:self-start">
+                <Reveal delay={0.1}>
+                  <div>
+                    <h3 className="text-sm font-bold text-[#2c2b2b] uppercase tracking-wider mb-6">
+                      TABLE OF CONTENTS
+                    </h3>
+                    <nav className="space-y-1">
                         {tableOfContents.map(
                           (item: { id: string; title: string; level: number }) => {
-                            const isActive = activeSection === item.id
-                            return (
-                              <button
-                                key={item.id}
-                                onClick={() => scrollToSection(item.id)}
-                                className={`w-full text-left flex items-center justify-between gap-3 py-2.5 px-2 rounded transition-all duration-200 group ${
-                                  isActive
-                                    ? "text-brand-red font-semibold"
-                                    : "text-[#2c2b2b] hover:text-brand-red"
-                                }`}
-                              >
-                                <span className="text-sm flex-1">{item.title}</span>
+                        const isActive = activeSection === item.id
+                        return (
+                          <button
+                            key={item.id}
+                            onClick={() => scrollToSection(item.id)}
+                            className={`w-full text-left flex items-center justify-between gap-3 py-2.5 px-2 rounded transition-all duration-200 group ${
+                              isActive
+                                ? "text-brand-red font-semibold"
+                                : "text-[#2c2b2b] hover:text-brand-red"
+                            }`}
+                          >
+                            <span className="text-sm flex-1">{item.title}</span>
                                 <ChevronDown
                                   className={`h-4 w-4 flex-shrink-0 transition-transform ${
                                     isActive
@@ -227,15 +227,15 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
                                       : "text-[#2c2b2b]/40 group-hover:text-brand-red"
                                   }`}
                                 />
-                              </button>
-                            )
+                          </button>
+                        )
                           }
                         )}
-                      </nav>
-                    </div>
-                  </Reveal>
-                </div>
-              </aside>
+                    </nav>
+                  </div>
+                </Reveal>
+              </div>
+            </aside>
             )}
 
             {/* Main Content - Right Column */}
@@ -250,64 +250,64 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
                 <article className="prose prose-lg max-w-none">
                   {content.length > 0 ? (
                     content.map((block: any, index: number) => {
-                      if (block.type === "heading") {
+                    if (block.type === "heading") {
                         const HeadingTag = `h${(block.level || 1) + 1}` as keyof React.JSX.IntrinsicElements
                         const blockId = block.id || `heading-${index}`
-                        return (
-                          <div
-                            key={index}
+                      return (
+                        <div
+                          key={index}
                             id={blockId}
-                            ref={(el) => {
+                          ref={(el) => {
                               if (el) contentRefs.current[blockId] = el
-                            }}
-                            className="scroll-mt-24"
-                          >
-                            <HeadingTag className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mt-10 mb-6 first:mt-0">
+                          }}
+                          className="scroll-mt-24"
+                        >
+                          <HeadingTag className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mt-10 mb-6 first:mt-0">
                               {block.text || block.content || block.title}
-                            </HeadingTag>
-                          </div>
-                        )
-                      }
+                          </HeadingTag>
+                        </div>
+                      )
+                    }
 
-                      if (block.type === "subheading") {
-                        return (
+                    if (block.type === "subheading") {
+                      return (
                           <h3
                             key={index}
                             className="text-xl font-semibold text-[#2c2b2b] mt-8 mb-4"
                           >
                             {block.text || block.content}
-                          </h3>
-                        )
-                      }
+                        </h3>
+                      )
+                    }
 
-                      if (block.type === "paragraph") {
-                        return (
-                          <p
-                            key={index}
-                            className="text-[#2c2b2b]/80 leading-relaxed mb-6 text-base md:text-lg"
-                          >
+                    if (block.type === "paragraph") {
+                      return (
+                        <p
+                          key={index}
+                          className="text-[#2c2b2b]/80 leading-relaxed mb-6 text-base md:text-lg"
+                        >
                             {block.text || block.content}
-                          </p>
-                        )
-                      }
+                        </p>
+                      )
+                    }
 
-                      if (block.type === "list") {
+                    if (block.type === "list") {
                         const items = block.items || block.content || []
-                        return (
+                      return (
                           <ul
                             key={index}
                             className="list-disc list-inside space-y-3 mb-6 text-[#2c2b2b]/80 text-base md:text-lg"
                           >
                             {items.map((item: string, itemIndex: number) => (
-                              <li key={itemIndex} className="leading-relaxed">
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        )
-                      }
+                            <li key={itemIndex} className="leading-relaxed">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      )
+                    }
 
-                      return null
+                    return null
                     })
                   ) : (
                     <p className="text-[#2c2b2b]/60">No content available.</p>

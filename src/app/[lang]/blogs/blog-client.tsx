@@ -10,9 +10,9 @@ import Image from "next/image"
 interface BlogClientProps {
   lang: string
   blogPosts: Array<{
-    id: string
+  id: string
     slug: string
-    title: string
+  title: string
     subtitle: string | null
     description: string | null
     featuredImage: string | null
@@ -24,7 +24,7 @@ interface BlogClientProps {
     categories: Array<{
       id: string
       name: string
-      slug: string
+  slug: string
     }>
   }>
   categories: Array<{
@@ -78,7 +78,7 @@ export function BlogClient({ lang, blogPosts, categories }: BlogClientProps) {
         post.subtitle?.toLowerCase().includes(query) ||
         post.categories.some((cat) => cat.name.toLowerCase().includes(query)) ||
         post.tags?.some((tag) => tag.toLowerCase().includes(query))
-    )
+  )
   }, [blogPosts, searchQuery])
 
   const handleSearch = (e: React.FormEvent) => {
@@ -149,14 +149,14 @@ export function BlogClient({ lang, blogPosts, categories }: BlogClientProps) {
                 <p className="text-[#2c2b2b]/60 text-lg">No blog posts found.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                {filteredPosts.map((post, index) => (
-                  <Reveal key={post.id} delay={index * 0.1}>
-                    <Link href={`/${lang}/blogs/${post.slug}`}>
-                      <motion.article
-                        whileHover={{ y: -4 }}
-                        className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer h-full flex flex-col"
-                      >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {filteredPosts.map((post, index) => (
+                <Reveal key={post.id} delay={index * 0.1}>
+                  <Link href={`/${lang}/blogs/${post.slug}`}>
+                    <motion.article
+                      whileHover={{ y: -4 }}
+                      className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer h-full flex flex-col"
+                    >
                         {/* Image */}
                         <div className="w-full h-48 bg-[#2c2b2b] relative overflow-hidden">
                           {post.featuredImage || post.heroImage ? (
@@ -171,10 +171,10 @@ export function BlogClient({ lang, blogPosts, categories }: BlogClientProps) {
                               <span className="text-white text-sm">No Image</span>
                             </div>
                           )}
-                        </div>
+                      </div>
 
-                        {/* Content */}
-                        <div className="p-6 flex-1 flex flex-col">
+                      {/* Content */}
+                      <div className="p-6 flex-1 flex flex-col">
                           {/* Category Tags */}
                           {post.categories.length > 0 && (
                             <div className="flex flex-wrap gap-2 mb-3">
@@ -189,17 +189,17 @@ export function BlogClient({ lang, blogPosts, categories }: BlogClientProps) {
                               {post.categories.length > 2 && (
                                 <span className="inline-block px-3 py-1 bg-brand-red/10 text-brand-red text-xs font-semibold rounded-full">
                                   +{post.categories.length - 2}
-                                </span>
+                        </span>
                               )}
                             </div>
                           )}
 
-                          {/* Title */}
-                          <h3 className="text-xl font-bold text-[#2c2b2b] mb-3 line-clamp-2">
-                            {post.title}
-                          </h3>
+                        {/* Title */}
+                        <h3 className="text-xl font-bold text-[#2c2b2b] mb-3 line-clamp-2">
+                          {post.title}
+                        </h3>
 
-                          {/* Description */}
+                        {/* Description */}
                           <p className="text-[#2c2b2b]/70 text-sm leading-relaxed flex-1 line-clamp-3 mb-3">
                             {post.description || post.subtitle || ""}
                           </p>
@@ -208,14 +208,14 @@ export function BlogClient({ lang, blogPosts, categories }: BlogClientProps) {
                           {post.publishedAt && (
                             <p className="text-xs text-[#2c2b2b]/50 mt-auto">
                               {formatDate(post.publishedAt)}
-                            </p>
+                        </p>
                           )}
-                        </div>
-                      </motion.article>
-                    </Link>
-                  </Reveal>
-                ))}
-              </div>
+                      </div>
+                    </motion.article>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
             )}
           </div>
 

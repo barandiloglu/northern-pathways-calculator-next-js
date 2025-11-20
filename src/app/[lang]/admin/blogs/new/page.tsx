@@ -18,7 +18,7 @@ export default async function NewBlogPage({ params }: PageProps) {
 
   // Fetch categories for selection
   const categories = await prisma.blogCategory.findMany({
-    orderBy: { name: "asc" },
+      orderBy: { name: "asc" },
   })
 
   return (

@@ -10,9 +10,9 @@ import Image from "next/image"
 interface EventsClientProps {
   lang: string
   events: Array<{
-    id: string
+  id: string
     slug: string
-    title: string
+  title: string
     subtitle: string | null
     description: string | null
     startDate: Date
@@ -26,7 +26,7 @@ interface EventsClientProps {
     province: string | null
     country: string | null
     meetingLink: string | null
-    type: string
+  type: string
     category: "WEBINAR" | "WORKSHOP" | "QNA" | "NETWORKING" | "OTHER"
     color: "BLUE" | "RED"
     coverImage: string | null
@@ -278,7 +278,7 @@ export function EventsClient({ lang, events }: EventsClientProps) {
                       <div
                         className={`absolute inset-0 ${
                           event.color === "BLUE" ? "bg-[#2c2b2b]" : "bg-[#b92025]"
-                        }`}
+                    }`}
                       />
                     )}
 
@@ -315,7 +315,7 @@ export function EventsClient({ lang, events }: EventsClientProps) {
                     <div className="absolute inset-x-0 bottom-0 z-10">
                       {/* Subtle gradient backdrop only at the very bottom */}
                       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 via-black/50 to-transparent rounded-b-xl" />
-                      
+
                       {/* Compact text section */}
                       <div className="relative p-4 md:p-5">
                         <div className="space-y-1.5">
@@ -325,38 +325,38 @@ export function EventsClient({ lang, events }: EventsClientProps) {
                               <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                               <p className="text-xs md:text-sm font-medium">
                                 {formatDate(event.startDate)}
-                              </p>
-                            </div>
+                        </p>
+                      </div>
                             {(event.startTime || event.endTime) && (
                               <div className="flex items-center gap-1.5">
                                 <Clock className="h-3.5 w-3.5 flex-shrink-0" />
                                 <p className="text-xs md:text-sm">
                                   {formatTime(event.startTime, event.endTime, event.timezone)}
-                                </p>
-                              </div>
-                            )}
+                          </p>
+                        </div>
+                      )}
                           </div>
                           
                           {/* Address - only show if exists */}
-                          {event.address && (
+                      {event.address && (
                             <div className="flex items-center gap-1.5 text-white/95 drop-shadow-lg">
                               <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
                               <p className="text-xs md:text-sm line-clamp-1">
-                                {event.address}
-                              </p>
-                            </div>
-                          )}
+                            {event.address}
+                          </p>
+                        </div>
+                      )}
                           
                           {/* Title - compact */}
                           <h4 className="text-white text-base md:text-lg font-bold drop-shadow-lg leading-tight">
-                            {event.title}
-                          </h4>
+                        {event.title}
+                      </h4>
                           
                           {/* Event Type and Attendees on same line if capacity exists */}
                           <div className="flex flex-wrap items-center gap-3">
                             <p className="text-white/95 text-xs md:text-sm drop-shadow-lg">
-                              {event.type}
-                            </p>
+                        {event.type}
+                      </p>
                             {event.capacity && (
                               <div className="flex items-center gap-1.5 text-white/90 drop-shadow-lg">
                                 <Users className="h-3.5 w-3.5 flex-shrink-0" />
