@@ -13,15 +13,15 @@ interface ConditionalLayoutProps {
 export function ConditionalLayout({ children, lang }: ConditionalLayoutProps) {
   const pathname = usePathname()
   const isLoginPage = pathname?.includes("/login")
-  const isDashboardPage = pathname?.includes("/dashboard")
+  const isAdminPage = pathname?.includes("/admin/")
 
   return (
     <>
-      {!isLoginPage && !isDashboardPage && <Header lang={lang} />}
-      <main className={isLoginPage || isDashboardPage ? "min-h-screen" : "pt-16 sm:pt-20 md:pt-24"}>
+      {!isLoginPage && !isAdminPage && <Header lang={lang} />}
+      <main className={isLoginPage || isAdminPage ? "min-h-screen" : "pt-16 sm:pt-20 md:pt-24"}>
         {children}
       </main>
-      {!isLoginPage && !isDashboardPage && <Footer lang={lang} />}
+      {!isLoginPage && !isAdminPage && <Footer lang={lang} />}
     </>
   )
 }

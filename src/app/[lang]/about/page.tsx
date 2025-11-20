@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 export default async function AboutPage({ params }: PageProps) {
-  const { lang } = await params
+  await params
 
   return (
     <div className="min-h-screen">
@@ -140,32 +140,60 @@ export default async function AboutPage({ params }: PageProps) {
           </Reveal>
 
           {/* Core team grid (placeholders) */}
-          <div className="mt-16">
-            <h3 className="text-center text-2xl md:text-3xl font-extrabold text-[#2c2b2b]">Our Core Team</h3>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                { name: "Dilsat Harika Eke", title: "Client Relations Manager" },
-                { name: "Seda Karaca", title: "Case Processing Lead" },
-                { name: "Seyda Can Goklerinoglu", title: "Finance Officer" },
-                { name: "Baran Diloglu", title: "[Placeholder Title, e.g., Case Analyst]" },
-                { name: "Yiğit Pala", title: "[Placeholder Title, e.g., Marketing Specialist]" },
-              ].map((member) => (
-                <Reveal key={member.name}>
-                  <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100">
-                    <div className="h-44 bg-gradient-to-b from-gray-100 to-gray-50 w-full flex items-center justify-center text-gray-400">
-                      [{member.name.split(" ")[0]}&apos;s Photo]
-                    </div>
-                    <div className="p-6">
-                      <div className="text-lg font-extrabold text-[#2c2b2b]">{member.name}</div>
-                      <div className="text-brand-red font-semibold text-sm mt-1">{member.title}</div>
-                      <p className="mt-3 text-sm text-[#2c2b2b]/75">
-                        Placeholder bio. Please add professional details and contributions for this team member.
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+          <div className="mt-16 space-y-16">
+            <Reveal>
+              <div className="text-center max-w-3xl mx-auto">
+                <h3 className="text-3xl md:text-4xl font-extrabold text-[#2c2b2b]">Our Core Team</h3>
+              </div>
+            </Reveal>
+
+            {[
+              { name: "Dilsat Harika Eke", title: "Client Relations Manager", imageOrder: "right" },
+              { name: "Seda Karaca", title: "Case Processing Lead", imageOrder: "left" },
+              { name: "Seyda Can Goklerinoglu", title: "Finance Officer", imageOrder: "right" },
+              { name: "Baran Diloglu", title: "[Placeholder Title, e.g., Case Analyst]", imageOrder: "left" },
+              { name: "Yiğit Pala", title: "[Placeholder Title, e.g., Marketing Specialist]", imageOrder: "right" },
+            ].map((member) => (
+              <Reveal key={member.name}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+                  {member.imageOrder === "left" ? (
+                    <>
+                      <Reveal delay={0.05}>
+                        <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-72 md:h-80 w-full flex items-center justify-center text-gray-400 order-1 md:order-none">
+                          [{member.name.split(" ")[0]}&apos;s Photo]
+                        </div>
+                      </Reveal>
+                      <Reveal delay={0.1} className="order-2 md:order-none">
+                        <div>
+                          <h3 className="text-2xl md:text-3xl font-extrabold text-[#2c2b2b]">{member.name}</h3>
+                          <div className="mt-1 font-semibold text-brand-red">{member.title}</div>
+                          <p className="mt-4 text-[#2c2b2b]/80 leading-relaxed">
+                            Placeholder bio. Please add professional details and contributions for this team member.
+                          </p>
+                        </div>
+                      </Reveal>
+                    </>
+                  ) : (
+                    <>
+                      <Reveal delay={0.05} className="order-2 md:order-none">
+                        <div>
+                          <h3 className="text-2xl md:text-3xl font-extrabold text-[#2c2b2b]">{member.name}</h3>
+                          <div className="mt-1 font-semibold text-brand-red">{member.title}</div>
+                          <p className="mt-4 text-[#2c2b2b]/80 leading-relaxed">
+                            Placeholder bio. Please add professional details and contributions for this team member.
+                          </p>
+                        </div>
+                      </Reveal>
+                      <Reveal delay={0.1}>
+                        <div className="rounded-2xl bg-gradient-to-b from-gray-100 to-gray-50 shadow-xl h-72 md:h-80 w-full flex items-center justify-center text-gray-400 order-1 md:order-none">
+                          [{member.name.split(" ")[0]}&apos;s Photo]
+                        </div>
+                      </Reveal>
+                    </>
+                  )}
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

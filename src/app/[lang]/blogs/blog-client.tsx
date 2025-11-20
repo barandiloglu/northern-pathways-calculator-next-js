@@ -1,23 +1,36 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
 import { Search } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import Link from "next/link"
+import Image from "next/image"
 
 interface BlogClientProps {
   lang: string
-}
-
-interface BlogPost {
-  id: string
-  title: string
-  description: string
-  category: string
-  date: string
-  image?: string
-  slug: string
+  blogPosts: Array<{
+    id: string
+    slug: string
+    title: string
+    subtitle: string | null
+    description: string | null
+    featuredImage: string | null
+    heroImage: string | null
+    publishedAt: Date | null
+    createdAt: Date
+    featured: boolean
+    tags: string[]
+    categories: Array<{
+      id: string
+      name: string
+      slug: string
+    }>
+  }>
+  categories: Array<{
+    name: string
+    count: number
+  }>
 }
 
 interface Category {
@@ -25,84 +38,52 @@ interface Category {
   count: number
 }
 
-// Hardcoded blog posts data
-const blogPosts: BlogPost[] = [
-  {
-    id: "1",
-    title: "Top 5 Mistakes to Avoid on Your Profile",
-    description: "An incomplete or inaccurate profile is the most common reason for a rejected application. Here's what to watch out for...",
-    category: "Express Entry",
-    date: "November 17, 2025",
-    slug: "top-5-mistakes-express-entry-profile"
-  },
-  {
-    id: "2",
-    title: "Guide to Writing a Strong Letter of Explanation",
-    description: "Your Letter of Explanation (LOE) is your chance to speak directly to the visa officer. We explain how to make it count.",
-    category: "Study Permits",
-    date: "November 10, 2025",
-    slug: "guide-strong-letter-explanation"
-  },
-  {
-    id: "3",
-    title: "Understanding the Latest OINP Draw",
-    description: "Ontario just held a new draw for tech and healthcare workers. See if you qualify and what it means for your application.",
-    category: "PNP",
-    date: "November 3, 2025",
-    slug: "understanding-latest-oinp-draw"
-  },
-  {
-    id: "4",
-    title: "Inland vs. Outland Spousal Sponsorship",
-    description: "Choosing the right sponsorship stream is critical. We break down the pros and cons of applying from inside or outside Canada.",
-    category: "Sponsorship",
-    date: "October 27, 2025",
-    slug: "inland-vs-outland-spousal-sponsorship"
-  },
-  {
-    id: "5",
-    title: "How to Prepare for the Canadian Citizenship Test",
-    description: "The final step! We've compiled our top tips and resources to help you study effectively and pass the test with confidence.",
-    category: "Citizenship",
-    date: "October 20, 2025",
-    slug: "prepare-canadian-citizenship-test"
-  },
-  {
-    id: "6",
-    title: "What is a Labour Market Impact Assessment (LMIA)?",
-    description: "The LMIA is a complex but crucial document for many work permits. Learn what it is and why your employer might need one.",
-    category: "Work Permits",
-    date: "October 13, 2025",
-    slug: "what-is-lmia-labour-market-impact-assessment"
-  }
-]
+function formatDate(date: Date | string | null): string {
+  if (!date) return ""
+  const dateObj = typeof date === "string" ? new Date(date) : date
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(dateObj)
+}
 
-const categories: Category[] = [
-  { name: "Express Entry", count: 12 },
-  { name: "Provincial Nominee Programs (PNP)", count: 8 },
-  { name: "Study Permits", count: 7 },
-  { name: "Work Permits", count: 5 },
-  { name: "Family Sponsorship", count: 10 },
-  { name: "Citizenship", count: 4 },
-  { name: "Business & Investors", count: 3 }
-]
-
-export function BlogClient({ lang }: BlogClientProps) {
+export function BlogClient({ lang, blogPosts, categories }: BlogClientProps) {
   const [searchQuery, setSearchQuery] = useState("")
 
-  // Featured posts (most recent 3)
-  const featuredPosts = blogPosts.slice(0, 3)
+  // Featured posts (featured flag first, then most recent)
+  const featuredPosts = useMemo(() => {
+    const sorted = [...blogPosts].sort((a, b) => {
+      // If both are featured or neither, sort by date
+      if ((a.featured && b.featured) || (!a.featured && !b.featured)) {
+        const dateA = a.publishedAt || a.createdAt
+        const dateB = b.publishedAt || b.createdAt
+        return new Date(dateB).getTime() - new Date(dateA).getTime()
+      }
+      // Featured posts first
+      return a.featured ? -1 : 1
+    })
+    return sorted.slice(0, 3)
+  }, [blogPosts])
 
   // Filter posts based on search query
-  const filteredPosts = blogPosts.filter(post =>
-    post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    post.category.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery.trim()) return blogPosts
+
+    const query = searchQuery.toLowerCase()
+    return blogPosts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(query) ||
+        post.description?.toLowerCase().includes(query) ||
+        post.subtitle?.toLowerCase().includes(query) ||
+        post.categories.some((cat) => cat.name.toLowerCase().includes(query)) ||
+        post.tags?.some((tag) => tag.toLowerCase().includes(query))
+    )
+  }, [blogPosts, searchQuery])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    // Search functionality will be implemented later
+    // Search is handled by filteredPosts which updates automatically with searchQuery
   }
 
   return (
@@ -163,41 +144,79 @@ export function BlogClient({ lang }: BlogClientProps) {
             </Reveal>
 
             {/* Articles Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {filteredPosts.map((post, index) => (
-                <Reveal key={post.id} delay={index * 0.1}>
-                  <Link href={`/${lang}/blogs/${post.slug}`}>
-                    <motion.article
-                      whileHover={{ y: -4 }}
-                      className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer h-full flex flex-col"
-                    >
-                      {/* Image Placeholder */}
-                      <div className="w-full h-48 bg-[#2c2b2b] flex items-center justify-center">
-                        <span className="text-white text-sm">[Placeholder]</span>
-                      </div>
+            {filteredPosts.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-[#2c2b2b]/60 text-lg">No blog posts found.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                {filteredPosts.map((post, index) => (
+                  <Reveal key={post.id} delay={index * 0.1}>
+                    <Link href={`/${lang}/blogs/${post.slug}`}>
+                      <motion.article
+                        whileHover={{ y: -4 }}
+                        className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer h-full flex flex-col"
+                      >
+                        {/* Image */}
+                        <div className="w-full h-48 bg-[#2c2b2b] relative overflow-hidden">
+                          {post.featuredImage || post.heroImage ? (
+                            <Image
+                              src={post.featuredImage || post.heroImage || ""}
+                              alt={post.title}
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <span className="text-white text-sm">No Image</span>
+                            </div>
+                          )}
+                        </div>
 
-                      {/* Content */}
-                      <div className="p-6 flex-1 flex flex-col">
-                        {/* Category Tag */}
-                        <span className="inline-block px-3 py-1 bg-brand-red/10 text-brand-red text-xs font-semibold rounded-full mb-3 w-fit">
-                          {post.category}
-                        </span>
+                        {/* Content */}
+                        <div className="p-6 flex-1 flex flex-col">
+                          {/* Category Tags */}
+                          {post.categories.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-3">
+                              {post.categories.slice(0, 2).map((category) => (
+                                <span
+                                  key={category.id}
+                                  className="inline-block px-3 py-1 bg-brand-red/10 text-brand-red text-xs font-semibold rounded-full"
+                                >
+                                  {category.name}
+                                </span>
+                              ))}
+                              {post.categories.length > 2 && (
+                                <span className="inline-block px-3 py-1 bg-brand-red/10 text-brand-red text-xs font-semibold rounded-full">
+                                  +{post.categories.length - 2}
+                                </span>
+                              )}
+                            </div>
+                          )}
 
-                        {/* Title */}
-                        <h3 className="text-xl font-bold text-[#2c2b2b] mb-3 line-clamp-2">
-                          {post.title}
-                        </h3>
+                          {/* Title */}
+                          <h3 className="text-xl font-bold text-[#2c2b2b] mb-3 line-clamp-2">
+                            {post.title}
+                          </h3>
 
-                        {/* Description */}
-                        <p className="text-[#2c2b2b]/70 text-sm leading-relaxed flex-1 line-clamp-3">
-                          {post.description}
-                        </p>
-                      </div>
-                    </motion.article>
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
+                          {/* Description */}
+                          <p className="text-[#2c2b2b]/70 text-sm leading-relaxed flex-1 line-clamp-3 mb-3">
+                            {post.description || post.subtitle || ""}
+                          </p>
+
+                          {/* Date */}
+                          {post.publishedAt && (
+                            <p className="text-xs text-[#2c2b2b]/50 mt-auto">
+                              {formatDate(post.publishedAt)}
+                            </p>
+                          )}
+                        </div>
+                      </motion.article>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -219,15 +238,24 @@ export function BlogClient({ lang }: BlogClientProps) {
                           whileHover={{ x: 4 }}
                           className="flex gap-4 group cursor-pointer"
                         >
-                          {/* Image Placeholder */}
-                          <div className="w-20 h-20 bg-[#2c2b2b] flex items-center justify-center flex-shrink-0 rounded">
-                            <span className="text-white text-xs">Img</span>
+                          {/* Image */}
+                          <div className="w-20 h-20 bg-[#2c2b2b] flex items-center justify-center flex-shrink-0 rounded relative overflow-hidden">
+                            {post.featuredImage || post.heroImage ? (
+                              <Image
+                                src={post.featuredImage || post.heroImage || ""}
+                                alt={post.title}
+                                fill
+                                className="object-cover"
+                              />
+                            ) : (
+                              <span className="text-white text-xs">No Img</span>
+                            )}
                           </div>
 
                           {/* Content */}
                           <div className="flex-1 min-w-0">
                             <p className="text-sm text-[#2c2b2b]/60 mb-1">
-                              {post.date}
+                              {formatDate(post.publishedAt || post.createdAt)}
                             </p>
                             <h4 className="text-sm font-semibold text-[#2c2b2b] group-hover:text-brand-red transition-colors line-clamp-2">
                               {post.title}

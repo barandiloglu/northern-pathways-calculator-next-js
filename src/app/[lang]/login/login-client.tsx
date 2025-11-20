@@ -57,7 +57,7 @@ export function LoginClient({ lang }: LoginClientProps) {
 
       // Redirect to dashboard on successful login
       setTimeout(() => {
-        router.push(`/${lang}/dashboard`)
+        router.push(`/${lang}/admin/dashboard`)
         router.refresh()
       }, 500)
     } catch {

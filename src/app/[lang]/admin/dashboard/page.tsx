@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation"
 import { type Locale } from "@/lib/i18n-config"
 import { getSessionUser } from "@/lib/auth"
 import { DashboardClient } from "./dashboard-client"
@@ -12,13 +11,9 @@ export default async function DashboardPage({ params }: PageProps) {
   const user = await getSessionUser()
 
   if (!user) {
-    redirect(`/${lang}/login`)
+    return null
   }
 
-  return (
-    <div className="min-h-screen bg-[#f9f9f9]">
-      <DashboardClient lang={lang} user={user} />
-    </div>
-  )
+  return <DashboardClient lang={lang} user={user} />
 }
 

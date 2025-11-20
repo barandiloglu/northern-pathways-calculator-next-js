@@ -2,162 +2,164 @@
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
-import { Search, Calendar, Clock, MapPin } from "lucide-react"
+import { Search, Calendar, Clock, MapPin, Users } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import Link from "next/link"
+import Image from "next/image"
 
 interface EventsClientProps {
   lang: string
+  events: Array<{
+    id: string
+    slug: string
+    title: string
+    subtitle: string | null
+    description: string | null
+    startDate: Date
+    endDate: Date | null
+    startTime: string | null
+    endTime: string | null
+    timezone: string | null
+    locationType: "IN_PERSON" | "ONLINE" | "HYBRID"
+    address: string | null
+    city: string | null
+    province: string | null
+    country: string | null
+    meetingLink: string | null
+    type: string
+    category: "WEBINAR" | "WORKSHOP" | "QNA" | "NETWORKING" | "OTHER"
+    color: "BLUE" | "RED"
+    coverImage: string | null
+    heroImage: string | null
+    featuredImage: string | null
+    status: "DRAFT" | "PUBLISHED" | "CANCELLED" | "ARCHIVED"
+    featured: boolean
+    publishedAt: Date | null
+    createdAt: Date
+    capacity: number | null
+    registeredCount: number
+  }>
 }
-
-interface Event {
-  id: string
-  title: string
-  date: string
-  time?: string
-  timezone?: string
-  address?: string
-  type: string
-  category: "all" | "webinar" | "workshop" | "qna"
-  color: "blue" | "red"
-  slug: string
-  status?: "upcoming" | "today" | "past" | "full" | "cancelled"
-}
-
-// Hardcoded events data
-const events: Event[] = [
-  {
-    id: "1",
-    title: "Express Entry: Live Q&A",
-    date: "December 10, 2025",
-    time: "2:00 PM",
-    timezone: "EST",
-    type: "Online Webinar",
-    category: "qna",
-    color: "blue",
-    slug: "express-entry-live-qa",
-    status: "upcoming"
-  },
-  {
-    id: "2",
-    title: "Student Visa Workshop: Avoid Refusals",
-    date: "December 15, 2025",
-    time: "3:00 PM",
-    timezone: "EST",
-    type: "Online Webinar",
-    category: "workshop",
-    color: "red",
-    slug: "student-visa-workshop",
-    status: "upcoming"
-  },
-  {
-    id: "3",
-    title: "OINP Tech Draw: What You Need to Know",
-    date: "December 20, 2025",
-    time: "1:00 PM",
-    timezone: "EST",
-    type: "Live Q&A Session",
-    category: "qna",
-    color: "blue",
-    slug: "oinp-tech-draw",
-    status: "upcoming"
-  },
-  {
-    id: "4",
-    title: "Spousal Sponsorship: Inland vs. Outland",
-    date: "January 5, 2026",
-    time: "4:00 PM",
-    timezone: "EST",
-    type: "Online Webinar",
-    category: "webinar",
-    color: "red",
-    slug: "spousal-sponsorship-inland-outland",
-    status: "upcoming"
-  },
-  {
-    id: "5",
-    title: "Startup Visa: Ask Me Anything",
-    date: "January 12, 2026",
-    time: "2:30 PM",
-    timezone: "EST",
-    type: "Live Q&A Session",
-    category: "qna",
-    color: "blue",
-    slug: "startup-visa-ama",
-    status: "upcoming"
-  },
-  {
-    id: "6",
-    title: "Navigating PGWP & PR Pathways",
-    date: "January 18, 2026",
-    time: "3:30 PM",
-    timezone: "EST",
-    type: "Student Workshop",
-    category: "workshop",
-    color: "red",
-    slug: "pgwp-pr-pathways",
-    status: "upcoming"
-  },
-  {
-    id: "7",
-    title: "Northern Pathways Annual Dinner Party",
-    date: "February 23, 2026",
-    time: "5:00 PM - 11:00 PM",
-    timezone: "EST",
-    address: "123 Pathways Ave, Toronto, ON",
-    type: "In-Person Event",
-    category: "webinar",
-    color: "blue",
-    slug: "northern-pathways-annual-dinner-party",
-    status: "upcoming"
-  }
-]
 
 const filterOptions = [
   { id: "all", label: "All Events" },
-  { id: "webinar", label: "Upcoming Webinars" },
-  { id: "workshop", label: "Workshops" },
-  { id: "qna", label: "Live Q&A Sessions" }
+  { id: "WEBINAR", label: "Upcoming Webinars" },
+  { id: "WORKSHOP", label: "Workshops" },
+  { id: "QNA", label: "Live Q&A Sessions" },
+  { id: "NETWORKING", label: "Networking" },
+  { id: "OTHER", label: "Other" },
 ]
 
 type SortOption = "date-asc" | "date-desc" | "title-asc"
 
-export function EventsClient({ lang }: EventsClientProps) {
+function formatDate(date: Date | string): string {
+  const dateObj = typeof date === "string" ? new Date(date) : date
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(dateObj)
+}
+
+function formatTime(time: string | null, endTime: string | null, timezone: string | null): string {
+  if (!time) return ""
+  if (endTime) {
+    return `${time} - ${endTime} ${timezone || ""}`.trim()
+  }
+  return `${time} ${timezone || ""}`.trim()
+}
+
+function getEventStatus(
+  startDate: Date | string,
+  endDate: Date | string | null,
+  status: "DRAFT" | "PUBLISHED" | "CANCELLED" | "ARCHIVED",
+  capacity: number | null,
+  registeredCount: number
+): "upcoming" | "today" | "past" | "full" | "cancelled" {
+  if (status === "CANCELLED") return "cancelled"
+  
+  const start = typeof startDate === "string" ? new Date(startDate) : startDate
+  const end = endDate ? (typeof endDate === "string" ? new Date(endDate) : endDate) : start
+  const now = new Date()
+  const todayStart = new Date(now.setHours(0, 0, 0, 0))
+  const todayEnd = new Date(now.setHours(23, 59, 59, 999))
+  
+  // Check if full
+  if (capacity && registeredCount >= capacity) {
+    return "full"
+  }
+  
+  // Check if today
+  if (start >= todayStart && start <= todayEnd) {
+    return "today"
+  }
+  
+  // Check if past
+  if (end < now) {
+    return "past"
+  }
+  
+  return "upcoming"
+}
+
+function getCategorySlug(category: string): string {
+  const map: Record<string, string> = {
+    WEBINAR: "webinar",
+    WORKSHOP: "workshop",
+    QNA: "qna",
+    NETWORKING: "networking",
+    OTHER: "other",
+  }
+  return map[category] || "all"
+}
+
+export function EventsClient({ lang, events }: EventsClientProps) {
   const [activeFilter, setActiveFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [sortBy, setSortBy] = useState<SortOption>("date-asc")
   const [showPastEvents, setShowPastEvents] = useState<boolean>(false)
 
   const filteredAndSortedEvents = useMemo(() => {
-    let filtered = events
+    let filtered = events.map((event) => ({
+      ...event,
+      eventStatus: getEventStatus(
+        event.startDate,
+        event.endDate,
+        event.status,
+        event.capacity,
+        event.registeredCount
+      ),
+    }))
 
     // Filter by category
     if (activeFilter !== "all") {
-      filtered = filtered.filter(event => event.category === activeFilter)
+      filtered = filtered.filter((event) => event.category === activeFilter)
     }
 
     // Filter by search query
     if (searchQuery) {
-      filtered = filtered.filter(event =>
-        event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.type.toLowerCase().includes(searchQuery.toLowerCase())
+      const query = searchQuery.toLowerCase()
+      filtered = filtered.filter(
+        (event) =>
+          event.title.toLowerCase().includes(query) ||
+          event.subtitle?.toLowerCase().includes(query) ||
+          event.description?.toLowerCase().includes(query) ||
+          event.type.toLowerCase().includes(query)
       )
     }
 
     // Filter past events
     if (!showPastEvents) {
-      // For now, assume all events are upcoming
-      // In production, you'd check actual dates
-      filtered = filtered.filter(event => event.status !== "past")
+      filtered = filtered.filter((event) => event.eventStatus !== "past")
     }
 
     // Sort events
     const sorted = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case "date-asc":
-          return new Date(a.date).getTime() - new Date(b.date).getTime()
+          return new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
         case "date-desc":
-          return new Date(b.date).getTime() - new Date(a.date).getTime()
+          return new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
         case "title-asc":
           return a.title.localeCompare(b.title)
         default:
@@ -166,7 +168,7 @@ export function EventsClient({ lang }: EventsClientProps) {
     })
 
     return sorted
-  }, [activeFilter, searchQuery, sortBy, showPastEvents])
+  }, [events, activeFilter, searchQuery, sortBy, showPastEvents])
 
   return (
     <div className="bg-white">
@@ -257,67 +259,115 @@ export function EventsClient({ lang }: EventsClientProps) {
                 <Link href={`/${lang}/events/${event.slug}`}>
                   <motion.div
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className={`rounded-xl p-8 min-h-[320px] md:min-h-[360px] flex flex-col shadow-lg cursor-pointer transition-all duration-300 relative ${
-                      event.color === "blue"
-                        ? "bg-[#2c2b2b]"
-                        : "bg-brand-red"
-                    }`}
+                    className="rounded-xl min-h-[320px] md:min-h-[360px] flex flex-col shadow-lg cursor-pointer transition-all duration-300 relative overflow-hidden"
                   >
+                    {/* Background Image */}
+                    {event.coverImage || event.heroImage || event.featuredImage ? (
+                      <div className="absolute inset-0">
+                        <Image
+                          src={event.coverImage || event.heroImage || event.featuredImage || ""}
+                          alt={event.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                        {/* Subtle gradient overlay only at the bottom for text readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                      </div>
+                    ) : (
+                      <div
+                        className={`absolute inset-0 ${
+                          event.color === "BLUE" ? "bg-[#2c2b2b]" : "bg-[#b92025]"
+                        }`}
+                      />
+                    )}
+
                     {/* Status Badge */}
-                    {event.status && (
-                      <div className="absolute top-4 right-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          event.status === "upcoming" ? "bg-green-500 text-white" :
-                          event.status === "today" ? "bg-yellow-500 text-white" :
-                          event.status === "full" ? "bg-orange-500 text-white" :
-                          event.status === "cancelled" ? "bg-gray-500 text-white" :
-                          "bg-gray-400 text-white"
-                        }`}>
-                          {event.status === "upcoming" ? "Upcoming" :
-                           event.status === "today" ? "Today" :
-                           event.status === "full" ? "Full" :
-                           event.status === "cancelled" ? "Cancelled" : ""}
+                    {event.eventStatus && (
+                      <div className="absolute top-4 right-4 z-10">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-semibold shadow-lg ${
+                            event.eventStatus === "upcoming"
+                              ? "bg-green-500 text-white"
+                              : event.eventStatus === "today"
+                              ? "bg-yellow-500 text-white"
+                              : event.eventStatus === "full"
+                              ? "bg-orange-500 text-white"
+                              : event.eventStatus === "cancelled"
+                              ? "bg-gray-500 text-white"
+                              : "bg-gray-400 text-white"
+                          }`}
+                        >
+                          {event.eventStatus === "upcoming"
+                            ? "Upcoming"
+                            : event.eventStatus === "today"
+                            ? "Today"
+                            : event.eventStatus === "full"
+                            ? "Full"
+                            : event.eventStatus === "cancelled"
+                            ? "Cancelled"
+                            : "Past"}
                         </span>
                       </div>
                     )}
 
-                    {/* Event Label */}
-                    <div className="mb-auto">
-                      <h3 className="text-5xl md:text-6xl font-bold text-white mb-8">
-                        Event
-                      </h3>
-                    </div>
-
-                    {/* Event Details */}
-                    <div className="space-y-2 mt-auto">
-                      <div className="flex items-center gap-2 text-white/90">
-                        <Calendar className="h-4 w-4" />
-                        <p className="text-sm md:text-base font-medium">
-                          {event.date}
-                        </p>
+                    {/* Event Details - compact bottom section, showing more image */}
+                    <div className="absolute inset-x-0 bottom-0 z-10">
+                      {/* Subtle gradient backdrop only at the very bottom */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 via-black/50 to-transparent rounded-b-xl" />
+                      
+                      {/* Compact text section */}
+                      <div className="relative p-4 md:p-5">
+                        <div className="space-y-1.5">
+                          {/* Date and Time on same line if space allows */}
+                          <div className="flex flex-wrap items-center gap-3 text-white drop-shadow-lg">
+                            <div className="flex items-center gap-1.5">
+                              <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                              <p className="text-xs md:text-sm font-medium">
+                                {formatDate(event.startDate)}
+                              </p>
+                            </div>
+                            {(event.startTime || event.endTime) && (
+                              <div className="flex items-center gap-1.5">
+                                <Clock className="h-3.5 w-3.5 flex-shrink-0" />
+                                <p className="text-xs md:text-sm">
+                                  {formatTime(event.startTime, event.endTime, event.timezone)}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                          
+                          {/* Address - only show if exists */}
+                          {event.address && (
+                            <div className="flex items-center gap-1.5 text-white/95 drop-shadow-lg">
+                              <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+                              <p className="text-xs md:text-sm line-clamp-1">
+                                {event.address}
+                              </p>
+                            </div>
+                          )}
+                          
+                          {/* Title - compact */}
+                          <h4 className="text-white text-base md:text-lg font-bold drop-shadow-lg leading-tight">
+                            {event.title}
+                          </h4>
+                          
+                          {/* Event Type and Attendees on same line if capacity exists */}
+                          <div className="flex flex-wrap items-center gap-3">
+                            <p className="text-white/95 text-xs md:text-sm drop-shadow-lg">
+                              {event.type}
+                            </p>
+                            {event.capacity && (
+                              <div className="flex items-center gap-1.5 text-white/90 drop-shadow-lg">
+                                <Users className="h-3.5 w-3.5 flex-shrink-0" />
+                                <p className="text-xs md:text-sm">
+                                  {event.registeredCount} / {event.capacity}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                      {event.time && (
-                        <div className="flex items-center gap-2 text-white/90">
-                          <Clock className="h-4 w-4" />
-                          <p className="text-sm md:text-base">
-                            {event.time} {event.timezone}
-                          </p>
-                        </div>
-                      )}
-                      {event.address && (
-                        <div className="flex items-center gap-2 text-white/90">
-                          <MapPin className="h-4 w-4" />
-                          <p className="text-sm md:text-base">
-                            {event.address}
-                          </p>
-                        </div>
-                      )}
-                      <h4 className="text-white text-lg md:text-xl font-bold mt-2">
-                        {event.title}
-                      </h4>
-                      <p className="text-white/90 text-sm md:text-base">
-                        {event.type}
-                      </p>
                     </div>
                   </motion.div>
                 </Link>
