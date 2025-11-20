@@ -5,6 +5,14 @@ import { ChevronDown, Clock } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import Link from "next/link"
 
+interface TipTapJSON {
+  type: string
+  content?: TipTapJSON[]
+  attrs?: Record<string, any>
+  marks?: Array<{ type: string; attrs?: Record<string, any> }>
+  text?: string
+}
+
 interface BlogAuthor {
   id: string
   name: string | null
@@ -60,6 +68,135 @@ function formatDate(date: Date | string | null): string {
     month: "short",
     year: "numeric",
   }).format(dateObj)
+}
+
+// Render TipTap JSON node with formatting marks
+function renderTipTapNode(node: TipTapJSON, index?: number, contentRefs?: React.MutableRefObject<Record<string, HTMLDivElement>>): React.ReactNode {
+  if (node.type === "text") {
+    let textNode: React.ReactNode = node.text || ""
+
+    // Apply marks in correct order (apply link last, then underline, then italic, then bold)
+    if (node.marks && node.marks.length > 0) {
+      const sortedMarks = [...node.marks].sort((a, b) => {
+        const order: Record<string, number> = { link: 0, underline: 1, italic: 2, bold: 3 }
+        return (order[a.type] || 99) - (order[b.type] || 99)
+      })
+
+      sortedMarks.forEach((mark) => {
+        if (mark.type === "bold") {
+          textNode = <strong>{textNode}</strong>
+        } else if (mark.type === "italic") {
+          textNode = <em>{textNode}</em>
+        } else if (mark.type === "underline") {
+          textNode = <u>{textNode}</u>
+        } else if (mark.type === "link") {
+          textNode = (
+            <a
+              href={mark.attrs?.href || "#"}
+              className="text-[#b92025] underline cursor-pointer"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {textNode}
+            </a>
+          )
+        }
+      })
+    }
+
+    return textNode
+  }
+
+  if (node.type === "paragraph") {
+    if (!node.content || node.content.length === 0) return null
+    return (
+      <p className="text-[#2c2b2b]/80 leading-relaxed mb-6 text-base md:text-lg">
+        {node.content.map((child, idx) => (
+          <React.Fragment key={idx}>{renderTipTapNode(child)}</React.Fragment>
+        ))}
+      </p>
+    )
+  }
+
+  if (node.type === "heading") {
+    const level = node.attrs?.level || 1
+    const HeadingTag = `h${Math.min(6, Math.max(1, level))}` as keyof React.JSX.IntrinsicElements
+    
+    if (!node.content || node.content.length === 0) return null
+    
+    // Different sizes for different heading levels - matching preview styling
+    const headingClasses: Record<number, string> = {
+      1: "text-3xl md:text-4xl lg:text-5xl font-bold text-[#2c2b2b] mt-10 mb-6 first:mt-0",
+      2: "text-2xl md:text-3xl font-bold text-[#2c2b2b] mt-10 mb-6 first:mt-0",
+      3: "text-xl font-semibold text-[#2c2b2b] mt-8 mb-4",
+      4: "text-lg font-semibold text-[#2c2b2b] mt-8 mb-4",
+      5: "text-base font-semibold text-[#2c2b2b] mt-8 mb-4",
+      6: "text-base font-semibold text-[#2c2b2b] mt-8 mb-4",
+    }
+    
+    const className = headingClasses[level] || headingClasses[1]
+    const headingId = node.attrs?.id || `heading-${index || 0}`
+    
+    return (
+      <div
+        id={headingId}
+        ref={(el) => {
+          if (el && contentRefs) {
+            contentRefs.current[headingId] = el
+          }
+        }}
+        className="scroll-mt-24"
+      >
+        <HeadingTag className={className}>
+          {node.content.map((child, idx) => (
+            <React.Fragment key={idx}>{renderTipTapNode(child)}</React.Fragment>
+          ))}
+        </HeadingTag>
+      </div>
+    )
+  }
+
+  if (node.type === "bulletList" || node.type === "orderedList") {
+    const ListTag = node.type === "orderedList" ? "ol" : "ul"
+    if (!node.content || node.content.length === 0) return null
+
+    return (
+      <ListTag
+        className={`${
+          node.type === "orderedList" ? "list-decimal" : "list-disc"
+        } list-outside ml-6 space-y-3 mb-6 text-[#2c2b2b]/80 text-base md:text-lg`}
+      >
+        {node.content.map((listItem, idx) => {
+          if (listItem.type === "listItem" && listItem.content) {
+            return (
+              <li key={idx} className="leading-relaxed pl-2">
+                {listItem.content.map((itemNode, itemIdx) => (
+                  <React.Fragment key={itemIdx}>
+                    {renderTipTapNode(itemNode)}
+                  </React.Fragment>
+                ))}
+              </li>
+            )
+          }
+          return null
+        })}
+      </ListTag>
+    )
+  }
+
+  if (node.content) {
+    return (
+      <>
+        {node.content.map((child, idx) => (
+          <React.Fragment key={idx}>
+            {renderTipTapNode(child, idx, contentRefs)}
+          </React.Fragment>
+        ))}
+      </>
+    )
+  }
+
+  return null
 }
 
 export function BlogPostClient({ lang, post }: BlogPostClientProps) {
@@ -248,70 +385,107 @@ export function BlogPostClient({ lang, post }: BlogPostClientProps) {
             >
               <Reveal delay={0.2}>
                 <article className="prose prose-lg max-w-none">
-                  {content.length > 0 ? (
-                    content.map((block: any, index: number) => {
-                    if (block.type === "heading") {
-                        const HeadingTag = `h${(block.level || 1) + 1}` as keyof React.JSX.IntrinsicElements
-                        const blockId = block.id || `heading-${index}`
-                      return (
-                        <div
-                          key={index}
-                            id={blockId}
-                          ref={(el) => {
-                              if (el) contentRefs.current[blockId] = el
-                          }}
-                          className="scroll-mt-24"
-                        >
-                          <HeadingTag className="text-2xl md:text-3xl font-bold text-[#2c2b2b] mt-10 mb-6 first:mt-0">
-                              {block.text || block.content || block.title}
-                          </HeadingTag>
-                        </div>
-                      )
+                  {(() => {
+                    // Check if content is TipTap JSON format (has type: "doc" or is an object with type property)
+                    const isTipTapFormat = content && 
+                      typeof content === "object" && 
+                      !Array.isArray(content) && 
+                      (content.type === "doc" || content.type)
+
+                    if (isTipTapFormat) {
+                      // Render TipTap JSON content
+                      const tipTapContent = content as TipTapJSON
+                      if (tipTapContent.content) {
+                        return (
+                          <>
+                            {tipTapContent.content.map((node, idx) => (
+                              <React.Fragment key={idx}>
+                                {renderTipTapNode(node, idx, contentRefs)}
+                              </React.Fragment>
+                            ))}
+                          </>
+                        )
+                      }
+                      return <p className="text-[#2c2b2b]/60">No content available.</p>
                     }
 
-                    if (block.type === "subheading") {
-                      return (
-                          <h3
-                            key={index}
-                            className="text-xl font-semibold text-[#2c2b2b] mt-8 mb-4"
-                          >
-                            {block.text || block.content}
-                        </h3>
-                      )
+                    // Fallback to old content block format for backward compatibility
+                    if (Array.isArray(content) && content.length > 0) {
+                      return content.map((block: any, index: number) => {
+                        if (block.type === "heading") {
+                          const HeadingTag = `h${(block.level || 1) + 1}` as keyof React.JSX.IntrinsicElements
+                          const blockId = block.id || `heading-${index}`
+                          const level = block.level || 1
+                          
+                          // Apply correct styling based on level
+                          const headingClasses: Record<number, string> = {
+                            1: "text-3xl md:text-4xl lg:text-5xl font-bold text-[#2c2b2b] mt-10 mb-6 first:mt-0",
+                            2: "text-2xl md:text-3xl font-bold text-[#2c2b2b] mt-10 mb-6 first:mt-0",
+                            3: "text-xl font-semibold text-[#2c2b2b] mt-8 mb-4",
+                          }
+                          
+                          const className = headingClasses[level] || headingClasses[1]
+                          
+                          return (
+                            <div
+                              key={index}
+                              id={blockId}
+                              ref={(el) => {
+                                if (el) contentRefs.current[blockId] = el
+                              }}
+                              className="scroll-mt-24"
+                            >
+                              <HeadingTag className={className}>
+                                {block.text || block.content || block.title}
+                              </HeadingTag>
+                            </div>
+                          )
+                        }
+
+                        if (block.type === "subheading") {
+                          return (
+                            <h3
+                              key={index}
+                              className="text-xl font-semibold text-[#2c2b2b] mt-8 mb-4"
+                            >
+                              {block.text || block.content}
+                            </h3>
+                          )
+                        }
+
+                        if (block.type === "paragraph") {
+                          return (
+                            <p
+                              key={index}
+                              className="text-[#2c2b2b]/80 leading-relaxed mb-6 text-base md:text-lg"
+                            >
+                              {block.text || block.content}
+                            </p>
+                          )
+                        }
+
+                        if (block.type === "list") {
+                          const items = block.items || block.content || []
+                          return (
+                            <ul
+                              key={index}
+                              className="list-disc list-inside space-y-3 mb-6 text-[#2c2b2b]/80 text-base md:text-lg"
+                            >
+                              {items.map((item: string, itemIndex: number) => (
+                                <li key={itemIndex} className="leading-relaxed">
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          )
+                        }
+
+                        return null
+                      })
                     }
 
-                    if (block.type === "paragraph") {
-                      return (
-                        <p
-                          key={index}
-                          className="text-[#2c2b2b]/80 leading-relaxed mb-6 text-base md:text-lg"
-                        >
-                            {block.text || block.content}
-                        </p>
-                      )
-                    }
-
-                    if (block.type === "list") {
-                        const items = block.items || block.content || []
-                      return (
-                          <ul
-                            key={index}
-                            className="list-disc list-inside space-y-3 mb-6 text-[#2c2b2b]/80 text-base md:text-lg"
-                          >
-                            {items.map((item: string, itemIndex: number) => (
-                            <li key={itemIndex} className="leading-relaxed">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      )
-                    }
-
-                    return null
-                    })
-                  ) : (
-                    <p className="text-[#2c2b2b]/60">No content available.</p>
-                  )}
+                    return <p className="text-[#2c2b2b]/60">No content available.</p>
+                  })()}
                 </article>
               </Reveal>
             </div>
