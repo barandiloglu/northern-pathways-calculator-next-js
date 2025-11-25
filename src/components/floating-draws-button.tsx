@@ -9,6 +9,15 @@ export function FloatingDrawsButton() {
   const [isOpen, setIsOpen] = useState(false)
   const [showTooltip, setShowTooltip] = useState(false)
   const [wiggleTrigger, setWiggleTrigger] = useState(0)
+  const [showGlow, setShowGlow] = useState(false)
+
+  // Show glow effects 0.3s after button appears (2.3 seconds total delay)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowGlow(true)
+    }, 2300)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Periodic wiggle animation every 12 seconds
   useEffect(() => {
@@ -28,53 +37,103 @@ export function FloatingDrawsButton() {
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
-        {/* Pulsing Border Ring */}
-        <motion.div
-          initial={{ scale: 1, opacity: 0 }}
-          animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.6, 0, 0.6],
-          }}
-          transition={{
-            delay: 2,
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0 rounded-full bg-brand-red/30 blur-sm pointer-events-none"
-        />
+        {/* Energy Burst Effect - Quick expanding burst */}
+        {showGlow && (
+          <>
+            {/* Initial Energy Burst */}
+            <motion.div
+              initial={{ scale: 1, opacity: 0 }}
+              animate={{
+                scale: [1, 2.2, 1.8],
+                opacity: [0, 0.8, 0],
+              }}
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                times: [0, 0.3, 1],
+              }}
+              className="absolute inset-0 rounded-full bg-brand-red/40 blur-xl pointer-events-none"
+              style={{ transformOrigin: "center" }}
+            />
+            {/* Secondary Burst */}
+            <motion.div
+              initial={{ scale: 1, opacity: 0 }}
+              animate={{
+                scale: [1, 1.8, 1.5],
+                opacity: [0, 0.6, 0],
+              }}
+              transition={{
+                delay: 0.15,
+                duration: 0.8,
+                ease: "easeOut",
+                times: [0, 0.3, 1],
+              }}
+              className="absolute inset-0 rounded-full bg-brand-red/30 blur-lg pointer-events-none"
+              style={{ transformOrigin: "center" }}
+            />
+            {/* Tertiary Burst */}
+            <motion.div
+              initial={{ scale: 1, opacity: 0 }}
+              animate={{
+                scale: [1, 1.5, 1.3],
+                opacity: [0, 0.4, 0],
+              }}
+              transition={{
+                delay: 0.3,
+                duration: 0.8,
+                ease: "easeOut",
+                times: [0, 0.3, 1],
+              }}
+              className="absolute inset-0 rounded-full bg-brand-red/20 blur-md pointer-events-none"
+              style={{ transformOrigin: "center" }}
+            />
+          </>
+        )}
 
-        {/* Enhanced Glow Effect */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            boxShadow: [
-              "0 0 20px rgba(185, 32, 37, 0.4)",
-              "0 0 30px rgba(185, 32, 37, 0.6)",
-              "0 0 20px rgba(185, 32, 37, 0.4)",
-            ],
-          }}
-          transition={{
-            delay: 2,
-            opacity: { duration: 0.3 },
-            boxShadow: {
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-          }}
-          className="absolute inset-0 rounded-full pointer-events-none"
-        />
+        {/* Base Glow - Settles after burst */}
+        {showGlow && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{
+              opacity: [0, 1, 1],
+              scale: [0.8, 1, 1],
+              boxShadow: [
+                "0 0 25px rgba(185, 32, 37, 0.4)",
+                "0 0 40px rgba(185, 32, 37, 0.6)",
+                "0 0 25px rgba(185, 32, 37, 0.4)",
+              ],
+            }}
+            transition={{
+              opacity: {
+                delay: 0.4,
+                duration: 0.6,
+                ease: "easeOut",
+                times: [0, 0.5, 1],
+              },
+              scale: {
+                delay: 0.4,
+                duration: 0.6,
+                ease: "easeOut",
+              },
+              boxShadow: {
+                delay: 1,
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{ transformOrigin: "center" }}
+          />
+        )}
 
         {/* Main Button */}
         <motion.button
           onClick={() => setIsOpen(true)}
-          initial={{ scale: 0, opacity: 0, y: 50, rotate: 0 }}
+          initial={{ scale: 0, opacity: 0, rotate: 0 }}
           animate={{
             scale: 1,
             opacity: 1,
-            y: 0,
             rotate: wiggleTrigger > 0 ? [0, -4, 4, -4, 4, 0] : 0,
           }}
           transition={{
@@ -94,22 +153,33 @@ export function FloatingDrawsButton() {
           }}
           whileTap={{ scale: 0.95 }}
           className="relative bg-gradient-to-r from-brand-red to-brand-maroon text-white p-4 sm:p-5 rounded-full shadow-[0_10px_40px_rgba(185,32,37,0.5),0_0_20px_rgba(185,32,37,0.3)] transition-all duration-300 flex items-center gap-3 group overflow-visible"
+          style={{ transformOrigin: "center" }}
           aria-label="View Latest Express Entry Draws"
         >
           {/* Shine Effect */}
           <motion.div
-            initial={{ x: "-100%" }}
+            initial={{ x: "-100%", opacity: 0 }}
             animate={{
               x: ["-100%", "200%"],
+              opacity: 1,
             }}
             transition={{
-              delay: 2,
-              duration: 3,
-              repeat: Infinity,
-              repeatDelay: 4,
-              ease: "easeInOut",
+              delay: 2.6,
+              opacity: {
+                delay: 2.6,
+                duration: 0.4,
+                ease: "easeOut",
+              },
+              x: {
+                delay: 3,
+                duration: 3,
+                repeat: Infinity,
+                repeatDelay: 4,
+                ease: "easeInOut",
+              },
             }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+            style={{ borderRadius: "inherit" }}
           />
 
           {/* Continuous Pulse Animation */}
