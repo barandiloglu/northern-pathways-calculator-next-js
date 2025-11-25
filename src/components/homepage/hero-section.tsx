@@ -28,7 +28,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
             repeat: Infinity,
             ease: "linear",
           }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-red rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-brand-red rounded-full blur-3xl"
         />
         <motion.div
           animate={{
@@ -41,11 +41,11 @@ export function HeroSection({ lang }: HeroSectionProps) {
             repeat: Infinity,
             ease: "linear",
           }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-maroon rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-brand-maroon rounded-full blur-3xl"
         />
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
+      <div className="container mx-auto px-4 py-12 md:py-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Consultant Photo with Overlay Card */}
           <motion.div
@@ -60,7 +60,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
                 initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
                 animate={{ opacity: 1, scale: 1, rotate: -8 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-                className="absolute left-4 md:-left-8 top-8 z-20 w-full max-w-sm md:max-w-md"
+                className="absolute left-0 sm:left-4 md:-left-8 top-4 sm:top-8 z-20 w-full max-w-[calc(100%-1rem)] sm:max-w-sm md:max-w-md"
               >
                 <motion.div
                   whileHover={{ 
@@ -68,7 +68,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
                     rotate: -6,
                     transition: { duration: 0.3 }
                   }}
-                  className="relative bg-white rounded-2xl p-8 shadow-2xl border border-gray-100"
+                  className="relative bg-white rounded-2xl p-4 md:p-6 lg:p-8 shadow-2xl border border-gray-100"
                 >
                   {/* RCIC Badge */}
                   <motion.div
@@ -88,7 +88,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
                       className="flex items-center gap-2 text-gray-600"
                     >
                       <Sparkles className="h-5 w-5 text-brand-red" />
-                      <p className="text-lg font-medium">
+                      <p className="text-base md:text-lg font-medium">
                         {t("home.newHero.cardTitle")}
                       </p>
                     </motion.div>
@@ -162,7 +162,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="space-y-4"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#2c2b2b] leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#2c2b2b] leading-tight">
                 {t("home.newHero.title")}{" "}
                 <span className="text-brand-red">Here</span>
               </h1>
@@ -171,7 +171,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-xl md:text-2xl text-gray-600 italic leading-relaxed"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 italic leading-relaxed"
               >
                 {t("home.newHero.tagline")}
               </motion.p>
@@ -180,7 +180,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
-                className="text-lg text-gray-600 leading-relaxed max-w-2xl"
+                className="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl"
               >
                 {t("home.newHero.description")}
               </motion.p>
@@ -221,7 +221,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-brand-red hover:bg-brand-maroon text-white px-8 py-4 rounded-lg font-semibold text-lg uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
+                  className="bg-brand-red hover:bg-brand-maroon text-white px-4 py-3 text-sm sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg rounded-lg font-semibold uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   {t("home.newHero.bookConsultation")}
                   <ArrowRight className="h-5 w-5" />
@@ -232,7 +232,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white px-8 py-4 rounded-lg font-semibold text-lg uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
+                  className="border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white px-4 py-3 text-sm sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg rounded-lg font-semibold uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   {t("home.newHero.exploreServices")}
                   <ArrowRight className="h-5 w-5" />

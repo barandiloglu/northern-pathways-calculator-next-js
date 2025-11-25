@@ -47,10 +47,10 @@ export function FAQSection({ lang }: FAQSectionProps) {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#2c2b2b] mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2c2b2b] mb-6">
             {t("home.faq.title")}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {t("home.faq.subtitle")}
           </p>
         </motion.div>
@@ -97,9 +97,9 @@ export function FAQSection({ lang }: FAQSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#2c2b2b] text-white rounded-xl p-8 shadow-xl min-h-[300px] flex flex-col justify-between"
+                className="bg-[#2c2b2b] text-white rounded-xl p-4 md:p-6 lg:p-8 shadow-xl min-h-[200px] md:min-h-[300px] flex flex-col justify-between"
               >
-                <p className="text-lg leading-relaxed mb-6">
+                <p className="text-base md:text-lg leading-relaxed mb-6">
                   {faqs[activeQuestion].answer}
                 </p>
                 <p className="text-sm text-gray-300 italic">

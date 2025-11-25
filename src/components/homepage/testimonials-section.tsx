@@ -37,10 +37,10 @@ export function TestimonialsSection({ lang }: TestimonialsSectionProps) {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#2c2b2b] mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2c2b2b] mb-6">
             {t("home.testimonials.title")}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             {t("home.testimonials.subtitle")}
           </p>
         </motion.div>
@@ -55,9 +55,9 @@ export function TestimonialsSection({ lang }: TestimonialsSectionProps) {
               viewport={{ once: true }}
               transition={{ delay: 0.1 * index, duration: 0.6 }}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="bg-white rounded-xl p-8 shadow-lg border-l-4 border-brand-red relative"
+              className="bg-white rounded-xl p-4 md:p-6 lg:p-8 shadow-lg border-l-4 border-brand-red relative"
             >
-              <p className="text-gray-600 italic leading-relaxed mb-6 text-lg">
+              <p className="text-gray-600 italic leading-relaxed mb-6 text-base md:text-lg">
                 &ldquo;{testimonial.text}&rdquo;
               </p>
               <p className="text-[#2c2b2b] font-semibold">

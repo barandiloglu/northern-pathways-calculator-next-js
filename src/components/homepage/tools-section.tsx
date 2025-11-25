@@ -42,7 +42,7 @@ export function ToolsSection({ lang }: ToolsSectionProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold text-[#2c2b2b] leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2c2b2b] leading-tight"
             >
               {t("home.tools.title")}
             </motion.h2>
@@ -52,7 +52,7 @@ export function ToolsSection({ lang }: ToolsSectionProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg text-gray-600 leading-relaxed"
+              className="text-base md:text-lg text-gray-600 leading-relaxed"
             >
               {t("home.tools.description")}
             </motion.p>
@@ -71,7 +71,7 @@ export function ToolsSection({ lang }: ToolsSectionProps) {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-brand-red hover:bg-brand-maroon text-white px-8 py-4 rounded-lg font-semibold text-lg uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
+                  className="bg-brand-red hover:bg-brand-maroon text-white px-4 py-3 text-sm sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg rounded-lg font-semibold uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
                 >
                   {t("home.newHero.bookConsultation")}
                   <ArrowRight className="h-5 w-5" />
@@ -92,7 +92,7 @@ export function ToolsSection({ lang }: ToolsSectionProps) {
             <div className="flex border-b-2 border-gray-200">
               <button
                 onClick={() => setActiveTab("crs")}
-                className={`px-6 py-3 font-semibold text-lg transition-colors relative ${
+                className={`px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 font-semibold text-sm sm:text-base md:text-lg transition-colors relative ${
                   activeTab === "crs"
                     ? "text-brand-red"
                     : "text-gray-400 hover:text-gray-600"
@@ -108,7 +108,7 @@ export function ToolsSection({ lang }: ToolsSectionProps) {
               </button>
               <button
                 onClick={() => setActiveTab("fswp")}
-                className={`px-6 py-3 font-semibold text-lg transition-colors relative ${
+                className={`px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 font-semibold text-sm sm:text-base md:text-lg transition-colors relative ${
                   activeTab === "fswp"
                     ? "text-brand-red"
                     : "text-gray-400 hover:text-gray-600"
@@ -130,11 +130,11 @@ export function ToolsSection({ lang }: ToolsSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl p-8 shadow-lg border border-gray-100"
+              className="bg-white rounded-xl p-4 md:p-6 lg:p-8 shadow-lg border border-gray-100"
             >
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-[#2c2b2b] mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#2c2b2b] mb-4">
                     {activeTab === "crs"
                       ? t("home.tools.crsCard.title")
                       : t("home.tools.fswpCard.title")}

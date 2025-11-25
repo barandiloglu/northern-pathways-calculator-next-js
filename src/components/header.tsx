@@ -135,7 +135,7 @@ export function Header({ lang }: HeaderProps) {
       variants={containerVariants}
       initial="visible"
       animate="visible"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 sm:pb-0 pb-2 ${
         isScrolled 
           ? "bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon shadow-lg" 
           : "bg-gradient-to-r from-brand-red via-brand-maroon to-brand-maroon"
@@ -156,7 +156,7 @@ export function Header({ lang }: HeaderProps) {
             style={{ opacity: 1 }}
           >
             <Link href={`/${lang}`} className="flex items-center group">
-              <div className="h-12 sm:h-14 md:h-20 w-auto max-w-[120px] sm:max-w-[140px] md:max-w-none min-w-[70px] sm:min-w-[80px] md:min-w-[100px]">
+              <div className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-none min-w-[70px] sm:min-w-[80px] md:min-w-[90px] lg:min-w-[100px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/logoFooter.png" 
@@ -170,7 +170,7 @@ export function Header({ lang }: HeaderProps) {
           </motion.div>
 
           {/* Div 2 - Nav Items (Desktop only) - Center Aligned */}
-          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-2 justify-center z-20">
+          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-1.5 md:gap-2 lg:gap-3 xl:gap-4 justify-center z-20">
             {navItems.map((item) => {
               // Handle Services with dropdown
               if (item.label === "Services") {
@@ -184,7 +184,7 @@ export function Header({ lang }: HeaderProps) {
                   >
                     <Link
                       href={`/${lang}#services`}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 relative ${
+                      className={`flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 md:px-3 md:py-1.5 lg:px-4 lg:py-2 rounded-lg font-medium text-xs md:text-sm lg:text-base transition-all duration-200 relative ${
                         isServicesActive
                           ? "text-white"
                           : "text-white/90 hover:text-white hover:bg-white/10"
@@ -197,9 +197,9 @@ export function Header({ lang }: HeaderProps) {
                         animate={isServicesActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                         transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                       />
-                      <Briefcase className="h-4 w-4" />
-                      <span className="relative z-10">Services</span>
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesHover ? 'rotate-180' : ''}`} />
+                      <Briefcase className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+                      <span className="relative z-10 whitespace-nowrap">Services</span>
+                      <ChevronDown className={`h-4 w-4 md:h-5 md:w-5 transition-transform duration-200 flex-shrink-0 ${servicesHover ? 'rotate-180' : ''}`} />
                     </Link>
 
               <AnimatePresence>
@@ -209,7 +209,7 @@ export function Header({ lang }: HeaderProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="absolute top-full left-0 mt-3 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 min-w-[260px]"
+                    className="absolute top-full left-0 mt-3 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 min-w-[200px] sm:min-w-[240px] md:min-w-[260px]"
                   >
                     <div className="py-2">
                       {servicesItems.map((service, index) => {
@@ -223,7 +223,7 @@ export function Header({ lang }: HeaderProps) {
                           >
                             <Link
                               href={service.href}
-                              className={`group relative flex items-center gap-3 px-5 py-3 font-semibold transition-all duration-200 ${
+                              className={`group relative flex items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 font-semibold transition-all duration-200 ${
                                 isActive
                                   ? "bg-gradient-to-r from-brand-red to-brand-maroon text-white"
                                   : "text-[#2c2b2b] hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-brand-red"
@@ -238,7 +238,7 @@ export function Header({ lang }: HeaderProps) {
                               >
                                 <service.icon className="h-5 w-5" />
                               </motion.div>
-                              <span className="text-sm">{service.label}</span>
+                              <span className="text-sm md:text-base">{service.label}</span>
                             </Link>
                           </motion.div>
                         )
@@ -259,7 +259,7 @@ export function Header({ lang }: HeaderProps) {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 relative ${
+                  className={`flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 md:px-3 md:py-1.5 lg:px-4 lg:py-2 rounded-lg font-medium text-xs md:text-sm lg:text-base transition-all duration-200 relative ${
                     isActive
                       ? "text-white"
                       : "text-white/90 hover:text-white hover:bg-white/10"
@@ -272,8 +272,8 @@ export function Header({ lang }: HeaderProps) {
                      animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                      transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                    />
-                  <item.icon className="h-4 w-4" />
-                  <span className="relative z-10">{item.label}</span>
+                  <item.icon className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+                  <span className="relative z-10 whitespace-nowrap">{item.label}</span>
                 </Link>
               )
             })}
@@ -286,7 +286,7 @@ export function Header({ lang }: HeaderProps) {
             >
               <Link
                 href={`/${lang}#tools`}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 relative ${
+                className={`flex items-center gap-1.5 md:gap-2 px-2.5 py-1.5 md:px-3 md:py-1.5 lg:px-4 lg:py-2 rounded-lg font-medium text-xs md:text-sm lg:text-base transition-all duration-200 relative ${
                   pathname.includes('calculator')
                     ? "text-white"
                     : "text-white/90 hover:text-white hover:bg-white/10"
@@ -299,9 +299,9 @@ export function Header({ lang }: HeaderProps) {
                    animate={pathname.includes('calculator') ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                    transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                  />
-                <Wrench className="h-4 w-4" />
-                <span className="relative z-10">Tools</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${toolsHover ? 'rotate-180' : ''}`} />
+                <Wrench className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+                <span className="relative z-10 whitespace-nowrap">Tools</span>
+                <ChevronDown className={`h-4 w-4 md:h-5 md:w-5 transition-transform duration-200 flex-shrink-0 ${toolsHover ? 'rotate-180' : ''}`} />
               </Link>
 
               {/* Dropdown Menu */}
@@ -312,7 +312,7 @@ export function Header({ lang }: HeaderProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="absolute top-full left-0 mt-3 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 min-w-[240px]"
+                    className="absolute top-full left-0 mt-3 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 min-w-[200px] sm:min-w-[240px] md:min-w-[260px]"
                   >
                     <div className="py-2">
                       {toolsItems.map((tool, index) => {
@@ -326,7 +326,7 @@ export function Header({ lang }: HeaderProps) {
                           >
                             <Link
                               href={tool.href}
-                              className={`group relative flex items-center gap-3 px-5 py-3 font-semibold transition-all duration-200 ${
+                              className={`group relative flex items-center gap-3 px-4 py-2.5 sm:px-5 sm:py-3 font-semibold transition-all duration-200 ${
                                 isActive
                                   ? "bg-gradient-to-r from-brand-red to-brand-maroon text-white"
                                   : "text-[#2c2b2b] hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-brand-red"
@@ -341,7 +341,7 @@ export function Header({ lang }: HeaderProps) {
                               >
                                 <tool.icon className="h-5 w-5" />
                               </motion.div>
-                              <span className="text-sm">{tool.label}</span>
+                              <span className="text-sm md:text-base">{tool.label}</span>
                             </Link>
                           </motion.div>
                         )
@@ -360,11 +360,11 @@ export function Header({ lang }: HeaderProps) {
           <div className="flex-1 md:hidden" />
 
           {/* Div 3 - Pre-Assessment, Book Consultation and Language Selection (Desktop) - Right Aligned */}
-          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-3 justify-end z-10">
+          <motion.div variants={itemVariants} className="hidden md:flex items-center gap-1.5 md:gap-2 lg:gap-3 justify-end z-10">
             {/* Pre-Assessment Link */}
             <Link
               href={`/${lang}/pre-assessment`}
-              className="flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 md:px-5 md:py-2 lg:px-6 lg:py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white text-xs sm:text-sm md:text-base rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap flex-shrink-0"
             >
               <span>Pre-Assessment</span>
             </Link>
@@ -372,10 +372,11 @@ export function Header({ lang }: HeaderProps) {
             {/* Book a Consultation Link */}
             <Link
               href={`/${lang}/book-consultation`}
-              className="flex items-center gap-2 px-6 py-2.5 bg-white hover:bg-white/90 text-brand-red rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 md:px-5 md:py-2 lg:px-6 lg:py-2.5 bg-white hover:bg-white/90 text-brand-red text-xs sm:text-sm md:text-base rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap flex-shrink-0"
             >
-              <Calendar className="h-4 w-4" />
-              <span>Book Consultation</span>
+              <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
+              <span className="hidden sm:inline">Book Consultation</span>
+              <span className="sm:hidden">Book</span>
             </Link>
 
             <LanguageSwitcher currentLang={lang} />
@@ -435,7 +436,7 @@ export function Header({ lang }: HeaderProps) {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-brand-maroon border-t border-brand-red/30 overflow-hidden"
           >
-            <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 max-w-[1920px]">
+            <div className="container mx-auto px-3 sm:px-4 pt-3 sm:pt-4 pb-4 sm:pb-5 max-w-[1920px]">
               <div className="space-y-1 sm:space-y-2">
                 {navItems.map((item) => {
                   // Handle Services with dropdown
@@ -479,7 +480,7 @@ export function Header({ lang }: HeaderProps) {
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.2 }}
-                              className="space-y-1 pl-8"
+                              className="space-y-1 pl-6 sm:pl-8"
                             >
                               {servicesItems.map((service) => {
                                 const isActive = pathname === service.href
@@ -487,14 +488,14 @@ export function Header({ lang }: HeaderProps) {
                                   <Link
                                     key={service.href}
                                     href={service.href}
-                                    className={`flex items-center gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 min-h-[44px] touch-friendly ${
+                                    className={`flex items-center gap-3 p-3 sm:p-3.5 md:p-4 rounded-lg font-medium text-base transition-all duration-200 min-h-[44px] touch-friendly ${
                                       isActive
                                         ? "bg-white/20 text-white"
                                         : "text-white/90 hover:text-white active:bg-white/10"
                                     }`}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                   >
-                                    <service.icon className="h-5 w-5" />
+                                    <service.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                                     <span>{service.label}</span>
                                   </Link>
                                 )
@@ -513,14 +514,14 @@ export function Header({ lang }: HeaderProps) {
                     <Link
                       key={item.label}
                       href={item.href}
-                      className={`flex items-center gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 min-h-[44px] touch-friendly ${
+                      className={`flex items-center gap-3 p-3 sm:p-3.5 md:p-4 rounded-lg font-medium text-base transition-all duration-200 min-h-[44px] touch-friendly ${
                         isActive
                           ? "text-white"
                           : "text-white/90 hover:text-white active:bg-white/10"
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <item.icon className="h-5 w-5 flex-shrink-0" />
+                      <item.icon className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
                       <span className="relative inline-block">
                         {item.label}
                         <motion.span
@@ -540,7 +541,7 @@ export function Header({ lang }: HeaderProps) {
                   <button
                     type="button"
                     onClick={() => setIsMobileToolsOpen((open) => !open)}
-                    className="flex w-full items-center justify-between gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 relative min-h-[44px] touch-friendly text-white/90 active:bg-white/10 hover:text-white"
+                    className="flex w-full items-center justify-between gap-3 p-3 sm:p-3.5 md:p-4 rounded-lg font-medium text-base transition-all duration-200 relative min-h-[44px] touch-friendly text-white/90 active:bg-white/10 hover:text-white"
                   >
                     <motion.span
                       className="absolute left-0 right-0 bottom-0 h-px bg-white"
@@ -550,7 +551,7 @@ export function Header({ lang }: HeaderProps) {
                       transition={{ type: "spring", stiffness: 360, damping: 28, duration: 0.3 }}
                     />
                     <div className="flex items-center gap-3 relative z-10">
-                      <Wrench className="h-5 w-5" />
+                      <Wrench className="h-5 w-5 sm:h-6 sm:w-6" />
                       <span>Tools</span>
                     </div>
                     <ChevronDown
@@ -569,7 +570,7 @@ export function Header({ lang }: HeaderProps) {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="space-y-1 pl-8"
+                        className="space-y-1 pl-6 sm:pl-8"
                       >
                         {toolsItems.map((tool) => {
                           const isActive = pathname === tool.href
@@ -577,14 +578,14 @@ export function Header({ lang }: HeaderProps) {
                             <Link
                               key={tool.href}
                               href={tool.href}
-                              className={`flex items-center gap-3 p-3 sm:p-3.5 rounded-lg font-medium transition-all duration-200 min-h-[44px] touch-friendly ${
+                              className={`flex items-center gap-3 p-3 sm:p-3.5 md:p-4 rounded-lg font-medium text-base transition-all duration-200 min-h-[44px] touch-friendly ${
                                 isActive
                                   ? "bg-white/20 text-white"
                                   : "text-white/90 hover:text-white active:bg-white/10"
                               }`}
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
-                              <tool.icon className="h-5 w-5" />
+                              <tool.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                               <span>{tool.label}</span>
                             </Link>
                           )
@@ -598,7 +599,7 @@ export function Header({ lang }: HeaderProps) {
                 <Link
                   href={`/${lang}/pre-assessment`}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 bg-white/10 active:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-lg font-semibold transition-all duration-200 shadow-lg active:shadow-xl whitespace-nowrap min-h-[44px] w-full touch-friendly"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 bg-white/10 active:bg-white/20 backdrop-blur-sm border border-white/20 text-white text-base rounded-lg font-semibold transition-all duration-200 shadow-lg active:shadow-xl whitespace-nowrap min-h-[44px] w-full touch-friendly"
                 >
                   <span>Pre-Assessment</span>
                 </Link>
@@ -607,9 +608,9 @@ export function Header({ lang }: HeaderProps) {
                 <Link
                   href={`/${lang}/book-consultation`}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 bg-white text-brand-red active:bg-white/90 rounded-lg font-semibold transition-all duration-200 shadow-lg active:shadow-xl whitespace-nowrap min-h-[44px] w-full touch-friendly mt-4 sm:mt-6"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-2.5 bg-white text-brand-red active:bg-white/90 rounded-lg font-semibold text-base transition-all duration-200 shadow-lg active:shadow-xl whitespace-nowrap min-h-[44px] w-full touch-friendly mt-4 sm:mt-6"
                 >
-                  <Calendar className="h-5 w-5" />
+                  <Calendar className="h-5 w-5 sm:h-6 sm:w-6" />
                   <span>Book Consultation</span>
                 </Link>
               </div>

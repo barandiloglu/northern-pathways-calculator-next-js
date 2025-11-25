@@ -156,32 +156,6 @@ export function FloatingDrawsButton() {
           style={{ transformOrigin: "center" }}
           aria-label="View Latest Express Entry Draws"
         >
-          {/* Shine Effect */}
-          <motion.div
-            initial={{ x: "-100%", opacity: 0 }}
-            animate={{
-              x: ["-100%", "200%"],
-              opacity: 1,
-            }}
-            transition={{
-              delay: 2.6,
-              opacity: {
-                delay: 2.6,
-                duration: 0.4,
-                ease: "easeOut",
-              },
-              x: {
-                delay: 3,
-                duration: 3,
-                repeat: Infinity,
-                repeatDelay: 4,
-                ease: "easeInOut",
-              },
-            }}
-            className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
-            style={{ borderRadius: "inherit" }}
-          />
-
           {/* Continuous Pulse Animation */}
           <motion.div
             initial={{ scale: 1 }}

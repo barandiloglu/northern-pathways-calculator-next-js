@@ -53,7 +53,7 @@ export function CommitmentSection({ lang }: CommitmentSectionProps) {
         </motion.div>
 
         {/* Feature Blocks */}
-        <div className="grid md:grid-cols-3 gap-16 max-w-8xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 md:gap-16 max-w-8xl mx-auto">
           {commitments.map((commitment, index) => (
             <motion.div
               key={index}
@@ -69,26 +69,26 @@ export function CommitmentSection({ lang }: CommitmentSectionProps) {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
-                  className="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center shadow-md"
+                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-brand-red rounded-full flex items-center justify-center shadow-md"
                 >
-                  <commitment.icon className="h-8 w-8 text-white" strokeWidth={2.5} />
+                  <commitment.icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" strokeWidth={2.5} />
                 </motion.div>
                 
                 {/* Vertical Line - extends downward from icon */}
-                <div className="w-px h-full min-h-[140px] bg-gray-300 mt-2" />
+                <div className="w-px h-full min-h-[120px] sm:min-h-[140px] md:min-h-[160px] bg-gray-300 mt-2" />
               </div>
 
               {/* Right Side - Number, Title, Description */}
               <div className="flex-1 space-y-3 pt-1 min-w-0">
                 {/* Number/Percentage */}
                 <div>
-                  <span className="text-5xl md:text-6xl font-bold text-brand-red block leading-tight whitespace-nowrap">
+                  <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-red block leading-tight break-words">
                     {commitment.number}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl md:text-2xl font-bold text-[#2c2b2b]">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#2c2b2b]">
                   {commitment.title}
                 </h3>
 

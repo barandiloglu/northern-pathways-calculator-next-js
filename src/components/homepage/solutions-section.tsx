@@ -80,7 +80,7 @@ export function SolutionsSection({ lang }: SolutionsSectionProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold text-[#2c2b2b] leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2c2b2b] leading-tight"
             >
               {t("home.solutions.title")}
             </motion.h2>
@@ -90,7 +90,7 @@ export function SolutionsSection({ lang }: SolutionsSectionProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg text-gray-600 leading-relaxed"
+              className="text-base md:text-lg text-gray-600 leading-relaxed"
             >
               {t("home.solutions.description")}
             </motion.p>
@@ -109,7 +109,7 @@ export function SolutionsSection({ lang }: SolutionsSectionProps) {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-brand-red hover:bg-brand-maroon text-white px-8 py-4 rounded-lg font-semibold text-lg uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
+                  className="bg-brand-red hover:bg-brand-maroon text-white px-4 py-3 text-sm sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg rounded-lg font-semibold uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
                 >
                   {t("home.newHero.bookConsultation")}
                   <ArrowRight className="h-5 w-5" />
@@ -140,13 +140,13 @@ export function SolutionsSection({ lang }: SolutionsSectionProps) {
                 >
                   <button
                     onClick={() => setExpandedService(isExpanded ? -1 : service.id)}
-                    className="w-full flex items-center justify-between p-6 text-left"
+                    className="w-full flex items-center justify-between p-4 md:p-6 text-left"
                   >
                     <div className="flex items-center gap-4">
                       <span className="text-2xl font-bold text-gray-400">
                         {String(service.id + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="text-xl font-bold text-[#2c2b2b]">
+                      <h3 className="text-lg sm:text-xl font-bold text-[#2c2b2b]">
                         {service.title}
                       </h3>
                     </div>

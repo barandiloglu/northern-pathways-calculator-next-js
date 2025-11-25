@@ -54,7 +54,7 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             {t("home.process.title")}
           </h2>
         </motion.div>
@@ -62,7 +62,7 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
         {/* Steps with Animated Arrows */}
         <div className="relative max-w-6xl mx-auto">
           {/* Steps Grid */}
-          <div className="grid md:grid-cols-3 gap-8 relative">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 relative">
             {steps.map((item, index) => (
               <motion.div
                 key={item.step}
@@ -91,12 +91,12 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
                         repeat: Infinity, 
                         ease: "easeInOut" 
                       }}
-                      className="w-16 h-16 bg-white text-brand-red rounded-full text-2xl font-bold flex items-center justify-center shadow-2xl border-4 border-white/20"
+                      className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-white text-brand-red rounded-full text-lg sm:text-xl md:text-2xl font-bold flex items-center justify-center shadow-2xl border-4 border-white/20"
                     >
                       {item.step}
                     </motion.div>
                     {/* Glow effect */}
-                    <div className="absolute inset-0 w-16 h-16 bg-white rounded-full blur-xl opacity-50 -z-10" />
+                    <div className="absolute inset-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-white rounded-full blur-xl opacity-50 -z-10" />
                   </div>
                 </motion.div>
 
@@ -107,7 +107,7 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
                     scale: 1.02,
                     transition: { duration: 0.3 }
                   }}
-                  className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 relative z-10 mt-8 group-hover:bg-white/15 transition-all duration-500 flex-1 flex flex-col"
+                  className="bg-white/10 backdrop-blur-sm rounded-3xl p-4 md:p-6 lg:p-8 shadow-2xl border border-white/20 relative z-10 mt-6 sm:mt-8 group-hover:bg-white/15 transition-all duration-500 flex-1 flex flex-col"
                 >
                   {/* Icon Container */}
                   <motion.div
@@ -116,9 +116,9 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
                       rotate: [0, -10, 10, 0],
                       transition: { duration: 0.6 }
                     }}
-                    className="w-20 h-20 bg-white/20 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-xl flex-shrink-0"
+                    className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-white/20 rounded-2xl mx-auto mb-4 md:mb-6 flex items-center justify-center shadow-xl flex-shrink-0"
                   >
-                    <item.icon className="h-10 w-10 text-white" />
+                    <item.icon className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 text-white" />
                   </motion.div>
 
                   {/* Content */}
@@ -128,7 +128,7 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 * index + 0.4, duration: 0.6 }}
-                      className="text-2xl font-bold mb-4"
+                      className="text-xl sm:text-2xl font-bold mb-4"
                     >
                       {item.title}
                     </motion.h3>
@@ -137,7 +137,7 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 * index + 0.5, duration: 0.6 }}
-                      className="text-white/90 leading-relaxed text-lg flex-1 mb-6"
+                      className="text-white/90 leading-relaxed text-base md:text-lg flex-1 mb-6"
                     >
                       {item.description}
                     </motion.p>
@@ -149,10 +149,10 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
                       <motion.button
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full bg-white text-brand-red px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
+                        className="w-full bg-white text-brand-red px-4 py-2.5 sm:px-5 sm:py-3 md:px-6 md:py-3 rounded-lg font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
                       >
                         <span>{item.buttonText}</span>
-                        <ArrowRight className="h-5 w-5" />
+                        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
                       </motion.button>
                     </a>
                   ) : (
@@ -160,10 +160,10 @@ export function ApplicationProcessSection({ lang }: ApplicationProcessSectionPro
                       <motion.button
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full bg-white text-brand-red px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
+                        className="w-full bg-white text-brand-red px-4 py-2.5 sm:px-5 sm:py-3 md:px-6 md:py-3 rounded-lg font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
                       >
                         <span>{item.buttonText}</span>
-                        <ArrowRight className="h-5 w-5" />
+                        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
                       </motion.button>
                     </Link>
                   )}
