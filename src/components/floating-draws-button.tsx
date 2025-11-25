@@ -1,47 +1,183 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, TrendingUp, Calendar, ExternalLink, RefreshCw } from "lucide-react"
 import { LatestDraws } from "./latest-draws"
 
 export function FloatingDrawsButton() {
   const [isOpen, setIsOpen] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [wiggleTrigger, setWiggleTrigger] = useState(0)
+
+  // Periodic wiggle animation every 12 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWiggleTrigger((prev) => prev + 1)
+    }, 12000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <>
       {/* Floating Button - Bottom Right Corner */}
-      <motion.button
-        onClick={() => setIsOpen(true)}
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 2, type: "spring", stiffness: 200 }}
-        className={`fixed bottom-6 right-6 z-40 bg-brand-red hover:bg-brand-maroon text-white p-4 rounded-full shadow-2xl transition-all duration-300 flex items-center gap-3 group ${
+      <div
+        className={`fixed bottom-6 right-6 z-40 ${
           isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
-        whileHover={{ scale: 1.1, y: -2 }}
-        whileTap={{ scale: 0.95 }}
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
       >
-        <div className="relative">
-          <TrendingUp className="h-6 w-6" />
-          <motion.div
-            animate={{ 
-              scale: [1, 1.3, 1],
-              opacity: [0.5, 0, 0.5]
-            }}
-            transition={{ 
-              duration: 2, 
+        {/* Pulsing Border Ring */}
+        <motion.div
+          initial={{ scale: 1, opacity: 0 }}
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.6, 0, 0.6],
+          }}
+          transition={{
+            delay: 2,
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute inset-0 rounded-full bg-brand-red/30 blur-sm pointer-events-none"
+        />
+
+        {/* Enhanced Glow Effect */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            boxShadow: [
+              "0 0 20px rgba(185, 32, 37, 0.4)",
+              "0 0 30px rgba(185, 32, 37, 0.6)",
+              "0 0 20px rgba(185, 32, 37, 0.4)",
+            ],
+          }}
+          transition={{
+            delay: 2,
+            opacity: { duration: 0.3 },
+            boxShadow: {
+              duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
+            },
+          }}
+          className="absolute inset-0 rounded-full pointer-events-none"
+        />
+
+        {/* Main Button */}
+        <motion.button
+          onClick={() => setIsOpen(true)}
+          initial={{ scale: 0, opacity: 0, y: 50, rotate: 0 }}
+          animate={{
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            rotate: wiggleTrigger > 0 ? [0, -4, 4, -4, 4, 0] : 0,
+          }}
+          transition={{
+            delay: 2,
+            type: "spring",
+            stiffness: 300,
+            damping: 20,
+            rotate: wiggleTrigger > 0 ? {
+              duration: 0.6,
+              ease: "easeInOut",
+              times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+            } : undefined,
+          }}
+          whileHover={{
+            scale: 1.15,
+            y: -4,
+          }}
+          whileTap={{ scale: 0.95 }}
+          className="relative bg-gradient-to-r from-brand-red to-brand-maroon text-white p-4 sm:p-5 rounded-full shadow-[0_10px_40px_rgba(185,32,37,0.5),0_0_20px_rgba(185,32,37,0.3)] transition-all duration-300 flex items-center gap-3 group overflow-visible"
+          aria-label="View Latest Express Entry Draws"
+        >
+          {/* Shine Effect */}
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{
+              x: ["-100%", "200%"],
             }}
-            className="absolute inset-0 bg-white rounded-full -z-10"
+            transition={{
+              delay: 2,
+              duration: 3,
+              repeat: Infinity,
+              repeatDelay: 4,
+              ease: "easeInOut",
+            }}
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
           />
-        </div>
-        <div className="hidden sm:flex flex-col items-start">
-          <span className="font-bold text-sm leading-tight">Latest</span>
-          <span className="font-semibold text-xs leading-tight">Draws</span>
-        </div>
-      </motion.button>
+
+          {/* Continuous Pulse Animation */}
+          <motion.div
+            initial={{ scale: 1 }}
+            animate={{
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              delay: 2,
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute inset-0 rounded-full bg-white/10"
+          />
+
+          {/* Notification Badge - Positioned outside button */}
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{
+              delay: 2.5,
+              type: "spring",
+              stiffness: 500,
+            }}
+            className="absolute -top-2 -right-2 bg-white text-brand-red text-[10px] font-bold px-2 py-1 rounded-full shadow-lg z-50 border-2 border-brand-red"
+          >
+            LIVE
+          </motion.div>
+
+          <div className="relative z-10">
+            <TrendingUp className="h-6 w-6" />
+            <motion.div
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.5, 0, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute inset-0 bg-white rounded-full -z-10"
+            />
+          </div>
+          <div className="hidden sm:flex flex-col items-start relative z-10">
+            <span className="font-bold text-sm leading-tight">Latest</span>
+            <span className="font-semibold text-xs leading-tight">Draws</span>
+          </div>
+        </motion.button>
+
+        {/* Tooltip */}
+        <AnimatePresence>
+          {showTooltip && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              className="absolute bottom-full right-0 mb-3 bg-[#2c2b2b] text-white text-xs font-medium px-3 py-2 rounded-lg shadow-xl whitespace-nowrap pointer-events-none z-50"
+            >
+              View Latest Express Entry Draws
+              <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#2c2b2b]" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Expanded Draws Panel - Slide up from bottom */}
       <AnimatePresence>
